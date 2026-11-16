@@ -2,9 +2,9 @@
 export async function onRequest({ env, request }) {
   if (!env.TG_TOKEN) return Response.json({ error: "нема TG_TOKEN" });
   const t = String(env.TG_TOKEN).trim(), api = "https://api.telegram.org/bot" + t + "/";
-  if (new URL(request.url).searchParams.get("test") && env.TG_CHAT) {
+  if (new URL(request.url).searchParams.get("test")) {
     const r = await fetch(api + "sendMessage", { method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ chat_id: String(env.TG_CHAT).trim(), text: "✅ Домашня школа підключена! Сюди приходитимуть результати Ані й Артема." }) }).then(x => x.json());
+      body: JSON.stringify({ chat_id: String(env.TG_CHAT || "-5559835738").trim(), text: "✅ Домашня школа підключена! Сюди приходитимуть результати Ані й Артема." }) }).then(x => x.json());
     return new Response(JSON.stringify({ sent: !!r.ok, error: r.description || null }), { headers: { "Content-Type": "application/json; charset=utf-8" } });
   }
   const r = await fetch(api + "getUpdates").then(x => x.json());

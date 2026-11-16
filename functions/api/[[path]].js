@@ -20,10 +20,11 @@ async function who(req, env) {
   return t && /^[0-9a-f]{48}$/.test(t) ? await env.DB.get("tok:" + t) : null;
 }
 async function tg(env, text) {
-  if (!env.TG_TOKEN || !env.TG_CHAT) return { ok: false, error: "telegram не налаштовано" };
+  const chat = env.TG_CHAT || "-5559835738"; // група «Домашня школа»
+  if (!env.TG_TOKEN) return { ok: false, error: "telegram не налаштовано" };
   const r = await fetch("https://api.telegram.org/bot" + String(env.TG_TOKEN).trim() + "/sendMessage", {
     method: "POST", headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ chat_id: String(env.TG_CHAT).trim(), text: String(text).slice(0, 4000) })
+    body: JSON.stringify({ chat_id: String(chat).trim(), text: String(text).slice(0, 4000) })
   }).then(x => x.json()).catch(e => ({ ok: false, description: String(e) }));
   return { ok: !!r.ok, error: r.description || null };
 }
