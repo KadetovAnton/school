@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Англійська">
+<meta name="theme-color" content="#FFF7EC">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+
+<title>Англійська 7 клас — перевірка рівня</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF7EC; --card:#FFFFFF; --ink:#1F2340; --muted:#6B6F88; --line:#EDE5D6;
+  --pri:#4B44E6; --pri-soft:#EEEDFF; --pri-ink:#2F29B8;
+  --ok:#17905F; --ok-soft:#E3F6EC; --bad:#D63F47; --bad-soft:#FDEBEC;
+  --warn:#C98200; --warn-soft:#FFF2D6;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Nunito",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);
+  font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:20px 16px 48px}
+.card{background:var(--card);border-radius:22px;padding:24px 22px;box-shadow:0 1px 0 var(--line),0 8px 24px rgba(60,40,10,.06)}
+h1{font-size:28px;line-height:1.2;margin:4px 0 10px;font-weight:800;letter-spacing:-.01em}
+h2{font-size:21px;margin:0 0 12px;font-weight:800}
+p{margin:0 0 12px}
+.muted{color:var(--muted)}
+.emoji-hero{font-size:46px;line-height:1}
+.list{margin:14px 0 18px;padding:0;list-style:none}
+.list li{display:flex;gap:10px;margin:8px 0;align-items:flex-start}
+.list li span:first-child{flex:0 0 26px;text-align:center}
+input[type=text]{width:100%;font:inherit;font-size:18px;padding:13px 14px;border:2px solid var(--line);border-radius:14px;outline:none;background:#fff;color:var(--ink)}
+input[type=text]:focus{border-color:var(--pri)}
+label.lbl{display:block;font-weight:700;margin:6px 0 6px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:800;font-size:17px;
+  border:0;border-radius:14px;padding:14px 20px;cursor:pointer;background:var(--pri);color:#fff;min-height:52px;transition:transform .08s, filter .15s}
+.btn:active{transform:scale(.98)}
+.btn:disabled{opacity:.4;cursor:default}
+.btn.full{width:100%}
+.btn.ghost{background:var(--pri-soft);color:var(--pri-ink)}
+.btn.plain{background:transparent;color:var(--muted);font-weight:700;padding:10px 12px;min-height:auto}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+.row .btn{flex:1 1 auto}
+.top{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px;font-weight:700;color:var(--muted);font-size:15px}
+.bar{height:10px;background:#EFE7D8;border-radius:99px;overflow:hidden;margin-bottom:18px}
+.bar i{display:block;height:100%;background:var(--pri);border-radius:99px;transition:width .3s}
+.chip{display:inline-block;background:var(--pri-soft);color:var(--pri-ink);font-weight:800;font-size:13px;padding:4px 10px;border-radius:99px;margin-bottom:12px}
+.prompt{font-size:22px;font-weight:700;line-height:1.4;margin:4px 0 18px}
+.blank{display:inline-block;min-width:70px;border-bottom:3px solid var(--pri);margin:0 4px;transform:translateY(-3px)}
+.task{color:var(--muted);font-weight:700;font-size:15px;margin-bottom:6px}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;font-size:19px;font-weight:700;text-align:left;padding:15px 16px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--pri)}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.reading{background:#FBF6EC;border-radius:16px;padding:16px;margin-bottom:16px;font-size:17px;border-left:4px solid var(--warn)}
+.reading .say{margin-top:8px}
+.hintbox{margin-top:14px}
+.hint{background:var(--warn-soft);border-radius:14px;padding:12px 14px;margin-top:8px;font-size:16px}
+.hint b{color:#8a5a00}
+.fb{border-radius:16px;padding:16px;margin-top:16px;font-size:16px}
+.fb.ok{background:var(--ok-soft)}
+.fb.bad{background:var(--bad-soft)}
+.fb h3{margin:0 0 6px;font-size:18px}
+.fb.ok h3{color:var(--ok)} .fb.bad h3{color:var(--bad)}
+.fb .rule{margin-top:10px;padding-top:10px;border-top:1px dashed rgba(0,0,0,.12)}
+.say{font:inherit;font-size:15px;font-weight:800;border:0;background:#fff;border-radius:99px;padding:7px 12px;cursor:pointer;color:var(--pri-ink);box-shadow:0 1px 0 var(--line)}
+.built{min-height:62px;border:2px dashed var(--line);border-radius:14px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.built.empty::before{content:"Натискай слова знизу по черзі";color:#b3ab9b;font-weight:600;font-size:15px}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.w{font:inherit;font-size:18px;font-weight:700;padding:9px 14px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.w.used{visibility:hidden}
+.built .w{background:var(--pri-soft);border-color:transparent;color:var(--pri-ink)}
+.score-big{font-size:56px;font-weight:800;line-height:1;margin:6px 0}
+.topic{margin:14px 0}
+.topic .t{display:flex;justify-content:space-between;gap:8px;font-weight:700;font-size:16px;margin-bottom:6px}
+.topic .t span:last-child{white-space:nowrap}
+.tbar{height:10px;background:#EFE7D8;border-radius:99px;overflow:hidden}
+.tbar i{display:block;height:100%;border-radius:99px}
+.lvl-ok{color:var(--ok)} .lvl-mid{color:var(--warn)} .lvl-low{color:var(--bad)}
+.bg-ok{background:var(--ok)} .bg-mid{background:#E8A21A} .bg-low{background:var(--bad)}
+.reco{background:var(--pri-soft);border-radius:16px;padding:16px;margin-top:18px}
+.reco ol{margin:6px 0 0;padding-left:22px}
+.reco li{margin:4px 0}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none}
+.toast.show{opacity:1}
+.small{font-size:14px}
+</style>
+</head>
+<body>
+<div class="wrap"><div id="app" class="card"></div></div>
+<div id="toast" class="toast"></div>
+
+<script>
+const TOPICS = {
+  be:    "Дієслово to be (5 клас)",
+  ps:    "Present Simple (5 клас)",
+  there: "There is / are, some / any (5–6 клас)",
+  pc:    "Present Continuous (5–6 клас)",
+  past:  "Past Simple (6 клас)",
+  comp:  "Ступені порівняння (6 клас)",
+  modal: "Модальні дієслова (6–7 клас)",
+  pastc: "Past Continuous (7 клас)",
+  pp:    "Present Perfect (7 клас)",
+  vocab: "Слова",
+  read:  "Читання"
+};
+
+const READING = "Tom lives in a small village. Every morning he gets up at seven and walks to school with his friend Max. Yesterday it was raining, so Tom's dad drove them to school in his car. After school, the boys played computer games at Max's house.";
+
+const Q = [
+ // to be
+ {t:"be",type:"choice",p:"My brother ___ twelve years old.",o:["is","are","am"],a:"is",
+  h:["Хто? <b>My brother</b> — це «він» (he).","З he / she / it вживаємо одну форму to be — яку?"],
+  e:"he / she / it → <b>is</b>; I → <b>am</b>; we / you / they → <b>are</b>.",
+  err:{"are":"<b>are</b> — для we / you / they. А «мій брат» — це один «він» (he).","am":"<b>am</b> буває тільки з I."}},
+ {t:"be",type:"choice",p:"___ you ready for the test?",o:["Are","Is","Am"],a:"Are",
+  h:["У питанні to be стоїть на самому початку.","Яка форма to be йде з <b>you</b>?"],
+  e:"you → <b>are</b>. У питанні просто міняємо місцями: You are ready → <b>Are</b> you ready?",
+  err:{"is":"is — для he / she / it. З you → <b>Are</b>.","am":"am — тільки з I. З you → <b>Are</b>."}},
+ // present simple
+ {t:"ps",type:"choice",p:"She ___ to school every day.",o:["go","goes","going"],a:"goes",
+  h:["«every day» — це регулярна дія, тобто Present Simple.","Що додаємо до дієслова після he / she / it?"],
+  e:"Present Simple: з he / she / it додаємо <b>-s / -es</b>: she go<b>es</b>, he play<b>s</b>.",
+  err:{"go":"Майже! Але з she треба закінчення: go → go<b>es</b>.","going":"going без am / is / are не вживається. А тут регулярна дія (every day) → <b>goes</b>."}},
+ {t:"ps",type:"choice",p:"___ your dad work in Kyiv?",o:["Do","Does","Is"],a:"Does",
+  h:["Питання в Present Simple будуємо з допоміжним словом.","<b>your dad</b> = he. Do чи Does?"],
+  e:"Питання: <b>Do</b> I / you / we / they…? <b>Does</b> he / she / it…? Після does дієслово без -s: Does he work…?",
+  err:{"do":"Do — для I / you / we / they. Тато — це he → <b>Does</b>.","is":"work — звичайне дієслово, тому питання будуємо з <b>Does</b>, а не з is."}},
+ {t:"ps",type:"input",task:"Впиши заперечення",p:"We ___ fish. (not / like)",a:["don't like","do not like"],
+  h:["Заперечення в Present Simple: допоміжне слово + not + дієслово.","З we допоміжне слово — <b>do</b>. Do not можна скоротити."],
+  e:"Заперечення: I / you / we / they <b>don't</b> + дієслово; he / she / it <b>doesn't</b> + дієслово.",
+  err:{"not like":"Потрібне допоміжне слово: <b>don't</b> like.","doesnt like":"doesn't — для he / she / it. З we → <b>don't</b> like.","dont likes":"Після don't дієслово без -s: don't <b>like</b>."}},
+ // there / some any
+ {t:"there",type:"choice",p:"There ___ some apples on the table.",o:["are","is","am"],a:"are",
+  h:["Яблук скільки — одне чи багато?","Кілька предметів → There …?"],
+  e:"There <b>is</b> + один предмет; There <b>are</b> + кілька предметів.",
+  err:{"is":"apples — їх кілька, тому <b>are</b>.","am":"am буває тільки з I."}},
+ {t:"there",type:"choice",p:"Is there ___ milk in the fridge?",o:["any","some","a"],a:"any",
+  h:["Зверни увагу: це питання.","У питаннях і запереченнях замість some вживаємо інше слово."],
+  e:"<b>some</b> — у звичайних реченнях; <b>any</b> — у питаннях і запереченнях.",
+  err:{"some":"some — у звичайних реченнях. У питанні → <b>any</b>.","a":"Молоко не порахуєш («одне молоко» не кажуть), тому не a. У питанні → <b>any</b>."}},
+ // present continuous
+ {t:"pc",type:"choice",p:"Look! The dog ___ in the garden.",o:["runs","is running","run"],a:"is running",
+  h:["«Look!» — дія відбувається прямо зараз.","Зараз → am / is / are + дієслово з -ing."],
+  e:"Present Continuous (прямо зараз): <b>am / is / are + -ing</b>. Слова-підказки: now, Look!, Listen!",
+  err:{"runs":"runs — це «бігає взагалі, регулярно». А тут «Дивись!» — прямо зараз → <b>is running</b>.","run":"Тут потрібна форма «прямо зараз»: <b>is running</b>."}},
+ {t:"pc",type:"order",task:"Склади речення",p:"«Моя сестра зараз робить домашнє завдання».",
+  words:["doing","sister","now","is","her","My","homework"],
+  a:["my sister is doing her homework now","now my sister is doing her homework"],
+  h:["Порядок в англійському реченні: хто → що робить → що → коли.","Почни з «My sister», далі «is doing»."],
+  e:"Хто (My sister) → дія (is doing) → що (her homework) → коли (now)."},
+ // past simple
+ {t:"past",type:"input",task:"Впиши дієслово в правильній формі",p:"Yesterday I ___ football. (play)",a:["played"],
+  h:["«Yesterday» — це минуле, тобто Past Simple.","play — правильне дієслово. Що додаємо в минулому часі?"],
+  e:"Правильні дієслова в минулому отримують <b>-ed</b>: play → play<b>ed</b>, watch → watch<b>ed</b>.",
+  err:{"play":"Yesterday = учора, тому потрібен минулий час: play<b>ed</b>.","was play":"was тут не потрібне. Просто додай -ed: <b>played</b>.","plaied":"У play перед y стоїть голосна, тому y не міняється: <b>played</b>."}},
+ {t:"past",type:"input",task:"Впиши дієслово в правильній формі",p:"Last summer we ___ to the sea. (go)",a:["went"],
+  h:["Минулий час. Але go — неправильне дієслово!","Три форми: go — ? — gone."],
+  e:"Неправильні дієслова треба вчити напам'ять: go → <b>went</b>, see → saw, have → had, buy → bought.",
+  err:{"goed":"Логічно, але go — неправильне дієслово. Його минула форма — <b>went</b>.","go":"Last summer — це минуле. Минула форма go — <b>went</b>.","gone":"gone — третя форма (для Present Perfect). У минулому — <b>went</b>."}},
+ {t:"past",type:"choice",p:"___ you see the film yesterday?",o:["Did","Do","Were"],a:"Did",
+  h:["yesterday → минулий час.","У минулому для питань є одне слово для всіх осіб."],
+  e:"Питання в минулому: <b>Did</b> + хто + дієслово без змін: Did you see…?",
+  err:{"do":"Do — для теперішнього часу. Тут yesterday → <b>Did</b>.","were":"Were вживається з -ing або з прикметниками. З дієсловом see → <b>Did</b>."}},
+ {t:"past",type:"choice",p:"She didn't ___ the window.",o:["opened","open","opens"],a:"open",
+  h:["Слово didn't уже показує, що це минуле.","Тоді яким має бути саме дієслово?"],
+  e:"Після <b>didn't</b> і <b>did</b> дієслово у звичайній формі: didn't open, did you open?",
+  err:{"opened":"Минулий час уже показує didn't, тому без -ed: didn't <b>open</b>.","opens":"Після didn't жодних закінчень: didn't <b>open</b>."}},
+ // comparison
+ {t:"comp",type:"input",task:"Впиши прикметник у правильній формі",p:"An elephant is ___ than a horse. (big)",a:["bigger"],
+  h:["«than» = «ніж», тобто порівнюємо два предмети.","Коротке слово + -er. Увага на останню літеру!"],
+  e:"Короткі прикметники: + <b>-er</b>. Якщо в кінці «голосна + приголосна», приголосну подвоюємо: big → big<b>g</b>er, hot → hot<b>t</b>er.",
+  err:{"biger":"Майже! Треба подвоїти g: big<b>g</b>er.","more big":"more — для довгих слів. big — коротке: <b>bigger</b>.","big":"Є «than», тож потрібна форма порівняння: <b>bigger</b>.","more bigger":"Або more, або -er — разом не можна: <b>bigger</b>."}},
+ {t:"comp",type:"choice",p:"This is the ___ book I have ever read.",o:["most interesting","more interesting","interestingest"],a:"most interesting",
+  h:["«the … ever» → найкраща з усіх (найвищий ступінь).","interesting — довге слово."],
+  e:"Довгі прикметники: <b>more</b> … (ніж), <b>the most</b> … (най-).",
+  err:{"more interesting":"more — це «цікавіша, ніж». А тут «найцікавіша з усіх» → <b>the most</b> interesting.","interestingest":"До довгих слів -est не додаємо → <b>most</b> interesting."}},
+ {t:"comp",type:"choice",p:"good → better → ___",o:["best","goodest","most good"],a:"best",
+  h:["Це виняток, як і good → better.","Згадай: «my ___ friend» — мій найкращий друг."],
+  e:"Винятки: good → better → <b>best</b>; bad → worse → <b>worst</b>."},
+ // modals
+ {t:"modal",type:"choice",p:"You ___ wear a uniform at our school. It's a rule.",o:["must","can","may"],a:"must",
+  h:["«It's a rule» — це правило, обов'язок.","Яке слово означає «повинен»?"],
+  e:"<b>must</b> — повинен, обов'язково; <b>can</b> — можу, вмію; <b>may</b> — можна (дозвіл).",
+  err:{"can":"can — «можеш, вмієш». А правило — це обов'язок → <b>must</b>.","may":"may — «можна» (дозвіл). Правило — це обов'язок → <b>must</b>."}},
+ {t:"modal",type:"choice",p:"You ___ run in the corridor. It's dangerous.",o:["mustn't","must","can"],a:"mustn't",
+  h:["Небезпечно — отже, це заборона.","Заборона = must + not."],
+  e:"<b>mustn't</b> — не можна, заборонено. <b>must</b> — повинен.",
+  err:{"must":"must — «повинен бігати»? Навпаки, це заборона → <b>mustn't</b>.","can":"can — «можна». Але небезпечно, тож це заборона → <b>mustn't</b>."}},
+ // past continuous
+ {t:"pastc",type:"choice",p:"I ___ TV when Mum came home.",o:["was watching","watched","am watching"],a:"was watching",
+  h:["Дві дії в минулому: одна тривала (дивився), друга коротка (прийшла).","Тривала дія в минулому → was / were + -ing."],
+  e:"Past Continuous: <b>was / were + -ing</b> — дія тривала в певний момент у минулому. Часто з when: I was watching TV when…",
+  err:{"watched":"watched — це «подивився» (завершена дія). А тут «дивився» (процес), коли мама прийшла → <b>was watching</b>.","am watching":"am — теперішній час, а мама прийшла в минулому → <b>was</b> watching."}},
+ {t:"pastc",type:"choice",p:"What ___ you doing at 8 o'clock yesterday?",o:["were","was","did"],a:"were",
+  h:["doing + yesterday → Past Continuous.","З you — was чи were?"],
+  e:"I / he / she / it → <b>was</b>; we / you / they → <b>were</b>.",
+  err:{"was":"was — для I / he / she / it. З you → <b>were</b>.","did":"did не вживається з -ing. Тут → <b>were</b>."}},
+ // present perfect
+ {t:"pp",type:"choice",p:"I have never ___ to London.",o:["been","was","be"],a:"been",
+  h:["have + третя форма дієслова = Present Perfect.","Три форми be: be — was/were — ?"],
+  e:"Present Perfect: <b>have / has + 3-тя форма</b>. I have never been = я ніколи не був(ла).",
+  err:{"was":"was — друга форма. Після have потрібна третя: <b>been</b>.","be":"Після have потрібна третя форма: <b>been</b>."}},
+ {t:"pp",type:"choice",p:"She ___ already finished her project.",o:["has","have","is"],a:"has",
+  h:["already + finished → Present Perfect.","she → have чи has?"],
+  e:"I / you / we / they → <b>have</b>; he / she / it → <b>has</b> + 3-тя форма.",
+  err:{"have":"have — для I / you / we / they. З she → <b>has</b>.","is":"Present Perfect будується з have / has. З she → <b>has</b>."}},
+ // vocab
+ {t:"vocab",type:"choice",p:"Як англійською «бібліотека»?",o:["library","bookshop","laboratory"],a:"library",say:"library",
+  h:["Це місце, де книжки беруть почитати, а не купують.","bookshop — там книжки купують."],
+  e:"<b>library</b> — бібліотека; bookshop — книгарня; laboratory — лабораторія."},
+ {t:"vocab",type:"choice",p:"Протилежне до «expensive» (дорогий):",o:["cheap","rich","poor"],a:"cheap",say:"expensive, cheap",
+  h:["Шукаємо «дешевий».","rich і poor — це про людей."],
+  e:"expensive — дорогий ↔ <b>cheap</b> — дешевий. rich — багатий, poor — бідний."},
+ {t:"vocab",type:"choice",p:"Що означає «I'm bored»?",o:["Мені нудно","Я втомився","Я злюся"],a:"Мені нудно",say:"I'm bored",
+  h:["Схоже на слово boring — нудний.","«Я втомився» — це I'm tired."],
+  e:"<b>bored</b> — нудно; tired — втомлений; angry — злий."},
+ {t:"vocab",type:"choice",p:"Яке слово зайве?",o:["Tuesday","Friday","July"],a:"July",say:"Tuesday, Friday, July",
+  h:["Два слова з однієї групи, одне — з іншої.","Що з цього дні тижня?"],
+  e:"Tuesday, Friday — дні тижня; <b>July</b> — місяць (липень)."},
+ // reading
+ {t:"read",type:"choice",reading:true,p:"How does Tom usually get to school?",o:["He walks","By car","By bus"],a:"He walks",
+  h:["Шукай у тексті слово «Every morning».","walks to school = йде до школи пішки."],
+  e:"«Every morning he … <b>walks</b> to school» — щоранку він ходить пішки. На машині — тільки вчора."},
+ {t:"read",type:"choice",reading:true,p:"Why did Tom's dad drive the boys to school yesterday?",o:["Because it was raining","Because they were late","Because Max was ill"],a:"Because it was raining",
+  h:["Знайди в тексті слово «Yesterday».","raining = йшов дощ; so = тому."],
+  e:"«Yesterday it <b>was raining</b>, so Tom's dad drove them» — учора йшов дощ, тому тато відвіз."},
+ {t:"read",type:"choice",reading:true,p:"What did the boys do after school?",o:["They played computer games","They did their homework","They went to the sea"],a:"They played computer games",
+  h:["Знайди в тексті «After school».","played = грали."],
+  e:"«After school, the boys <b>played computer games</b>» — після школи хлопці грали в комп'ютерні ігри."}
+];
+
+const KEY = "eng7-diag-v1";
+let S = load() || fresh();
+function fresh(){ return {name:"", i:0, started:false, done:false, ans:[], date:null}; }
+function load(){ try{ const s = JSON.parse(localStorage.getItem(KEY)); return s && Array.isArray(s.ans) ? s : null; }catch(e){ return null; } }
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+
+const canSpeak = (()=>{ try{ return "speechSynthesis" in window; }catch(e){ return false; } })();
+function say(text){
+  try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = .9; speechSynthesis.speak(u); }catch(e){}
+}
+const norm = s => String(s).toLowerCase().replace(/[’'`]/g,"").replace(/[.!?,«»"]/g,"").replace(/\s+/g," ").trim();
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const $app = document.getElementById("app");
+
+function answersOf(q){ return Array.isArray(q.a) ? q.a : [q.a]; }
+function fullSentence(q){
+  if(q.say) return q.say;
+  if(q.type==="order") return q.a[0].charAt(0).toUpperCase()+q.a[0].slice(1)+".";
+  if(q.t==="read") return q.a;
+  return q.p.replace("___", answersOf(q)[0]).replace(/\s*\(.*?\)\s*$/,"").replace("good → better → best","good, better, best");
+}
+function promptHTML(q){
+  return esc(q.p).replace("___",'<span class="blank"></span>');
+}
+
+/* ---------- screens ---------- */
+function renderStart(){
+  const resume = S.started && !S.done && S.i>0;
+  $app.innerHTML = `
+    <a href="./" style="display:inline-block;margin-bottom:10px;font-weight:800;color:#2F29B8;text-decoration:none">← Кабінет</a>
+    <div class="emoji-hero">🇬🇧</div>
+    <h1>Перевіримо, що ти вже знаєш з англійської</h1>
+    <p class="muted">Це не контрольна і не оцінка. Тест покаже, які теми вже добре виходять, а які варто підтягнути, щоб скласти тобі план.</p>
+    <ul class="list">
+      <li><span>⏱️</span><span>${Q.length} коротких завдань, приблизно 15–20 хвилин</span></li>
+      <li><span>💡</span><span>Застрягла — натисни «Підказка». Це не соромно!</span></li>
+      <li><span>🤷</span><span>Не знаєш зовсім — натисни «Не знаю». Не вгадуй, так результат буде чеснішим</span></li>
+      <li><span>🔊</span><span>Після відповіді можна послухати, як звучить речення</span></li>
+    </ul>
+    ${resume ? "" : `<label class="lbl" for="nm">Як тебе звати?</label>
+    <input id="nm" type="text" autocomplete="off" placeholder="Ім'я" value="${esc(S.name)}">`}
+    <div class="row">
+      ${resume ? `<button class="btn full" id="go">Продовжити з питання ${S.i+1}</button>
+                  <button class="btn plain full" id="restart">Почати спочатку</button>`
+               : `<button class="btn full" id="go">Почати →</button>`}
+    </div>`;
+  document.getElementById("go").onclick = ()=>{
+    const nm = document.getElementById("nm");
+    if(nm) S.name = nm.value.trim();
+    S.started = true; if(!S.date) S.date = new Date().toISOString(); save(); renderQ();
+  };
+  const r = document.getElementById("restart");
+  if(r) r.onclick = ()=>{ const n=S.name; S=fresh(); S.name=n; save(); renderStart(); };
+}
+
+let cur = null; // {hints, answered, built:[]}
+function renderQ(){
+  if(S.i >= Q.length){ S.done = true; save(); return renderResult(); }
+  const q = Q[S.i];
+  cur = {hints:0, answered:false, built:[]};
+  const pct = Math.round(S.i / Q.length * 100);
+  let body = "";
+  if(q.type==="choice"){
+    body = `<div class="opts">${q.o.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>`;
+  } else if(q.type==="input"){
+    body = `<input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Твоя відповідь">
+            <div class="row"><button class="btn full" id="check" disabled>Перевірити</button></div>`;
+  } else if(q.type==="order"){
+    const shuffled = q.words.map((w,k)=>({w,k}));
+    body = `<div class="built empty" id="built"></div>
+            <div class="pool" id="pool">${shuffled.map(x=>`<button class="w" data-k="${x.k}">${esc(x.w)}</button>`).join("")}</div>
+            <div class="row"><button class="btn full" id="check" disabled>Перевірити</button></div>`;
+  }
+  $app.innerHTML = `
+    <div class="top"><span>Завдання ${S.i+1} з ${Q.length}</span><button class="btn plain small" id="home">Пауза</button></div>
+    <div class="bar"><i style="width:${pct}%"></i></div>
+    <span class="chip">${TOPICS[q.t]}</span>
+    ${q.reading ? `<div class="reading"><div class="task" style="margin-bottom:6px">Прочитай текст:</div>${esc(READING)}
+        ${canSpeak?`<div class="say-row"><button class="say" id="sayText">🔊 Послухати текст</button></div>`:""}</div>` : ""}
+    ${q.task ? `<div class="task">${q.task}:</div>` : ""}
+    <div class="prompt">${promptHTML(q)}</div>
+    ${body}
+    <div class="hintbox" id="hintbox"></div>
+    <div class="row" id="aux">
+      <button class="btn ghost" id="hintBtn">💡 Підказка</button>
+      <button class="btn plain" id="idk">🤷 Не знаю</button>
+    </div>
+    <div id="fb"></div>`;
+
+  document.getElementById("home").onclick = ()=>{ save(); renderStart(); };
+  const st = document.getElementById("sayText"); if(st) st.onclick = ()=>say(READING);
+  document.getElementById("hintBtn").onclick = showHint;
+  document.getElementById("idk").onclick = ()=>finish(null);
+
+  if(q.type==="choice"){
+    $app.querySelectorAll(".opt").forEach(b=> b.onclick = ()=>finish(q.o[+b.dataset.k], b));
+  } else if(q.type==="input"){
+    const inp = document.getElementById("inp"), ch = document.getElementById("check");
+    inp.oninput = ()=>{ ch.disabled = !inp.value.trim(); };
+    inp.onkeydown = e=>{ if(e.key==="Enter" && inp.value.trim()) finish(inp.value); };
+    ch.onclick = ()=>finish(inp.value);
+    setTimeout(()=>{ try{ inp.focus({preventScroll:true}); }catch(e){} }, 50);
+  } else if(q.type==="order"){
+    const pool = document.getElementById("pool"), built = document.getElementById("built"), ch = document.getElementById("check");
+    const redraw = ()=>{
+      built.innerHTML = cur.built.map(k=>`<button class="w" data-k="${k}">${esc(q.words[k])}</button>`).join("");
+      built.classList.toggle("empty", cur.built.length===0);
+      pool.querySelectorAll(".w").forEach(b=> b.classList.toggle("used", cur.built.includes(+b.dataset.k)));
+      ch.disabled = cur.built.length !== q.words.length;
+      built.querySelectorAll(".w").forEach(b=> b.onclick = ()=>{ if(cur.answered) return; cur.built = cur.built.filter(k=>k!==+b.dataset.k); redraw(); });
+    };
+    pool.querySelectorAll(".w").forEach(b=> b.onclick = ()=>{ if(cur.answered) return; const k=+b.dataset.k; if(!cur.built.includes(k)){ cur.built.push(k); redraw(); } });
+    ch.onclick = ()=> finish(cur.built.map(k=>q.words[k]).join(" "));
+    redraw();
+  }
+}
+
+function showHint(){
+  const q = Q[S.i];
+  if(cur.answered || cur.hints >= q.h.length) return;
+  const box = document.getElementById("hintbox");
+  box.insertAdjacentHTML("beforeend", `<div class="hint"><b>Підказка ${cur.hints+1}:</b> ${q.h[cur.hints]}</div>`);
+  cur.hints++;
+  if(cur.hints >= q.h.length){ const b=document.getElementById("hintBtn"); b.disabled = true; b.textContent = "💡 Підказок більше немає"; }
+}
+
+function finish(given, btn){
+  if(cur.answered) return;
+  cur.answered = true;
+  const q = Q[S.i];
+  const ok = given!==null && answersOf(q).some(a=>norm(a)===norm(given));
+  const score = ok ? (cur.hints ? .5 : 1) : 0;
+  S.ans[S.i] = {ok, score, hint:cur.hints>0, given};
+  save();
+
+  // lock UI
+  $app.querySelectorAll(".opt").forEach(b=>{
+    b.disabled = true;
+    if(q.type==="choice" && norm(q.o[+b.dataset.k])===norm(q.a)) b.classList.add("right");
+  });
+  if(btn && !ok) btn.classList.add("wrong");
+  const inp = document.getElementById("inp"); if(inp) inp.disabled = true;
+  const ch = document.getElementById("check"); if(ch) ch.parentElement.remove();
+  document.getElementById("aux").remove();
+
+  let html;
+  if(ok){
+    html = `<div class="fb ok"><h3>${cur.hints ? "Правильно! 👍" : ["Правильно! 🎉","Так тримати! ⭐","Чудово! 💪"][S.i%3]}</h3>
+            <div>${q.e}</div>`;
+  } else {
+    const specific = given!==null && q.err ? Object.entries(q.err).find(([k])=>norm(k)===norm(given)) : null;
+    const correct = q.type==="order" ? fullSentence(q) : answersOf(q)[0];
+    html = `<div class="fb bad"><h3>${given===null ? "Нічого страшного — розберімо 🙂" : "Не зовсім 🙂"}</h3>
+            ${specific ? `<div>${specific[1]}</div>` : given!==null ? `<div>Твоя відповідь: <b>${esc(given)}</b></div>` : ""}
+            <div style="margin-top:6px">Правильно: <b>${esc(correct)}</b></div>
+            <div class="rule"><b>Правило:</b> ${q.e}</div>`;
+  }
+  html += `${canSpeak ? `<div style="margin-top:12px"><button class="say" id="sayIt">🔊 Послухати</button></div>` : ""}</div>
+           <div class="row"><button class="btn full" id="next">${S.i+1 < Q.length ? "Далі →" : "Подивитися результат"}</button></div>`;
+  document.getElementById("fb").innerHTML = html;
+  const si = document.getElementById("sayIt"); if(si) si.onclick = ()=>say(fullSentence(q));
+  const nx = document.getElementById("next");
+  nx.onclick = ()=>{ S.i++; save(); renderQ(); window.scrollTo({top:0,behavior:"smooth"}); };
+  setTimeout(()=>{ try{ nx.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} }, 80);
+}
+
+function stats(){
+  const by = {};
+  Object.keys(TOPICS).forEach(t=> by[t] = {sum:0, max:0, hints:0});
+  Q.forEach((q,i)=>{ const a=S.ans[i]; by[q.t].max++; if(a){ by[q.t].sum += a.score; if(a.hint && a.ok) by[q.t].hints++; } });
+  const list = Object.keys(TOPICS).map((t,ord)=>({t, ord, name:TOPICS[t], pct: by[t].max ? Math.round(by[t].sum/by[t].max*100) : 0, ...by[t]}));
+  const total = list.reduce((s,x)=>s+x.sum,0), max = Q.length;
+  return {list, total, max, pct: Math.round(total/max*100)};
+}
+const lvl = p => p>=80 ? "ok" : p>=50 ? "mid" : "low";
+const lvlText = {ok:"✓ знає", mid:"підтягнути", low:"почати з цього"};
+
+function renderResult(){
+  const st = stats();
+  const weak = st.list.filter(x=>x.pct<80).sort((a,b)=> (a.pct<50?0:1)-(b.pct<50?0:1) || a.ord-b.ord);
+  const name = S.name ? esc(S.name) : "";
+  const mood = st.pct>=80 ? "Дуже добре! 🎉" : st.pct>=55 ? "Непогано! Є що підтягнути 💪" : "Чудово, що пройшла до кінця! Тепер знаємо, з чого почати 🙂";
+  $app.innerHTML = `
+    <div class="emoji-hero">🏁</div>
+    <h1>${name ? name+", готово!" : "Готово!"}</h1>
+    <p class="muted">${mood}</p>
+    <div class="score-big">${st.pct}%</div>
+    <p class="muted small">${fmt(st.total)} з ${st.max} балів · підказка = пів бала</p>
+    <h2 style="margin-top:20px">Теми</h2>
+    ${st.list.map(x=>{ const L=lvl(x.pct); return `
+      <div class="topic">
+        <div class="t"><span>${x.name}</span><span class="lvl-${L}">${x.pct}% · ${lvlText[L]}</span></div>
+        <div class="tbar"><i class="bg-${L}" style="width:${Math.max(x.pct,3)}%"></i></div>
+      </div>`; }).join("")}
+    ${weak.length ? `<div class="reco"><b>Що вчимо першим:</b><ol>${weak.slice(0,4).map(x=>`<li>${x.name}</li>`).join("")}</ol></div>`
+                  : `<div class="reco"><b>Усі теми на хорошому рівні!</b> Можна братися за складніші завдання 7 класу.</div>`}
+    <div class="row">
+      <button class="btn full" id="copy">📋 Скопіювати результат для тата</button>
+      <button class="btn plain full" id="again">Пройти ще раз</button>
+    </div>`;
+  document.getElementById("copy").onclick = ()=>copyReport(st, weak);
+  document.getElementById("again").onclick = ()=>{ const n=S.name; S=fresh(); S.name=n; save(); renderStart(); };
+}
+function fmt(n){ return Number.isInteger(n) ? String(n) : n.toFixed(1).replace(".",","); }
+
+function copyReport(st, weak){
+  const d = new Date(S.date || Date.now()).toLocaleDateString("uk-UA");
+  const lines = [
+    `Діагностика англійської (7 клас)${S.name ? " — "+S.name : ""}, ${d}`,
+    `Загалом: ${st.pct}% (${fmt(st.total)} з ${st.max})`,
+    "",
+    ...st.list.map(x=>`${x.name}: ${x.pct}% — ${lvlText[lvl(x.pct)]}`),
+    "",
+    "Помилки:",
+    ...Q.map((q,i)=>{ const a=S.ans[i]; if(!a || a.ok) return null;
+      return `• ${q.p.replace(/«|»/g,"")} → ${a.given===null ? "не знаю" : a.given} (правильно: ${q.type==="order" ? fullSentence(q) : answersOf(q)[0]})`; }).filter(Boolean),
+    "",
+    weak.length ? "Почати з: " + weak.slice(0,4).map(x=>x.name).join("; ") : "Усі теми на хорошому рівні."
+  ];
+  const text = lines.join("\n");
+  const done = ()=>toast("Скопійовано — встав у месенджер");
+  try{
+    navigator.clipboard.writeText(text).then(done, ()=>fallbackCopy(text, done));
+  }catch(e){ fallbackCopy(text, done); }
+}
+function fallbackCopy(text, done){
+  try{
+    const ta = document.createElement("textarea"); ta.value = text; ta.style.position="fixed"; ta.style.opacity="0";
+    document.body.appendChild(ta); ta.select(); const ok = document.execCommand("copy"); ta.remove();
+    if(ok) return done();
+  }catch(e){}
+  toast("Не вдалося скопіювати — зроби скріншот");
+}
+function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"), 2200); }
+
+/* ---------- start ---------- */
+if(S.done) renderResult(); else renderStart();
+</script>
+</body>
+</html>

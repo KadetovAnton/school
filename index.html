@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Англійська">
+<meta name="theme-color" content="#FFF7EC">
+<link rel="apple-touch-icon" href="icon.png">
+<link rel="icon" href="icon.png">
+
+<title>Англійська — мій кабінет</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#FFF7EC; --card:#FFFFFF; --ink:#1F2340; --muted:#6B6F88; --line:#EDE5D6;
+  --pri:#4B44E6; --pri-soft:#EEEDFF; --pri-ink:#2F29B8;
+  --ok:#17905F; --ok-soft:#E3F6EC; --bad:#D63F47; --bad-soft:#FDEBEC;
+  --warn:#C98200; --warn-soft:#FFF2D6; --sun:#FFB020;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{font-family:"Nunito",system-ui,-apple-system,sans-serif;background:var(--bg);color:var(--ink);font-size:17px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:640px;margin:0 auto;padding:18px 16px 56px}
+.card{background:var(--card);border-radius:22px;padding:22px 20px;box-shadow:0 1px 0 var(--line),0 8px 24px rgba(60,40,10,.06);margin-bottom:14px}
+h1{font-size:27px;line-height:1.2;margin:2px 0 8px;font-weight:900;letter-spacing:-.01em}
+h2{font-size:20px;margin:0 0 10px;font-weight:800}
+h3{font-size:18px;margin:0 0 8px;font-weight:800}
+p{margin:0 0 12px}
+.muted{color:var(--muted)} .small{font-size:14px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;font:inherit;font-weight:800;font-size:17px;border:0;border-radius:14px;padding:14px 20px;cursor:pointer;background:var(--pri);color:#fff;min-height:52px;transition:transform .08s}
+.btn:active{transform:scale(.98)} .btn:disabled{opacity:.4;cursor:default}
+.btn.full{width:100%} .btn.ghost{background:var(--pri-soft);color:var(--pri-ink)}
+.btn.plain{background:transparent;color:var(--muted);font-weight:700;padding:8px 10px;min-height:auto}
+.btn.okb{background:var(--ok)}
+.row{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px} .row .btn{flex:1 1 auto}
+input[type=text]{width:100%;font:inherit;font-size:18px;padding:13px 14px;border:2px solid var(--line);border-radius:14px;outline:none;background:#fff;color:var(--ink)}
+input[type=text]:focus{border-color:var(--pri)}
+.topbar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.back{font:inherit;font-weight:800;color:var(--pri-ink);background:var(--pri-soft);border:0;border-radius:99px;padding:8px 14px;cursor:pointer;font-size:15px}
+.chip{display:inline-block;background:var(--pri-soft);color:var(--pri-ink);font-weight:800;font-size:13px;padding:4px 10px;border-radius:99px;margin-bottom:10px}
+/* home */
+.hello{display:flex;justify-content:space-between;align-items:flex-start;gap:12px}
+.stats{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap}
+.stat{background:#FBF6EC;border-radius:14px;padding:8px 12px;font-weight:800;font-size:15px}
+.stage{margin-top:6px}
+.stage-h{display:flex;align-items:center;gap:10px;margin-bottom:10px}
+.stage-n{flex:0 0 34px;height:34px;border-radius:50%;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900}
+.stage.locked .stage-n{background:#D9D1C2}
+.stage-t{font-weight:800;font-size:18px;line-height:1.2}
+.stage-s{color:var(--muted);font-size:14px;font-weight:600}
+.lesson{display:flex;align-items:center;gap:12px;width:100%;text-align:left;font:inherit;background:#fff;border:2px solid var(--line);border-radius:16px;padding:13px 14px;margin:8px 0;cursor:pointer;color:var(--ink)}
+.lesson .ic{flex:0 0 40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--pri-soft)}
+.lesson .lt{font-weight:800;line-height:1.25}
+.lesson .ls{font-size:14px;color:var(--muted);font-weight:600}
+.lesson.open{border-color:var(--pri);box-shadow:0 4px 0 #D8D6FF}
+.lesson.done .ic{background:var(--ok-soft)}
+.lesson.lock{cursor:default;opacity:.55}
+.lesson.lock .ic{background:#F1ECE2}
+.stars{color:var(--sun);letter-spacing:1px;font-size:15px}
+/* lesson */
+.steps{display:flex;gap:6px;margin:4px 0 16px}
+.step{flex:1;font:inherit;border:0;background:#fff;border-radius:12px;padding:8px 2px;font-size:12px;font-weight:800;color:var(--muted);cursor:pointer;box-shadow:0 1px 0 var(--line);display:flex;flex-direction:column;align-items:center;gap:2px}
+.step .e{font-size:20px}
+.step.cur{background:var(--pri);color:#fff}
+.step.done{color:var(--ok)}
+.step:disabled{opacity:.4;cursor:default}
+.prog{height:8px;background:#EFE7D8;border-radius:99px;overflow:hidden;margin:6px 0 16px}
+.prog i{display:block;height:100%;background:var(--pri);border-radius:99px;transition:width .3s}
+/* explain */
+.big-emoji{font-size:44px;line-height:1;margin-bottom:6px}
+.rule-box{background:var(--pri-soft);border-radius:16px;padding:14px 16px;margin:12px 0}
+.ex{background:#FBF6EC;border-radius:14px;padding:10px 14px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
+.ex .en{font-weight:800;font-size:18px}
+.ex .ua{color:var(--muted);font-size:15px}
+.ex b, .en b{color:var(--pri-ink);background:#E3E1FF;border-radius:6px;padding:0 3px}
+table.t{width:100%;border-collapse:separate;border-spacing:0;margin:10px 0;font-size:16px}
+table.t td{padding:9px 10px;border-bottom:1px solid var(--line)}
+table.t tr:last-child td{border-bottom:0}
+table.t td:first-child{font-weight:800}
+.dots{display:flex;gap:6px;justify-content:center;margin-top:14px}
+.dots i{width:8px;height:8px;border-radius:50%;background:#E2D9C8}
+.dots i.on{background:var(--pri)}
+.say{font:inherit;font-size:15px;font-weight:800;border:0;background:#fff;border-radius:99px;padding:7px 12px;cursor:pointer;color:var(--pri-ink);box-shadow:0 1px 0 var(--line);white-space:nowrap}
+.say.round{width:40px;height:40px;padding:0;font-size:18px;flex:0 0 40px}
+.tip{background:var(--warn-soft);border-radius:14px;padding:12px 14px;margin:10px 0;font-size:16px}
+/* exercises */
+.task{color:var(--muted);font-weight:700;font-size:15px;margin-bottom:6px}
+.prompt{font-size:22px;font-weight:700;line-height:1.4;margin:4px 0 18px}
+.blank{display:inline-block;min-width:70px;border-bottom:3px solid var(--pri);margin:0 4px;transform:translateY(-3px)}
+.opts{display:grid;gap:10px}
+.opt{font:inherit;font-size:19px;font-weight:700;text-align:left;padding:15px 16px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.opt:hover:not(:disabled){border-color:var(--pri)} .opt:disabled{cursor:default}
+.opt.right{border-color:var(--ok);background:var(--ok-soft)} .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.hint{background:var(--warn-soft);border-radius:14px;padding:12px 14px;margin-top:8px;font-size:16px}
+.hint b{color:#8a5a00}
+.fb{border-radius:16px;padding:16px;margin-top:16px;font-size:16px}
+.fb.ok{background:var(--ok-soft)} .fb.bad{background:var(--bad-soft)}
+.fb h3{margin:0 0 6px;font-size:18px} .fb.ok h3{color:var(--ok)} .fb.bad h3{color:var(--bad)}
+.fb .rule{margin-top:10px;padding-top:10px;border-top:1px dashed rgba(0,0,0,.12)}
+.built{min-height:62px;border:2px dashed var(--line);border-radius:14px;padding:10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.built.empty::before{content:"Натискай слова знизу по черзі";color:#b3ab9b;font-weight:600;font-size:15px}
+.pool{display:flex;flex-wrap:wrap;gap:8px}
+.w{font:inherit;font-size:18px;font-weight:700;padding:9px 14px;border-radius:12px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.w.used{visibility:hidden}
+.built .w{background:var(--pri-soft);border-color:transparent;color:var(--pri-ink)}
+/* flashcards */
+.flash{perspective:1000px;margin:8px 0 6px}
+.flash-in{position:relative;height:210px;transition:transform .45s;transform-style:preserve-3d;cursor:pointer}
+.flash.flipped .flash-in{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;border-radius:20px;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:16px;text-align:center}
+.face.front{background:var(--pri);color:#fff}
+.face.back{background:#fff;border:2px solid var(--pri);transform:rotateY(180deg)}
+.face .word{font-size:32px;font-weight:900;line-height:1.15}
+.face .sub{opacity:.8;font-size:14px;font-weight:700;margin-top:10px}
+.face .say{margin-top:12px}
+/* results */
+.score-big{font-size:54px;font-weight:900;line-height:1;margin:6px 0}
+.celebrate{font-size:52px;line-height:1}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast.show{opacity:1}
+</style>
+</head>
+<body>
+<div class="wrap" id="app"></div>
+<div id="toast" class="toast"></div>
+
+<script>
+/* ================== КОНТЕНТ ================== */
+const PATH = [
+  {n:1, title:"Фундамент", sub:"Теперішній час", lessons:[
+    {id:"l1", title:"Present Simple: що я роблю щодня", ic:"☀️"},
+    {id:"l2", title:"Present Simple: заперечення і питання", ic:"❓"},
+    {id:"l3", title:"Present Continuous: що відбувається зараз", ic:"👀"},
+    {id:"l4", title:"Simple чи Continuous? Тренуємо різницю", ic:"⚖️"}]},
+  {n:2, title:"Опис світу", sub:"Що де є", lessons:[
+    {id:"l5", title:"There is / There are", ic:"🏠"},
+    {id:"l6", title:"some / any, множина", ic:"🍎"}]},
+  {n:3, title:"Минуле", sub:"Що було вчора", lessons:[
+    {id:"l7", title:"Past Simple: правильні дієслова (-ed)", ic:"📅"},
+    {id:"l8", title:"30 головних неправильних дієслів", ic:"🧩"},
+    {id:"l9", title:"Past Simple: питання і заперечення", ic:"🔁"}]},
+  {n:4, title:"Порівняння і правила", sub:"Більше, найкраще, треба", lessons:[
+    {id:"l10", title:"Ступені порівняння", ic:"📏"},
+    {id:"l11", title:"must / can / mustn't", ic:"🚦"}]},
+  {n:5, title:"Наздоганяємо 7 клас", sub:"Програма класу", lessons:[
+    {id:"l12", title:"Past Continuous", ic:"🎬"},
+    {id:"l13", title:"Present Perfect", ic:"✅"}]}
+];
+
+const L1 = {
+  id:"l1",
+  title:"Present Simple: що я роблю щодня",
+  explain:[
+    {e:"☀️", h:"Коли вживаємо?",
+     html:`<p>Present Simple — це про те, що буває <b>регулярно</b>: щодня, завжди, зазвичай. Твої звички, розклад, факти.</p>
+      <div class="ex"><div><div class="en">I <b>go</b> to school every day.</div><div class="ua">Я ходжу до школи щодня.</div></div><button class="say round" data-say="I go to school every day.">🔊</button></div>
+      <div class="tip">🔎 <b>Слова-підказки:</b> every day (щодня), always (завжди), usually (зазвичай), often (часто), sometimes (іноді), never (ніколи).</div>`},
+    {e:"🙂", h:"Як утворюється?",
+     html:`<p>Найпростіше в англійській: беремо дієслово <b>як у словнику</b>, нічого не змінюємо.</p>
+      <table class="t">
+        <tr><td>I</td><td>play</td><td class="muted">я граю</td></tr>
+        <tr><td>you</td><td>play</td><td class="muted">ти граєш</td></tr>
+        <tr><td>we</td><td>play</td><td class="muted">ми граємо</td></tr>
+        <tr><td>they</td><td>play</td><td class="muted">вони грають</td></tr>
+      </table>
+      <p class="muted">Порівняй: в українській дієслово змінюється для кожної особи, а в англійській майже ніколи. Майже…</p>`},
+    {e:"⚠️", h:"Головна пастка: he / she / it",
+     html:`<p>Коли мова про <b>одну людину чи предмет</b> (він, вона, воно), до дієслова додаємо хвостик <b>-s</b>.</p>
+      <div class="rule-box" style="text-align:center;font-size:20px;font-weight:900">he / she / it → дієслово + s</div>
+      <div class="ex"><div><div class="en">She <b>plays</b> tennis.</div><div class="ua">Вона грає в теніс.</div></div><button class="say round" data-say="She plays tennis.">🔊</button></div>
+      <div class="ex"><div><div class="en">My mum <b>works</b> in a shop.</div><div class="ua">Моя мама працює в магазині.</div></div><button class="say round" data-say="My mum works in a shop.">🔊</button></div>
+      <div class="tip">💡 Увага: <b>my mum, Tom, the cat, my friend</b> — це теж he / she / it! Тому і тут потрібна -s.</div>`},
+    {e:"✏️", h:"Як правильно додати -s",
+     html:`<table class="t">
+        <tr><td>Майже всі</td><td>+ s</td><td>play → play<b>s</b><br>read → read<b>s</b></td></tr>
+        <tr><td>-s, -sh, -ch, -x, -o</td><td>+ es</td><td>watch → watch<b>es</b><br>go → go<b>es</b><br>do → do<b>es</b></td></tr>
+        <tr><td>приголосна + y</td><td>y → ies</td><td>study → stud<b>ies</b><br>fly → fl<b>ies</b></td></tr>
+        <tr><td>голосна + y</td><td>+ s</td><td>play → play<b>s</b></td></tr>
+        <tr><td>виняток</td><td>have</td><td>he <b>has</b></td></tr>
+      </table>
+      <div class="tip">💡 Чому -es? Спробуй вимовити «watchs» — язик заплітається. Тому додаємо голосну: watch<b>es</b> [вочіз].</div>`},
+    {e:"📍", h:"Куди ставити always, usually, never?",
+     html:`<p>Ці слова стоять <b>перед дієсловом</b>:</p>
+      <div class="ex"><div><div class="en">She <b>always</b> gets up at seven.</div><div class="ua">Вона завжди встає о сьомій.</div></div><button class="say round" data-say="She always gets up at seven.">🔊</button></div>
+      <div class="ex"><div><div class="en">I <b>never</b> drink coffee.</div><div class="ua">Я ніколи не п'ю каву.</div></div><button class="say round" data-say="I never drink coffee.">🔊</button></div>
+      <div class="rule-box"><b>Запам'ятай:</b> хто → <u>як часто</u> → що робить → решта.</div>`}
+  ],
+  examples:{title:"Один день Софійки", items:[
+    ["Sofia <b>gets</b> up at seven o'clock.","Софійка встає о сьомій."],
+    ["She <b>brushes</b> her teeth and <b>has</b> breakfast.","Вона чистить зуби і снідає."],
+    ["Her mum <b>makes</b> pancakes on Sundays.","Її мама робить млинці в неділю."],
+    ["Sofia <b>goes</b> to school by bus.","Софійка їздить до школи автобусом."],
+    ["She <b>studies</b> English and maths.","Вона вивчає англійську і математику."],
+    ["After school she <b>does</b> her homework.","Після школи вона робить домашнє завдання."],
+    ["Her brothers <b>play</b> football in the yard.","Її брати грають у футбол у дворі."],
+    ["In the evening the family <b>watches</b> TV.","Увечері сім'я дивиться телевізор."],
+    ["She usually <b>goes</b> to bed at ten.","Зазвичай вона лягає спати о десятій."]
+  ]},
+  practice:[
+    {type:"choice",p:"I ___ football every Saturday.",o:["play","plays"],a:"play",
+     h:["Хто? <b>I</b> — я.","Хвостик -s буває тільки з he / she / it."],
+     e:"З I / you / we / they дієслово без змін: I <b>play</b>.",
+     err:{"plays":"З <b>I</b> закінчення не додаємо — тільки з he / she / it."}},
+    {type:"choice",p:"My mum ___ in a hospital.",o:["work","works"],a:"works",
+     h:["My mum — це «вона».","she → дієслово + s"],
+     e:"My mum = she → <b>works</b>.",
+     err:{"work":"My mum — це «вона» (she), тож потрібна -s: work<b>s</b>."}},
+    {type:"choice",p:"They ___ TV in the evening.",o:["watch","watches"],a:"watch",
+     h:["They — це «вони». Їх багато.","Хвостик тільки для одного: he / she / it."],
+     e:"they → дієслово без змін: they <b>watch</b>.",
+     err:{"watches":"they — «вони», тут закінчення не потрібне: they <b>watch</b>."}},
+    {type:"input",task:"Впиши дієслово з правильним закінченням",p:"Tom ___ cartoons every morning. (watch)",a:["watches"],
+     h:["Tom = he, тож потрібне закінчення.","watch закінчується на -ch. Подивись у табличку: -s чи -es?"],
+     e:"Після -ch додаємо <b>-es</b>: watch → watch<b>es</b>.",
+     err:{"watchs":"Після -ch додаємо -es: watch<b>es</b>.","watch":"Tom = he, тож потрібне закінчення: watch<b>es</b>."}},
+    {type:"input",task:"Впиши дієслово з правильним закінченням",p:"She ___ to bed at ten. (go)",a:["goes"],
+     h:["she → закінчення потрібне.","go закінчується на -o."],
+     e:"go, do → <b>goes, does</b>.",
+     err:{"gos":"go закінчується на -o, тому -es: go<b>es</b>.","go":"she → потрібне закінчення: go<b>es</b>."}},
+    {type:"input",task:"Впиши дієслово з правильним закінченням",p:"My brother ___ English. (study)",a:["studies"],
+     h:["My brother = he.","study: перед y стоїть приголосна d. Що відбувається з y?"],
+     e:"Приголосна + y → <b>ies</b>: study → stud<b>ies</b>.",
+     err:{"studys":"Перед y стоїть приголосна (d), тому y → ies: stud<b>ies</b>.","studyes":"y міняємо на i: stud<b>ies</b>.","study":"My brother = he, потрібне закінчення: stud<b>ies</b>."}},
+    {type:"input",task:"Впиши дієслово з правильним закінченням",p:"He ___ the guitar. (play)",a:["plays"],
+     h:["he → закінчення потрібне.","play: перед y стоїть голосна a."],
+     e:"Голосна + y → просто <b>+s</b>: play<b>s</b>.",
+     err:{"plaies":"Перед y голосна (a), тому y не чіпаємо: play<b>s</b>.","play":"he → потрібне закінчення: play<b>s</b>."}},
+    {type:"choice",p:"Ann ___ a cat.",o:["have","has","haves"],a:"has",
+     h:["Ann = she.","have — виняток!"],
+     e:"have з he / she / it стає <b>has</b>.",
+     err:{"have":"Ann = she, а have з she стає <b>has</b>.","haves":"have — виняток, не haves, а <b>has</b>."}},
+    {type:"order",task:"Склади речення",p:"«Вона завжди встає о сьомій».",
+     words:["up","She","seven","always","at","gets"],a:["she always gets up at seven"],
+     h:["Хто → як часто → що робить → коли.","She → always → gets up → …"],
+     e:"<b>She always gets up at seven.</b> always стоїть перед дієсловом."},
+    {type:"choice",p:"We ___ to school by bus.",o:["goes","go"],a:"go",
+     h:["We — «ми».","Хвостик тільки для he / she / it."],
+     e:"we → дієслово без змін: we <b>go</b>.",
+     err:{"goes":"we — «ми», закінчення не потрібне: we <b>go</b>."}},
+    {type:"choice",p:"Яке речення правильне?",o:["He usually walks to school.","He walks usually to school.","He usually walk to school."],a:"He usually walks to school.",
+     h:["usually ставимо перед дієсловом.","І не забудь: he → дієслово + s."],
+     e:"Хто → як часто → дієслово з -s: He <b>usually walks</b> to school.",
+     err:{"he walks usually to school":"usually стоїть <b>перед</b> дієсловом: He usually walks…","he usually walk to school":"Порядок правильний, але he → walk<b>s</b>."}},
+    {type:"input",task:"Впиши дієслово з правильним закінченням",p:"The lesson ___ at two o'clock. (finish)",a:["finishes"],
+     h:["The lesson = it.","finish закінчується на -sh."],
+     e:"Після -sh додаємо <b>-es</b>: finish<b>es</b>.",
+     err:{"finishs":"Після -sh додаємо -es: finish<b>es</b>.","finish":"The lesson = it, потрібне закінчення: finish<b>es</b>."}}
+  ],
+  words:[
+    ["get up","вставати"],["have breakfast","снідати"],["brush my teeth","чистити зуби"],
+    ["go to school","йти до школи"],["have lunch","обідати"],["do homework","робити домашнє завдання"],
+    ["go to bed","лягати спати"],["always","завжди"],["usually","зазвичай"],["never","ніколи"]
+  ],
+  test:[
+    {type:"input",task:"Впиши дієслово",p:"My sister ___ her homework after school. (do)",a:["does"],
+     h:["My sister = she.","do закінчується на -o."],e:"do → <b>does</b>.",err:{"dos":"do закінчується на -o: do<b>es</b>.","do":"My sister = she → <b>does</b>."}},
+    {type:"choice",p:"I ___ milk every morning.",o:["drink","drinks"],a:"drink",
+     h:["I — я.","З I хвостика немає."],e:"I → <b>drink</b>.",err:{"drinks":"З I закінчення не додаємо: I <b>drink</b>."}},
+    {type:"choice",p:"Our teacher ___ very fast.",o:["speak","speaks"],a:"speaks",
+     h:["Our teacher = he або she.","he / she → + s"],e:"Our teacher = she → <b>speaks</b>.",err:{"speak":"Our teacher — це одна людина (he/she): speak<b>s</b>."}},
+    {type:"input",task:"Впиши дієслово",p:"Dad ___ cars. (fix)",a:["fixes"],
+     h:["Dad = he.","fix закінчується на -x."],e:"Після -x → <b>-es</b>: fix<b>es</b>.",err:{"fixs":"Після -x додаємо -es: fix<b>es</b>.","fix":"Dad = he → fix<b>es</b>."}},
+    {type:"input",task:"Впиши дієслово",p:"Max ___ to Lviv every summer. (fly)",a:["flies"],
+     h:["Max = he.","fly: перед y приголосна l."],e:"Приголосна + y → <b>ies</b>: fl<b>ies</b>.",err:{"flys":"Перед y приголосна, тому fl<b>ies</b>.","fly":"Max = he → fl<b>ies</b>."}},
+    {type:"choice",p:"Mark and Jane ___ in Kyiv.",o:["live","lives"],a:"live",
+     h:["Mark and Jane — скільки людей?","Двоє = they."],e:"Mark and Jane = they → <b>live</b>.",err:{"lives":"Mark and Jane — це двоє (they), тому без закінчення: <b>live</b>."}},
+    {type:"order",task:"Склади речення",p:"«Мій тато ніколи не п'є каву».",words:["never","coffee","My","drinks","dad"],a:["my dad never drinks coffee"],
+     h:["Хто → як часто → що робить → що.","My dad → never → drinks → …"],e:"<b>My dad never drinks coffee.</b>"},
+    {type:"choice",p:"She ___ two brothers.",o:["have","has"],a:"has",
+     h:["she → …","have — виняток."],e:"she → <b>has</b>.",err:{"have":"З she have стає <b>has</b>."}}
+  ]
+};
+
+const STEPS = [
+  {id:"explain", e:"📖", t:"Правило"},
+  {id:"examples", e:"🎧", t:"Приклади"},
+  {id:"practice", e:"✍️", t:"Вправи"},
+  {id:"words", e:"🃏", t:"Слова"},
+  {id:"test", e:"🏆", t:"Тест"}
+];
+
+/* ================== СТАН ================== */
+const KEY = "eng7-cabinet-v1";
+function fresh(){ return {name:"", days:[], lessons:{}}; }
+function load(){ try{ const s=JSON.parse(localStorage.getItem(KEY)); return s && s.lessons ? s : null; }catch(e){ return null; } }
+let S = load() || fresh();
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
+function L(id){ return S.lessons[id] || (S.lessons[id] = {steps:{}, best:0, stars:0}); }
+function today(){ const d=new Date(); return d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate(); }
+function markDay(){ const t=today(); if(!S.days.includes(t)){ S.days.push(t); save(); } }
+function streak(){
+  let n=0; const d=new Date();
+  for(;;){ const k=d.getFullYear()+"-"+(d.getMonth()+1)+"-"+d.getDate();
+    if(S.days.includes(k)){ n++; d.setDate(d.getDate()-1); } else if(n===0 && k===today()){ d.setDate(d.getDate()-1); } else break; }
+  return n;
+}
+
+/* ================== ДОПОМІЖНЕ ================== */
+const $app = document.getElementById("app");
+const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
+const strip = s => String(s).replace(/<[^>]+>/g,"");
+const norm = s => String(s).toLowerCase().replace(/[’'`]/g,"").replace(/[.!?,«»"]/g,"").replace(/\s+/g," ").trim();
+const canSpeak = (()=>{ try{ return "speechSynthesis" in window; }catch(e){ return false; } })();
+function say(text){ try{ speechSynthesis.cancel(); const u=new SpeechSynthesisUtterance(text); u.lang="en-GB"; u.rate=.9; speechSynthesis.speak(u); }catch(e){} }
+function bindSay(root){ root.querySelectorAll("[data-say]").forEach(b=>{ if(!canSpeak){ b.remove(); return; } b.onclick=e=>{ e.stopPropagation(); say(b.dataset.say); }; }); }
+function toast(m){ const t=document.getElementById("toast"); t.textContent=m; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"),2200); }
+function toTop(){ window.scrollTo({top:0,behavior:"smooth"}); }
+function starsStr(n){ return "★".repeat(n)+"☆".repeat(3-n); }
+
+/* ================== КАБІНЕТ ================== */
+function renderHome(){
+  if(!S.name) return renderName();
+  const l1 = L("l1"); const done = l1.stars>0;
+  const st = streak();
+  const totalStars = Object.values(S.lessons).reduce((s,x)=>s+(x.stars||0),0);
+  const doneCount = Object.values(S.lessons).filter(x=>x.stars>0).length;
+  const allLessons = PATH.reduce((s,p)=>s+p.lessons.length,0);
+
+  let html = `
+  <div class="card">
+    <div class="hello">
+      <div><h1>Привіт, ${esc(S.name)}! 👋</h1>
+      <p class="muted" style="margin:0">${done ? "Перший урок пройдено. Наступний уже на підході!" : "Сьогодні починаємо з першого уроку. 15–20 хвилин, і все вийде."}</p></div>
+    </div>
+    <div class="stats">
+      <span class="stat">🔥 ${st} ${dayWord(st)} поспіль</span>
+      <span class="stat">⭐ ${totalStars}</span>
+      <span class="stat">📚 ${doneCount} з ${allLessons} уроків</span>
+    </div>
+  </div>`;
+
+  PATH.forEach((stage,si)=>{
+    const stageOpen = si===0;
+    html += `<div class="card stage ${stageOpen?"":"locked"}">
+      <div class="stage-h"><div class="stage-n">${stage.n}</div>
+        <div><div class="stage-t">${stage.title}</div><div class="stage-s">${stage.sub}</div></div></div>`;
+    stage.lessons.forEach((ls,li)=>{
+      let cls="lock", sub="🔒 Відкриється після попереднього уроку", ic="🔒";
+      if(ls.id==="l1"){
+        const st1 = L("l1"); const nDone = STEPS.filter(s=>st1.steps[s.id]).length;
+        if(st1.stars>0){ cls="done"; ic="✅"; sub=`<span class="stars">${starsStr(st1.stars)}</span> · можна повторити`; }
+        else { cls="open"; ic=ls.ic; sub = nDone ? `Продовжити · ${nDone} з 5 кроків` : "Почати · ~20 хв"; }
+      } else if(ls.id==="l2" && done){
+        cls="lock"; ic="⏳"; sub="Скоро з'явиться";
+      }
+      html += `<button class="lesson ${cls}" data-id="${ls.id}">
+        <span class="ic">${ic}</span>
+        <span><div class="lt">${li+1+PATH.slice(0,si).reduce((s,p)=>s+p.lessons.length,0)}. ${ls.title}</div><div class="ls">${sub}</div></span></button>`;
+    });
+    html += `</div>`;
+  });
+  html += `<a class="lesson" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">Тест на 29 завдань: що вже знаю, а що підтягнути</div></span></a>`;
+  $app.innerHTML = html;
+  $app.querySelectorAll(".lesson").forEach(b=> b.onclick = ()=>{ if(b.dataset.id==="l1") renderLesson(); });
+}
+function dayWord(n){ const a=n%10,b=n%100; if(a===1&&b!==11) return "день"; if(a>=2&&a<=4&&(b<12||b>14)) return "дні"; return "днів"; }
+
+function renderName(){
+  $app.innerHTML = `<div class="card">
+    <div class="big-emoji">🇬🇧</div>
+    <h1>Твій кабінет англійської</h1>
+    <p class="muted">Тут твій шлях навчання: короткі уроки по 15–20 хвилин, вправи з підказками, слова з озвучкою. Пройшла урок — відкривається наступний.</p>
+    <label style="display:block;font-weight:800;margin:8px 0 6px" for="nm">Як тебе звати?</label>
+    <input id="nm" type="text" autocomplete="off" placeholder="Ім'я">
+    <div class="row"><button class="btn full" id="go" disabled>Увійти →</button></div></div>`;
+  const nm=document.getElementById("nm"), go=document.getElementById("go");
+  nm.oninput=()=>go.disabled=!nm.value.trim();
+  nm.onkeydown=e=>{ if(e.key==="Enter"&&nm.value.trim()) go.click(); };
+  go.onclick=()=>{ S.name=nm.value.trim(); save(); renderHome(); };
+}
+
+/* ================== УРОК ================== */
+function stepAvailable(i){ const st=L("l1").steps; return i===0 || st[STEPS[i-1].id] || st[STEPS[i].id]; }
+function renderLesson(stepId){
+  const st = L("l1").steps;
+  if(!stepId){ const firstUndone = STEPS.find(s=>!st[s.id]); stepId = firstUndone ? firstUndone.id : "explain"; }
+  const idx = STEPS.findIndex(s=>s.id===stepId);
+  const stepsHtml = STEPS.map((s,i)=>`<button class="step ${s.id===stepId?"cur":""} ${st[s.id]?"done":""}" data-s="${s.id}" ${stepAvailable(i)?"":"disabled"}>
+      <span class="e">${st[s.id] && s.id!==stepId ? "✓" : s.e}</span>${s.t}</button>`).join("");
+  $app.innerHTML = `
+    <div class="topbar"><button class="back" id="back">← Кабінет</button><span class="muted small" style="font-weight:700">Урок 1</span></div>
+    <div class="steps">${stepsHtml}</div>
+    <div id="stage"></div>`;
+  document.getElementById("back").onclick = ()=>{ speechSafeStop(); renderHome(); toTop(); };
+  $app.querySelectorAll(".step").forEach(b=> b.onclick = ()=>{ speechSafeStop(); renderLesson(b.dataset.s); toTop(); });
+  const stage = document.getElementById("stage");
+  ({explain:stepExplain, examples:stepExamples, practice:stepPractice, words:stepWords, test:stepTest})[stepId](stage, idx);
+}
+function speechSafeStop(){ try{ speechSynthesis.cancel(); }catch(e){} }
+function completeStep(id){ L("l1").steps[id]=true; markDay(); save(); }
+function nextStep(idx){ const n=STEPS[idx+1]; if(n) renderLesson(n.id); else renderHome(); toTop(); }
+
+/* --- 1. Пояснення --- */
+function stepExplain(root, idx){
+  let k=0;
+  const draw=()=>{
+    const c = L1.explain[k];
+    root.innerHTML = `<div class="card">
+      <span class="chip">Правило · ${k+1} з ${L1.explain.length}</span>
+      <div class="big-emoji">${c.e}</div><h2>${c.h}</h2>${c.html}
+      <div class="dots">${L1.explain.map((_,i)=>`<i class="${i===k?"on":""}"></i>`).join("")}</div>
+      <div class="row">
+        ${k>0?`<button class="btn ghost" id="prev">←</button>`:""}
+        <button class="btn" id="nx" style="flex:3">${k<L1.explain.length-1?"Далі →":"Зрозуміло! До прикладів →"}</button>
+      </div></div>`;
+    bindSay(root);
+    const p=document.getElementById("prev"); if(p) p.onclick=()=>{k--;draw();toTop();};
+    document.getElementById("nx").onclick=()=>{ if(k<L1.explain.length-1){k++;draw();toTop();} else { completeStep("explain"); nextStep(idx); } };
+  };
+  draw();
+}
+
+/* --- 2. Приклади --- */
+function stepExamples(root, idx){
+  const ex = L1.examples;
+  root.innerHTML = `<div class="card">
+    <span class="chip">Приклади</span>
+    <h2>🎧 ${ex.title}</h2>
+    <p class="muted">Натисни 🔊 і повтори вголос. Подивись на виділені дієслова: де є -s, а де нема, і чому?</p>
+    ${canSpeak?`<button class="btn ghost full" id="all" style="margin-bottom:8px">▶️ Послухати все</button>`:""}
+    ${ex.items.map(([en,ua])=>`<div class="ex"><div><div class="en">${en}</div><div class="ua">${ua}</div></div><button class="say round" data-say="${esc(strip(en))}">🔊</button></div>`).join("")}
+    <div class="tip">🤔 <b>Питання на кмітливість:</b> чому «Her brothers <b>play</b>» без -s? <span id="ans" style="display:none">Бо brothers — їх кілька, це they.</span> <button class="say" id="showAns">Відповідь</button></div>
+    <div class="row"><button class="btn full" id="nx">До вправ →</button></div></div>`;
+  bindSay(root);
+  document.getElementById("showAns").onclick=e=>{ document.getElementById("ans").style.display="inline"; e.target.remove(); };
+  const all=document.getElementById("all");
+  if(all) all.onclick=()=>{ try{ speechSynthesis.cancel(); ex.items.forEach(([en])=>{ const u=new SpeechSynthesisUtterance(strip(en)); u.lang="en-GB"; u.rate=.9; speechSynthesis.speak(u); }); }catch(e){} };
+  document.getElementById("nx").onclick=()=>{ completeStep("examples"); nextStep(idx); };
+}
+
+/* --- 3/5. Вправи і тест (спільний рушій) --- */
+function runSet(root, items, mode, onDone){
+  let i=0; const res=[];
+  const draw=()=>{
+    if(i>=items.length) return onDone(res);
+    const q=items[i]; const cur={hints:0, answered:false, built:[]};
+    const answers = Array.isArray(q.a)?q.a:[q.a];
+    let body="";
+    if(q.type==="choice") body=`<div class="opts">${q.o.map((o,k)=>`<button class="opt" data-k="${k}">${esc(o)}</button>`).join("")}</div>`;
+    if(q.type==="input") body=`<input id="inp" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="Твоя відповідь"><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>`;
+    if(q.type==="order") body=`<div class="built empty" id="built"></div><div class="pool" id="pool">${q.words.map((w,k)=>`<button class="w" data-k="${k}">${esc(w)}</button>`).join("")}</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>`;
+    root.innerHTML = `<div class="card">
+      <span class="chip">${mode==="test"?"🏆 Міні-тест":"✍️ Вправи"} · ${i+1} з ${items.length}</span>
+      <div class="prog"><i style="width:${Math.round(i/items.length*100)}%"></i></div>
+      ${q.task?`<div class="task">${q.task}:</div>`:""}
+      <div class="prompt">${esc(q.p).replace("___",'<span class="blank"></span>')}</div>
+      ${body}
+      <div id="hints"></div>
+      <div class="row" id="aux"><button class="btn ghost" id="hintBtn">💡 Підказка</button><button class="btn plain" id="idk">🤷 Не знаю</button></div>
+      <div id="fb"></div></div>`;
+    const finish=(given,btn)=>{
+      if(cur.answered) return; cur.answered=true;
+      const ok = given!==null && answers.some(a=>norm(a)===norm(given));
+      res.push({ok, hint:cur.hints>0, given, q});
+      root.querySelectorAll(".opt").forEach(b=>{ b.disabled=true; if(norm(q.o[+b.dataset.k])===norm(answers[0])) b.classList.add("right"); });
+      if(btn&&!ok) btn.classList.add("wrong");
+      const inp=document.getElementById("inp"); if(inp) inp.disabled=true;
+      const cr=document.getElementById("chkrow"); if(cr) cr.remove();
+      document.getElementById("aux").remove();
+      const full = q.type==="order" ? cap(answers[0])+"." : q.p.includes("___") ? q.p.replace("___",answers[0]).replace(/\s*\(.*?\)\s*$/,"") : answers[0];
+      let h;
+      if(ok) h=`<div class="fb ok"><h3>${cur.hints?"Правильно! 👍":["Правильно! 🎉","Так тримати! ⭐","Чудово! 💪","Супер! 🚀"][i%4]}</h3><div>${q.e}</div>`;
+      else {
+        const sp = given!==null && q.err ? Object.entries(q.err).find(([k])=>norm(k)===norm(given)) : null;
+        h=`<div class="fb bad"><h3>${given===null?"Нічого страшного, розберімо 🙂":"Не зовсім 🙂"}</h3>
+          ${sp?`<div>${sp[1]}</div>`:given!==null?`<div>Твоя відповідь: <b>${esc(given)}</b></div>`:""}
+          <div style="margin-top:6px">Правильно: <b>${esc(q.type==="order"?full:answers[0])}</b></div>
+          <div class="rule"><b>Правило:</b> ${q.e}</div>`;
+      }
+      h += `${canSpeak && /[a-z]/i.test(full) ? `<div style="margin-top:12px"><button class="say" data-say="${esc(full)}">🔊 Послухати</button></div>`:""}</div>
+        <div class="row"><button class="btn full" id="next">${i+1<items.length?"Далі →":"Готово"}</button></div>`;
+      document.getElementById("fb").innerHTML=h; bindSay(root);
+      const nx=document.getElementById("next"); nx.onclick=()=>{ i++; draw(); toTop(); };
+      setTimeout(()=>{ try{ nx.scrollIntoView({behavior:"smooth",block:"center"}); }catch(e){} },80);
+    };
+    document.getElementById("hintBtn").onclick=()=>{
+      if(cur.answered||cur.hints>=q.h.length) return;
+      document.getElementById("hints").insertAdjacentHTML("beforeend",`<div class="hint"><b>Підказка ${cur.hints+1}:</b> ${q.h[cur.hints]}</div>`);
+      cur.hints++; if(cur.hints>=q.h.length){ const b=document.getElementById("hintBtn"); b.disabled=true; b.textContent="💡 Більше немає"; }
+    };
+    document.getElementById("idk").onclick=()=>finish(null);
+    if(q.type==="choice") root.querySelectorAll(".opt").forEach(b=>b.onclick=()=>finish(q.o[+b.dataset.k],b));
+    if(q.type==="input"){ const inp=document.getElementById("inp"),ch=document.getElementById("check");
+      inp.oninput=()=>ch.disabled=!inp.value.trim(); inp.onkeydown=e=>{ if(e.key==="Enter"&&inp.value.trim()) finish(inp.value); };
+      ch.onclick=()=>finish(inp.value); setTimeout(()=>{ try{ inp.focus({preventScroll:true}); }catch(e){} },50); }
+    if(q.type==="order"){ const pool=document.getElementById("pool"),built=document.getElementById("built"),ch=document.getElementById("check");
+      const rd=()=>{ built.innerHTML=cur.built.map(k=>`<button class="w" data-k="${k}">${esc(q.words[k])}</button>`).join("");
+        built.classList.toggle("empty",!cur.built.length);
+        pool.querySelectorAll(".w").forEach(b=>b.classList.toggle("used",cur.built.includes(+b.dataset.k)));
+        ch.disabled=cur.built.length!==q.words.length;
+        built.querySelectorAll(".w").forEach(b=>b.onclick=()=>{ if(cur.answered) return; cur.built=cur.built.filter(k=>k!==+b.dataset.k); rd(); }); };
+      pool.querySelectorAll(".w").forEach(b=>b.onclick=()=>{ if(cur.answered) return; const k=+b.dataset.k; if(!cur.built.includes(k)){ cur.built.push(k); rd(); } });
+      ch.onclick=()=>finish(cur.built.map(k=>q.words[k]).join(" ")); rd(); }
+  };
+  draw();
+}
+const cap = s => s.charAt(0).toUpperCase()+s.slice(1);
+const scoreOf = res => res.reduce((s,r)=>s+(r.ok?(r.hint?.5:1):0),0);
+
+function stepPractice(root, idx){
+  runSet(root, L1.practice, "practice", res=>{
+    completeStep("practice");
+    const sc=scoreOf(res), mx=res.length, wrong=res.filter(r=>!r.ok);
+    root.innerHTML = `<div class="card" style="text-align:center">
+      <div class="celebrate">${sc/mx>=.8?"🎉":"💪"}</div>
+      <h2>Вправи зроблено!</h2>
+      <p class="muted">${fmt(sc)} з ${mx} балів</p>
+      ${wrong.length?`<div class="tip" style="text-align:left"><b>Варто повторити:</b><br>${wrong.map(r=>"• "+esc(r.q.p)).join("<br>")}</div>`:`<p>Без жодної помилки! 🔥</p>`}
+      <div class="row">
+        ${wrong.length?`<button class="btn ghost" id="again">↺ Ще раз</button>`:""}
+        <button class="btn" id="nx" style="flex:2">До слів →</button></div></div>`;
+    const a=document.getElementById("again"); if(a) a.onclick=()=>{ stepPractice(root, idx); toTop(); };
+    document.getElementById("nx").onclick=()=>nextStep(idx);
+  });
+}
+
+/* --- 4. Слова --- */
+function stepWords(root, idx){
+  let queue = L1.words.map((w,k)=>k); let known=0;
+  const draw=()=>{
+    if(!queue.length){
+      completeStep("words");
+      root.innerHTML=`<div class="card" style="text-align:center"><div class="celebrate">🃏</div><h2>Усі ${L1.words.length} слів вивчено!</h2>
+        <p class="muted">Вони ще трапляться в тесті та в наступних уроках.</p>
+        <div class="row"><button class="btn full" id="nx">До тесту →</button></div></div>`;
+      document.getElementById("nx").onclick=()=>nextStep(idx); return;
+    }
+    const k=queue[0], [en,ua]=L1.words[k];
+    root.innerHTML=`<div class="card">
+      <span class="chip">Слова · вивчено ${known} з ${L1.words.length}</span>
+      <p class="muted" style="margin-bottom:4px">Подивись на слово, згадай переклад і переверни картку.</p>
+      <div class="flash" id="fl"><div class="flash-in">
+        <div class="face front"><div class="word">${esc(en)}</div>${canSpeak?`<button class="say" data-say="${esc(en)}">🔊 Послухати</button>`:""}<div class="sub">натисни, щоб перевернути</div></div>
+        <div class="face back"><div class="word" style="color:var(--pri-ink)">${esc(ua)}</div><div class="sub" style="color:var(--muted)">${esc(en)}</div></div>
+      </div></div>
+      <div class="row" id="btns" style="visibility:hidden">
+        <button class="btn ghost" id="again">↺ Ще вчу</button>
+        <button class="btn okb" id="ok">✓ Знаю</button></div></div>`;
+    bindSay(root);
+    const fl=document.getElementById("fl");
+    fl.onclick=()=>{ fl.classList.toggle("flipped"); document.getElementById("btns").style.visibility="visible"; };
+    document.getElementById("ok").onclick=()=>{ queue.shift(); known++; draw(); };
+    document.getElementById("again").onclick=()=>{ queue.push(queue.shift()); draw(); };
+    if(canSpeak) setTimeout(()=>say(en),150);
+  };
+  draw();
+}
+
+/* --- 5. Тест --- */
+function stepTest(root, idx){
+  root.innerHTML=`<div class="card"><div class="big-emoji">🏆</div><h2>Міні-тест</h2>
+    <p>${L1.test.length} завдань на все, що вивчили в цьому уроці.</p>
+    <div class="tip">Набери <b>80%</b> або більше, і урок зарахується, а наступний відкриється. Підказки є, але кожна забирає пів бала.</div>
+    <p class="muted small">⭐ 80%+ · ⭐⭐ 90%+ · ⭐⭐⭐ 100%</p>
+    <div class="row"><button class="btn full" id="go">Почати тест →</button></div></div>`;
+  document.getElementById("go").onclick=()=> runSet(root, L1.test, "test", res=>{
+    const sc=scoreOf(res), mx=res.length, pct=Math.round(sc/mx*100);
+    const stars = pct>=100?3:pct>=90?2:pct>=80?1:0;
+    const l=L("l1"); const pass = stars>0;
+    if(pass){ completeStep("test"); if(stars>l.stars) l.stars=stars; }
+    if(pct>l.best) l.best=pct; markDay(); save();
+    const wrong=res.filter(r=>!r.ok);
+    root.innerHTML=`<div class="card" style="text-align:center">
+      <div class="celebrate">${pass?"🏆":"🌱"}</div>
+      <h2>${pass?"Урок пройдено!":"Майже! Ще трішки"}</h2>
+      <div class="score-big">${pct}%</div>
+      ${pass?`<div class="stars" style="font-size:30px">${starsStr(stars)}</div>`:`<p class="muted">Потрібно 80%. Повтори правило і спробуй ще раз, у тебе вийде!</p>`}
+      ${wrong.length?`<div class="tip" style="text-align:left;margin-top:14px"><b>Помилки:</b><br>${wrong.map(r=>`• ${esc(r.q.p)} → <b>${esc(Array.isArray(r.q.a)?r.q.a[0]:r.q.a)}</b>`).join("<br>")}</div>`:""}
+      <div class="row">
+        ${pass?`<button class="btn ghost full" id="copy">📋 Надіслати результат татові</button>`:`<button class="btn ghost" id="rule">📖 До правила</button><button class="btn" id="retry">↺ Ще раз</button>`}
+        <button class="btn ${pass?"":"plain"} full" id="home">${pass?"До кабінету →":"До кабінету"}</button></div></div>`;
+    const c=document.getElementById("copy"); if(c) c.onclick=()=>copyReport(pct,stars,wrong);
+    const r=document.getElementById("rule"); if(r) r.onclick=()=>{ renderLesson("explain"); toTop(); };
+    const rt=document.getElementById("retry"); if(rt) rt.onclick=()=>{ stepTest(root, idx); toTop(); };
+    document.getElementById("home").onclick=()=>{ renderHome(); toTop(); };
+  });
+}
+function fmt(n){ return Number.isInteger(n)?String(n):n.toFixed(1).replace(".",","); }
+
+function copyReport(pct,stars,wrong){
+  const d=new Date().toLocaleDateString("uk-UA");
+  const text=[`${S.name} — урок 1 «Present Simple: що я роблю щодня», ${d}`,
+    `Тест: ${pct}% ${"★".repeat(stars)}`,
+    wrong.length?"Помилки:\n"+wrong.map(r=>`• ${r.q.p} → ${r.given===null?"не знаю":r.given} (правильно: ${Array.isArray(r.q.a)?r.q.a[0]:r.q.a})`).join("\n"):"Без помилок!",
+    `Днів поспіль: ${streak()}`].join("\n");
+  const done=()=>toast("Скопійовано — встав у месенджер");
+  try{ navigator.clipboard.writeText(text).then(done,()=>fb(text,done)); }catch(e){ fb(text,done); }
+}
+function fb(text,done){ try{ const ta=document.createElement("textarea"); ta.value=text; ta.style.position="fixed"; ta.style.opacity="0"; document.body.appendChild(ta); ta.select(); const ok=document.execCommand("copy"); ta.remove(); if(ok) return done(); }catch(e){} toast("Не вдалося скопіювати — зроби скріншот"); }
+
+renderHome();
+</script>
+</body>
+</html>
