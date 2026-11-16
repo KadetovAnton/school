@@ -1,0 +1,143 @@
+{
+ "id": "l1",
+ "title": "Present Simple: що я роблю щодня",
+ "skillFiles": [
+  "skills/ps.json"
+ ],
+ "skills": [
+  "ps.base",
+  "ps.s",
+  "ps.es",
+  "ps.ies",
+  "ps.has",
+  "ps.adv"
+ ],
+ "practice": {
+  "perSkill": 2
+ },
+ "test": {
+  "plan": {
+   "ps.base": 1,
+   "ps.s": 1,
+   "ps.es": 2,
+   "ps.ies": 2,
+   "ps.has": 1,
+   "ps.adv": 1
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "☀️",
+   "h": "Коли вживаємо?",
+   "html": "<p>Present Simple — це про те, що буває <b>регулярно</b>: щодня, завжди, зазвичай. Твої звички, розклад, факти.</p>\n      <div class=\"ex\"><div><div class=\"en\">I <b>go</b> to school every day.</div><div class=\"ua\">Я ходжу до школи щодня.</div></div><button class=\"say round\" data-say=\"I go to school every day.\">🔊</button></div>\n      <div class=\"tip\">🔎 <b>Слова-підказки:</b> every day (щодня), always (завжди), usually (зазвичай), often (часто), sometimes (іноді), never (ніколи).</div>"
+  },
+  {
+   "e": "🙂",
+   "h": "Як утворюється?",
+   "html": "<p>Найпростіше в англійській: беремо дієслово <b>як у словнику</b>, нічого не змінюємо.</p>\n      <table class=\"t\">\n        <tr><td>I</td><td>play</td><td class=\"muted\">я граю</td></tr>\n        <tr><td>you</td><td>play</td><td class=\"muted\">ти граєш</td></tr>\n        <tr><td>we</td><td>play</td><td class=\"muted\">ми граємо</td></tr>\n        <tr><td>they</td><td>play</td><td class=\"muted\">вони грають</td></tr>\n      </table>\n      <p class=\"muted\">Порівняй: в українській дієслово змінюється для кожної особи, а в англійській майже ніколи. Майже…</p>"
+  },
+  {
+   "e": "⚠️",
+   "h": "Головна пастка: he / she / it",
+   "html": "<p>Коли мова про <b>одну людину чи предмет</b> (він, вона, воно), до дієслова додаємо хвостик <b>-s</b>.</p>\n      <div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:900\">he / she / it → дієслово + s</div>\n      <div class=\"ex\"><div><div class=\"en\">She <b>plays</b> tennis.</div><div class=\"ua\">Вона грає в теніс.</div></div><button class=\"say round\" data-say=\"She plays tennis.\">🔊</button></div>\n      <div class=\"ex\"><div><div class=\"en\">My mum <b>works</b> in a shop.</div><div class=\"ua\">Моя мама працює в магазині.</div></div><button class=\"say round\" data-say=\"My mum works in a shop.\">🔊</button></div>\n      <div class=\"tip\">💡 Увага: <b>my mum, Tom, the cat, my friend</b> — це теж he / she / it! Тому і тут потрібна -s.</div>"
+  },
+  {
+   "e": "✏️",
+   "h": "Як правильно додати -s",
+   "html": "<table class=\"t\">\n        <tr><td>Майже всі</td><td>+ s</td><td>play → play<b>s</b><br>read → read<b>s</b></td></tr>\n        <tr><td>-s, -sh, -ch, -x, -o</td><td>+ es</td><td>watch → watch<b>es</b><br>go → go<b>es</b><br>do → do<b>es</b></td></tr>\n        <tr><td>приголосна + y</td><td>y → ies</td><td>study → stud<b>ies</b><br>fly → fl<b>ies</b></td></tr>\n        <tr><td>голосна + y</td><td>+ s</td><td>play → play<b>s</b></td></tr>\n        <tr><td>виняток</td><td>have</td><td>he <b>has</b></td></tr>\n      </table>\n      <div class=\"tip\">💡 Чому -es? Спробуй вимовити «watchs» — язик заплітається. Тому додаємо голосну: watch<b>es</b> [вочіз].</div>"
+  },
+  {
+   "e": "📍",
+   "h": "Куди ставити always, usually, never?",
+   "html": "<p>Ці слова стоять <b>перед дієсловом</b>:</p>\n      <div class=\"ex\"><div><div class=\"en\">She <b>always</b> gets up at seven.</div><div class=\"ua\">Вона завжди встає о сьомій.</div></div><button class=\"say round\" data-say=\"She always gets up at seven.\">🔊</button></div>\n      <div class=\"ex\"><div><div class=\"en\">I <b>never</b> drink coffee.</div><div class=\"ua\">Я ніколи не п'ю каву.</div></div><button class=\"say round\" data-say=\"I never drink coffee.\">🔊</button></div>\n      <div class=\"rule-box\"><b>Запам'ятай:</b> хто → <u>як часто</u> → що робить → решта.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Один день Софійки",
+  "question": {
+   "q": "чому «Her brothers <b>play</b>» без -s?",
+   "a": "Бо brothers — їх кілька, це they."
+  },
+  "items": [
+   [
+    "Sofia <b>gets</b> up at seven o'clock.",
+    "Софійка встає о сьомій."
+   ],
+   [
+    "She <b>brushes</b> her teeth and <b>has</b> breakfast.",
+    "Вона чистить зуби і снідає."
+   ],
+   [
+    "Her mum <b>makes</b> pancakes on Sundays.",
+    "Її мама робить млинці в неділю."
+   ],
+   [
+    "Sofia <b>goes</b> to school by bus.",
+    "Софійка їздить до школи автобусом."
+   ],
+   [
+    "She <b>studies</b> English and maths.",
+    "Вона вивчає англійську і математику."
+   ],
+   [
+    "After school she <b>does</b> her homework.",
+    "Після школи вона робить домашнє завдання."
+   ],
+   [
+    "Her brothers <b>play</b> football in the yard.",
+    "Її брати грають у футбол у дворі."
+   ],
+   [
+    "In the evening the family <b>watches</b> TV.",
+    "Увечері сім'я дивиться телевізор."
+   ],
+   [
+    "She usually <b>goes</b> to bed at ten.",
+    "Зазвичай вона лягає спати о десятій."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "get up",
+   "вставати"
+  ],
+  [
+   "have breakfast",
+   "снідати"
+  ],
+  [
+   "brush my teeth",
+   "чистити зуби"
+  ],
+  [
+   "go to school",
+   "йти до школи"
+  ],
+  [
+   "have lunch",
+   "обідати"
+  ],
+  [
+   "do homework",
+   "робити домашнє завдання"
+  ],
+  [
+   "go to bed",
+   "лягати спати"
+  ],
+  [
+   "always",
+   "завжди"
+  ],
+  [
+   "usually",
+   "зазвичай"
+  ],
+  [
+   "never",
+   "ніколи"
+  ]
+ ]
+}

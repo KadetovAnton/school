@@ -1,0 +1,842 @@
+{
+ "topic": "ps",
+ "title": "Present Simple",
+ "skills": [
+  {
+   "id": "ps.base",
+   "title": "I / you / we / they: дієслово без змін",
+   "rule": "З I, you, we, they дієслово як у словнику: I play, they play.",
+   "worked": {
+    "p": "My friends ___ basketball. (play)",
+    "steps": [
+     "Хто? <b>My friends</b> — друзі, їх багато.",
+     "Багато = <b>they</b>.",
+     "З they дієслово не змінюємо, хвостика немає.",
+     "Відповідь: My friends <b>play</b> basketball."
+    ]
+   },
+   "alt": "<p>Уяви, що -s — це значок «один-єдиний». Його чіпляють до дієслова, тільки коли діє <b>одна</b> особа, і це не я і не ти.</p>\n    <p>I (я), you (ти, ви), we (ми), they (вони) — значок не потрібен: <b>I play, you play, we play, they play</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ football every Saturday.",
+     "o": [
+      "play",
+      "plays"
+     ],
+     "a": "play",
+     "h": [
+      "Хто? <b>I</b> — я.",
+      "Хвостик -s буває тільки з he / she / it."
+     ],
+     "e": "З I / you / we / they дієслово без змін: I <b>play</b>.",
+     "err": {
+      "plays": "З <b>I</b> закінчення не додаємо — тільки з he / she / it."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They ___ TV in the evening.",
+     "o": [
+      "watch",
+      "watches"
+     ],
+     "a": "watch",
+     "h": [
+      "They — це «вони». Їх багато.",
+      "Хвостик тільки для одного: he / she / it."
+     ],
+     "e": "they → дієслово без змін: they <b>watch</b>.",
+     "err": {
+      "watches": "they — «вони», тут закінчення не потрібне: they <b>watch</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ to school by bus.",
+     "o": [
+      "goes",
+      "go"
+     ],
+     "a": "go",
+     "h": [
+      "We — «ми».",
+      "Хвостик тільки для he / she / it."
+     ],
+     "e": "we → дієслово без змін: we <b>go</b>.",
+     "err": {
+      "goes": "we — «ми», закінчення не потрібне: we <b>go</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I ___ milk every morning.",
+     "o": [
+      "drink",
+      "drinks"
+     ],
+     "a": "drink",
+     "h": [
+      "I — я.",
+      "З I хвостика немає."
+     ],
+     "e": "I → <b>drink</b>.",
+     "err": {
+      "drinks": "З I закінчення не додаємо: I <b>drink</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Mark and Jane ___ in Kyiv.",
+     "o": [
+      "live",
+      "lives"
+     ],
+     "a": "live",
+     "h": [
+      "Mark and Jane — скільки людей?",
+      "Двоє = they."
+     ],
+     "e": "Mark and Jane = they → <b>live</b>.",
+     "err": {
+      "lives": "Mark and Jane — це двоє (they), тому без закінчення: <b>live</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "You ___ very well. (sing)",
+     "a": [
+      "sing"
+     ],
+     "h": [
+      "You — «ти» або «ви».",
+      "З you дієслово не змінюється."
+     ],
+     "e": "you → дієслово без змін: you <b>sing</b>.",
+     "err": {
+      "sings": "З <b>you</b> закінчення не додаємо: you <b>sing</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My parents ___ in a big city. (live)",
+     "a": [
+      "live"
+     ],
+     "h": [
+      "My parents — батьки. Скільки їх?",
+      "Двоє = they."
+     ],
+     "e": "My parents = they → <b>live</b>.",
+     "err": {
+      "lives": "My parents — це вони (they), закінчення не потрібне: <b>live</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "We ___ English on Mondays. (have)",
+     "a": [
+      "have"
+     ],
+     "h": [
+      "We — «ми».",
+      "has буває тільки з he / she / it."
+     ],
+     "e": "we → <b>have</b>.",
+     "err": {
+      "has": "has — тільки для he / she / it. З we: <b>have</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ps.s",
+   "title": "he / she / it: + s",
+   "rule": "he / she / it (і Tom, my mum, the cat) → дієслово + s.",
+   "worked": {
+    "p": "My cat ___ milk. (like)",
+    "steps": [
+     "Хто? <b>My cat</b> — кіт, один.",
+     "Один предмет чи тварина = <b>it</b>.",
+     "he / she / it → додаємо <b>-s</b>.",
+     "Відповідь: My cat <b>likes</b> milk."
+    ]
+   },
+   "alt": "<p>Підстав замість того, хто діє, маленьке слово: <b>Tom → he</b>, <b>my mum → she</b>, <b>the dog → it</b>, <b>Tom and Ann → they</b>.</p>\n    <p>Вийшло he, she чи it? Тоді дієслову потрібен хвостик <b>-s</b>. Вийшло I, you, we, they? Хвостика немає.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "My mum ___ in a hospital.",
+     "o": [
+      "work",
+      "works"
+     ],
+     "a": "works",
+     "h": [
+      "My mum — це «вона».",
+      "she → дієслово + s"
+     ],
+     "e": "My mum = she → <b>works</b>.",
+     "err": {
+      "work": "My mum — це «вона» (she), тож потрібна -s: work<b>s</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Our teacher ___ very fast.",
+     "o": [
+      "speak",
+      "speaks"
+     ],
+     "a": "speaks",
+     "h": [
+      "Our teacher = he або she.",
+      "he / she → + s"
+     ],
+     "e": "Our teacher = she → <b>speaks</b>.",
+     "err": {
+      "speak": "Our teacher — це одна людина (he/she): speak<b>s</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My dad ___ coffee every morning. (drink)",
+     "a": [
+      "drinks"
+     ],
+     "h": [
+      "My dad = he.",
+      "he → дієслово + s."
+     ],
+     "e": "My dad = he → drink<b>s</b>.",
+     "err": {
+      "drink": "My dad — це «він» (he), потрібна -s: drink<b>s</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "The shop ___ at nine o'clock. (open)",
+     "a": [
+      "opens"
+     ],
+     "h": [
+      "The shop — магазин, один. Це he, she чи it?",
+      "it → дієслово + s."
+     ],
+     "e": "The shop = it → open<b>s</b>.",
+     "err": {
+      "open": "The shop — це «воно» (it), потрібна -s: open<b>s</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Anna ___ in a small village. (live)",
+     "a": [
+      "lives"
+     ],
+     "h": [
+      "Anna = she.",
+      "she → дієслово + s."
+     ],
+     "e": "Anna = she → live<b>s</b>.",
+     "err": {
+      "live": "Anna — це «вона» (she), потрібна -s: live<b>s</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "It ___ a lot here in autumn. (rain)",
+     "a": [
+      "rains"
+     ],
+     "h": [
+      "It — «воно».",
+      "it → дієслово + s."
+     ],
+     "e": "it → rain<b>s</b>.",
+     "err": {
+      "rain": "З it потрібна -s: rain<b>s</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ps.es",
+   "title": "-s, -sh, -ch, -x, -o → + es",
+   "rule": "Після -s, -sh, -ch, -x, -o додаємо -es: watches, goes.",
+   "worked": {
+    "p": "Dad ___ TV in the evening. (watch)",
+    "steps": [
+     "Хто? <b>Dad</b> = he → потрібне закінчення.",
+     "Дивлюся на кінець слова: watch → <b>-ch</b>.",
+     "Після -s, -sh, -ch, -x, -o пишемо <b>-es</b>.",
+     "Відповідь: Dad <b>watches</b> TV in the evening."
+    ]
+   },
+   "alt": "<p>Скажи вголос: «watchs», «fixs», «washs». Язик заплітається, правда? 😄</p>\n    <p>Тому після шиплячих і свистячих звуків (-s, -sh, -ch, -x) вставляємо голосну: <b>watch-es, fix-es, wash-es</b>. А go і do треба просто запам'ятати: <b>goes, does</b>.</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Tom ___ cartoons every morning. (watch)",
+     "a": [
+      "watches"
+     ],
+     "h": [
+      "Tom = he, тож потрібне закінчення.",
+      "watch закінчується на -ch. Подивись у табличку: -s чи -es?"
+     ],
+     "e": "Після -ch додаємо <b>-es</b>: watch → watch<b>es</b>.",
+     "err": {
+      "watchs": "Після -ch додаємо -es: watch<b>es</b>.",
+      "watch": "Tom = he, тож потрібне закінчення: watch<b>es</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "She ___ to bed at ten. (go)",
+     "a": [
+      "goes"
+     ],
+     "h": [
+      "she → закінчення потрібне.",
+      "go закінчується на -o."
+     ],
+     "e": "go, do → <b>goes, does</b>.",
+     "err": {
+      "gos": "go закінчується на -o, тому -es: go<b>es</b>.",
+      "go": "she → потрібне закінчення: go<b>es</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "The lesson ___ at two o'clock. (finish)",
+     "a": [
+      "finishes"
+     ],
+     "h": [
+      "The lesson = it.",
+      "finish закінчується на -sh."
+     ],
+     "e": "Після -sh додаємо <b>-es</b>: finish<b>es</b>.",
+     "err": {
+      "finishs": "Після -sh додаємо -es: finish<b>es</b>.",
+      "finish": "The lesson = it, потрібне закінчення: finish<b>es</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My sister ___ her homework after school. (do)",
+     "a": [
+      "does"
+     ],
+     "h": [
+      "My sister = she.",
+      "do закінчується на -o."
+     ],
+     "e": "do → <b>does</b>.",
+     "err": {
+      "dos": "do закінчується на -o: do<b>es</b>.",
+      "do": "My sister = she → <b>does</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Dad ___ cars. (fix)",
+     "a": [
+      "fixes"
+     ],
+     "h": [
+      "Dad = he.",
+      "fix закінчується на -x."
+     ],
+     "e": "Після -x → <b>-es</b>: fix<b>es</b>.",
+     "err": {
+      "fixs": "Після -x додаємо -es: fix<b>es</b>.",
+      "fix": "Dad = he → fix<b>es</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My grandma ___ the dishes after dinner. (wash)",
+     "a": [
+      "washes"
+     ],
+     "h": [
+      "My grandma = she.",
+      "wash закінчується на -sh."
+     ],
+     "e": "Після -sh → <b>-es</b>: wash<b>es</b>.",
+     "err": {
+      "washs": "Після -sh додаємо -es: wash<b>es</b>.",
+      "wash": "My grandma = she → wash<b>es</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "The bus ___ our house at eight. (pass)",
+     "a": [
+      "passes"
+     ],
+     "h": [
+      "The bus = it.",
+      "pass закінчується на -s."
+     ],
+     "e": "Після -s → <b>-es</b>: pass<b>es</b>.",
+     "err": {
+      "passs": "Після -s додаємо -es: pass<b>es</b>.",
+      "pass": "The bus = it → pass<b>es</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "She ___ her teeth twice a day. (brush)",
+     "a": [
+      "brushes"
+     ],
+     "h": [
+      "she → закінчення потрібне.",
+      "brush закінчується на -sh."
+     ],
+     "e": "Після -sh → <b>-es</b>: brush<b>es</b>.",
+     "err": {
+      "brushs": "Після -sh додаємо -es: brush<b>es</b>.",
+      "brush": "she → brush<b>es</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ps.ies",
+   "title": "y → ies чи просто + s",
+   "rule": "Приголосна + y → ies (studies). Голосна + y → + s (plays).",
+   "worked": {
+    "p": "Kate ___ hard. (study)",
+    "steps": [
+     "Хто? <b>Kate</b> = she → потрібне закінчення.",
+     "Кінець слова: study → <b>-y</b>.",
+     "Що перед y? Буква <b>d</b> — приголосна.",
+     "Приголосна + y → y міняємо на <b>ies</b>.",
+     "Відповідь: Kate <b>studies</b> hard. А от у play перед y голосна a, тому просто play<b>s</b>."
+    ]
+   },
+   "alt": "<p>Дивись на букву <b>перед y</b>:</p>\n    <table class=\"t\"><tr><td>голосна (a, e, o, u)</td><td>y лишається, + s</td><td>pl<b>a</b>y → plays</td></tr>\n    <tr><td>приголосна</td><td>y → ies</td><td>stu<b>d</b>y → studies</td></tr></table>\n    <p class=\"muted\">Голосна ніби «тримає» y, і вона не змінюється. Приголосна не тримає — y перетворюється на ies.</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My brother ___ English. (study)",
+     "a": [
+      "studies"
+     ],
+     "h": [
+      "My brother = he.",
+      "study: перед y стоїть приголосна d. Що відбувається з y?"
+     ],
+     "e": "Приголосна + y → <b>ies</b>: study → stud<b>ies</b>.",
+     "err": {
+      "studys": "Перед y стоїть приголосна (d), тому y → ies: stud<b>ies</b>.",
+      "studyes": "y міняємо на i: stud<b>ies</b>.",
+      "study": "My brother = he, потрібне закінчення: stud<b>ies</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Max ___ to Lviv every summer. (fly)",
+     "a": [
+      "flies"
+     ],
+     "h": [
+      "Max = he.",
+      "fly: перед y приголосна l."
+     ],
+     "e": "Приголосна + y → <b>ies</b>: fl<b>ies</b>.",
+     "err": {
+      "flys": "Перед y приголосна, тому fl<b>ies</b>.",
+      "fly": "Max = he → fl<b>ies</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "He ___ the guitar. (play)",
+     "a": [
+      "plays"
+     ],
+     "h": [
+      "he → закінчення потрібне.",
+      "play: перед y стоїть голосна a."
+     ],
+     "e": "Голосна + y → просто <b>+s</b>: play<b>s</b>.",
+     "err": {
+      "plaies": "Перед y голосна (a), тому y не чіпаємо: play<b>s</b>.",
+      "play": "he → потрібне закінчення: play<b>s</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "The baby ___ at night. (cry)",
+     "a": [
+      "cries"
+     ],
+     "h": [
+      "The baby = he або she.",
+      "cry: перед y приголосна r."
+     ],
+     "e": "Приголосна + y → <b>ies</b>: cr<b>ies</b>.",
+     "err": {
+      "crys": "Перед y приголосна (r), тому cr<b>ies</b>.",
+      "cry": "The baby — одна дитина, потрібне закінчення: cr<b>ies</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My sister ___ her room on Saturdays. (tidy)",
+     "a": [
+      "tidies"
+     ],
+     "h": [
+      "My sister = she.",
+      "tidy: перед y приголосна d."
+     ],
+     "e": "Приголосна + y → <b>ies</b>: tid<b>ies</b>.",
+     "err": {
+      "tidys": "Перед y приголосна (d), тому tid<b>ies</b>.",
+      "tidy": "My sister = she → tid<b>ies</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Our cat ___ at home all day. (stay)",
+     "a": [
+      "stays"
+     ],
+     "h": [
+      "Our cat = it.",
+      "stay: перед y голосна a."
+     ],
+     "e": "Голосна + y → просто <b>+s</b>: stay<b>s</b>.",
+     "err": {
+      "staies": "Перед y голосна (a), тому y не чіпаємо: stay<b>s</b>.",
+      "stay": "Our cat = it → stay<b>s</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Mum ___ potatoes for dinner. (fry)",
+     "a": [
+      "fries"
+     ],
+     "h": [
+      "Mum = she.",
+      "fry: перед y приголосна r."
+     ],
+     "e": "Приголосна + y → <b>ies</b>: fr<b>ies</b>.",
+     "err": {
+      "frys": "Перед y приголосна (r), тому fr<b>ies</b>.",
+      "fry": "Mum = she → fr<b>ies</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ps.has",
+   "title": "have → has",
+   "rule": "З he / she / it: have → has.",
+   "worked": {
+    "p": "My brother ___ a bike. (have)",
+    "steps": [
+     "Хто? <b>My brother</b> = he.",
+     "have — особливе слово: з he / she / it воно не have і не haves.",
+     "he / she / it → <b>has</b>.",
+     "Відповідь: My brother <b>has</b> a bike."
+    ]
+   },
+   "alt": "<p>have — «неслухняне» слово. Замість haves у he / she / it кажемо коротко <b>has</b>.</p>\n    <p>Порівняй: I <b>have</b> a cat. → She <b>has</b> a cat. We <b>have</b> a dog. → Tom <b>has</b> a dog.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Ann ___ a cat.",
+     "o": [
+      "have",
+      "has",
+      "haves"
+     ],
+     "a": "has",
+     "h": [
+      "Ann = she.",
+      "have — виняток!"
+     ],
+     "e": "have з he / she / it стає <b>has</b>.",
+     "err": {
+      "have": "Ann = she, а have з she стає <b>has</b>.",
+      "haves": "have — виняток, не haves, а <b>has</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She ___ two brothers.",
+     "o": [
+      "have",
+      "has"
+     ],
+     "a": "has",
+     "h": [
+      "she → …",
+      "have — виняток."
+     ],
+     "e": "she → <b>has</b>.",
+     "err": {
+      "have": "З she have стає <b>has</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "My friend ___ a new phone. (have)",
+     "a": [
+      "has"
+     ],
+     "h": [
+      "My friend — один друг: he або she.",
+      "have з he / she → ?"
+     ],
+     "e": "he / she → <b>has</b>.",
+     "err": {
+      "haves": "have — виняток: не haves, а <b>has</b>.",
+      "have": "My friend = he/she → <b>has</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "We ___ a big dog. (have)",
+     "a": [
+      "have"
+     ],
+     "h": [
+      "We — «ми».",
+      "has — тільки для he / she / it."
+     ],
+     "e": "we → <b>have</b>.",
+     "err": {
+      "has": "has — тільки для he / she / it. З we: <b>have</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "Dad ___ lunch at one o'clock. (have)",
+     "a": [
+      "has"
+     ],
+     "h": [
+      "Dad = he.",
+      "have з he → ?"
+     ],
+     "e": "he → <b>has</b>: Dad has lunch.",
+     "err": {
+      "haves": "have — виняток: не haves, а <b>has</b>.",
+      "have": "Dad = he → <b>has</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з правильним закінченням",
+     "p": "They ___ a lot of homework. (have)",
+     "a": [
+      "have"
+     ],
+     "h": [
+      "They — «вони».",
+      "has — тільки для he / she / it."
+     ],
+     "e": "they → <b>have</b>.",
+     "err": {
+      "has": "has — тільки для he / she / it. З they: <b>have</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "ps.adv",
+   "title": "Де стоять always, usually, never",
+   "rule": "Хто → як часто → що робить: She always gets up…",
+   "worked": {
+    "p": "«Я завжди роблю уроки ввечері»",
+    "steps": [
+     "Хто? <b>I</b>.",
+     "Як часто? <b>always</b>.",
+     "Що роблю? <b>do</b> my homework.",
+     "«Як часто» ставимо перед дієсловом: I → always → do.",
+     "Відповідь: <b>I always do my homework in the evening.</b>"
+    ]
+   },
+   "alt": "<p>Уяви потяг з вагонів: <b>хто → як часто → що робить → решта</b>.</p>\n    <p>Вагон «як часто» (always, usually, often, sometimes, never) чіпляється <b>одразу перед</b> вагоном «що робить».</p>",
+   "items": [
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Вона завжди встає о сьомій».",
+     "words": [
+      "up",
+      "She",
+      "seven",
+      "always",
+      "at",
+      "gets"
+     ],
+     "a": [
+      "she always gets up at seven",
+      "at seven she always gets up"
+     ],
+     "h": [
+      "Хто → як часто → що робить → коли.",
+      "She → always → gets up → …"
+     ],
+     "e": "<b>She always gets up at seven.</b> always стоїть перед дієсловом."
+    },
+    {
+     "type": "choice",
+     "p": "Яке речення правильне?",
+     "o": [
+      "He usually walks to school.",
+      "He walks usually to school.",
+      "He usually walk to school."
+     ],
+     "a": "He usually walks to school.",
+     "h": [
+      "usually ставимо перед дієсловом.",
+      "І не забудь: he → дієслово + s."
+     ],
+     "e": "Хто → як часто → дієслово з -s: He <b>usually walks</b> to school.",
+     "err": {
+      "He walks usually to school.": "usually стоїть <b>перед</b> дієсловом: He usually walks…",
+      "He usually walk to school.": "Порядок правильний, але he → walk<b>s</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Мій тато ніколи не п'є каву».",
+     "words": [
+      "never",
+      "coffee",
+      "My",
+      "drinks",
+      "dad"
+     ],
+     "a": [
+      "my dad never drinks coffee"
+     ],
+     "h": [
+      "Хто → як часто → що робить → що.",
+      "My dad → never → drinks → …"
+     ],
+     "e": "<b>My dad never drinks coffee.</b> never стоїть перед дієсловом."
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Я зазвичай снідаю о восьмій».",
+     "words": [
+      "usually",
+      "I",
+      "breakfast",
+      "have",
+      "at",
+      "eight"
+     ],
+     "a": [
+      "i usually have breakfast at eight",
+      "usually i have breakfast at eight",
+      "at eight i usually have breakfast"
+     ],
+     "h": [
+      "Хто → як часто → що робить → коли.",
+      "I → usually → have breakfast → …"
+     ],
+     "e": "<b>I usually have breakfast at eight.</b> usually стоїть перед дієсловом."
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Ми іноді граємо в шахи».",
+     "words": [
+      "sometimes",
+      "We",
+      "chess",
+      "play"
+     ],
+     "a": [
+      "we sometimes play chess",
+      "sometimes we play chess",
+      "we play chess sometimes"
+     ],
+     "h": [
+      "Хто → як часто → що робить → що.",
+      "We → sometimes → play → …"
+     ],
+     "e": "<b>We sometimes play chess.</b> sometimes зазвичай ставимо перед дієсловом (його ще можна на початок чи в кінець)."
+    },
+    {
+     "type": "choice",
+     "p": "Яке речення правильне?",
+     "o": [
+      "Tom often plays chess.",
+      "Tom plays often chess.",
+      "Tom often play chess."
+     ],
+     "a": "Tom often plays chess.",
+     "h": [
+      "often ставимо перед дієсловом.",
+      "Tom = he → дієслово + s."
+     ],
+     "e": "Хто → як часто → дієслово з -s: Tom <b>often plays</b> chess.",
+     "err": {
+      "Tom plays often chess.": "often стоїть <b>перед</b> дієсловом: Tom often plays…",
+      "Tom often play chess.": "Порядок правильний, але Tom = he → play<b>s</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Вона ніколи не їсть м'ясо».",
+     "words": [
+      "never",
+      "She",
+      "meat",
+      "eats"
+     ],
+     "a": [
+      "she never eats meat"
+     ],
+     "h": [
+      "Хто → як часто → що робить → що.",
+      "She → never → eats → …"
+     ],
+     "e": "<b>She never eats meat.</b> never стоїть перед дієсловом."
+    }
+   ]
+  }
+ ]
+}

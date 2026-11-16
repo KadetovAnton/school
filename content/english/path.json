@@ -1,0 +1,107 @@
+{
+ "subject": "english",
+ "title": "Англійська",
+ "stages": [
+  {
+   "n": 1,
+   "title": "Фундамент",
+   "sub": "Теперішній час",
+   "lessons": [
+    {
+     "id": "l1",
+     "title": "Present Simple: що я роблю щодня",
+     "ic": "☀️",
+     "file": "lessons/l1.json"
+    },
+    {
+     "id": "l2",
+     "title": "Present Simple: заперечення і питання",
+     "ic": "❓"
+    },
+    {
+     "id": "l3",
+     "title": "Present Continuous: що відбувається зараз",
+     "ic": "👀"
+    },
+    {
+     "id": "l4",
+     "title": "Simple чи Continuous? Тренуємо різницю",
+     "ic": "⚖️"
+    }
+   ]
+  },
+  {
+   "n": 2,
+   "title": "Опис світу",
+   "sub": "Що де є",
+   "lessons": [
+    {
+     "id": "l5",
+     "title": "There is / There are",
+     "ic": "🏠"
+    },
+    {
+     "id": "l6",
+     "title": "some / any, множина",
+     "ic": "🍎"
+    }
+   ]
+  },
+  {
+   "n": 3,
+   "title": "Минуле",
+   "sub": "Що було вчора",
+   "lessons": [
+    {
+     "id": "l7",
+     "title": "Past Simple: правильні дієслова (-ed)",
+     "ic": "📅"
+    },
+    {
+     "id": "l8",
+     "title": "30 головних неправильних дієслів",
+     "ic": "🧩"
+    },
+    {
+     "id": "l9",
+     "title": "Past Simple: питання і заперечення",
+     "ic": "🔁"
+    }
+   ]
+  },
+  {
+   "n": 4,
+   "title": "Порівняння і правила",
+   "sub": "Більше, найкраще, треба",
+   "lessons": [
+    {
+     "id": "l10",
+     "title": "Ступені порівняння",
+     "ic": "📏"
+    },
+    {
+     "id": "l11",
+     "title": "must / can / mustn't",
+     "ic": "🚦"
+    }
+   ]
+  },
+  {
+   "n": 5,
+   "title": "Наздоганяємо 7 клас",
+   "sub": "Програма класу",
+   "lessons": [
+    {
+     "id": "l12",
+     "title": "Past Continuous",
+     "ic": "🎬"
+    },
+    {
+     "id": "l13",
+     "title": "Present Perfect",
+     "ic": "✅"
+    }
+   ]
+  }
+ ]
+}
