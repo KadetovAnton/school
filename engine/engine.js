@@ -117,12 +117,14 @@
 
   /* ---------- навички ---------- */
   E.SK = {}; // id → навичка зі змісту
+  E.ITEM = {}; // key → завдання
   E.addSkills = function (json) {
     (json.skills || []).forEach(function (s) {
       s.topic = json.topic;
       (s.items || []).forEach(function (it) {
         it.skill = s.id;
         it.key = s.id + "|" + it.p + (it.type === "choice" ? "|" + it.a : "");
+        E.ITEM[it.key] = it;
       });
       E.SK[s.id] = s;
     });
@@ -193,6 +195,47 @@
     E.P().mistakes.forEach(function (m) { if (m.skill === skill) m.fixed = true; });
     E.save();
   };
+  E.fixMistake = function (key) {
+    E.P().mistakes.forEach(function (m) { if (m.key === key) m.fixed = true; });
+    E.save();
+  };
+  /* невиправлені помилки: по одній на завдання, найновіші першими */
+  E.openMistakes = function () {
+    var seen = {}, out = [], ms = E.P().mistakes;
+    for (var i = ms.length - 1; i >= 0; i--) {
+      var m = ms[i];
+      if (m.fixed || seen[m.key] || !E.ITEM[m.key]) continue;
+      seen[m.key] = 1; out.push(m);
+    }
+    return out;
+  };
+
+  /* план «Заняття на сьогодні»: розминка → крок уроку → помилки */
+  E.plan = function () {
+    var p = E.P(), t = today();
+    if (!p.plan || p.plan.d !== t) p.plan = { d: t, warm: false, lesson: false, mist: false };
+    return p.plan;
+  };
+  /* розминка: спершу навички, яким пора повторитися, далі — давно не бачені з уже почате */
+  E.warmItems = function (n, onlyIds) {
+    var p = E.P(), due = E.dueSkills(), t = today();
+    var started = Object.keys(p.skills).filter(function (id) {
+      return E.SK[id] && p.skills[id].lvl >= 1 && due.indexOf(id) < 0 && (!onlyIds || onlyIds.indexOf(id) >= 0);
+    });
+    started.sort(function (a, b) { return (p.skills[a].last || "") < (p.skills[b].last || "") ? -1 : 1; });
+    // сьогоднішні навички — в кінець (їх і так щойно тренували)
+    started = started.filter(function (id) { return p.skills[id].last !== t; }).concat(started.filter(function (id) { return p.skills[id].last === t; }));
+    var ids = due.concat(started), used = {}, out = [], round = 0;
+    while (out.length < n && ids.length && round < 5) {
+      for (var i = 0; i < ids.length && out.length < n; i++) {
+        var x = E.pick(ids[i], 1, used)[0];
+        if (x && !used[x.key]) { used[x.key] = 1; out.push(x); }
+      }
+      round++;
+    }
+    return out;
+  };
+
   E.reportIssue = function (it, given) {
     E.P().reports.push({ key: it.key, given: given == null ? null : String(given), d: today() });
     E.save();
