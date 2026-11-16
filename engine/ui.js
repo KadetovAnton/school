@@ -100,12 +100,12 @@
   /* картка тижневої нагороди */
   function rewardCard() {
     var r = E.reward(), w = E.starsWeek();
-    if (!r.text) return '<div class="card reward"><h3>🎁 Нагорода тижня</h3><p class="muted" style="margin:0">Домовтеся з татом, яку нагороду ти отримаєш за зірки тижня ⭐ — і тато впише її сюди.</p>' +
-      '<div class="row"><button class="btn ghost full" data-act="dad">⚙️ Тато: налаштувати</button></div></div>';
+    if (!r.text) return '<div class="card reward"><h3>🎁 Нагорода тижня</h3><p class="muted" style="margin:0">Домовтеся з батьками, яку нагороду ти отримаєш за зірки тижня ⭐ — і батьки впишуть її сюди.</p>' +
+      '<div class="row"><button class="btn ghost full" data-act="dad">⚙️ Батьки: налаштувати</button></div></div>';
     var pct = Math.min(100, Math.round(w / r.goal * 100)), got = w >= r.goal;
-    return '<div class="card reward"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><h3 style="margin:0">🎁 ' + esc(r.text) + '</h3><button class="btn plain" data-act="dad" title="Для тата">⚙️</button></div>' +
+    return '<div class="card reward"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><h3 style="margin:0">🎁 ' + esc(r.text) + '</h3><button class="btn plain" data-act="dad" title="Для батьків">⚙️</button></div>' +
       '<div class="prog" style="margin:10px 0 6px"><i style="width:' + pct + '%;' + (got ? "background:var(--ok)" : "background:var(--sun)") + '"></i></div>' +
-      '<div style="font-weight:800">' + (got ? "🎉 " + G("Заслужила", "Заслужив") + "! Покажи татові: " + w + " ⭐ цього тижня" : "⭐ " + w + " з " + r.goal + " · ще " + (r.goal - w) + " до нагороди") + '</div>' +
+      '<div style="font-weight:800">' + (got ? "🎉 " + G("Заслужила", "Заслужив") + "! Покажи батькам: " + w + " ⭐ цього тижня" : "⭐ " + w + " з " + r.goal + " · ще " + (r.goal - w) + " до нагороди") + '</div>' +
       '<p class="muted small" style="margin:4px 0 0">Зірки тижня рахуються з понеділка. ⭐ дають: заняття на сьогодні +5, виправлена помилка +1, нова навичка 🌿 +2 / 🌳 +3, зірка тесту +3.</p></div>';
   }
   function bindActs(back) {
@@ -124,12 +124,12 @@
   function renderDad(back) {
     var r = E.reward();
     function form() {
-      $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">⚙️ Для тата</span></div>' +
+      $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">⚙️ Для батьків</span></div>' +
         '<div class="card"><h2>🎁 Нагорода тижня — ' + esc(E.P().name) + '</h2>' +
         '<label class="lbl">Що отримає за тиждень</label><input id="rt" type="text" placeholder="напр. похід у кіно, 200 грн, піца" value="' + esc(r.text) + '">' +
         '<label class="lbl">Скільки ⭐ треба за тиждень</label><input id="rg" type="text" inputmode="numeric" value="' + r.goal + '">' +
         '<p class="muted small">Орієнтир: повне заняття за день дає приблизно 6–10 ⭐. 30 ⭐ — це 4–5 днів занять.</p>' +
-        '<label class="lbl">PIN тата (4 цифри, щоб діти не змінили ціль)</label><input id="rp" type="text" inputmode="numeric" maxlength="4" placeholder="' + (r.pin ? "лишити як є" : "придумай PIN") + '">' +
+        '<label class="lbl">PIN батьків (4 цифри, щоб діти не змінили ціль)</label><input id="rp" type="text" inputmode="numeric" maxlength="4" placeholder="' + (r.pin ? "лишити як є" : "придумай PIN") + '">' +
         '<div class="row"><button class="btn full" id="sv">Зберегти</button></div></div>';
       $("bk").onclick = function () { back(); toTop(); };
       $("sv").onclick = function () {
@@ -142,7 +142,7 @@
       };
     }
     if (!r.pin) return form();
-    $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button></div><div class="card"><h2>🔒 Для тата</h2><label class="lbl">PIN</label>' +
+    $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button></div><div class="card"><h2>🔒 Для батьків</h2><label class="lbl">PIN</label>' +
       '<input id="pn" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div class="row"><button class="btn full" id="ok">Увійти</button></div></div>';
     $("bk").onclick = function () { back(); toTop(); };
     var go = function () { if ($("pn").value === r.pin) form(); else { toast("PIN не підходить"); $("pn").value = ""; } };
@@ -223,7 +223,7 @@
       return;
     }
     var title = mode === "enter" ? "Введи свій PIN" : first ? "Повтори PIN ще раз" : "Придумай свій PIN";
-    var sub = mode === "enter" ? "4 цифри, які ви придумали з татом" : first ? "Щоб точно не помилитися" : "4 цифри — разом з татом. Запам'ятай його: він потрібен на кожному новому пристрої.";
+    var sub = mode === "enter" ? "4 цифри, які ви придумали з батьками" : first ? "Щоб точно не помилитися" : "4 цифри — разом з батьками. Запам'ятай його: він потрібен на кожному новому пристрої.";
     $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button></div>' +
       '<div class="card" style="text-align:center"><div class="big-emoji">' + c.emoji + '</div><h1>' + esc(c.name) + ', ' + title.charAt(0).toLowerCase() + title.slice(1) + '</h1>' +
       '<p class="muted">' + sub + '</p><div class="pin" id="pin"><i></i><i></i><i></i><i></i></div><div class="pin-err" id="perr"></div>' +
@@ -291,7 +291,7 @@
         return '<div class="ex"><div><div class="en">' + (v.good ? "⭐ " : "") + esc(v.name) + (v.name === cur ? " ✅" : "") + '</div><div class="ua">' + esc(v.lang) + '</div></div>' +
           '<div class="row" style="margin:0;gap:6px"><button class="say round" data-v="' + i + '">▶️</button><button class="btn' + (v.name === cur ? "" : " ghost") + '" data-pick="' + i + '" style="padding:8px 12px">' + (v.name === cur ? "Обрано" : "Обрати") + '</button></div></div>';
       }).join("") : '<p>Голосів не знайдено.</p>') +
-      '<div class="tip">💡 <b>Найчіткіший голос на iPhone</b> (меню російською, як у тата): Настройки → Универсальный доступ → Устный контент → Голоса → Английский → напр., <b>Daniel</b> або <b>Serena</b> → завантажити <b>«Улучшенный»</b>. На Mac: Системные настройки → Универсальный доступ → Устный контент → Системный голос → Управлять голосами. Потім перезавантаж сторінку — голос з\'явиться тут.</div>' +
+      '<div class="tip">💡 <b>Найчіткіший голос на iPhone</b> (меню російською): Настройки → Универсальный доступ → Устный контент → Голоса → Английский → напр., <b>Daniel</b> або <b>Serena</b> → завантажити <b>«Улучшенный»</b>. На Mac: Системные настройки → Универсальный доступ → Устный контент → Системный голос → Управлять голосами. Потім перезавантаж сторінку — голос з\'явиться тут.</div>' +
       '<div class="tip">🔕 Не чути? Вимкни беззвучний режим на iPhone.</div>' +
       '<button class="btn plain full" id="auto">Обирати автоматично</button></div>';
     var list = vs.filter(function (v) { return !v.bad; }).slice(0, 12);
@@ -313,7 +313,7 @@
         (SY && SY.moved ? '<div class="card" style="background:var(--ok-soft)"><b>🏠 Сайт переїхав!</b><br>' + (SY.has(c.id) && E.P().srv ? "Твій прогрес уже перенесено ✅ " : "") + 'Тепер заходь сюди: <a href="https://school.akdtv.pp.ua/"><b>school.akdtv.pp.ua</b></a></div>' : "") +
         '<div class="card"><h1>Привіт, ' + esc(c.name) + '! ' + c.emoji + '</h1>' +
         '<div class="stats">' + freezeChip() + '<span class="stat">⭐ ' + E.starsWeek() + ' за тиждень</span></div>' +
-        (hasOpen(c) ? goalBar(E.todayCount(null), goal) : '<div class="today"><div class="today-t">🚀 Твої заняття скоро з\'являться! Тато вже готує.</div></div>') +
+        (hasOpen(c) ? goalBar(E.todayCount(null), goal) : '<div class="today"><div class="today-t">🚀 Твої заняття скоро з\'являться! Батьки вже готують.</div></div>') +
         '</div>' + (hasOpen(c) ? rewardCard() : "") + '<div class="card"><h2>Мої предмети</h2>';
       c.subjects.forEach(function (s) {
         var n = E.todayCount(s.id);
@@ -900,7 +900,7 @@
         '<div class="row"><button class="btn full" id="next">' + cfg.nextLabel(ok) + '</button></div>' +
         '<button class="report" id="rep">🚩 Тут, здається, помилка</button>';
       $("fb").innerHTML = h; bindSay(root);
-      $("rep").onclick = function () { E.reportIssue(it, given); this.textContent = "Дякую! Тато перевірить 👍"; this.disabled = true; };
+      $("rep").onclick = function () { E.reportIssue(it, given); this.textContent = "Дякую! Батьки перевірять 👍"; this.disabled = true; };
       var nx = $("next");
       nx.onclick = function () { stopSay(); cfg.done({ ok: ok, clean: clean, given: given, st: c.st, it: it }); toTop(); };
       setTimeout(function () { try { nx.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }, 80);
@@ -1067,7 +1067,7 @@
             "Спробую ще →", function () { series(failed, 2, cont); });
         }
         E.flag(failed.skill); flagged.push(failed.skill);
-        showCard(root, '<div class="celebrate">🤝</div><h2>Розберемо разом з татом</h2><p>Ця штука поки хитра — і це нормально. Я позначила її, щоб розібрати разом. А зараз ідемо далі!</p>', "Далі →", cont);
+        showCard(root, '<div class="celebrate">🤝</div><h2>Розберемо разом з батьками</h2><p>Ця штука поки хитра — і це нормально. Я позначила її, щоб розібрати разом. А зараз ідемо далі!</p>', "Далі →", cont);
       }
       step();
     }
@@ -1191,7 +1191,7 @@
     var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
     var lines = [P.name + " — «" + LES.title + "», " + d, "Тест: " + pct + "% " + "★".repeat(stars)];
     lines.push(wrong.length ? "Помилки:\n" + wrong.map(function (r) { return "• " + pText(r.it) + " → " + (r.given == null ? "не знаю" : r.given) + " (правильно: " + E.answersOf(r.it)[0] + ")"; }).join("\n") : "Без помилок!");
-    lines.push("Навички:\n" + LES.skills.map(function (id) { var l = lvl(id), s = P.skills[id]; return "• " + l.e + " " + (E.SK[id] ? E.SK[id].title : id) + (s && s.flag ? " — розібрати з татом 🤝" : ""); }).join("\n"));
+    lines.push("Навички:\n" + LES.skills.map(function (id) { var l = lvl(id), s = P.skills[id]; return "• " + l.e + " " + (E.SK[id] ? E.SK[id].title : id) + (s && s.flag ? " — розібрати з батьками 🤝" : ""); }).join("\n"));
     var rep = P.reports.filter(function (r) { return !r.sent; });
     if (rep.length) lines.push("Позначено «тут помилка»:\n" + rep.map(function (r) { return "• " + r.key.split("|")[1] + (r.given != null ? " (відповідь: " + r.given + ")" : ""); }).join("\n"));
     lines.push("Днів поспіль: " + E.streak());

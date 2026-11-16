@@ -97,8 +97,8 @@ label.lbl{display:block;font-weight:700;margin:6px 0 6px}
 <div class="wrap"><div id="app" class="card"></div></div>
 <div id="toast" class="toast"></div>
 
-<script src="engine/engine.js?v=2.16.2"></script>
-<script src="engine/speech.js?v=2.16.2"></script>
+<script src="engine/engine.js?v=2.16.3"></script>
+<script src="engine/speech.js?v=2.16.3"></script>
 <script>
 const TOPICS = {
   be:    "Дієслово to be (5 клас)",
@@ -464,7 +464,7 @@ function renderResult(){
     ${weak.length ? `<div class="reco"><b>Що вчимо першим:</b><ol>${weak.slice(0,4).map(x=>`<li>${x.name}</li>`).join("")}</ol></div>`
                   : `<div class="reco"><b>Усі теми на хорошому рівні!</b> Можна братися за складніші завдання 7 класу.</div>`}
     <div class="row">
-      <button class="btn full" id="copy">📋 Скопіювати результат для тата</button>
+      <button class="btn full" id="copy">📋 Скопіювати результат для батьків</button>
       <button class="btn plain full" id="again">Пройти ще раз</button>
     </div>`;
   document.getElementById("copy").onclick = ()=>copyReport(st, weak);
