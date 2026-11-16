@@ -102,17 +102,107 @@
 
   E.markDay = function () {
     var p = E.P(), t = today();
-    if (p.days.indexOf(t) < 0) { p.days.push(t); E.save(); }
+    if (p.days.indexOf(t) < 0) {
+      var last = p.days.length ? p.days[p.days.length - 1] : "";
+      p.days.push(t); E.save();
+      if (last && addDays(last, 3) <= t) E.cnt("back"); // перерва 2+ дні — і все одно повернулась
+      E.checkBadges();
+    }
   };
-  E.streak = function (prof) {
-    var p = prof || E.P(), n = 0, d = today();
+  /* Серія днів. ❄️ Заморозка: один пропущений день на тиждень (пн–нд) не рве серію,
+     якщо день до і день після пропуску — навчальні. */
+  function weekStart(s) {
+    var p = String(s).split("-"), dt = new Date(+p[0], +p[1] - 1, +p[2]);
+    return addDays(s, -((dt.getDay() + 6) % 7));
+  }
+  E.weekStart = weekStart;
+  function streakInfo(p) {
+    var n = 0, d = today(), used = {}, frozen = [];
     if (p.days.indexOf(d) < 0) d = addDays(d, -1); // сьогодні ще не займались — серія не згоряє
-    while (p.days.indexOf(d) >= 0) { n++; d = addDays(d, -1); }
-    return n;
-  };
+    for (var guard = 0; guard < 2000; guard++) {
+      if (p.days.indexOf(d) >= 0) { n++; d = addDays(d, -1); continue; }
+      var w = weekStart(d);
+      if ((n > 0 || d === addDays(today(), -1)) && !used[w] && p.days.indexOf(addDays(d, -1)) >= 0) { used[w] = 1; frozen.push(d); d = addDays(d, -1); continue; }
+      break;
+    }
+    return { n: n, frozen: frozen, freezeUsedThisWeek: !!used[weekStart(today())] || frozen.some(function (f) { return weekStart(f) === weekStart(today()); }) };
+  }
+  E.streak = function (prof) { return streakInfo(prof || E.P()).n; };
+  E.streakInfo = function (prof) { return streakInfo(prof || E.P()); };
   E.lesson = function (id) {
     var p = E.P();
     return p.lessons[id] || (p.lessons[id] = { steps: {}, stars: 0, best: 0 });
+  };
+
+  /* ---------- зірки ⭐ ----------
+     Журнал нарахувань: {d, n, why}. Тижнева сума — з понеділка. */
+  E.onStars = null; E.onBadge = null;
+  E.addStars = function (n, why) {
+    var p = E.P();
+    if (!p.stars) p.stars = [];
+    p.stars.push({ d: today(), n: n, why: why });
+    if (p.stars.length > 2000) p.stars = p.stars.slice(-2000);
+    E.save();
+    if (E.onStars) E.onStars(n, why);
+    E.checkBadges();
+  };
+  E.starsWeek = function (prof) {
+    var p = prof || E.P(), w = weekStart(today()), n = 0;
+    (p.stars || []).forEach(function (x) { if (x.d >= w) n += x.n; });
+    return n;
+  };
+  E.starsTotal = function (prof) {
+    var p = prof || E.P(), n = 0;
+    (p.stars || []).forEach(function (x) { n += x.n; });
+    return n;
+  };
+  /* тижнева нагорода: {text, goal, pin} — задає тато */
+  E.reward = function (prof) {
+    var p = prof || E.P();
+    return p.reward || (p.reward = { text: "", goal: 30, pin: "" });
+  };
+
+  /* ---------- значки 🏅 ---------- */
+  function totalTasks(p) { var n = 0; Object.keys(p.daily || {}).forEach(function (d) { for (var k in p.daily[d]) n += p.daily[d][k]; }); return n; }
+  function fixedCount(p) { var k = {}, n = 0; p.mistakes.forEach(function (m) { if (m.fixed && !k[m.key]) { k[m.key] = 1; n++; } }); return n; }
+  function lvlCount(p, l) { var n = 0; for (var id in p.skills) if (p.skills[id].lvl >= l) n++; return n; }
+  E.BADGES = [
+    { id: "day1", e: "🌅", t: "Перше заняття", s: "Виконати «Заняття на сьогодні»", ok: function (p) { return (p.cnt && p.cnt.daysDone) >= 1; } },
+    { id: "lesson1", e: "🎓", t: "Перший урок", s: "Скласти тест уроку", ok: function (p) { for (var k in p.lessons) if (p.lessons[k].stars > 0) return true; return false; } },
+    { id: "streak3", e: "🔥", t: "3 дні поспіль", s: "Займатися 3 дні підряд", ok: function (p) { return streakInfo(p).n >= 3; } },
+    { id: "streak7", e: "🚀", t: "Тиждень поспіль", s: "Займатися 7 днів підряд", ok: function (p) { return streakInfo(p).n >= 7; } },
+    { id: "streak30", e: "🏆", t: "Місяць поспіль", s: "Займатися 30 днів підряд", ok: function (p) { return streakInfo(p).n >= 30; } },
+    { id: "fix10", e: "🛠️", t: "10 помилок виправлено", s: "Помилка — це і є навчання", ok: function (p) { return fixedCount(p) >= 10; } },
+    { id: "fix50", e: "🧰", t: "50 помилок виправлено", s: "Справжній майстер виправлень", ok: function (p) { return fixedCount(p) >= 50; } },
+    { id: "brave", e: "💪", t: "Наполегливість", s: "Не здатися і розібратися з другої спроби", ok: function (p) { return (p.cnt && p.cnt.brave) >= 1; } },
+    { id: "back", e: "🤗", t: "З поверненням!", s: "Повернутися до занять після перерви", ok: function (p) { return (p.cnt && p.cnt.back) >= 1; } },
+    { id: "know5", e: "🌿", t: "5 навичок «Знаю»", s: "Довести 5 навичок до 🌿", ok: function (p) { return lvlCount(p, 2) >= 5; } },
+    { id: "master1", e: "🌳", t: "Перша засвоєна", s: "Перша навичка 🌳 — правильно і через день", ok: function (p) { return lvlCount(p, 3) >= 1; } },
+    { id: "es", e: "🔤", t: "Майстер -es", s: "Засвоїти -s, -sh, -ch, -x, -o → + es", ok: function (p) { return p.skills["ps.es"] && p.skills["ps.es"].lvl >= 3; } },
+    { id: "t100", e: "💯", t: "100 завдань", s: "Виконати 100 завдань", ok: function (p) { return totalTasks(p) >= 100; } },
+    { id: "t500", e: "⭐", t: "500 завдань", s: "Виконати 500 завдань", ok: function (p) { return totalTasks(p) >= 500; } },
+    { id: "reward1", e: "🎁", t: "Перша нагорода", s: "Зібрати зірки на тижневу нагороду", ok: function (p) { return (p.cnt && p.cnt.rewards) >= 1; } }
+  ];
+  E.cnt = function (k, n) { var p = E.P(); if (!p.cnt) p.cnt = {}; p.cnt[k] = (p.cnt[k] || 0) + (n || 1); E.save(); E.checkBadges(); };
+  var checking = false;
+  E.checkBadges = function () {
+    if (checking) return [];
+    checking = true;
+    var p = E.P(), out = [];
+    if (!p.badges) p.badges = {};
+    // нагорода тижня: зібрано ціль — фіксуємо раз на тиждень
+    var r = E.reward(p), w = weekStart(today());
+    if (r.text && r.goal && E.starsWeek(p) >= r.goal) {
+      if (!p.rewardWeeks) p.rewardWeeks = {};
+      if (!p.rewardWeeks[w]) { p.rewardWeeks[w] = today(); if (!p.cnt) p.cnt = {}; p.cnt.rewards = (p.cnt.rewards || 0) + 1; out.push({ e: "🎁", t: "Нагорода тижня: " + r.text, reward: true }); }
+    }
+    E.BADGES.forEach(function (b) {
+      if (!p.badges[b.id] && b.ok(p)) { p.badges[b.id] = today(); out.push(b); }
+    });
+    if (out.length) E.save();
+    checking = false;
+    if (out.length && E.onBadge) out.forEach(function (b) { E.onBadge(b); });
+    return out;
   };
 
   /* ---------- навички ---------- */
@@ -171,6 +261,7 @@
     }
     s.last = t;
     E.save();
+    if (s.lvl > before && s.lvl >= 2) E.addStars(s.lvl === 2 ? 2 : 3, "lvl");
     return s.lvl !== before ? s.lvl : 0;
   };
   E.flag = function (id) { E.sk(id).flag = true; E.save(); };
@@ -191,14 +282,15 @@
     if (p.mistakes.length > 300) p.mistakes = p.mistakes.slice(-300);
     E.save();
   };
-  E.fixSkillMistakes = function (skill) {
-    E.P().mistakes.forEach(function (m) { if (m.skill === skill) m.fixed = true; });
+  function fixWhere(test) {
+    var n = 0, seen = {};
+    E.P().mistakes.forEach(function (m) { if (!m.fixed && test(m)) { m.fixed = true; if (!seen[m.key]) { seen[m.key] = 1; n++; } } });
     E.save();
-  };
-  E.fixMistake = function (key) {
-    E.P().mistakes.forEach(function (m) { if (m.key === key) m.fixed = true; });
-    E.save();
-  };
+    if (n) E.addStars(n, "fix");
+    return n;
+  }
+  E.fixSkillMistakes = function (skill) { return fixWhere(function (m) { return m.skill === skill; }); };
+  E.fixMistake = function (key) { return fixWhere(function (m) { return m.key === key; }); };
   /* невиправлені помилки: по одній на завдання, найновіші першими */
   E.openMistakes = function () {
     var seen = {}, out = [], ms = E.P().mistakes;

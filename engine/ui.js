@@ -27,11 +27,15 @@
       b.onclick = function (e) { e.stopPropagation(); say(b.getAttribute("data-say")); };
     })(bs[i]);
   }
-  var toastTimer;
-  function toast(m) {
-    var t = $("toast"); t.textContent = m; t.classList.add("show");
-    clearTimeout(toastTimer); toastTimer = setTimeout(function () { t.classList.remove("show"); }, 2600);
+  var toastQ = [], toastBusy = false;
+  function toast(m) { toastQ.push(m); if (!toastBusy) nextToast(); }
+  function nextToast() {
+    var t = $("toast"), m = toastQ.shift();
+    if (!m) { toastBusy = false; return; }
+    toastBusy = true; t.textContent = m; t.classList.add("show");
+    setTimeout(function () { t.classList.remove("show"); setTimeout(nextToast, 250); }, 2600);
   }
+  E.onBadge = function (b) { toast(b.reward ? "🎉 " + b.t + "!" : "🏅 Новий значок: " + b.e + " " + b.t); };
   function toTop() { try { window.scrollTo({ top: 0, behavior: "smooth" }); } catch (e) { window.scrollTo(0, 0); } }
   function starsStr(n) { return "★".repeat(n) + "☆".repeat(3 - n); }
   function fmt(n) { return n % 1 === 0 ? String(n) : n.toFixed(1).replace(".", ","); }
@@ -63,6 +67,93 @@
     $("rt").onclick = retry;
   }
 
+  var THEMES = [
+    { id: "", t: "Класика", e: "💜", need: 0 },
+    { id: "ocean", t: "Океан", e: "🌊", need: 20 },
+    { id: "forest", t: "Ліс", e: "🌿", need: 50 },
+    { id: "sunset", t: "Захід сонця", e: "🌅", need: 100 },
+    { id: "berry", t: "Ягідна", e: "🫐", need: 200 }
+  ];
+  function applyTheme() {
+    var id = (E.cur() && E.P().theme) || "";
+    document.body.className = id ? "th-" + id : "";
+  }
+  function freezeChip() {
+    var si = E.streakInfo();
+    return '<span class="stat" title="Серія днів">🔥 ' + si.n + ' ' + dayWord(si.n) + ' поспіль</span>' +
+      '<span class="stat" title="Один пропущений день на тиждень не обнуляє серію">' + (si.freezeUsedThisWeek ? "❄️ використано" : "❄️ заморозка є") + '</span>';
+  }
+  /* картка тижневої нагороди */
+  function rewardCard() {
+    var r = E.reward(), w = E.starsWeek();
+    if (!r.text) return '<div class="card reward"><h3>🎁 Нагорода тижня</h3><p class="muted" style="margin:0">Домовтеся з татом, яку нагороду ти отримаєш за зірки тижня ⭐ — і тато впише її сюди.</p>' +
+      '<div class="row"><button class="btn ghost full" data-act="dad">⚙️ Тато: налаштувати</button></div></div>';
+    var pct = Math.min(100, Math.round(w / r.goal * 100)), got = w >= r.goal;
+    return '<div class="card reward"><div style="display:flex;justify-content:space-between;align-items:flex-start;gap:8px"><h3 style="margin:0">🎁 ' + esc(r.text) + '</h3><button class="btn plain" data-act="dad" title="Для тата">⚙️</button></div>' +
+      '<div class="prog" style="margin:10px 0 6px"><i style="width:' + pct + '%;' + (got ? "background:var(--ok)" : "background:var(--sun)") + '"></i></div>' +
+      '<div style="font-weight:800">' + (got ? "🎉 Заслужила! Покажи татові: " + w + " ⭐ цього тижня" : "⭐ " + w + " з " + r.goal + " · ще " + (r.goal - w) + " до нагороди") + '</div>' +
+      '<p class="muted small" style="margin:4px 0 0">Зірки тижня рахуються з понеділка. ⭐ дають: заняття на сьогодні +5, виправлена помилка +1, нова навичка 🌿 +2 / 🌳 +3, зірка тесту +3.</p></div>';
+  }
+  function bindActs(back) {
+    var bs = $app.querySelectorAll("[data-act]");
+    for (var i = 0; i < bs.length; i++) (function (b) {
+      b.onclick = function () { var a = b.getAttribute("data-act"); if (a === "dad") renderDad(back); if (a === "badges") renderBadges(back); toTop(); };
+    })(bs[i]);
+  }
+  function badgesRow() {
+    var got = E.P().badges || {}, n = 0; for (var k in got) n++;
+    var last = E.BADGES.filter(function (b) { return got[b.id]; }).slice(-5).map(function (b) { return b.e; }).join(" ");
+    return '<button class="lesson" data-act="badges"><span class="ic">🏅</span><span><div class="lt">Мої значки та оформлення</div><div class="ls">' + n + ' з ' + E.BADGES.length + (last ? " · " + last : " · перший уже близько!") + '</div></span></button>';
+  }
+
+  /* ================== ДЛЯ ТАТА ================== */
+  function renderDad(back) {
+    var r = E.reward();
+    function form() {
+      $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">⚙️ Для тата</span></div>' +
+        '<div class="card"><h2>🎁 Нагорода тижня — ' + esc(E.P().name) + '</h2>' +
+        '<label class="lbl">Що отримає за тиждень</label><input id="rt" type="text" placeholder="напр. похід у кіно, 200 грн, піца" value="' + esc(r.text) + '">' +
+        '<label class="lbl">Скільки ⭐ треба за тиждень</label><input id="rg" type="text" inputmode="numeric" value="' + r.goal + '">' +
+        '<p class="muted small">Орієнтир: повне заняття за день дає приблизно 6–10 ⭐. 30 ⭐ — це 4–5 днів занять.</p>' +
+        '<label class="lbl">PIN тата (4 цифри, щоб діти не змінили ціль)</label><input id="rp" type="text" inputmode="numeric" maxlength="4" placeholder="' + (r.pin ? "лишити як є" : "придумай PIN") + '">' +
+        '<div class="row"><button class="btn full" id="sv">Зберегти</button></div></div>';
+      $("bk").onclick = function () { back(); toTop(); };
+      $("sv").onclick = function () {
+        var t = $("rt").value.trim(), g = parseInt($("rg").value, 10), pin = $("rp").value.trim();
+        if (!(g > 0)) { toast("Вкажи кількість зірок числом"); return; }
+        if (!r.pin && !/^\d{4}$/.test(pin)) { toast("Придумай PIN з 4 цифр"); return; }
+        if (pin && !/^\d{4}$/.test(pin)) { toast("PIN — 4 цифри"); return; }
+        r.text = t; r.goal = g; if (pin) r.pin = pin; E.save(); E.checkBadges();
+        toast("Збережено 👍"); back(); toTop();
+      };
+    }
+    if (!r.pin) return form();
+    $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button></div><div class="card"><h2>🔒 Для тата</h2><label class="lbl">PIN</label>' +
+      '<input id="pn" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div class="row"><button class="btn full" id="ok">Увійти</button></div></div>';
+    $("bk").onclick = function () { back(); toTop(); };
+    var go = function () { if ($("pn").value === r.pin) form(); else { toast("PIN не підходить"); $("pn").value = ""; } };
+    $("ok").onclick = go; $("pn").onkeydown = function (e) { if (e.key === "Enter") go(); };
+  }
+
+  /* ================== ЗНАЧКИ І ОФОРМЛЕННЯ ================== */
+  function renderBadges(back) {
+    var P = E.P(), got = P.badges || {}, tot = E.starsTotal();
+    var html = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">🏅 Значки</span></div>' +
+      '<div class="card"><h1>Мої значки</h1><p class="muted">Значки — за старанність, а не лише за ідеальність. Усього зірок: ⭐ ' + tot + '</p><div class="badges">' +
+      E.BADGES.map(function (b) {
+        return '<div class="badge ' + (got[b.id] ? "got" : "") + '"><div class="be">' + (got[b.id] ? b.e : "🔒") + '</div><div class="bt">' + esc(b.t) + '</div><div class="bs">' + esc(got[b.id] ? got[b.id].split("-").reverse().join(".") : b.s) + '</div></div>';
+      }).join("") + '</div></div>' +
+      '<div class="card"><h2>🎨 Оформлення</h2><p class="muted small">Нові кольори відкриваються за зібрані зірки.</p><div class="themes">' +
+      THEMES.map(function (t) {
+        var open = tot >= t.need, on = (P.theme || "") === t.id;
+        return '<button class="theme th-' + (t.id || "classic") + (on ? " on" : "") + '" data-th="' + t.id + '"' + (open ? "" : " disabled") + '><span class="sw"></span>' + t.e + ' ' + esc(t.t) + '<span class="muted small">' + (open ? (on ? " ✓" : "") : " 🔒 " + t.need + " ⭐") + '</span></button>';
+      }).join("") + '</div></div>';
+    $app.innerHTML = html;
+    $("bk").onclick = function () { back(); toTop(); };
+    var ts = $app.querySelectorAll(".theme");
+    for (var i = 0; i < ts.length; i++) (function (b) { b.onclick = function () { P.theme = b.getAttribute("data-th"); E.save(); applyTheme(); renderBadges(back); }; })(ts[i]);
+  }
+
   var PATH = null, SUBJ = null;
   function withSubjects(cb) {
     if (SUBJ) return cb();
@@ -82,6 +173,7 @@
 
   /* ================== ХТО ВЧИТЬСЯ ================== */
   function renderWho() {
+    document.body.className = "";
     withSubjects(function () {
       $app.innerHTML = '<div class="card" style="text-align:center"><div class="big-emoji">🎒</div><h1>Хто сьогодні вчиться?</h1>' +
         '<div class="who">' + SUBJ.children.map(function (c) {
@@ -93,7 +185,7 @@
       for (var i = 0; i < bs.length; i++) (function (b) {
         b.onclick = function () {
           var c = null; SUBJ.children.forEach(function (x) { if (x.id === b.getAttribute("data-id")) c = x; });
-          E.setCur(c.id, c.name); renderSubjects(); toTop();
+          E.setCur(c.id, c.name); applyTheme(); renderSubjects(); toTop();
         };
       })(bs[i]);
     });
@@ -107,9 +199,9 @@
       var P = E.P(), goal = SUBJ.dailyGoal, st = E.streak();
       var html = '<div class="topbar"><button class="back" id="who">⇄ Змінити</button><span class="muted small" style="font-weight:700">' + c.grade + ' клас</span></div>' +
         '<div class="card"><h1>Привіт, ' + esc(c.name) + '! ' + c.emoji + '</h1>' +
-        '<div class="stats"><span class="stat">🔥 ' + st + ' ' + dayWord(st) + ' поспіль</span><span class="stat">⭐ ' + totalStars(P) + '</span></div>' +
+        '<div class="stats">' + freezeChip() + '<span class="stat">⭐ ' + E.starsWeek() + ' за тиждень</span></div>' +
         (hasOpen(c) ? goalBar(E.todayCount(null), goal) : '<div class="today"><div class="today-t">🚀 Твої заняття скоро з\'являться! Тато вже готує.</div></div>') +
-        '</div><div class="card"><h2>Мої предмети</h2>';
+        '</div>' + (hasOpen(c) ? rewardCard() : "") + '<div class="card"><h2>Мої предмети</h2>';
       c.subjects.forEach(function (s) {
         var n = E.todayCount(s.id);
         html += '<button class="lesson ' + (s.open ? "open" : "lock") + '" data-s="' + s.id + '"><span class="ic">' + s.ic + '</span><span style="flex:1">' +
@@ -117,8 +209,9 @@
           (s.open ? (n >= goal ? "✅ Сьогодні зроблено · " + n + " " + tasksW(n) : n ? "Сьогодні: " + n + " з " + goal + " " + tasksW(goal) : "Сьогодні ще не займались") : "🔒 Скоро з'явиться") +
           '</div></span></button>';
       });
-      html += '</div>';
+      html += '</div>' + (hasOpen(c) ? '<div class="card">' + badgesRow() + '</div>' : "");
       $app.innerHTML = html;
+      bindActs(renderSubjects);
       $("who").onclick = function () { renderWho(); toTop(); };
       var bs = $app.querySelectorAll(".lesson.open");
       for (var i = 0; i < bs.length; i++) (function (b) {
@@ -144,15 +237,16 @@
     var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">🇬🇧 Англійська</span></div>' +
       '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
       '<p class="muted" style="margin:0">' + (cont ? (next ? "Зараз: урок " + next.n + " «" + esc(cont.title) + "»" : "Усі готові уроки пройдено! Нові вже готуються.") : "") + '</p></div></div>' +
-      '<div class="stats"><span class="stat">🔥 ' + st + ' ' + dayWord(st) + ' поспіль</span><span class="stat">⭐ ' + totalStars(P) + '</span>' +
+      '<div class="stats">' + freezeChip() + '<span class="stat">⭐ ' + E.starsWeek() + ' за тиждень</span>' +
       '<span class="stat">📚 ' + doneCount + ' з ' + allLessons + ' уроків</span></div>' +
       goalBar(E.todayCount("english"), SUBJ.dailyGoal) +
       '<div class="row"><button class="btn full ' + (dayDone ? "okb" : "") + '" id="daily">' + (dayDone ? "✅ Заняття на сьогодні виконано" : "▶️ Заняття на сьогодні · ~15 хв") + '</button></div>' +
       (cont ? '<div class="row" style="margin-top:8px"><button class="btn ghost full" id="cont">' + T.label + '</button></div>' : "") + '</div>' +
       (P.diag ? "" : '<div class="card"><h2>🧭 Спершу — перевірка рівня</h2><p class="muted" style="margin:0 0 4px">15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.</p>@DIAG@</div>');
 
-    html += '<button class="lesson" id="mist"><span class="ic">📝</span><span><div class="lt">Мої помилки</div><div class="ls">' +
-      (nMist ? nMist + " " + (nMist === 1 ? "речення чекає" : "речень чекають") + " на виправлення" : "Усі виправлено 🎉") + '</div></span></button>';
+    html += rewardCard();
+    html += '<div class="card" style="padding:12px 16px">' + badgesRow() + '<button class="lesson" id="mist"><span class="ic">📝</span><span><div class="lt">Мої помилки</div><div class="ls">' +
+      (nMist ? nMist + " " + (nMist === 1 ? "речення чекає" : "речень чекають") + " на виправлення" : "Усі виправлено 🎉") + '</div></span></button></div>';
     num = 0;
     PATH.stages.forEach(function (stage, si) {
       html += '<div class="card stage ' + (si === 0 ? "" : "locked") + '"><div class="stage-h"><div class="stage-n">' + stage.n + '</div>' +
@@ -179,6 +273,7 @@
     html = dg ? html + diagHtml : html.replace("@DIAG@", diagHtml);
     $app.innerHTML = html;
     $("subj").onclick = function () { renderSubjects(); toTop(); };
+    bindActs(renderHome);
     if ($("cont")) $("cont").onclick = function () { DAILY = false; openLesson(cont.file, T.step); };
     $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
@@ -244,6 +339,7 @@
       ];
       var cur = null; parts.forEach(function (x) { if (!cur && !x.done) cur = x; });
       var allDone = !cur;
+      if (allDone && !plan.paid) { plan.paid = true; E.save(); E.cnt("daysDone"); E.addStars(5, "day"); toast("⭐ +5 за заняття на сьогодні!"); }
       var n = E.todayCount("english");
       var html = '<div class="topbar"><button class="back" id="back">← Кабінет</button><span class="muted small" style="font-weight:700">🇬🇧 Заняття на сьогодні</span></div>' +
         '<div class="card' + (allDone ? '" style="text-align:center"' : '"') + '>' +
@@ -601,6 +697,7 @@
       function finishSeries() {
         if (okc >= 2 || (items.length < 2 && okc >= items.length)) {
           fixed++; E.fixSkillMistakes(failed.skill); E.unflag(failed.skill);
+          if (attempt === 2) E.cnt("brave");
           return showCard(root, '<div class="celebrate">💪</div><h2>' + (attempt === 1 ? "Зрозуміла!" : "Вийшло! Ось це наполегливість!") + '</h2><p class="muted">' + esc(sk.title) + '</p>', "Далі →", cont);
         }
         if (attempt === 1) {
@@ -706,7 +803,7 @@
         var pct = Math.round(s.score / s.max * 100);
         var stars = pct >= 100 ? 3 : pct >= 90 ? 2 : pct >= pass ? 1 : 0;
         var L = E.lesson(LES.id), ok = stars > 0;
-        if (ok) { completeStep("test"); if (stars > L.stars) L.stars = stars; }
+        if (ok) { completeStep("test"); if (stars > L.stars) { var gain = 3 * (stars - L.stars); L.stars = stars; E.save(); E.addStars(gain, "lesson"); toast("⭐ +" + gain + " за тест!"); } }
         if (pct > L.best) L.best = pct;
         E.markDay(); E.save();
         var wrong = s.res.filter(function (r) { return !r.ok; });
@@ -750,6 +847,7 @@
 
   window.UI = { home: renderHome, _runSession: runSession };
   withSubjects(function () {
+    applyTheme();
     var h = (location.hash || "").replace("#", "");
     if (h && child()) { if (h === "english") renderHome(); else renderSubjects(); }
     else renderWho();

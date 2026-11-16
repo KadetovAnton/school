@@ -39,7 +39,7 @@ input[type=text]:focus{border-color:var(--pri)}
 .lesson .ic{flex:0 0 40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:20px;background:var(--pri-soft)}
 .lesson .lt{font-weight:800;line-height:1.25}
 .lesson .ls{font-size:14px;color:var(--muted);font-weight:600}
-.lesson.open{border-color:var(--pri);box-shadow:0 4px 0 #D8D6FF}
+.lesson.open{border-color:var(--pri);box-shadow:0 4px 0 var(--pri-soft)}
 .lesson.done .ic{background:var(--ok-soft)}
 .lesson.lock{cursor:default;opacity:.55}
 .lesson.lock .ic{background:#F1ECE2}
@@ -59,7 +59,7 @@ input[type=text]:focus{border-color:var(--pri)}
 .ex{background:#FBF6EC;border-radius:14px;padding:10px 14px;margin:8px 0;display:flex;justify-content:space-between;align-items:center;gap:10px}
 .ex .en{font-weight:800;font-size:18px}
 .ex .ua{color:var(--muted);font-size:15px}
-.ex b, .en b{color:var(--pri-ink);background:#E3E1FF;border-radius:6px;padding:0 3px}
+.ex b, .en b{color:var(--pri-ink);background:var(--pri-soft);border-radius:6px;padding:0 3px}
 table.t{width:100%;border-collapse:separate;border-spacing:0;margin:10px 0;font-size:16px}
 table.t td{padding:9px 10px;border-bottom:1px solid var(--line)}
 table.t tr:last-child td{border-bottom:0}
@@ -133,3 +133,27 @@ table.t td:first-child{font-weight:800}
 .fixw .w{font-size:20px}
 .fixw .w.bad{border-color:var(--ok);background:var(--ok-soft)}
 .fixw .w.miss{border-color:var(--bad);background:var(--bad-soft)}
+/* --- мотивація --- */
+.lbl{display:block;font-weight:800;margin:12px 0 6px}
+.reward{background:linear-gradient(135deg,#FFF6DD,#FFFFFF)}
+.badges{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.badge{background:#F6F1E7;border-radius:16px;padding:12px 6px;text-align:center;opacity:.55}
+.badge.got{background:var(--pri-soft);opacity:1}
+.badge .be{font-size:30px;line-height:1.1}
+.badge .bt{font-weight:800;font-size:13px;line-height:1.2;margin-top:4px}
+.badge .bs{font-size:11px;color:var(--muted);line-height:1.25;margin-top:3px}
+.themes{display:grid;gap:8px}
+.theme{font:inherit;font-weight:800;display:flex;align-items:center;gap:10px;text-align:left;padding:12px 14px;border-radius:14px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.theme.on{border-color:var(--pri)}
+.theme:disabled{opacity:.5;cursor:default}
+.theme .sw{width:22px;height:22px;border-radius:50%;flex:0 0 22px}
+.th-classic .sw{background:#4B44E6}
+.th-ocean .sw{background:#0E7CC2}
+.th-forest .sw{background:#1F8A55}
+.th-sunset .sw{background:#E2572B}
+.th-berry .sw{background:#9B2C8F}
+/* теми: перефарбовуємо основні кольори */
+body.th-ocean{--bg:#EEF7FC;--pri:#0E7CC2;--pri-soft:#E1F1FB;--pri-ink:#0A5A8E}
+body.th-forest{--bg:#F1F8EF;--pri:#1F8A55;--pri-soft:#E2F4E8;--pri-ink:#146640}
+body.th-sunset{--bg:#FFF3EC;--pri:#E2572B;--pri-soft:#FDE8DF;--pri-ink:#A93A16}
+body.th-berry{--bg:#FBF0F8;--pri:#9B2C8F;--pri-soft:#F6E2F3;--pri-ink:#741F6B}
