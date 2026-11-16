@@ -97,8 +97,8 @@ label.lbl{display:block;font-weight:700;margin:6px 0 6px}
 <div class="wrap"><div id="app" class="card"></div></div>
 <div id="toast" class="toast"></div>
 
-<script src="engine/engine.js?v=2.10.0"></script>
-<script src="engine/speech.js?v=2.10.0"></script>
+<script src="engine/engine.js?v=2.10.1"></script>
+<script src="engine/speech.js?v=2.10.1"></script>
 <script>
 const TOPICS = {
   be:    "Дієслово to be (5 клас)",
@@ -244,7 +244,18 @@ if(!E.cur()) location.replace("./");
 const KEY = "eng7-diag-v1:" + (E.cur() || "guest");
 let S = load() || fresh();
 function fresh(){ return {name:E.P().name||"", i:0, started:false, done:false, ans:[], date:null}; }
-function load(){ try{ const s = JSON.parse(localStorage.getItem(KEY)); return s && Array.isArray(s.ans) ? s : null; }catch(e){ return null; } }
+function load(){
+  try{
+    const s = JSON.parse(localStorage.getItem(KEY));
+    if (s && Array.isArray(s.ans)) return s;
+    // Тест, пройдений ще до появи профілів (старе сховище без імені дитини) — віддаємо Ані
+    if (E.cur() === "anya"){
+      const o = JSON.parse(localStorage.getItem("eng7-diag-v1"));
+      if (o && Array.isArray(o.ans) && o.ans.length){ localStorage.setItem(KEY, JSON.stringify(o)); return o; }
+    }
+  }catch(e){}
+  return null;
+}
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
 const canSpeak = window.SAY ? SAY.can : false;
@@ -415,6 +426,7 @@ function stats(){
 const lvl = p => p>=80 ? "ok" : p>=50 ? "mid" : "low";
 const lvlText = {ok:"✓ знає", mid:"підтягнути", low:"почати з цього"};
 
+const DIAG_V = 2; // версія підлаштування: при зміні — уже пройдений тест перераховується
 // Підлаштування плану: урок можна пропустити, якщо ВСІ його питання розв'язані правильно і без підказки
 const LESSON_T = {l17:"Дієслово to be",l1:"Present Simple",l2:"Present Simple: заперечення і питання",l3:"Present Continuous",l4:"Simple чи Continuous",l5:"There is / There are",
   l7:"Past Simple: правильні дієслова",l8:"Неправильні дієслова",l9:"Past Simple: питання і заперечення",l10:"Ступені порівняння",l11:"can / must",l12:"Past Continuous",l13:"Present Perfect"};
@@ -427,7 +439,7 @@ function saveDiag(){
   const st = stats(), t = {};
   st.list.forEach(x=>{ t[x.t] = x.pct; });
   const P = E.P(), skip = placement();
-  P.diag = {date:new Date(S.date||Date.now()).toLocaleDateString("uk-UA"), pct:st.pct, topics:t, skip:skip};
+  P.diag = {v:DIAG_V, date:new Date(S.date||Date.now()).toLocaleDateString("uk-UA"), pct:st.pct, topics:t, skip:skip, applied:false};
   skip.forEach(l=>{ const L=E.lesson(l); if(!(L.stars>0)) L.skip = true; });
   E.save();
 }
@@ -491,6 +503,8 @@ function fallbackCopy(text, done){
 function toast(msg){ const t=document.getElementById("toast"); t.textContent=msg; t.classList.add("show"); setTimeout(()=>t.classList.remove("show"), 2200); }
 
 /* ---------- start ---------- */
+// Тест уже пройдений, але план за ним ще не підлаштований (пройдено до появи цієї функції) — підлаштовуємо зараз
+if(S.done && (!E.P().diag || E.P().diag.v !== DIAG_V)) saveDiag();
 if(S.done) renderResult(); else renderStart();
 </script>
 </body>

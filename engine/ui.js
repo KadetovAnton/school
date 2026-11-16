@@ -232,6 +232,8 @@
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
     PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
     var T = lessonTarget(), next = T && T.next ? T : null, cont = T ? T.l : null;
+    var dg = P.diag && P.diag.v === 2 ? P.diag : null;
+    var pendingDiag = !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
     var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && plan.words && plan.mist;
 
     var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">🇬🇧 Англійська</span></div>' +
@@ -242,7 +244,7 @@
       goalBar(E.todayCount("english"), SUBJ.dailyGoal) +
       '<div class="row"><button class="btn full ' + (dayDone ? "okb" : "") + '" id="daily">' + (dayDone ? "✅ Заняття на сьогодні виконано" : "▶️ Заняття на сьогодні · ~15 хв") + '</button></div>' +
       (cont ? '<div class="row" style="margin-top:8px"><button class="btn ghost full" id="cont">' + T.label + '</button></div>' : "") + '</div>' +
-      (P.diag ? "" : '<div class="card"><h2>🧭 Спершу — перевірка рівня</h2><p class="muted" style="margin:0 0 4px">15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.</p>@DIAG@</div>');
+      (dg ? "" : '<div class="card"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>');
 
     html += rewardCard();
     var wDue = E.wordsDue().length, wL = E.wordsLearned();
@@ -276,9 +278,8 @@
       });
       html += '</div>';
     });
-    var dg = P.diag;
     var diagHtml = '<a class="lesson' + (dg ? "" : " open") + '" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
-      (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : "Тест на 29 завдань: що вже знаю, а що підтягнути") + '</div></span></a>';
+      (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : pendingDiag ? "✅ Ти вже пройшла тест! Натисни — і план підлаштується під результат" : "Тест на 29 завдань: що вже знаю, а що підтягнути") + '</div></span></a>';
     html = dg ? html + diagHtml : html.replace("@DIAG@", diagHtml);
     $app.innerHTML = html;
     $("subj").onclick = function () { renderSubjects(); toTop(); };
@@ -322,6 +323,15 @@
       });
     });
     d.applied = true; E.save();
+  }
+  /* чи є в пам'яті пройдений тест (для поточної дитини або старий, до появи профілів — для Ані) */
+  function testDone() {
+    try {
+      var a = JSON.parse(localStorage.getItem("eng7-diag-v1:" + E.cur()) || "null");
+      if (a && a.done) return true;
+      if (E.cur() === "anya") { var o = JSON.parse(localStorage.getItem("eng7-diag-v1") || "null"); if (o && o.done) return true; }
+    } catch (e) {}
+    return false;
   }
   /* наступний крок навчання: перший непройдений урок і його перший незроблений крок */
   function lessonTarget() {
