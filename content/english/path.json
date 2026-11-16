@@ -41,6 +41,31 @@
   },
   {
    "n": 2,
+   "title": "Минуле",
+   "sub": "Що було вчора (6 клас)",
+   "lessons": [
+    {
+     "id": "l7",
+     "title": "Past Simple: правильні дієслова, was / were",
+     "ic": "📅",
+     "file": "lessons/l7.json"
+    },
+    {
+     "id": "l8",
+     "title": "30 головних неправильних дієслів",
+     "ic": "🧩",
+     "file": "lessons/l8.json"
+    },
+    {
+     "id": "l9",
+     "title": "Past Simple: питання і заперечення",
+     "ic": "🔁",
+     "file": "lessons/l9.json"
+    }
+   ]
+  },
+  {
+   "n": 3,
    "title": "Опис світу",
    "sub": "Що в мене є, де і чиє (5–6 клас)",
    "lessons": [
@@ -91,31 +116,6 @@
      "title": "Займенники: me / mine / myself",
      "ic": "🙋",
      "file": "lessons/l15.json"
-    }
-   ]
-  },
-  {
-   "n": 3,
-   "title": "Минуле",
-   "sub": "Що було вчора (6 клас)",
-   "lessons": [
-    {
-     "id": "l7",
-     "title": "Past Simple: правильні дієслова, was / were",
-     "ic": "📅",
-     "file": "lessons/l7.json"
-    },
-    {
-     "id": "l8",
-     "title": "30 головних неправильних дієслів",
-     "ic": "🧩",
-     "file": "lessons/l8.json"
-    },
-    {
-     "id": "l9",
-     "title": "Past Simple: питання і заперечення",
-     "ic": "🔁",
-     "file": "lessons/l9.json"
     }
    ]
   },

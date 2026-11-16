@@ -319,7 +319,7 @@
       var L = cache["lessons/" + id + ".json"];
       (L && L.skills || []).forEach(function (sid) {
         var s = E.sk(sid);
-        if (s.lvl < 2) { s.lvl = 2; s.knownAt = "placement"; s.iv = 0; s.due = E.addDays(E.today(), 1); }
+        if (s.lvl < 2 && !s.n) { s.lvl = 2; s.knownAt = "placement"; s.iv = 0; s.due = E.addDays(E.today(), 1); } // власні відповіді Ані важливіші за тест
       });
     });
     d.applied = true; E.save();
