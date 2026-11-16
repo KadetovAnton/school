@@ -97,7 +97,7 @@ label.lbl{display:block;font-weight:700;margin:6px 0 6px}
 <div class="wrap"><div id="app" class="card"></div></div>
 <div id="toast" class="toast"></div>
 
-<script src="engine/engine.js?v=2.8.0"></script>
+<script src="engine/engine.js?v=2.9.0"></script>
 <script>
 const TOPICS = {
   be:    "Дієслово to be (5 клас)",
@@ -126,90 +126,90 @@ const Q = [
   e:"you → <b>are</b>. У питанні просто міняємо місцями: You are ready → <b>Are</b> you ready?",
   err:{"is":"is — для he / she / it. З you → <b>Are</b>.","am":"am — тільки з I. З you → <b>Are</b>."}},
  // present simple
- {t:"ps",type:"choice",p:"She ___ to school every day.",o:["go","goes","going"],a:"goes",
+ {ls:["l1","l4"],t:"ps",type:"choice",p:"She ___ to school every day.",o:["go","goes","going"],a:"goes",
   h:["«every day» — це регулярна дія, тобто Present Simple.","Що додаємо до дієслова після he / she / it?"],
   e:"Present Simple: з he / she / it додаємо <b>-s / -es</b>: she go<b>es</b>, he play<b>s</b>.",
   err:{"go":"Майже! Але з she треба закінчення: go → go<b>es</b>.","going":"going без am / is / are не вживається. А тут регулярна дія (every day) → <b>goes</b>."}},
- {t:"ps",type:"choice",p:"___ your dad work in Kyiv?",o:["Do","Does","Is"],a:"Does",
+ {ls:["l2"],t:"ps",type:"choice",p:"___ your dad work in Kyiv?",o:["Do","Does","Is"],a:"Does",
   h:["Питання в Present Simple будуємо з допоміжним словом.","<b>your dad</b> = he. Do чи Does?"],
   e:"Питання: <b>Do</b> I / you / we / they…? <b>Does</b> he / she / it…? Після does дієслово без -s: Does he work…?",
   err:{"do":"Do — для I / you / we / they. Тато — це he → <b>Does</b>.","is":"work — звичайне дієслово, тому питання будуємо з <b>Does</b>, а не з is."}},
- {t:"ps",type:"input",task:"Впиши заперечення",p:"We ___ fish. (not / like)",a:["don't like","do not like"],
+ {ls:["l2"],t:"ps",type:"input",task:"Впиши заперечення",p:"We ___ fish. (not / like)",a:["don't like","do not like"],
   h:["Заперечення в Present Simple: допоміжне слово + not + дієслово.","З we допоміжне слово — <b>do</b>. Do not можна скоротити."],
   e:"Заперечення: I / you / we / they <b>don't</b> + дієслово; he / she / it <b>doesn't</b> + дієслово.",
   err:{"not like":"Потрібне допоміжне слово: <b>don't</b> like.","doesnt like":"doesn't — для he / she / it. З we → <b>don't</b> like.","dont likes":"Після don't дієслово без -s: don't <b>like</b>."}},
  // there / some any
- {t:"there",type:"choice",p:"There ___ some apples on the table.",o:["are","is","am"],a:"are",
+ {ls:["l5"],t:"there",type:"choice",p:"There ___ some apples on the table.",o:["are","is","am"],a:"are",
   h:["Яблук скільки — одне чи багато?","Кілька предметів → There …?"],
   e:"There <b>is</b> + один предмет; There <b>are</b> + кілька предметів.",
   err:{"is":"apples — їх кілька, тому <b>are</b>.","am":"am буває тільки з I."}},
- {t:"there",type:"choice",p:"Is there ___ milk in the fridge?",o:["any","some","a"],a:"any",
+ {ls:["l5"],t:"there",type:"choice",p:"Is there ___ milk in the fridge?",o:["any","some","a"],a:"any",
   h:["Зверни увагу: це питання.","У питаннях і запереченнях замість some вживаємо інше слово."],
   e:"<b>some</b> — у звичайних реченнях; <b>any</b> — у питаннях і запереченнях.",
   err:{"some":"some — у звичайних реченнях. У питанні → <b>any</b>.","a":"Молоко не порахуєш («одне молоко» не кажуть), тому не a. У питанні → <b>any</b>."}},
  // present continuous
- {t:"pc",type:"choice",p:"Look! The dog ___ in the garden.",o:["runs","is running","run"],a:"is running",
+ {ls:["l3","l4"],t:"pc",type:"choice",p:"Look! The dog ___ in the garden.",o:["runs","is running","run"],a:"is running",
   h:["«Look!» — дія відбувається прямо зараз.","Зараз → am / is / are + дієслово з -ing."],
   e:"Present Continuous (прямо зараз): <b>am / is / are + -ing</b>. Слова-підказки: now, Look!, Listen!",
   err:{"runs":"runs — це «бігає взагалі, регулярно». А тут «Дивись!» — прямо зараз → <b>is running</b>.","run":"Тут потрібна форма «прямо зараз»: <b>is running</b>."}},
- {t:"pc",type:"order",task:"Склади речення",p:"«Моя сестра зараз робить домашнє завдання».",
+ {ls:["l3"],t:"pc",type:"order",task:"Склади речення",p:"«Моя сестра зараз робить домашнє завдання».",
   words:["doing","sister","now","is","her","My","homework"],
   a:["my sister is doing her homework now","now my sister is doing her homework"],
   h:["Порядок в англійському реченні: хто → що робить → що → коли.","Почни з «My sister», далі «is doing»."],
   e:"Хто (My sister) → дія (is doing) → що (her homework) → коли (now)."},
  // past simple
- {t:"past",type:"input",task:"Впиши дієслово в правильній формі",p:"Yesterday I ___ football. (play)",a:["played"],
+ {ls:["l7"],t:"past",type:"input",task:"Впиши дієслово в правильній формі",p:"Yesterday I ___ football. (play)",a:["played"],
   h:["«Yesterday» — це минуле, тобто Past Simple.","play — правильне дієслово. Що додаємо в минулому часі?"],
   e:"Правильні дієслова в минулому отримують <b>-ed</b>: play → play<b>ed</b>, watch → watch<b>ed</b>.",
   err:{"play":"Yesterday = учора, тому потрібен минулий час: play<b>ed</b>.","was play":"was тут не потрібне. Просто додай -ed: <b>played</b>.","plaied":"У play перед y стоїть голосна, тому y не міняється: <b>played</b>."}},
- {t:"past",type:"input",task:"Впиши дієслово в правильній формі",p:"Last summer we ___ to the sea. (go)",a:["went"],
+ {ls:["l8"],t:"past",type:"input",task:"Впиши дієслово в правильній формі",p:"Last summer we ___ to the sea. (go)",a:["went"],
   h:["Минулий час. Але go — неправильне дієслово!","Три форми: go — ? — gone."],
   e:"Неправильні дієслова треба вчити напам'ять: go → <b>went</b>, see → saw, have → had, buy → bought.",
   err:{"goed":"Логічно, але go — неправильне дієслово. Його минула форма — <b>went</b>.","go":"Last summer — це минуле. Минула форма go — <b>went</b>.","gone":"gone — третя форма (для Present Perfect). У минулому — <b>went</b>."}},
- {t:"past",type:"choice",p:"___ you see the film yesterday?",o:["Did","Do","Were"],a:"Did",
+ {ls:["l9"],t:"past",type:"choice",p:"___ you see the film yesterday?",o:["Did","Do","Were"],a:"Did",
   h:["yesterday → минулий час.","У минулому для питань є одне слово для всіх осіб."],
   e:"Питання в минулому: <b>Did</b> + хто + дієслово без змін: Did you see…?",
   err:{"do":"Do — для теперішнього часу. Тут yesterday → <b>Did</b>.","were":"Were вживається з -ing або з прикметниками. З дієсловом see → <b>Did</b>."}},
- {t:"past",type:"choice",p:"She didn't ___ the window.",o:["opened","open","opens"],a:"open",
+ {ls:["l9"],t:"past",type:"choice",p:"She didn't ___ the window.",o:["opened","open","opens"],a:"open",
   h:["Слово didn't уже показує, що це минуле.","Тоді яким має бути саме дієслово?"],
   e:"Після <b>didn't</b> і <b>did</b> дієслово у звичайній формі: didn't open, did you open?",
   err:{"opened":"Минулий час уже показує didn't, тому без -ed: didn't <b>open</b>.","opens":"Після didn't жодних закінчень: didn't <b>open</b>."}},
  // comparison
- {t:"comp",type:"input",task:"Впиши прикметник у правильній формі",p:"An elephant is ___ than a horse. (big)",a:["bigger"],
+ {ls:["l10"],t:"comp",type:"input",task:"Впиши прикметник у правильній формі",p:"An elephant is ___ than a horse. (big)",a:["bigger"],
   h:["«than» = «ніж», тобто порівнюємо два предмети.","Коротке слово + -er. Увага на останню літеру!"],
   e:"Короткі прикметники: + <b>-er</b>. Якщо в кінці «голосна + приголосна», приголосну подвоюємо: big → big<b>g</b>er, hot → hot<b>t</b>er.",
   err:{"biger":"Майже! Треба подвоїти g: big<b>g</b>er.","more big":"more — для довгих слів. big — коротке: <b>bigger</b>.","big":"Є «than», тож потрібна форма порівняння: <b>bigger</b>.","more bigger":"Або more, або -er — разом не можна: <b>bigger</b>."}},
- {t:"comp",type:"choice",p:"This is the ___ book I have ever read.",o:["most interesting","more interesting","interestingest"],a:"most interesting",
+ {ls:["l10"],t:"comp",type:"choice",p:"This is the ___ book I have ever read.",o:["most interesting","more interesting","interestingest"],a:"most interesting",
   h:["«the … ever» → найкраща з усіх (найвищий ступінь).","interesting — довге слово."],
   e:"Довгі прикметники: <b>more</b> … (ніж), <b>the most</b> … (най-).",
   err:{"more interesting":"more — це «цікавіша, ніж». А тут «найцікавіша з усіх» → <b>the most</b> interesting.","interestingest":"До довгих слів -est не додаємо → <b>most</b> interesting."}},
- {t:"comp",type:"choice",p:"good → better → ___",o:["best","goodest","most good"],a:"best",
+ {ls:["l10"],t:"comp",type:"choice",p:"good → better → ___",o:["best","goodest","most good"],a:"best",
   h:["Це виняток, як і good → better.","Згадай: «my ___ friend» — мій найкращий друг."],
   e:"Винятки: good → better → <b>best</b>; bad → worse → <b>worst</b>."},
  // modals
- {t:"modal",type:"choice",p:"You ___ wear a uniform at our school. It's a rule.",o:["must","can","may"],a:"must",
+ {ls:["l11"],t:"modal",type:"choice",p:"You ___ wear a uniform at our school. It's a rule.",o:["must","can","may"],a:"must",
   h:["«It's a rule» — це правило, обов'язок.","Яке слово означає «повинен»?"],
   e:"<b>must</b> — повинен, обов'язково; <b>can</b> — можу, вмію; <b>may</b> — можна (дозвіл).",
   err:{"can":"can — «можеш, вмієш». А правило — це обов'язок → <b>must</b>.","may":"may — «можна» (дозвіл). Правило — це обов'язок → <b>must</b>."}},
- {t:"modal",type:"choice",p:"You ___ run in the corridor. It's dangerous.",o:["mustn't","must","can"],a:"mustn't",
+ {ls:["l11"],t:"modal",type:"choice",p:"You ___ run in the corridor. It's dangerous.",o:["mustn't","must","can"],a:"mustn't",
   h:["Небезпечно — отже, це заборона.","Заборона = must + not."],
   e:"<b>mustn't</b> — не можна, заборонено. <b>must</b> — повинен.",
   err:{"must":"must — «повинен бігати»? Навпаки, це заборона → <b>mustn't</b>.","can":"can — «можна». Але небезпечно, тож це заборона → <b>mustn't</b>."}},
  // past continuous
- {t:"pastc",type:"choice",p:"I ___ TV when Mum came home.",o:["was watching","watched","am watching"],a:"was watching",
+ {ls:["l12"],t:"pastc",type:"choice",p:"I ___ TV when Mum came home.",o:["was watching","watched","am watching"],a:"was watching",
   h:["Дві дії в минулому: одна тривала (дивився), друга коротка (прийшла).","Тривала дія в минулому → was / were + -ing."],
   e:"Past Continuous: <b>was / were + -ing</b> — дія тривала в певний момент у минулому. Часто з when: I was watching TV when…",
   err:{"watched":"watched — це «подивився» (завершена дія). А тут «дивився» (процес), коли мама прийшла → <b>was watching</b>.","am watching":"am — теперішній час, а мама прийшла в минулому → <b>was</b> watching."}},
- {t:"pastc",type:"choice",p:"What ___ you doing at 8 o'clock yesterday?",o:["were","was","did"],a:"were",
+ {ls:["l12"],t:"pastc",type:"choice",p:"What ___ you doing at 8 o'clock yesterday?",o:["were","was","did"],a:"were",
   h:["doing + yesterday → Past Continuous.","З you — was чи were?"],
   e:"I / he / she / it → <b>was</b>; we / you / they → <b>were</b>.",
   err:{"was":"was — для I / he / she / it. З you → <b>were</b>.","did":"did не вживається з -ing. Тут → <b>were</b>."}},
  // present perfect
- {t:"pp",type:"choice",p:"I have never ___ to London.",o:["been","was","be"],a:"been",
+ {ls:["l13"],t:"pp",type:"choice",p:"I have never ___ to London.",o:["been","was","be"],a:"been",
   h:["have + третя форма дієслова = Present Perfect.","Три форми be: be — was/were — ?"],
   e:"Present Perfect: <b>have / has + 3-тя форма</b>. I have never been = я ніколи не був(ла).",
   err:{"was":"was — друга форма. Після have потрібна третя: <b>been</b>.","be":"Після have потрібна третя форма: <b>been</b>."}},
- {t:"pp",type:"choice",p:"She ___ already finished her project.",o:["has","have","is"],a:"has",
+ {ls:["l13"],t:"pp",type:"choice",p:"She ___ already finished her project.",o:["has","have","is"],a:"has",
   h:["already + finished → Present Perfect.","she → have чи has?"],
   e:"I / you / we / they → <b>have</b>; he / she / it → <b>has</b> + 3-тя форма.",
   err:{"have":"have — для I / you / we / they. З she → <b>has</b>.","is":"Present Perfect будується з have / has. З she → <b>has</b>."}},
@@ -416,10 +416,20 @@ function stats(){
 const lvl = p => p>=80 ? "ok" : p>=50 ? "mid" : "low";
 const lvlText = {ok:"✓ знає", mid:"підтягнути", low:"почати з цього"};
 
+// Підлаштування плану: урок можна пропустити, якщо ВСІ його питання розв'язані правильно і без підказки
+const LESSON_T = {l1:"Present Simple",l2:"Present Simple: заперечення і питання",l3:"Present Continuous",l4:"Simple чи Continuous",l5:"There is / There are",
+  l7:"Past Simple: правильні дієслова",l8:"Неправильні дієслова",l9:"Past Simple: питання і заперечення",l10:"Ступені порівняння",l11:"can / must",l12:"Past Continuous",l13:"Present Perfect"};
+function placement(){
+  const by = {};
+  Q.forEach((q,i)=>{ (q.ls||[]).forEach(l=>{ const a=S.ans[i]; by[l] = (by[l]!==false) && !!(a && a.ok && !a.hint); }); });
+  return Object.keys(by).filter(l=>by[l]);
+}
 function saveDiag(){
   const st = stats(), t = {};
   st.list.forEach(x=>{ t[x.t] = x.pct; });
-  E.P().diag = {date:new Date(S.date||Date.now()).toLocaleDateString("uk-UA"), pct:st.pct, topics:t};
+  const P = E.P(), skip = placement();
+  P.diag = {date:new Date(S.date||Date.now()).toLocaleDateString("uk-UA"), pct:st.pct, topics:t, skip:skip};
+  skip.forEach(l=>{ const L=E.lesson(l); if(!(L.stars>0)) L.skip = true; });
   E.save();
 }
 function renderResult(){
@@ -439,6 +449,7 @@ function renderResult(){
         <div class="t"><span>${x.name}</span><span class="lvl-${L}">${x.pct}% · ${lvlText[L]}</span></div>
         <div class="tbar"><i class="bg-${L}" style="width:${Math.max(x.pct,3)}%"></i></div>
       </div>`; }).join("")}
+    ${(E.P().diag && E.P().diag.skip && E.P().diag.skip.length) ? `<div class="reco"><b>⏭️ Ці уроки ти вже знаєш — їх можна пропустити:</b><ol>${E.P().diag.skip.map(l=>`<li>${LESSON_T[l]||l}</li>`).join("")}</ol><span class="muted small">У кабінеті вони позначені ⏭️. Правила з них іноді з'являтимуться в розминці, щоб не забулись.</span></div>` : ""}
     ${weak.length ? `<div class="reco"><b>Що вчимо першим:</b><ol>${weak.slice(0,4).map(x=>`<li>${x.name}</li>`).join("")}</ol></div>`
                   : `<div class="reco"><b>Усі теми на хорошому рівні!</b> Можна братися за складніші завдання 7 класу.</div>`}
     <div class="row">

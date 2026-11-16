@@ -229,6 +229,7 @@
     if (!hasOpen(child(), "english")) return renderSubjects();
     var P = E.P();
     if (!ALL) return loadAll(function () { ALL = true; renderHome(); });
+    applyPlacement();
     var st = E.streak(), doneCount = 0, allLessons = 0, num = 0;
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
     PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
@@ -266,10 +267,11 @@
           var lv = lessonLevels(ls.id);
           var unlocked = prevOk || L.early || L.stars > 0 || nDone > 0;
           if (L.stars > 0) { cls = "done"; ic = "✅"; sub = '<span class="stars">' + starsStr(L.stars) + '</span> · можна повторити'; }
+          else if (L.skip) { cls = "done"; ic = "⏭️"; sub = "Знаєш за перевіркою рівня · можна пройти"; }
           else if (unlocked) { cls = "open"; ic = ls.ic; sub = nDone ? "Пройдено " + nDone + " з 5 кроків" : "Почати · ~20 хв"; }
           else { cls = "lock soon"; ic = "🔒"; sub = "Відкриється після тесту уроку " + prevN + " · можна раніше"; early[ls.file] = { l: ls, after: prevN }; }
           if (lv && unlocked) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
-          prevOk = L.stars > 0; prevN = num;
+          prevOk = L.stars > 0 || !!L.skip; prevN = num;
         } else if (next && next.n + 1 === num) { ic = "⏳"; sub = "Готується — скоро з'явиться"; }
         html += '<button class="lesson ' + cls + '" data-file="' + (ls.file || "") + '"><span class="ic">' + ic + '</span>' +
           '<span><div class="lt">' + num + '. ' + esc(ls.title) + '</div><div class="ls">' + sub + '</div></span></button>';
@@ -309,11 +311,25 @@
     $("no").onclick = function () { renderHome(); toTop(); };
   }
 
+  /* Після перевірки рівня: навички уроків, які Аня вже знає, ставимо в 🌿 «Знаю»
+     з повторенням завтра — так вони з'являтимуться в розминці. */
+  function applyPlacement() {
+    var P = E.P(), d = P.diag;
+    if (!d || !d.skip || d.applied) return;
+    d.skip.forEach(function (id) {
+      var L = cache["lessons/" + id + ".json"];
+      (L && L.skills || []).forEach(function (sid) {
+        var s = E.sk(sid);
+        if (s.lvl < 2) { s.lvl = 2; s.knownAt = "placement"; s.iv = 0; s.due = E.addDays(E.today(), 1); }
+      });
+    });
+    d.applied = true; E.save();
+  }
   /* наступний крок навчання: перший непройдений урок і його перший незроблений крок */
   function lessonTarget() {
     if (!PATH) return null;
     var next = null, last = null, num = 0;
-    PATH.stages.forEach(function (s) { s.lessons.forEach(function (l) { num++; if (l.file) { last = { l: l, n: num }; if (!next && !(E.lesson(l.id).stars > 0)) next = { l: l, n: num }; } }); });
+    PATH.stages.forEach(function (s) { s.lessons.forEach(function (l) { num++; if (l.file) { last = { l: l, n: num }; var LL = E.lesson(l.id); if (!next && !(LL.stars > 0) && !LL.skip) next = { l: l, n: num }; } }); });
     var t = next || last;
     if (!t) return null;
     var cs = E.lesson(t.l.id).steps, sd = null;
