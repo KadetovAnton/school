@@ -1,0 +1,38 @@
+{
+ "id": "m26",
+ "title": "Задачі у 2 дії — крок за кроком",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.plan20",
+  "m.prob2s20"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.plan20": 3,
+   "m.prob2s20": 5
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🪜",
+   "h": "Коли однієї дії мало",
+   "html": "<p>Прочитай питання задачі і спитай себе: <b>чи можу я відповісти одразу?</b> Якщо ні — чого бракує?</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1) знаходжу, чого бракує &nbsp;→&nbsp; 2) відповідаю</div>"
+  },
+  {
+   "e": "🍎",
+   "h": "Приклад",
+   "html": "<p>У кошику 9 яблук, а груш — на 3 менше. Скільки всього фруктів?</p><p>Фрукти = яблука + груші. Яблук 9 — знаємо. Груш — <b>не знаємо</b>!</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1) 9 − 3 = 6 (груш) &nbsp; 2) 9 + 6 = 15</div><p class=\"muted\">Тут ти вводитимеш кожну дію окремо — так легше не заплутатися.</p>"
+  }
+ ]
+}

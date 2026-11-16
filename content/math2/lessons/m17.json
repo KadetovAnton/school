@@ -10,14 +10,18 @@
   "skills/math.json"
  ],
  "skills": [
+  "m.plan100",
+  "m.prob2s100",
   "m.prob2"
  ],
  "practice": {
-  "perSkill": 6
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "m.prob2": 6
+   "m.plan100": 2,
+   "m.prob2s100": 3,
+   "m.prob2": 3
   },
   "pass": 80
  },

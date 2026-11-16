@@ -37,6 +37,18 @@
      "title": "Задачі до 20",
      "ic": "🧩",
      "file": "lessons/m4.json"
+    },
+    {
+     "id": "m25",
+     "title": "Хитрі задачі до 20",
+     "ic": "🦊",
+     "file": "lessons/m25.json"
+    },
+    {
+     "id": "m26",
+     "title": "Задачі у 2 дії — крок за кроком",
+     "ic": "🪜",
+     "file": "lessons/m26.json"
     }
    ]
   },

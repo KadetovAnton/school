@@ -793,11 +793,12 @@
     E.markSeen(it);
     window.UI_CUR = it; // для автоматичних перевірок
     var body = "";
-    if (it.type === "choice") body = '<div class="opts">' + it.o.map(function (o, k) { return '<button class="opt" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>';
+    if (it.type === "choice") body = '<div class="opts">' + it.o.map(function (o, k) { return '<button class="opt' + (String(o).length > 14 ? " sm" : "") + '" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>';
     if (it.type === "dict") body = '<div class="row" style="margin-top:0"><button class="btn ghost" id="play">🔊 Послухати</button><button class="btn ghost" id="slow">🐢 Повільно</button></div><p class="muted small" style="margin:6px 0 10px">Не чути? Вимкни беззвучний режим 🔕 (перемикач збоку на iPhone) і додай гучність.</p>';
     if (it.type === "fix") body = '<div class="pool fixw">' + it.p.split(" ").map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div>';
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
-    if (it.type === "num") body = '<div class="numbox" id="numbox"></div><div class="keypad" id="keypad">' +
+    if (it.type === "num") body = (it.steps ? '<div class="stps">' + it.steps.map(function (st, k) { return '<div class="stp' + (k ? "" : " cur") + '" id="stp' + k + '"><span class="sq">' + (k + 1) + ') ' + esc(st.q) + '</span> <b class="sv" id="sv' + k + '">' + (k ? "" : "?") + '</b></div>'; }).join("") + '</div>' : "") +
+      '<div class="numbox" id="numbox"></div><div class="keypad" id="keypad">' +
       [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"].map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     root.innerHTML = '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
@@ -817,9 +818,9 @@
     }
     for (var p = 0; p < pre; p++) addHint();
 
-    function finish(given, btn) {
+    function finish(given, btn, forced) {
       if (answered) return;
-      var c = E.check(it, given), spellNote = false;
+      var c = forced || E.check(it, given), spellNote = false;
       if (c.st === "typo" && !typoUsed) {
         typoUsed = true;
         $("almost").innerHTML = '<div class="almost">✏️ Майже! Перевір написання і спробуй ще раз 🙂</div>';
@@ -845,6 +846,7 @@
       if ($("inp")) $("inp").disabled = true;
       if ($("keypad")) $("keypad").parentNode.removeChild($("keypad"));
       if ($("numbox") && $("numbox").classList.contains("show")) $("numbox").classList.add(ok ? "good" : "badv");
+      if (it.steps && $("stp" + si) && !$("stp" + si).classList.contains("bad")) { $("stp" + si).classList.remove("cur"); $("stp" + si).classList.add(ok ? "ok" : "bad"); if (given == null) $("sv" + si).textContent = "?"; }
       if (it.type === "num" && $("blank")) { $("blank").textContent = given == null ? "?" : given; $("blank").classList.add(ok ? "good" : "badv"); }
       if ($("chkrow")) $("chkrow").parentNode.removeChild($("chkrow"));
       if ($("almost")) $("almost").innerHTML = "";
@@ -872,13 +874,27 @@
     $("hintBtn").onclick = addHint;
     if ($("readIt")) $("readIt").onclick = function () { SAY.uk(it.read); };
     if (it.type === "num") {
-      var val = "", box = $("numbox"), blank = $("blank");
-      if (!blank) box.classList.add("show"); // у задачах нема пропуску ___ — показуємо окреме поле відповіді
-      var show = function () { box.innerHTML = '<span class="nl">Відповідь:</span> <b>' + (val || "?") + "</b>"; box.classList.toggle("empty", !val); if (blank) { blank.textContent = val; blank.classList.toggle("filled", !!val); } };
+      var val = "", box = $("numbox"), blank = $("blank"), si = 0, NS = it.steps ? it.steps.length : 0;
+      if (NS) blank = $("sv0"); // задача «крок за кроком»: кожна дія — свій рядок
+      else if (!blank) box.classList.add("show"); // у задачах нема пропуску ___ — показуємо окреме поле відповіді
+      var show = function () { box.innerHTML = '<span class="nl">Відповідь:</span> <b>' + (val || "?") + "</b>"; box.classList.toggle("empty", !val); if (blank) { blank.textContent = val || (NS ? "?" : ""); blank.classList.toggle("filled", !!val); } };
       var press = function (k) {
         if (answered) return;
         if (k === "⌫") val = val.slice(0, -1);
-        else if (k === "✓") { if (val) finish(val); return; }
+        else if (k === "✓") {
+          if (!val) return;
+          if (NS && si < NS - 1) {
+            var st = it.steps[si], row = $("stp" + si);
+            if (E.norm(val) !== E.norm(st.a)) {
+              row.classList.add("bad");
+              return finish(val, null, { st: "wrong", right: E.answersOf(it)[0], msg: "У " + (si + 1) + "-й дії (" + esc(st.q.toLowerCase().replace(/\?$/, "")) + ") має вийти <b>" + st.a + "</b>" + (st.how ? ": " + st.how : "") + "." });
+            }
+            row.classList.remove("cur"); row.classList.add("ok");
+            si++; val = ""; blank = $("sv" + si); $("stp" + si).classList.add("cur"); show();
+            return;
+          }
+          finish(val); return;
+        }
         else if (val.length < 4) val = (val === "0" ? "" : val) + k;
         show();
       };

@@ -11,15 +11,17 @@
  ],
  "skills": [
   "m.prob100",
+  "m.probx100",
   "m.mix100"
  ],
  "practice": {
-  "perSkill": 4
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "m.prob100": 4,
-   "m.mix100": 4
+   "m.prob100": 3,
+   "m.probx100": 3,
+   "m.mix100": 2
   },
   "pass": 80
  },

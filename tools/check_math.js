@@ -35,6 +35,8 @@ for(const s of sk){ if(!G[s.gen]){B(s.gen,"нема генератора");conti
   if(s.gen==="subc"&&(n[0]%10>=n[1]%10||n[0]-n[1]<=0))B(s.gen,"нема переходу",it);
   if(s.gen==="mulT"&&s.args&&s.args.t.length===1&&!n.includes(s.args.t[0]))B(s.gen,"не та таблиця",it);
   if(s.gen==="divT"&&s.args&&s.args.t.length===1&&n[1]!==s.args.t[0])B(s.gen,"не та таблиця",it);
+  if(it.steps){ if(it.steps[it.steps.length-1].a!==it.a)B(s.gen,"остання дія ≠ відповідь",it); it.steps.forEach(st=>{ if(!(+st.a>=0)||(s.args&&s.args.max===20&&+st.a>20))B(s.gen,"дія поза межами",it); const v=eval(st.how.replace(/−/g,"-").replace(/·/g,"*")); if(String(v)!==st.a)B(s.gen,"дія порахована неправильно",it); }); }
+  if(s.args&&s.args.max===20&&(it.type==="num")&&(+it.a>20||n.some(x=>x>20)))B(s.gen,">20",it);
   if(s.gen==="add10"&&n[0]+(it.calc.includes("+")?n[1]:0)>10)B(s.gen,">10",it);
   if((s.gen==="prob20")&&(+it.a>20||n.some(x=>x>20)))B(s.gen,">20",it);
  }
