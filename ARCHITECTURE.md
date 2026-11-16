@@ -188,6 +188,8 @@ school/
 │   ├─ path.json              етапи й уроки (урок з полем file — доступний)
 │   ├─ lessons/l1.json        урок: правило, приклади, слова, які навички, план тесту
 │   └─ skills/ps.json         мікронавички: назва, rule, worked (розібраний приклад), alt, банк items
+├─ functions/api/[[path]].js  сервер (Cloudflare Pages Functions): вхід, прогрес, звіт у Telegram
+├─ tools/                     генератори змісту, перевірки, тести (tools/README.md)
 ├─ ARCHITECTURE.md
 └─ STATUS.md
 ```
