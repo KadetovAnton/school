@@ -97,6 +97,7 @@ label.lbl{display:block;font-weight:700;margin:6px 0 6px}
 <div class="wrap"><div id="app" class="card"></div></div>
 <div id="toast" class="toast"></div>
 
+<script src="engine/engine.js?v=2.1.0"></script>
 <script>
 const TOPICS = {
   be:    "Дієслово to be (5 клас)",
@@ -237,9 +238,11 @@ const Q = [
   e:"«After school, the boys <b>played computer games</b>» — після школи хлопці грали в комп'ютерні ігри."}
 ];
 
-const KEY = "eng7-diag-v1";
+// результат перевірки — окремо для кожної дитини
+if(!E.cur()) location.replace("./");
+const KEY = "eng7-diag-v1:" + (E.cur() || "guest");
 let S = load() || fresh();
-function fresh(){ return {name:"", i:0, started:false, done:false, ans:[], date:null}; }
+function fresh(){ return {name:E.P().name||"", i:0, started:false, done:false, ans:[], date:null}; }
 function load(){ try{ const s = JSON.parse(localStorage.getItem(KEY)); return s && Array.isArray(s.ans) ? s : null; }catch(e){ return null; } }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
@@ -266,7 +269,7 @@ function promptHTML(q){
 function renderStart(){
   const resume = S.started && !S.done && S.i>0;
   $app.innerHTML = `
-    <a href="./" style="display:inline-block;margin-bottom:10px;font-weight:800;color:#2F29B8;text-decoration:none">← Кабінет</a>
+    <a href="./#english" style="display:inline-block;margin-bottom:10px;font-weight:800;color:#2F29B8;text-decoration:none">← Кабінет</a>
     <div class="emoji-hero">🇬🇧</div>
     <h1>Перевіримо, що ти вже знаєш з англійської</h1>
     <p class="muted">Це не контрольна і не оцінка. Тест покаже, які теми вже добре виходять, а які варто підтягнути, щоб скласти тобі план.</p>
@@ -276,8 +279,6 @@ function renderStart(){
       <li><span>🤷</span><span>Не знаєш зовсім — натисни «Не знаю». Не вгадуй, так результат буде чеснішим</span></li>
       <li><span>🔊</span><span>Після відповіді можна послухати, як звучить речення</span></li>
     </ul>
-    ${resume ? "" : `<label class="lbl" for="nm">Як тебе звати?</label>
-    <input id="nm" type="text" autocomplete="off" placeholder="Ім'я" value="${esc(S.name)}">`}
     <div class="row">
       ${resume ? `<button class="btn full" id="go">Продовжити з питання ${S.i+1}</button>
                   <button class="btn plain full" id="restart">Почати спочатку</button>`
@@ -294,7 +295,7 @@ function renderStart(){
 
 let cur = null; // {hints, answered, built:[]}
 function renderQ(){
-  if(S.i >= Q.length){ S.done = true; save(); return renderResult(); }
+  if(S.i >= Q.length){ S.done = true; save(); saveDiag(); return renderResult(); }
   const q = Q[S.i];
   cur = {hints:0, answered:false, built:[]};
   const pct = Math.round(S.i / Q.length * 100);
@@ -370,6 +371,7 @@ function finish(given, btn){
   const ok = given!==null && answersOf(q).some(a=>norm(a)===norm(given));
   const score = ok ? (cur.hints ? .5 : 1) : 0;
   S.ans[S.i] = {ok, score, hint:cur.hints>0, given};
+  E.tick("english"); E.save();
   save();
 
   // lock UI
@@ -414,6 +416,12 @@ function stats(){
 const lvl = p => p>=80 ? "ok" : p>=50 ? "mid" : "low";
 const lvlText = {ok:"✓ знає", mid:"підтягнути", low:"почати з цього"};
 
+function saveDiag(){
+  const st = stats(), t = {};
+  st.list.forEach(x=>{ t[x.t] = x.pct; });
+  E.P().diag = {date:new Date(S.date||Date.now()).toLocaleDateString("uk-UA"), pct:st.pct, topics:t};
+  E.save();
+}
 function renderResult(){
   const st = stats();
   const weak = st.list.filter(x=>x.pct<80).sort((a,b)=> (a.pct<50?0:1)-(b.pct<50?0:1) || a.ord-b.ord);

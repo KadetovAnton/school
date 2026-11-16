@@ -120,3 +120,12 @@ table.t td:first-child{font-weight:800}
 .sklist div:last-child{border-bottom:0}
 .sklist b{white-space:nowrap}
 .loading{text-align:center;padding:40px 0;color:var(--muted);font-weight:700}
+/* --- вхід і предмети --- */
+.who{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:16px}
+.who-b{font:inherit;display:flex;flex-direction:column;align-items:center;gap:4px;padding:22px 10px;border-radius:20px;border:2px solid var(--line);background:#fff;cursor:pointer;color:var(--ink)}
+.who-b:active{transform:scale(.98)}
+.who-e{font-size:56px;line-height:1}
+.who-n{font-size:22px;font-weight:900}
+.who-s{font-size:13px;color:var(--muted);font-weight:700}
+.today{margin-top:14px;background:#FBF6EC;border-radius:14px;padding:10px 14px}
+.today-t{font-weight:800;font-size:15px}

@@ -19,54 +19,93 @@
   E.today = today;
   E.addDays = addDays;
 
-  /* ---------- стан ---------- */
-  var KEY = "school-v2";
+  /* ---------- стан ----------
+     Сховище: {v:3, cur:"anya", profiles:{anya:{...}, artem:{...}}}
+     Кожна дитина — окремий профіль зі своїм прогресом. */
+  var KEY = "school-v3";
+  var V2_KEY = "school-v2";
   var OLD_KEY = "eng7-cabinet-v1";
   E.IV = [1, 3, 7, 14, 30]; // інтервали повторення, днів
 
   function freshProfile(name) {
-    return { name: name || "", days: [], skills: {}, lessons: {}, seen: {}, mistakes: [], reports: [] };
+    return { name: name || "", days: [], daily: {}, skills: {}, lessons: {}, seen: {}, mistakes: [], reports: [] };
   }
-  function freshStore() { return { v: 2, cur: "p1", profiles: { p1: freshProfile("") } }; }
+  function freshStore() { return { v: 3, cur: "", profiles: {} }; }
+  function isAnya(n) { return /^ан[яиюіа]|^anya|^ann/i.test(String(n || "").trim()); }
 
-  function migrateOld() {
+  /* Старий прогрес переносимо лише якщо він Анин; тестові проходи тата скидаємо. */
+  function migrate() {
+    var st = freshStore();
     try {
+      var v2 = JSON.parse(localStorage.getItem(V2_KEY));
+      if (v2 && v2.profiles) {
+        Object.keys(v2.profiles).forEach(function (k) {
+          var p = v2.profiles[k];
+          if (isAnya(p.name)) { p.daily = p.daily || {}; p.name = "Аня"; st.profiles.anya = p; }
+        });
+        return st;
+      }
       var o = JSON.parse(localStorage.getItem(OLD_KEY));
-      if (!o || !o.lessons) return null;
-      var st = freshStore(), p = st.profiles.p1;
-      p.name = o.name || "";
-      (o.days || []).forEach(function (d) {
-        var a = String(d).split("-");
-        if (a.length === 3) p.days.push(a[0] + "-" + pad(+a[1]) + "-" + pad(+a[2]));
-      });
-      Object.keys(o.lessons).forEach(function (id) {
-        var l = o.lessons[id];
-        p.lessons[id] = { steps: l.steps || {}, stars: l.stars || 0, best: l.best || 0 };
-      });
-      return st;
-    } catch (e) { return null; }
+      if (o && o.lessons && isAnya(o.name)) {
+        var p1 = freshProfile("Аня");
+        (o.days || []).forEach(function (d) {
+          var a = String(d).split("-");
+          if (a.length === 3) p1.days.push(a[0] + "-" + pad(+a[1]) + "-" + pad(+a[2]));
+        });
+        Object.keys(o.lessons).forEach(function (id) {
+          var l = o.lessons[id];
+          p1.lessons[id] = { steps: l.steps || {}, stars: l.stars || 0, best: l.best || 0 };
+        });
+        st.profiles.anya = p1;
+      }
+    } catch (e) {}
+    return st;
   }
 
   function load() {
     try {
       var s = JSON.parse(localStorage.getItem(KEY));
-      if (s && s.v === 2 && s.profiles && s.profiles[s.cur]) return s;
+      if (s && s.v === 3 && s.profiles) return s;
     } catch (e) {}
-    return migrateOld() || freshStore();
+    return migrate();
   }
 
   var store = load();
   E.store = function () { return store; };
-  E.P = function () { return store.profiles[store.cur]; };
   E.save = function () { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+  /* профіль дитини (створюється за потреби) */
+  E.profile = function (id, name) {
+    var p = store.profiles[id];
+    if (!p) p = store.profiles[id] = freshProfile(name);
+    if (!p.daily) p.daily = {};
+    if (name && !p.name) p.name = name;
+    return p;
+  };
+  E.setCur = function (id, name) { E.profile(id, name); store.cur = id; E.save(); };
+  E.cur = function () { return store.profiles[store.cur] ? store.cur : ""; };
+  E.P = function () { return E.profile(store.cur || "guest"); };
   E.save();
+
+  /* лічильник виконаних завдань за день по предметах */
+  E.tick = function (subject) {
+    var p = E.P(), t = today();
+    var d = p.daily[t] || (p.daily[t] = {});
+    d[subject] = (d[subject] || 0) + 1;
+    E.markDay();
+  };
+  E.todayCount = function (subject, prof) {
+    var p = prof || E.P(), d = p.daily && p.daily[today()];
+    if (!d) return 0;
+    if (subject) return d[subject] || 0;
+    var n = 0; for (var k in d) n += d[k]; return n;
+  };
 
   E.markDay = function () {
     var p = E.P(), t = today();
     if (p.days.indexOf(t) < 0) { p.days.push(t); E.save(); }
   };
-  E.streak = function () {
-    var p = E.P(), n = 0, d = today();
+  E.streak = function (prof) {
+    var p = prof || E.P(), n = 0, d = today();
     if (p.days.indexOf(d) < 0) d = addDays(d, -1); // сьогодні ще не займались — серія не згоряє
     while (p.days.indexOf(d) >= 0) { n++; d = addDays(d, -1); }
     return n;

@@ -41,7 +41,8 @@
   var cache = {};
   function getJSON(path) {
     if (cache[path]) return Promise.resolve(cache[path]);
-    return fetch(BASE + path + "?v=" + VER).then(function (r) {
+    var url = path.indexOf("content/") === 0 ? path : BASE + path;
+    return fetch(url + "?v=" + VER).then(function (r) {
       if (!r.ok) throw new Error(r.status);
       return r.json();
     }).then(function (j) { cache[path] = j; return j; });
@@ -60,24 +61,99 @@
     $("rt").onclick = retry;
   }
 
-  var PATH = null;
+  var PATH = null, SUBJ = null;
+  function withSubjects(cb) {
+    if (SUBJ) return cb();
+    loadingView();
+    getJSON("content/subjects.json").then(function (j) { SUBJ = j; cb(); }, function () { failView(function () { withSubjects(cb); }); });
+  }
+  function child() {
+    var id = E.cur();
+    for (var i = 0; SUBJ && i < SUBJ.children.length; i++) if (SUBJ.children[i].id === id) return SUBJ.children[i];
+    return null;
+  }
+  function goalBar(n, goal) {
+    var pct = Math.min(100, Math.round(n / goal * 100));
+    return '<div class="today"><div class="today-t">' + (n >= goal ? "✅ Сьогодні норму виконано: " + n + " завдань" : "Сьогодні: " + n + " з " + goal + " завдань") + '</div>' +
+      '<div class="prog" style="margin:6px 0 0"><i style="width:' + pct + '%;' + (n >= goal ? "background:var(--ok)" : "") + '"></i></div></div>';
+  }
 
-  /* ================== КАБІНЕТ ================== */
+  /* ================== ХТО ВЧИТЬСЯ ================== */
+  function renderWho() {
+    withSubjects(function () {
+      $app.innerHTML = '<div class="card" style="text-align:center"><div class="big-emoji">🎒</div><h1>Хто сьогодні вчиться?</h1>' +
+        '<div class="who">' + SUBJ.children.map(function (c) {
+          var p = E.store().profiles[c.id], n = p ? E.todayCount(null, p) : 0, st = p ? E.streak(p) : 0;
+          return '<button class="who-b" data-id="' + c.id + '"><span class="who-e">' + c.emoji + '</span><span class="who-n">' + esc(c.name) + '</span>' +
+            '<span class="who-s">' + c.grade + ' клас' + (st ? ' · 🔥 ' + st : '') + (n ? ' · сьогодні ' + n : '') + '</span></button>';
+        }).join("") + '</div></div>';
+      var bs = $app.querySelectorAll(".who-b");
+      for (var i = 0; i < bs.length; i++) (function (b) {
+        b.onclick = function () {
+          var c = null; SUBJ.children.forEach(function (x) { if (x.id === b.getAttribute("data-id")) c = x; });
+          E.setCur(c.id, c.name); renderSubjects(); toTop();
+        };
+      })(bs[i]);
+    });
+  }
+
+  /* ================== МОЇ ПРЕДМЕТИ ================== */
+  function renderSubjects() {
+    withSubjects(function () {
+      var c = child();
+      if (!c) return renderWho();
+      var P = E.P(), goal = SUBJ.dailyGoal, st = E.streak();
+      var html = '<div class="topbar"><button class="back" id="who">⇄ Змінити</button><span class="muted small" style="font-weight:700">' + c.grade + ' клас</span></div>' +
+        '<div class="card"><h1>Привіт, ' + esc(c.name) + '! ' + c.emoji + '</h1>' +
+        '<div class="stats"><span class="stat">🔥 ' + st + ' ' + dayWord(st) + ' поспіль</span><span class="stat">⭐ ' + totalStars(P) + '</span></div>' +
+        (hasOpen(c) ? goalBar(E.todayCount(null), goal) : '<div class="today"><div class="today-t">🚀 Твої заняття скоро з\'являться! Тато вже готує.</div></div>') +
+        '</div><div class="card"><h2>Мої предмети</h2>';
+      c.subjects.forEach(function (s) {
+        var n = E.todayCount(s.id);
+        html += '<button class="lesson ' + (s.open ? "open" : "lock") + '" data-s="' + s.id + '"><span class="ic">' + s.ic + '</span><span style="flex:1">' +
+          '<div class="lt">' + esc(s.title) + '</div><div class="ls">' +
+          (s.open ? (n >= goal ? "✅ Сьогодні зроблено · " + n + " завдань" : n ? "Сьогодні: " + n + " з " + goal + " завдань" : "Сьогодні ще не займались") : "🔒 Скоро з'явиться") +
+          '</div></span></button>';
+      });
+      html += '</div>';
+      $app.innerHTML = html;
+      $("who").onclick = function () { renderWho(); toTop(); };
+      var bs = $app.querySelectorAll(".lesson.open");
+      for (var i = 0; i < bs.length; i++) (function (b) {
+        b.onclick = function () { if (b.getAttribute("data-s") === "english") { renderHome(); toTop(); } };
+      })(bs[i]);
+    });
+  }
+  function hasOpen(c, id) { for (var i = 0; i < c.subjects.length; i++) if (c.subjects[i].open && (!id || c.subjects[i].id === id)) return true; return false; }
+  function totalStars(P) { var n = 0; Object.keys(P.lessons).forEach(function (k) { n += P.lessons[k].stars || 0; }); return n; }
+
+  /* ================== КАБІНЕТ АНГЛІЙСЬКОЇ ================== */
   function renderHome() {
+    if (!SUBJ || !child()) return withSubjects(function () { if (child()) renderHome(); else renderWho(); });
+    if (!hasOpen(child(), "english")) return renderSubjects();
     var P = E.P();
-    if (!P.name) return renderName();
     if (!PATH) { loadingView(); getJSON("path.json").then(function (j) { PATH = j; renderHome(); }, function () { failView(renderHome); }); return; }
-    var l1 = E.lesson("l1"), done = l1.stars > 0, st = E.streak();
-    var totalStars = 0, doneCount = 0, allLessons = 0;
-    Object.keys(P.lessons).forEach(function (k) { totalStars += P.lessons[k].stars || 0; if (P.lessons[k].stars > 0) doneCount++; });
-    PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
+    var st = E.streak(), doneCount = 0, allLessons = 0, next = null, num = 0;
+    Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
+    PATH.stages.forEach(function (s) { allLessons += s.lessons.length; s.lessons.forEach(function (l) { num++; if (!next && l.file && !(E.lesson(l.id).stars > 0)) next = { l: l, n: num }; }); });
+    var last = null; PATH.stages.forEach(function (s) { s.lessons.forEach(function (l) { if (l.file) last = l; }); });
+    var cont = next ? next.l : last, contLabel = "";
+    if (cont) {
+      var cs = E.lesson(cont.id).steps, sd = null;
+      for (var i = 0; i < STEPS.length; i++) if (!cs[STEPS[i].id]) { sd = STEPS[i]; break; }
+      contLabel = next ? (sd ? (sd.id === "explain" && !Object.keys(cs).length ? "▶️ Почати урок" : "▶️ Продовжити: " + sd.t.toLowerCase()) : "▶️ Продовжити урок") : "🔁 Повторити урок";
+    }
 
-    var html = '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
-      '<p class="muted" style="margin:0">' + (done ? "Перший урок пройдено. Наступний уже на підході!" : "Сьогодні починаємо з першого уроку. 15–20 хвилин, і все вийде.") + '</p></div></div>' +
-      '<div class="stats"><span class="stat">🔥 ' + st + ' ' + dayWord(st) + ' поспіль</span><span class="stat">⭐ ' + totalStars + '</span>' +
-      '<span class="stat">📚 ' + doneCount + ' з ' + allLessons + ' уроків</span></div></div>';
+    var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">🇬🇧 Англійська</span></div>' +
+      '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
+      '<p class="muted" style="margin:0">' + (cont ? (next ? "Зараз: урок " + next.n + " «" + esc(cont.title) + "»" : "Усі готові уроки пройдено! Нові вже готуються.") : "") + '</p></div></div>' +
+      '<div class="stats"><span class="stat">🔥 ' + st + ' ' + dayWord(st) + ' поспіль</span><span class="stat">⭐ ' + totalStars(P) + '</span>' +
+      '<span class="stat">📚 ' + doneCount + ' з ' + allLessons + ' уроків</span></div>' +
+      goalBar(E.todayCount("english"), SUBJ.dailyGoal) +
+      (cont ? '<div class="row"><button class="btn full" id="cont">' + contLabel + '</button></div>' : "") + '</div>' +
+      (P.diag ? "" : '<div class="card"><h2>🧭 Спершу — перевірка рівня</h2><p class="muted" style="margin:0 0 4px">15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.</p>@DIAG@</div>');
 
-    var num = 0;
+    num = 0;
     PATH.stages.forEach(function (stage, si) {
       html += '<div class="card stage ' + (si === 0 ? "" : "locked") + '"><div class="stage-h"><div class="stage-n">' + stage.n + '</div>' +
         '<div><div class="stage-t">' + esc(stage.title) + '</div><div class="stage-s">' + esc(stage.sub) + '</div></div></div>';
@@ -89,21 +165,26 @@
           for (var k in L.steps) if (L.steps[k]) nDone++;
           var lv = lessonLevels(ls.id);
           if (L.stars > 0) { cls = "done"; ic = "✅"; sub = '<span class="stars">' + starsStr(L.stars) + '</span> · можна повторити'; }
-          else { cls = "open"; ic = ls.ic; sub = nDone ? "Продовжити · " + nDone + " з 5 кроків" : "Почати · ~20 хв"; }
+          else { cls = "open"; ic = ls.ic; sub = nDone ? "Пройдено " + nDone + " з 5 кроків" : "Почати · ~20 хв"; }
           if (lv) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
-        } else if (ls.id === "l2" && done) { ic = "⏳"; sub = "Скоро з'явиться"; }
+        } else if (next && next.n + 1 === num) { ic = "⏳"; sub = "Готується — скоро з'явиться"; }
         html += '<button class="lesson ' + cls + '" data-file="' + (ls.file || "") + '"><span class="ic">' + ic + '</span>' +
           '<span><div class="lt">' + num + '. ' + esc(ls.title) + '</div><div class="ls">' + sub + '</div></span></button>';
       });
       html += '</div>';
     });
-    html += '<a class="lesson" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">Тест на 29 завдань: що вже знаю, а що підтягнути</div></span></a>';
+    var dg = P.diag;
+    var diagHtml = '<a class="lesson' + (dg ? "" : " open") + '" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
+      (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : "Тест на 29 завдань: що вже знаю, а що підтягнути") + '</div></span></a>';
+    html = dg ? html + diagHtml : html.replace("@DIAG@", diagHtml);
     $app.innerHTML = html;
+    $("subj").onclick = function () { renderSubjects(); toTop(); };
+    if ($("cont")) $("cont").onclick = function () { openLesson(cont.file); };
     var bs = $app.querySelectorAll(".lesson[data-file]");
-    for (var i = 0; i < bs.length; i++) (function (b) {
+    for (var j = 0; j < bs.length; j++) (function (b) {
       var f = b.getAttribute("data-file");
       if (f) b.onclick = function () { openLesson(f); };
-    })(bs[i]);
+    })(bs[j]);
   }
   /* рядок значків рівнів навичок уроку (лише якщо урок уже завантажувався) */
   function lessonLevels(id) {
@@ -116,17 +197,6 @@
       if (!ids.length) return "";
     }
     return ids.map(function (s) { return '<span>' + lvl(s).e + '</span>'; }).join("");
-  }
-
-  function renderName() {
-    $app.innerHTML = '<div class="card"><div class="big-emoji">🇬🇧</div><h1>Твій кабінет англійської</h1>' +
-      '<p class="muted">Тут твій шлях навчання: короткі уроки по 15–20 хвилин, вправи з підказками, слова з озвучкою. Пройшла урок — відкривається наступний.</p>' +
-      '<label style="display:block;font-weight:800;margin:8px 0 6px" for="nm">Як тебе звати?</label>' +
-      '<input id="nm" type="text" autocomplete="off" placeholder="Ім\'я"><div class="row"><button class="btn full" id="go" disabled>Увійти →</button></div></div>';
-    var nm = $("nm"), go = $("go");
-    nm.oninput = function () { go.disabled = !nm.value.trim(); };
-    nm.onkeydown = function (e) { if (e.key === "Enter" && nm.value.trim()) go.click(); };
-    go.onclick = function () { E.P().name = nm.value.trim(); E.save(); renderHome(); };
   }
 
   /* ================== УРОК ================== */
@@ -342,6 +412,7 @@
     var isP = o.mode === "practice";
 
     function rec(it, r) {
+      E.tick("english");
       var nl = E.record(it.skill, r.ok, r.clean);
       if (nl >= 2) toast(E.LV[nl].e + " " + E.SK[it.skill].title + " — " + E.LV[nl].t + "!");
     }
@@ -532,5 +603,9 @@
   }
 
   window.UI = { home: renderHome, _runSession: runSession };
-  renderHome();
+  withSubjects(function () {
+    var h = (location.hash || "").replace("#", "");
+    if (h && child()) { if (h === "english") renderHome(); else renderSubjects(); }
+    else renderWho();
+  });
 })();

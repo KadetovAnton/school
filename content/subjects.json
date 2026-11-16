@@ -1,0 +1,92 @@
+{
+ "dailyGoal": 15,
+ "children": [
+  {
+   "id": "anya",
+   "name": "Аня",
+   "emoji": "👧",
+   "grade": 7,
+   "subjects": [
+    {
+     "id": "english",
+     "title": "Англійська",
+     "ic": "🇬🇧",
+     "open": true
+    },
+    {
+     "id": "algebra",
+     "title": "Алгебра",
+     "ic": "🔢"
+    },
+    {
+     "id": "geometry",
+     "title": "Геометрія",
+     "ic": "📐"
+    },
+    {
+     "id": "ukrainian",
+     "title": "Українська мова",
+     "ic": "✍️"
+    },
+    {
+     "id": "physics",
+     "title": "Фізика",
+     "ic": "⚡"
+    },
+    {
+     "id": "chemistry",
+     "title": "Хімія",
+     "ic": "🧪"
+    },
+    {
+     "id": "biology",
+     "title": "Біологія",
+     "ic": "🌿"
+    },
+    {
+     "id": "geography",
+     "title": "Географія",
+     "ic": "🗺️"
+    },
+    {
+     "id": "history",
+     "title": "Історія",
+     "ic": "🏛️"
+    }
+   ]
+  },
+  {
+   "id": "artem",
+   "name": "Артем",
+   "emoji": "👦",
+   "grade": 2,
+   "subjects": [
+    {
+     "id": "math2",
+     "title": "Математика",
+     "ic": "🔢"
+    },
+    {
+     "id": "ukrainian2",
+     "title": "Українська мова",
+     "ic": "✍️"
+    },
+    {
+     "id": "reading2",
+     "title": "Читання",
+     "ic": "📖"
+    },
+    {
+     "id": "world2",
+     "title": "Я досліджую світ",
+     "ic": "🌍"
+    },
+    {
+     "id": "english2",
+     "title": "Англійська",
+     "ic": "🇬🇧"
+    }
+   ]
+  }
+ ]
+}
