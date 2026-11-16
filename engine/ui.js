@@ -154,7 +154,7 @@
     for (var i = 0; i < ts.length; i++) (function (b) { b.onclick = function () { P.theme = b.getAttribute("data-th"); E.save(); applyTheme(); renderBadges(back); }; })(ts[i]);
   }
 
-  var PATH = null, SUBJ = null;
+  var PATH = null, SUBJ = null, ALL = false;
   function withSubjects(cb) {
     if (SUBJ) return cb();
     loadingView();
@@ -227,7 +227,7 @@
     if (!SUBJ || !child()) return withSubjects(function () { if (child()) renderHome(); else renderWho(); });
     if (!hasOpen(child(), "english")) return renderSubjects();
     var P = E.P();
-    if (!PATH) { loadingView(); getJSON("path.json").then(function (j) { PATH = j; renderHome(); }, function () { failView(renderHome); }); return; }
+    if (!ALL) return loadAll(function () { ALL = true; renderHome(); });
     var st = E.streak(), doneCount = 0, allLessons = 0, num = 0;
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
     PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
@@ -248,8 +248,10 @@
     html += '<div class="card" style="padding:12px 16px">' + badgesRow() + '<button class="lesson" id="mist"><span class="ic">📝</span><span><div class="lt">Мої помилки</div><div class="ls">' +
       (nMist ? nMist + " " + (nMist === 1 ? "речення чекає" : "речень чекають") + " на виправлення" : "Усі виправлено 🎉") + '</div></span></button></div>';
     num = 0;
+    var prevOk = true, prevN = 0, early = {};
     PATH.stages.forEach(function (stage, si) {
-      html += '<div class="card stage ' + (si === 0 ? "" : "locked") + '"><div class="stage-h"><div class="stage-n">' + stage.n + '</div>' +
+      var anyOpen = stage.lessons.some(function (l) { return !!l.file; });
+      html += '<div class="card stage ' + (anyOpen ? "" : "locked") + '"><div class="stage-h"><div class="stage-n">' + stage.n + '</div>' +
         '<div><div class="stage-t">' + esc(stage.title) + '</div><div class="stage-s">' + esc(stage.sub) + '</div></div></div>';
       stage.lessons.forEach(function (ls) {
         num++;
@@ -258,9 +260,12 @@
           var L = E.lesson(ls.id), nDone = 0;
           for (var k in L.steps) if (L.steps[k]) nDone++;
           var lv = lessonLevels(ls.id);
+          var unlocked = prevOk || L.early || L.stars > 0 || nDone > 0;
           if (L.stars > 0) { cls = "done"; ic = "✅"; sub = '<span class="stars">' + starsStr(L.stars) + '</span> · можна повторити'; }
-          else { cls = "open"; ic = ls.ic; sub = nDone ? "Пройдено " + nDone + " з 5 кроків" : "Почати · ~20 хв"; }
-          if (lv) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
+          else if (unlocked) { cls = "open"; ic = ls.ic; sub = nDone ? "Пройдено " + nDone + " з 5 кроків" : "Почати · ~20 хв"; }
+          else { cls = "lock soon"; ic = "🔒"; sub = "Відкриється після тесту уроку " + prevN + " · можна раніше"; early[ls.file] = { l: ls, after: prevN }; }
+          if (lv && unlocked) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
+          prevOk = L.stars > 0; prevN = num;
         } else if (next && next.n + 1 === num) { ic = "⏳"; sub = "Готується — скоро з'явиться"; }
         html += '<button class="lesson ' + cls + '" data-file="' + (ls.file || "") + '"><span class="ic">' + ic + '</span>' +
           '<span><div class="lt">' + num + '. ' + esc(ls.title) + '</div><div class="ls">' + sub + '</div></span></button>';
@@ -280,20 +285,23 @@
     var bs = $app.querySelectorAll(".lesson[data-file]");
     for (var j = 0; j < bs.length; j++) (function (b) {
       var f = b.getAttribute("data-file");
-      if (f) b.onclick = function () { openLesson(f); };
+      if (f) b.onclick = function () { if (early[f]) askEarly(early[f]); else openLesson(f); };
     })(bs[j]);
   }
-  /* рядок значків рівнів навичок уроку (лише якщо урок уже завантажувався) */
+  /* рядок значків рівнів навичок уроку */
   function lessonLevels(id) {
     var L = cache["lessons/" + id + ".json"];
-    var ids = L ? L.skills : null;
-    if (!ids) { // ще не завантажений — показуємо з прогресу, якщо щось є
-      var P = E.P(), pre = id === "l1" ? "ps." : null;
-      if (!pre) return "";
-      ids = Object.keys(P.skills).filter(function (k) { return k.indexOf(pre) === 0; });
-      if (!ids.length) return "";
-    }
-    return ids.map(function (s) { return '<span>' + lvl(s).e + '</span>'; }).join("");
+    if (!L || !L.skills) return "";
+    var any = L.skills.some(function (s) { return E.level(s) > 0; });
+    return any ? L.skills.map(function (s) { return '<span>' + lvl(s).e + '</span>'; }).join("") : "";
+  }
+  /* «Вільний режим»: відкрити урок раніше, якщо в школі вже проходять цю тему */
+  function askEarly(x) {
+    $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🔓</div><h2>Відкрити урок раніше?</h2>' +
+      '<p>«' + esc(x.l.title) + '»</p><p class="muted">Зазвичай він відкривається після тесту уроку ' + x.after + '. Але якщо в школі вже проходите цю тему чи скоро контрольна — відкривай сміливо.</p>' +
+      '<div class="row"><button class="btn full" id="yes">Так, відкрити</button><button class="btn plain full" id="no">Ні, по черзі</button></div></div>';
+    $("yes").onclick = function () { var L = E.lesson(x.l.id); L.early = true; E.save(); openLesson(x.l.file); };
+    $("no").onclick = function () { renderHome(); toTop(); };
   }
 
   /* наступний крок навчання: перший непройдений урок і його перший незроблений крок */
@@ -496,7 +504,15 @@
     return h;
   }
   function fullSentence(it, right) {
-    if (it.type === "order") return cap(right) + ".";
+    if (it.type === "order") {
+      // написання беремо з карток слів (Saturdays, I), а не з рядка відповіді
+      var pool = it.words.slice();
+      var ws = right.split(" ").map(function (w) {
+        for (var i = 0; i < pool.length; i++) if (E.norm(pool[i]) === E.norm(w)) return pool.splice(i, 1)[0];
+        return w;
+      });
+      return cap(ws.join(" ")) + (it.end || ".");
+    }
     if (it.type === "fix" || it.type === "dict") return right;
     if (it.p.indexOf("___") >= 0) return it.p.replace("___", right).replace(/\s*\(.*?\)\s*$/, "");
     return right;

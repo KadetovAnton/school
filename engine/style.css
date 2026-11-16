@@ -157,3 +157,7 @@ body.th-ocean{--bg:#EEF7FC;--pri:#0E7CC2;--pri-soft:#E1F1FB;--pri-ink:#0A5A8E}
 body.th-forest{--bg:#F1F8EF;--pri:#1F8A55;--pri-soft:#E2F4E8;--pri-ink:#146640}
 body.th-sunset{--bg:#FFF3EC;--pri:#E2572B;--pri-soft:#FDE8DF;--pri-ink:#A93A16}
 body.th-berry{--bg:#FBF0F8;--pri:#9B2C8F;--pri-soft:#F6E2F3;--pri-ink:#741F6B}
+.lesson.soon{cursor:pointer;opacity:.8}
+.topbar{gap:10px}
+.back{white-space:nowrap;flex:0 0 auto}
+.topbar>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;text-align:right}

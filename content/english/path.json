@@ -16,24 +16,27 @@
     {
      "id": "l2",
      "title": "Present Simple: заперечення і питання",
-     "ic": "❓"
+     "ic": "❓",
+     "file": "lessons/l2.json"
     },
     {
      "id": "l3",
      "title": "Present Continuous: що відбувається зараз",
-     "ic": "👀"
+     "ic": "👀",
+     "file": "lessons/l3.json"
     },
     {
      "id": "l4",
      "title": "Simple чи Continuous? Тренуємо різницю",
-     "ic": "⚖️"
+     "ic": "⚖️",
+     "file": "lessons/l4.json"
     }
    ]
   },
   {
    "n": 2,
    "title": "Опис світу",
-   "sub": "Що де є",
+   "sub": "Що де є, чиє це",
    "lessons": [
     {
      "id": "l5",
@@ -42,8 +45,18 @@
     },
     {
      "id": "l6",
-     "title": "some / any, множина",
+     "title": "Множина іменників, some / any",
      "ic": "🍎"
+    },
+    {
+     "id": "l14",
+     "title": "Артиклі a / an / the",
+     "ic": "🅰️"
+    },
+    {
+     "id": "l15",
+     "title": "Займенники: my / mine / myself",
+     "ic": "🙋"
     }
    ]
   },
@@ -71,9 +84,14 @@
   },
   {
    "n": 4,
-   "title": "Порівняння і правила",
-   "sub": "Більше, найкраще, треба",
+   "title": "Майбутнє і порівняння",
+   "sub": "Що буде, що краще, що треба",
    "lessons": [
+    {
+     "id": "l16",
+     "title": "Майбутнє: will і be going to",
+     "ic": "🔮"
+    },
     {
      "id": "l10",
      "title": "Ступені порівняння",

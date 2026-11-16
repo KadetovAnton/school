@@ -425,7 +425,7 @@
       var ks = Object.keys(it.err);
       for (i = 0; i < ks.length; i++) if (E.norm(ks[i]) === g) return { st: "wrong", msg: it.err[ks[i]], right: right };
     }
-    if (it.type === "input" || it.type === "dict") {
+    if ((it.type === "input" || it.type === "dict") && !it.strict) { // strict — правопис і є правилом, описок не прощаємо
       for (i = 0; i < ans.length; i++) { var rn = E.norm(ans[i]); if (isTypo(rn, g, guardOf(it, rn))) return { st: "typo", right: ans[i] }; }
     }
     return { st: "wrong", right: right };

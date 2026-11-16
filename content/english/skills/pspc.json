@@ -1,0 +1,394 @@
+{
+ "topic": "pspc",
+ "title": "Simple чи Continuous",
+ "skills": [
+  {
+   "id": "pspc.sig",
+   "title": "Звичка чи «просто зараз»",
+   "rule": "every day, usually, often → Present Simple; now, at the moment, Look!, Listen! → am/is/are + -ing.",
+   "worked": {
+    "p": "Listen! Someone ___ the piano. (play)",
+    "steps": [
+     "Шукаю слово-підказку: <b>Listen!</b>",
+     "Я чую це просто зараз → <b>Continuous</b>.",
+     "Someone = he/she → <b>is</b> + playing.",
+     "Відповідь: Listen! Someone <b>is playing</b> the piano."
+    ]
+   },
+   "alt": "<p>Задай собі питання: <b>«Це відбувається зараз, на моїх очах?»</b></p>\n        <p>Так → am / is / are + -ing (I am reading now).<br>Ні, це звичка чи розклад → Present Simple (I read every evening).</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Look! It ___.",
+     "o": [
+      "is snowing",
+      "snows"
+     ],
+     "a": "is snowing",
+     "h": [
+      "Look! — бачимо зараз.",
+      "Дія просто зараз → is + -ing."
+     ],
+     "e": "Look! → дія зараз: <b>is snowing</b>.",
+     "err": {
+      "snows": "Look! — ми бачимо сніг зараз, тож <b>is snowing</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "It often ___ here in winter.",
+     "o": [
+      "snows",
+      "is snowing"
+     ],
+     "a": "snows",
+     "h": [
+      "often — часто.",
+      "Часто = звичка → Present Simple."
+     ],
+     "e": "often → <b>snows</b>.",
+     "err": {
+      "is snowing": "often — це про те, як буває зазвичай: <b>snows</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I ___ to school every day.",
+     "o": [
+      "go",
+      "am going"
+     ],
+     "a": "go",
+     "h": [
+      "every day — щодня.",
+      "Щодня = звичка."
+     ],
+     "e": "every day → <b>go</b>.",
+     "err": {
+      "am going": "every day — звичка: I <b>go</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Shh! The baby ___.",
+     "o": [
+      "is sleeping",
+      "sleeps"
+     ],
+     "a": "is sleeping",
+     "h": [
+      "Shh! — тихо, бо зараз…",
+      "Дія просто зараз."
+     ],
+     "e": "Дитина спить просто зараз: <b>is sleeping</b>.",
+     "err": {
+      "sleeps": "Тихо, бо дитина спить зараз: <b>is sleeping</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Simple або Continuous",
+     "p": "My dad usually ___ at seven. (get up)",
+     "a": [
+      "gets up"
+     ],
+     "h": [
+      "usually — зазвичай.",
+      "Звичка → Present Simple, he → + s."
+     ],
+     "e": "usually → <b>gets up</b>.",
+     "err": {
+      "is getting up": "usually — це звичка: <b>gets up</b>.",
+      "get up": "My dad = he → <b>gets</b> up."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Simple або Continuous",
+     "p": "Listen! Someone ___ the piano. (play)",
+     "a": [
+      "is playing"
+     ],
+     "h": [
+      "Listen! — чуємо зараз.",
+      "Дія зараз → is + -ing."
+     ],
+     "e": "Listen! → <b>is playing</b>.",
+     "err": {
+      "plays": "Listen! — дія просто зараз: <b>is playing</b>.",
+      "playing": "Не забудь is: <b>is playing</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Simple або Continuous",
+     "p": "We ___ English on Mondays and Fridays. (study)",
+     "a": [
+      "study"
+     ],
+     "h": [
+      "on Mondays — по понеділках.",
+      "Розклад → Present Simple."
+     ],
+     "e": "Розклад → <b>study</b>.",
+     "err": {
+      "are studying": "on Mondays — це розклад: we <b>study</b>.",
+      "studies": "we → без -s: <b>study</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Simple або Continuous",
+     "p": "At the moment she ___ a shower. (take)",
+     "a": [
+      "is taking"
+     ],
+     "h": [
+      "At the moment — у цей момент.",
+      "Дія зараз → is + -ing."
+     ],
+     "e": "At the moment → <b>is taking</b>.",
+     "err": {
+      "takes": "At the moment — дія зараз: <b>is taking</b>.",
+      "is takeing": "Німа -e відпадає: <b>taking</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Simple або Continuous",
+     "p": "Tom ___ his homework now. (do)",
+     "a": [
+      "is doing"
+     ],
+     "h": [
+      "now — зараз.",
+      "Дія зараз → is + -ing."
+     ],
+     "e": "now → <b>is doing</b>.",
+     "err": {
+      "does": "now — дія зараз: <b>is doing</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Simple або Continuous",
+     "p": "They never ___ TV in the morning. (watch)",
+     "a": [
+      "watch"
+     ],
+     "h": [
+      "never — ніколи.",
+      "Звичка → Present Simple."
+     ],
+     "e": "never → <b>watch</b>.",
+     "err": {
+      "are watching": "never — це про звичку: <b>watch</b>.",
+      "watches": "they → без -s: <b>watch</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Look! The children play in the snow.",
+     "bad": 3,
+     "a": "Look! The children are playing in the snow.",
+     "h": [
+      "Look! — це підказка.",
+      "Дія зараз → are + -ing."
+     ],
+     "e": "Look! → <b>are playing</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She usually walks to school.",
+     "a": [
+      "She usually walks to school."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "usually → Present Simple."
+     ],
+     "e": "usually → <b>walks</b>.",
+     "err": {
+      "She usually is walking to school.": "usually — звичка: <b>walks</b>.",
+      "She usually walk to school.": "she → walk<b>s</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Listen! The birds are singing.",
+     "a": [
+      "Listen! The birds are singing."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Listen! → are + -ing."
+     ],
+     "e": "Listen! → <b>are singing</b>.",
+     "err": {
+      "Listen! The birds sing.": "Listen! — дія зараз: <b>are singing</b>.",
+      "Listen! The birds is singing.": "birds — їх багато: <b>are</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pspc.state",
+   "title": "Дієслова-стани: like, want, know — без -ing",
+   "rule": "like, love, want, need, know, understand — не вживаємо з -ing, навіть «зараз».",
+   "worked": {
+    "p": "I ___ an ice cream now. (want)",
+    "steps": [
+     "Є підказка <b>now</b>, але…",
+     "<b>want</b> — це стан (бажання), а не дія.",
+     "Дієслова-стани не беруть -ing.",
+     "Відповідь: I <b>want</b> an ice cream now."
+    ]
+   },
+   "alt": "<p>Дію можна «зняти на відео»: бігти, писати, готувати. А стан — ні: не можна зняти, як ти «знаєш» чи «хочеш».</p>\n        <p>Що не знімеш на відео, те без -ing: I <b>know</b>, she <b>likes</b>, we <b>need</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ this song.",
+     "o": [
+      "like",
+      "am liking"
+     ],
+     "a": "like",
+     "h": [
+      "like — дія чи стан?",
+      "like — стан, без -ing."
+     ],
+     "e": "like — стан: I <b>like</b>.",
+     "err": {
+      "am liking": "like — дієслово-стан, з -ing не вживається: I <b>like</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She ___ the answer.",
+     "o": [
+      "knows",
+      "is knowing"
+     ],
+     "a": "knows",
+     "h": [
+      "know — дія чи стан?",
+      "know — стан, без -ing."
+     ],
+     "e": "know — стан: she <b>knows</b>.",
+     "err": {
+      "is knowing": "know — стан, без -ing: she <b>knows</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ a new computer.",
+     "o": [
+      "need",
+      "are needing"
+     ],
+     "a": "need",
+     "h": [
+      "need — потребувати.",
+      "Це стан, без -ing."
+     ],
+     "e": "need — стан: we <b>need</b>.",
+     "err": {
+      "are needing": "need — стан, без -ing: we <b>need</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Яке речення правильне?",
+     "o": [
+      "Mum is liking coffee.",
+      "Mum likes coffee."
+     ],
+     "a": "Mum likes coffee.",
+     "h": [
+      "like — стан.",
+      "Стан → без -ing, she → + s."
+     ],
+     "e": "<b>Mum likes coffee.</b>",
+     "err": {
+      "Mum is liking coffee.": "like — стан, без -ing: Mum <b>likes</b> coffee."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в правильній формі",
+     "p": "I ___ an ice cream now. (want)",
+     "a": [
+      "want"
+     ],
+     "h": [
+      "want — стан.",
+      "Навіть з now — без -ing."
+     ],
+     "e": "want — стан: I <b>want</b>.",
+     "err": {
+      "am wanting": "want — стан, без -ing навіть «зараз»: I <b>want</b>.",
+      "wants": "I → без -s: <b>want</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в правильній формі",
+     "p": "My brother ___ cats. (love)",
+     "a": [
+      "loves"
+     ],
+     "h": [
+      "love — стан.",
+      "My brother = he → + s."
+     ],
+     "e": "love — стан: he <b>loves</b>.",
+     "err": {
+      "is loving": "love — стан, без -ing: <b>loves</b>.",
+      "love": "My brother = he → love<b>s</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Я зараз хочу пити».",
+     "words": [
+      "want",
+      "I",
+      "drink",
+      "a",
+      "now"
+     ],
+     "a": [
+      "i want a drink now"
+     ],
+     "h": [
+      "want — стан, без -ing.",
+      "I → want → a drink → now."
+     ],
+     "e": "<b>I want a drink now.</b> want — без -ing."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She knows a lot of English words.",
+     "a": [
+      "She knows a lot of English words."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "know — стан, без -ing."
+     ],
+     "e": "know — стан: she <b>knows</b>.",
+     "err": {
+      "She is knowing a lot of English words.": "know — стан, без -ing: <b>knows</b>.",
+      "She know a lot of English words.": "she → know<b>s</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

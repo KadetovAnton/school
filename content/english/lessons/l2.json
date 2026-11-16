@@ -1,0 +1,135 @@
+{
+ "id": "l2",
+ "title": "Present Simple: заперечення і питання",
+ "skillFiles": [
+  "skills/psnq.json"
+ ],
+ "skills": [
+  "ps.neg",
+  "ps.q",
+  "ps.short",
+  "ps.wh"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "ps.neg": 2,
+   "ps.q": 2,
+   "ps.short": 2,
+   "ps.wh": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🙅",
+   "h": "Як сказати «не»",
+   "html": "<p>Перед дієсловом ставимо помічника: <b>don't</b> або <b>doesn't</b>.</p>\n        <table class=\"t\"><tr><td>I / you / we / they</td><td><b>don't</b> + дієслово</td></tr>\n        <tr><td>he / she / it</td><td><b>doesn't</b> + дієслово</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I <b>don't</b> like milk.</div><div class=\"ua\">Я не люблю молоко.</div></div><button class=\"say round\" data-say=\"I don't like milk.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">She <b>doesn't</b> like milk.</div><div class=\"ua\">Вона не любить молоко.</div></div><button class=\"say round\" data-say=\"She doesn't like milk.\">🔊</button></div>\n        <div class=\"tip\">💡 don't = do not, doesn't = does not. Обидва варіанти правильні.</div>"
+  },
+  {
+   "e": "🧳",
+   "h": "Куди зникає -s?",
+   "html": "<p>Хвостик -s «переїжджає» в помічника: <b>does</b>. Тому саме дієслово лишається без змін.</p>\n        <div class=\"rule-box\" style=\"text-align:center;font-size:18px;font-weight:900\">She play<b>s</b>. → She doe<b>s</b>n't play.</div>\n        <div class=\"ex\"><div><div class=\"en\">Tom doesn't <b>play</b> football.</div><div class=\"ua\">Том не грає у футбол.</div></div><button class=\"say round\" data-say=\"Tom doesn't play football.\">🔊</button></div>\n        <div class=\"tip\">⚠️ Пастка: <s>She doesn't plays</s>. Двох -s в одному реченні не буває!</div>"
+  },
+  {
+   "e": "❓",
+   "h": "Питання: Do чи Does?",
+   "html": "<p>Щоб запитати, ставимо помічника <b>на початок</b>:</p>\n        <table class=\"t\"><tr><td><b>Do</b></td><td>I / you / we / they + дієслово?</td></tr>\n        <tr><td><b>Does</b></td><td>he / she / it + дієслово?</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\"><b>Do</b> you like pizza?</div><div class=\"ua\">Ти любиш піцу?</div></div><button class=\"say round\" data-say=\"Do you like pizza?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Does</b> your sister <b>play</b> the piano?</div><div class=\"ua\">Твоя сестра грає на піаніно?</div></div><button class=\"say round\" data-say=\"Does your sister play the piano?\">🔊</button></div>\n        <div class=\"tip\">💡 І тут -s живе тільки в Does: <s>Does she likes</s> → Does she <b>like</b>?</div>"
+  },
+  {
+   "e": "💬",
+   "h": "Короткі відповіді",
+   "html": "<p>Відповідаємо тим самим помічником, а не всім реченням:</p>\n        <table class=\"t\"><tr><td>Do you…?</td><td>Yes, I <b>do</b>. / No, I <b>don't</b>.</td></tr>\n        <tr><td>Does he…?</td><td>Yes, he <b>does</b>. / No, he <b>doesn't</b>.</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">Do you like cats? — Yes, I <b>do</b>.</div><div class=\"ua\">Ти любиш котів? — Так.</div></div><button class=\"say round\" data-say=\"Do you like cats? Yes, I do.\">🔊</button></div>\n        <div class=\"tip\">⚠️ Не кажемо «Yes, I like» чи «Yes, he do».</div>"
+  },
+  {
+   "e": "🗺️",
+   "h": "Питання з What, Where, When…",
+   "html": "<p>Питальне слово стає першим, далі все як у звичайному питанні:</p>\n        <div class=\"rule-box\"><b>Питальне слово → do / does → хто → дієслово?</b></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>What do</b> you do after school?</div><div class=\"ua\">Що ти робиш після школи?</div></div><button class=\"say round\" data-say=\"What do you do after school?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Where does</b> your mum <b>work</b>?</div><div class=\"ua\">Де працює твоя мама?</div></div><button class=\"say round\" data-say=\"Where does your mum work?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>When does</b> the lesson <b>start</b>?</div><div class=\"ua\">Коли починається урок?</div></div><button class=\"say round\" data-say=\"When does the lesson start?\">🔊</button></div>\n        <p class=\"muted\">What — що, Where — де, When — коли, What time — о котрій, Why — чому, How — як.</p>"
+  }
+ ],
+ "examples": {
+  "title": "Інтерв'ю з Максом",
+  "question": {
+   "q": "чому «Does he <b>play</b>», а не «Does he plays»?",
+   "a": "Бо -s уже «з'їла» does. У дієслові він не потрібен."
+  },
+  "items": [
+   [
+    "<b>Do</b> you like sport, Max?",
+    "Ти любиш спорт, Максе?"
+   ],
+   [
+    "Yes, I <b>do</b>. I play football every day.",
+    "Так. Я граю у футбол щодня."
+   ],
+   [
+    "<b>Does</b> your brother play too?",
+    "Твій брат теж грає?"
+   ],
+   [
+    "No, he <b>doesn't</b>. He <b>doesn't like</b> football.",
+    "Ні. Він не любить футбол."
+   ],
+   [
+    "<b>What does</b> he <b>do</b> after school?",
+    "Що він робить після школи?"
+   ],
+   [
+    "He draws pictures and listens to music.",
+    "Він малює і слухає музику."
+   ],
+   [
+    "<b>Where do</b> you <b>play</b> football?",
+    "Де ти граєш у футбол?"
+   ],
+   [
+    "We play in the park. We <b>don't</b> have a stadium.",
+    "Ми граємо в парку. У нас немає стадіону."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "hobby",
+   "хобі"
+  ],
+  [
+   "collect stamps",
+   "збирати марки"
+  ],
+  [
+   "draw",
+   "малювати"
+  ],
+  [
+   "ride a bike",
+   "кататися на велосипеді"
+  ],
+  [
+   "play computer games",
+   "грати в комп'ютерні ігри"
+  ],
+  [
+   "go swimming",
+   "ходити плавати"
+  ],
+  [
+   "listen to music",
+   "слухати музику"
+  ],
+  [
+   "watch films",
+   "дивитися фільми"
+  ],
+  [
+   "enjoy",
+   "отримувати задоволення"
+  ],
+  [
+   "hate",
+   "ненавидіти"
+  ]
+ ]
+}

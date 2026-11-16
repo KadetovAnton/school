@@ -1,0 +1,119 @@
+{
+ "id": "l4",
+ "title": "Simple чи Continuous? Тренуємо різницю",
+ "skillFiles": [
+  "skills/pspc.json",
+  "skills/ps.json",
+  "skills/pc.json"
+ ],
+ "skills": [
+  "pspc.sig",
+  "pspc.state"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "pspc.sig": 5,
+   "pspc.state": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⚖️",
+   "h": "Звичка чи «просто зараз»?",
+   "html": "<table class=\"t\"><tr><td>Present Simple</td><td>звичка, розклад, факт</td><td>I <b>play</b> tennis on Mondays.</td></tr>\n        <tr><td>Present Continuous</td><td>дія йде зараз</td><td>I <b>am playing</b> tennis now.</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I usually <b>walk</b> to school, but today I <b>am going</b> by bus.</div><div class=\"ua\">Зазвичай я ходжу до школи пішки, але сьогодні їду автобусом.</div></div><button class=\"say round\" data-say=\"I usually walk to school, but today I am going by bus.\">🔊</button></div>"
+  },
+  {
+   "e": "🔎",
+   "h": "Слова-підказки",
+   "html": "<table class=\"t\"><tr><td>Simple</td><td>every day, usually, always, often, sometimes, never, on Mondays</td></tr>\n        <tr><td>Continuous</td><td>now, right now, at the moment, today, Look!, Listen!</td></tr></table>\n        <div class=\"tip\">💡 Побачила «Look!» чи «Listen!» — це майже завжди Continuous: ти бачиш або чуєш дію саме зараз.</div>"
+  },
+  {
+   "e": "🧠",
+   "h": "Дієслова-стани: без -ing",
+   "html": "<p>Є дієслова, які означають не дію, а <b>стан</b>: що ти знаєш, любиш, хочеш. Їх у Continuous не ставимо навіть «зараз».</p>\n        <div class=\"rule-box\">like, love, hate, want, need, know, understand, believe, remember</div>\n        <div class=\"ex\"><div><div class=\"en\">I <b>want</b> an ice cream now.</div><div class=\"ua\">Я зараз хочу морозиво.</div></div><button class=\"say round\" data-say=\"I want an ice cream now.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>I am wanting</s>, <s>She is knowing</s> — так не кажуть.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Зима за вікном",
+  "question": {
+   "q": "чому «It <b>snows</b> a lot in January», але «Look! It <b>is snowing</b>»?",
+   "a": "Перше — факт про січень загалом (Simple). Друге — сніг іде просто зараз, ми це бачимо (Continuous)."
+  },
+  "items": [
+   [
+    "It <b>snows</b> a lot in January.",
+    "У січні часто йде сніг."
+   ],
+   [
+    "Look! It <b>is snowing</b> now!",
+    "Дивись! Зараз іде сніг!"
+   ],
+   [
+    "Usually I <b>walk</b> to school.",
+    "Зазвичай я ходжу до школи пішки."
+   ],
+   [
+    "But today Dad <b>is driving</b> me there.",
+    "Але сьогодні тато везе мене машиною."
+   ],
+   [
+    "My brother <b>loves</b> winter.",
+    "Мій брат обожнює зиму."
+   ],
+   [
+    "He <b>is making</b> a snowman in the yard right now.",
+    "Він просто зараз ліпить сніговика у дворі."
+   ],
+   [
+    "I <b>want</b> some hot tea.",
+    "Я хочу гарячого чаю."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "snow",
+   "сніг; іде сніг"
+  ],
+  [
+   "it's sunny",
+   "сонячно"
+  ],
+  [
+   "it's windy",
+   "вітряно"
+  ],
+  [
+   "it's cold",
+   "холодно"
+  ],
+  [
+   "warm",
+   "теплий"
+  ],
+  [
+   "umbrella",
+   "парасолька"
+  ],
+  [
+   "every morning",
+   "щоранку"
+  ],
+  [
+   "today",
+   "сьогодні"
+  ],
+  [
+   "know",
+   "знати"
+  ],
+  [
+   "understand",
+   "розуміти"
+  ]
+ ]
+}

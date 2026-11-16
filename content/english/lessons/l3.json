@@ -1,0 +1,130 @@
+{
+ "id": "l3",
+ "title": "Present Continuous: що відбувається зараз",
+ "skillFiles": [
+  "skills/pc.json"
+ ],
+ "skills": [
+  "pc.be",
+  "pc.ing",
+  "pc.neg",
+  "pc.q"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "pc.be": 2,
+   "pc.ing": 2,
+   "pc.neg": 2,
+   "pc.q": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "👀",
+   "h": "Що відбувається просто зараз",
+   "html": "<p>Present Continuous — про дію, яка йде <b>в цю хвилину</b>, ніби ти дивишся відео.</p>\n        <div class=\"ex\"><div><div class=\"en\">I <b>am reading</b> a book now.</div><div class=\"ua\">Я зараз читаю книжку.</div></div><button class=\"say round\" data-say=\"I am reading a book now.\">🔊</button></div>\n        <div class=\"tip\">🔎 <b>Слова-підказки:</b> now (зараз), right now (прямо зараз), at the moment (в цей момент), Look! (Дивись!), Listen! (Слухай!)</div>\n        <p class=\"muted\">Порівняй: I read every day — звичка (Present Simple). I am reading now — саме зараз.</p>"
+  },
+  {
+   "e": "🧩",
+   "h": "am / is / are + дієслово з -ing",
+   "html": "<table class=\"t\"><tr><td>I</td><td><b>am</b> reading</td><td class=\"muted\">I'm</td></tr>\n        <tr><td>he / she / it</td><td><b>is</b> reading</td><td class=\"muted\">she's</td></tr>\n        <tr><td>you / we / they</td><td><b>are</b> reading</td><td class=\"muted\">they're</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">My mum <b>is cooking</b> dinner.</div><div class=\"ua\">Мама готує вечерю.</div></div><button class=\"say round\" data-say=\"My mum is cooking dinner.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">The children <b>are playing</b> in the garden.</div><div class=\"ua\">Діти граються в саду.</div></div><button class=\"say round\" data-say=\"The children are playing in the garden.\">🔊</button></div>\n        <div class=\"tip\">⚠️ Обидві частини обов'язкові: <s>I reading</s> → I <b>am</b> reading.</div>"
+  },
+  {
+   "e": "✏️",
+   "h": "Як правильно додати -ing",
+   "html": "<table class=\"t\"><tr><td>Майже всі</td><td>+ ing</td><td>read → read<b>ing</b><br>play → play<b>ing</b></td></tr>\n        <tr><td>німа -e в кінці</td><td>e відпадає</td><td>make → mak<b>ing</b><br>write → writ<b>ing</b></td></tr>\n        <tr><td>коротке слово: голосна + приголосна</td><td>подвоюємо</td><td>swim → swim<b>ming</b><br>run → run<b>ning</b><br>sit → sit<b>ting</b></td></tr>\n        <tr><td>-ie</td><td>ie → y</td><td>lie → l<b>ying</b></td></tr></table>\n        <div class=\"tip\">💡 Подвоєння — щоб звук лишився коротким: swi<b>mm</b>ing [свімін], а не «сваймін».</div>"
+  },
+  {
+   "e": "🙅",
+   "h": "Заперечення і питання",
+   "html": "<p>Заперечення: додаємо <b>not</b> після am / is / are.</p>\n        <div class=\"ex\"><div><div class=\"en\">She <b>isn't</b> sleeping.</div><div class=\"ua\">Вона не спить.</div></div><button class=\"say round\" data-say=\"She isn't sleeping.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">We <b>aren't</b> watching TV.</div><div class=\"ua\">Ми не дивимося телевізор.</div></div><button class=\"say round\" data-say=\"We aren't watching TV.\">🔊</button></div>\n        <p>Питання: am / is / are виходить <b>наперед</b>.</p>\n        <div class=\"ex\"><div><div class=\"en\"><b>Are</b> you listening to me? — Yes, I <b>am</b>.</div><div class=\"ua\">Ти мене слухаєш? — Так.</div></div><button class=\"say round\" data-say=\"Are you listening to me? Yes, I am.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">What <b>are</b> you doing?</div><div class=\"ua\">Що ти робиш?</div></div><button class=\"say round\" data-say=\"What are you doing?\">🔊</button></div>\n        <div class=\"tip\">⚠️ Тут не потрібні do / does: <s>Do you listening?</s> → <b>Are</b> you listening?</div>"
+  }
+ ],
+ "examples": {
+  "title": "Субота вдома",
+  "question": {
+   "q": "чому «swim<b>ming</b>», а «read<b>ing</b>» без подвоєння?",
+   "a": "swim — коротке слово з голосною + приголосною в кінці, тому m подвоюємо. У read дві голосні (ea) — подвоювати не треба."
+  },
+  "items": [
+   [
+    "It's Saturday morning. Everybody <b>is doing</b> something.",
+    "Суботній ранок. Усі щось роблять."
+   ],
+   [
+    "Mum <b>is making</b> pancakes in the kitchen.",
+    "Мама пече млинці на кухні."
+   ],
+   [
+    "Dad <b>is reading</b> a newspaper.",
+    "Тато читає газету."
+   ],
+   [
+    "My little brother <b>is sitting</b> on the floor and <b>playing</b>.",
+    "Молодший брат сидить на підлозі й грається."
+   ],
+   [
+    "The cat <b>is lying</b> on the sofa.",
+    "Кіт лежить на дивані."
+   ],
+   [
+    "I <b>am not sleeping</b>. I <b>am writing</b> a message to my friend.",
+    "Я не сплю. Я пишу повідомлення подрузі."
+   ],
+   [
+    "Look! It <b>is snowing</b>!",
+    "Дивись! Іде сніг!"
+   ],
+   [
+    "<b>Are</b> you <b>coming</b> to the park? — Yes, I <b>am</b>!",
+    "Ти йдеш у парк? — Так!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "right now",
+   "прямо зараз"
+  ],
+  [
+   "at the moment",
+   "в цей момент"
+  ],
+  [
+   "Look!",
+   "Дивись!"
+  ],
+  [
+   "Listen!",
+   "Слухай!"
+  ],
+  [
+   "wait for",
+   "чекати на"
+  ],
+  [
+   "talk on the phone",
+   "розмовляти по телефону"
+  ],
+  [
+   "wear",
+   "бути вдягненим у"
+  ],
+  [
+   "cook dinner",
+   "готувати вечерю"
+  ],
+  [
+   "sit",
+   "сидіти"
+  ],
+  [
+   "lie",
+   "лежати"
+  ]
+ ]
+}

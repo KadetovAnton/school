@@ -1,0 +1,774 @@
+{
+ "topic": "pc",
+ "title": "Present Continuous",
+ "skills": [
+  {
+   "id": "pc.be",
+   "title": "am / is / are + -ing",
+   "rule": "I am, he/she/it is, you/we/they are + дієслово з -ing.",
+   "worked": {
+    "p": "My friends ___ waiting for me.",
+    "steps": [
+     "Хто? <b>My friends</b> — їх кілька = they.",
+     "they → <b>are</b>.",
+     "Дієслово з -ing уже є: waiting.",
+     "Відповідь: My friends <b>are</b> waiting for me."
+    ]
+   },
+   "alt": "<p>Запам'ятай пари, як таблицю множення:</p>\n        <div class=\"rule-box\" style=\"font-weight:800\">I → am · he / she / it → is · you / we / they → are</div>\n        <p>Present Continuous — це завжди <b>дві частини</b>: am / is / are + дієслово з -ing. Одна без одної не працює.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ reading a book now.",
+     "o": [
+      "am",
+      "is",
+      "are"
+     ],
+     "a": "am",
+     "h": [
+      "Хто? I.",
+      "I → am."
+     ],
+     "e": "I → <b>am</b> reading.",
+     "err": {
+      "is": "is — для he / she / it. З I: <b>am</b>.",
+      "are": "are — для you / we / they. З I: <b>am</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "My mum ___ cooking dinner.",
+     "o": [
+      "am",
+      "is",
+      "are"
+     ],
+     "a": "is",
+     "h": [
+      "My mum = she.",
+      "she → is."
+     ],
+     "e": "My mum = she → <b>is</b> cooking.",
+     "err": {
+      "are": "My mum — одна людина (she): <b>is</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "The children ___ playing in the garden.",
+     "o": [
+      "am",
+      "is",
+      "are"
+     ],
+     "a": "are",
+     "h": [
+      "The children — їх багато.",
+      "they → are."
+     ],
+     "e": "The children = they → <b>are</b>.",
+     "err": {
+      "is": "children — це багато дітей (they): <b>are</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "We ___ watching a film at the moment.",
+     "a": [
+      "are"
+     ],
+     "h": [
+      "We — «ми».",
+      "we → are."
+     ],
+     "e": "we → <b>are</b>.",
+     "err": {
+      "is": "we → <b>are</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "My friends ___ waiting for me.",
+     "a": [
+      "are"
+     ],
+     "h": [
+      "My friends = they.",
+      "they → are."
+     ],
+     "e": "My friends = they → <b>are</b>.",
+     "err": {
+      "is": "My friends — це «вони», тож <b>are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "It ___ raining now.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "It — «воно».",
+      "it → is."
+     ],
+     "e": "it → <b>is</b>.",
+     "err": {
+      "are": "it → <b>is</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "I ___ doing my homework.",
+     "a": [
+      "am"
+     ],
+     "h": [
+      "I — я.",
+      "I → am."
+     ],
+     "e": "I → <b>am</b>.",
+     "err": {
+      "is": "З I — <b>am</b>.",
+      "are": "З I — <b>am</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "They is playing football now.",
+     "bad": 1,
+     "a": "They are playing football now.",
+     "h": [
+      "They — «вони».",
+      "they → are."
+     ],
+     "e": "they → <b>are</b> playing."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She are talking on the phone.",
+     "bad": 1,
+     "a": "She is talking on the phone.",
+     "h": [
+      "She — «вона».",
+      "she → is."
+     ],
+     "e": "she → <b>is</b> talking."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We are having lunch now.",
+     "a": [
+      "We are having lunch now."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "we → are + -ing."
+     ],
+     "e": "we → <b>are having</b>.",
+     "err": {
+      "We is having lunch now.": "we → <b>are</b>.",
+      "We having lunch now.": "Не забувай are: We <b>are</b> having lunch now."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Мама зараз готує вечерю».",
+     "words": [
+      "cooking",
+      "Mum",
+      "now",
+      "dinner",
+      "is"
+     ],
+     "a": [
+      "mum is cooking dinner now"
+     ],
+     "h": [
+      "Хто → is → дієслово з -ing → що → коли.",
+      "Mum → is → cooking → …"
+     ],
+     "e": "<b>Mum is cooking dinner now.</b>"
+    }
+   ]
+  },
+  {
+   "id": "pc.ing",
+   "title": "Як писати -ing: making, swimming, lying",
+   "rule": "Німа -e відпадає (making); коротке слово з голосна+приголосна — подвоюємо (swimming); ie → y (lying).",
+   "worked": {
+    "p": "They are ___ in the river. (swim)",
+    "steps": [
+     "Дієслово: <b>swim</b> — коротке, одна голосна i.",
+     "В кінці голосна + приголосна: i + m.",
+     "Значить, останню літеру подвоюємо: swim → swim<b>m</b>.",
+     "Відповідь: They are <b>swimming</b> in the river."
+    ]
+   },
+   "alt": "<p>Перевір по черзі три питання:</p>\n        <p>1) В кінці німа <b>-e</b>? Прибираємо її: write → writing.<br>2) В кінці <b>-ie</b>? Міняємо на y: lie → lying.<br>3) Коротке слово з <b>одною</b> голосною, а в кінці приголосна? Подвоюємо: run → running.</p>\n        <p class=\"muted\">Ні на одне — просто + ing: read → reading, play → playing.</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "She is ___ a letter. (write)",
+     "a": [
+      "writing"
+     ],
+     "h": [
+      "write закінчується на німу -e.",
+      "-e відпадає."
+     ],
+     "e": "write → <b>writing</b>: німа -e відпадає.",
+     "err": {
+      "writeing": "Німа -e відпадає: <b>writing</b>.",
+      "writting": "Тут не подвоюємо: write → <b>writing</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "They are ___ in the river. (swim)",
+     "a": [
+      "swimming"
+     ],
+     "h": [
+      "swim — коротке слово.",
+      "Голосна + приголосна в кінці → подвоюємо."
+     ],
+     "e": "swim → <b>swimming</b>.",
+     "err": {
+      "swiming": "Коротке слово з голосна + приголосна → подвоюємо: swim<b>m</b>ing."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "Tom is ___ in the park. (run)",
+     "a": [
+      "running"
+     ],
+     "h": [
+      "run — коротке слово.",
+      "Подвоюємо n."
+     ],
+     "e": "run → <b>running</b>.",
+     "err": {
+      "runing": "Подвоюємо n: run<b>n</b>ing."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "I am ___ a cake. (make)",
+     "a": [
+      "making"
+     ],
+     "h": [
+      "make закінчується на -e.",
+      "-e відпадає."
+     ],
+     "e": "make → <b>making</b>.",
+     "err": {
+      "makeing": "Німа -e відпадає: <b>making</b>.",
+      "makking": "Не подвоюємо: <b>making</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "We are ___ on the sofa. (sit)",
+     "a": [
+      "sitting"
+     ],
+     "h": [
+      "sit — коротке слово.",
+      "Подвоюємо t."
+     ],
+     "e": "sit → <b>sitting</b>.",
+     "err": {
+      "siting": "Подвоюємо t: sit<b>t</b>ing."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "The baby is ___ in the bedroom. (cry)",
+     "a": [
+      "crying"
+     ],
+     "h": [
+      "cry закінчується на -y.",
+      "Перед -ing y не змінюється."
+     ],
+     "e": "cry → <b>crying</b>: y лишається.",
+     "err": {
+      "criing": "y лишається: <b>crying</b>.",
+      "cring": "y лишається: <b>crying</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "He is ___ to music. (listen)",
+     "a": [
+      "listening"
+     ],
+     "h": [
+      "listen — просто + ing.",
+      "Тут нічого не подвоюємо."
+     ],
+     "e": "listen → <b>listening</b>.",
+     "err": {
+      "listenning": "Тут не подвоюємо: <b>listening</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "The dog is ___ on the floor. (lie)",
+     "a": [
+      "lying"
+     ],
+     "h": [
+      "lie закінчується на -ie.",
+      "ie → y."
+     ],
+     "e": "lie → <b>lying</b>: ie → y.",
+     "err": {
+      "lieing": "ie → y: <b>lying</b>.",
+      "liing": "ie → y: <b>lying</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово з -ing",
+     "p": "Kate is ___ her bike. (ride)",
+     "a": [
+      "riding"
+     ],
+     "h": [
+      "ride закінчується на -e.",
+      "-e відпадає."
+     ],
+     "e": "ride → <b>riding</b>.",
+     "err": {
+      "rideing": "Німа -e відпадає: <b>riding</b>.",
+      "ridding": "Не подвоюємо: <b>riding</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Look! He is swiming in the sea.",
+     "bad": 3,
+     "a": "Look! He is swimming in the sea.",
+     "h": [
+      "Подивись, як написане дієслово з -ing.",
+      "swim — подвоюємо m."
+     ],
+     "e": "swim → <b>swimming</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I am writeing an email.",
+     "bad": 2,
+     "a": "I am writing an email.",
+     "h": [
+      "Подивись, як написане дієслово з -ing.",
+      "Німа -e відпадає."
+     ],
+     "e": "write → <b>writing</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She is making a sandwich.",
+     "a": [
+      "She is making a sandwich."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "make → -e відпадає."
+     ],
+     "e": "make → <b>making</b>.",
+     "err": {
+      "She is makeing a sandwich.": "Німа -e відпадає: <b>making</b>.",
+      "She making a sandwich.": "Не забувай is: She <b>is</b> making…"
+     }
+    }
+   ]
+  },
+  {
+   "id": "pc.neg",
+   "title": "Заперечення: isn't / aren't / am not",
+   "rule": "am not / isn't / aren't + дієслово з -ing. Без don't і doesn't!",
+   "worked": {
+    "p": "Dad ___ today. (not work)",
+    "steps": [
+     "Хто? <b>Dad</b> = he → is.",
+     "Заперечення: is + not = <b>isn't</b>.",
+     "Дієслово з -ing: <b>working</b>.",
+     "Відповідь: Dad <b>isn't working</b> today."
+    ]
+   },
+   "alt": "<p>У Present Continuous свій помічник — am / is / are. Тому «не» чіпляємо до нього:</p>\n        <p>I am → I <b>am not</b> (I'm not)<br>she is → she <b>isn't</b><br>they are → they <b>aren't</b></p>\n        <p class=\"muted\">don't / doesn't — це помічники з іншого часу (Present Simple). Тут вони не потрібні.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ sleeping.",
+     "o": [
+      "am not",
+      "isn't",
+      "aren't"
+     ],
+     "a": "am not",
+     "h": [
+      "Хто? I.",
+      "I → am → am not."
+     ],
+     "e": "I → <b>am not</b>.",
+     "err": {
+      "isn't": "З I — <b>am not</b>.",
+      "aren't": "З I — <b>am not</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Dad ___ working today.",
+     "o": [
+      "isn't",
+      "aren't",
+      "am not"
+     ],
+     "a": "isn't",
+     "h": [
+      "Dad = he.",
+      "he → is → isn't."
+     ],
+     "e": "Dad = he → <b>isn't</b>.",
+     "err": {
+      "aren't": "Dad — одна людина (he): <b>isn't</b>.",
+      "am not": "am — тільки з I."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ watching TV.",
+     "o": [
+      "isn't",
+      "aren't",
+      "am not"
+     ],
+     "a": "aren't",
+     "h": [
+      "We — «ми».",
+      "we → are → aren't."
+     ],
+     "e": "we → <b>aren't</b>.",
+     "err": {
+      "isn't": "we → <b>aren't</b>.",
+      "am not": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши заперечення з дієсловом",
+     "p": "She ___ to me. (not listen)",
+     "a": [
+      "isn't listening",
+      "is not listening"
+     ],
+     "h": [
+      "she → is → isn't.",
+      "Дієслово з -ing."
+     ],
+     "e": "she → <b>isn't listening</b>.",
+     "err": {
+      "isn't listen": "Не забудь -ing: isn't <b>listening</b>.",
+      "doesn't listening": "Тут помічник is, а не does: <b>isn't</b> listening.",
+      "aren't listening": "she → <b>isn't</b>.",
+      "don't listening": "Тут помічник is: <b>isn't</b> listening."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши заперечення з дієсловом",
+     "p": "They ___ football now. (not play)",
+     "a": [
+      "aren't playing",
+      "are not playing"
+     ],
+     "h": [
+      "they → are → aren't.",
+      "Дієслово з -ing."
+     ],
+     "e": "they → <b>aren't playing</b>.",
+     "err": {
+      "isn't playing": "they → <b>aren't</b>.",
+      "don't playing": "Тут помічник are, а не do: <b>aren't</b> playing.",
+      "aren't play": "Не забудь -ing: aren't <b>playing</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши заперечення з дієсловом",
+     "p": "I ___ a book now. (not read)",
+     "a": [
+      "am not reading"
+     ],
+     "h": [
+      "I → am not.",
+      "Дієслово з -ing."
+     ],
+     "e": "I → <b>am not reading</b>.",
+     "err": {
+      "isn't reading": "З I — <b>am not</b>.",
+      "amn't reading": "amn't не буває: I <b>am not</b> reading.",
+      "don't reading": "Тут помічник am: I <b>am not</b> reading.",
+      "am not read": "Не забудь -ing: am not <b>reading</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My brother aren't sleeping now.",
+     "bad": 2,
+     "a": "My brother isn't sleeping now.",
+     "h": [
+      "My brother = he.",
+      "he → isn't."
+     ],
+     "e": "My brother = he → <b>isn't</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We isn't going to school today.",
+     "bad": 1,
+     "a": "We aren't going to school today.",
+     "h": [
+      "We — «ми».",
+      "we → aren't."
+     ],
+     "e": "we → <b>aren't</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 It isn't raining now.",
+     "a": [
+      "It isn't raining now."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "it → isn't + -ing."
+     ],
+     "e": "it → <b>isn't raining</b>.",
+     "err": {
+      "It aren't raining now.": "it → <b>isn't</b>.",
+      "It isn't rain now.": "Не забудь -ing: <b>raining</b>.",
+      "It doesn't raining now.": "Тут помічник is: <b>isn't</b> raining."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pc.q",
+   "title": "Питання: Are you…? Is she…?",
+   "rule": "Am / Is / Are на початок + хто + дієслово з -ing? Відповідь: Yes, I am. / No, she isn't.",
+   "worked": {
+    "p": "___ your parents working today?",
+    "steps": [
+     "Про кого питаю? <b>your parents</b> = they.",
+     "they → <b>Are</b> на початок.",
+     "Далі хто і дієслово з -ing.",
+     "Відповідь: <b>Are</b> your parents working today?"
+    ]
+   },
+   "alt": "<p>Питання — це речення, де am / is / are <b>помінявся місцями</b> з тим, хто діє:</p>\n        <p>She <b>is</b> sleeping. → <b>Is</b> she sleeping?<br>You <b>are</b> listening. → <b>Are</b> you listening?</p>\n        <p>Коротка відповідь — тим самим словом: Yes, she <b>is</b>. / No, I'<b>m</b> not.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ you listening to me?",
+     "o": [
+      "Are",
+      "Is",
+      "Do"
+     ],
+     "a": "Are",
+     "h": [
+      "you → ?",
+      "У цьому часі питаємо з am / is / are."
+     ],
+     "e": "you → <b>Are</b> you listening?",
+     "err": {
+      "Do": "Тут питання з am / is / are, а не do: <b>Are</b> you listening?",
+      "Is": "you → <b>Are</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ your sister sleeping?",
+     "o": [
+      "Is",
+      "Are",
+      "Does"
+     ],
+     "a": "Is",
+     "h": [
+      "your sister = she.",
+      "she → Is."
+     ],
+     "e": "your sister = she → <b>Is</b>.",
+     "err": {
+      "Are": "your sister — одна людина (she): <b>Is</b>.",
+      "Does": "Тут питання з is: <b>Is</b> your sister sleeping?"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Are they playing? — Yes, they ___.",
+     "o": [
+      "are",
+      "do",
+      "is"
+     ],
+     "a": "are",
+     "h": [
+      "Питали з Are.",
+      "Відповідаємо тим самим словом."
+     ],
+     "e": "Are they…? → Yes, they <b>are</b>.",
+     "err": {
+      "do": "Питали з Are, тож відповідь: Yes, they <b>are</b>.",
+      "is": "they → <b>are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Am, Is або Are",
+     "p": "___ it raining now?",
+     "a": [
+      "Is"
+     ],
+     "h": [
+      "it → ?",
+      "it → Is."
+     ],
+     "e": "it → <b>Is</b> it raining?",
+     "err": {
+      "Are": "it → <b>Is</b>.",
+      "Does": "Тут питання з is: <b>Is</b> it raining?"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Am, Is або Are",
+     "p": "___ your parents working today?",
+     "a": [
+      "Are"
+     ],
+     "h": [
+      "your parents = they.",
+      "they → Are."
+     ],
+     "e": "your parents = they → <b>Are</b>.",
+     "err": {
+      "Is": "your parents — це «вони», тож <b>Are</b>.",
+      "Do": "Тут питання з are: <b>Are</b> your parents working?"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Is Tom reading? — No, he ___.",
+     "a": [
+      "isn't",
+      "is not"
+     ],
+     "h": [
+      "Питали з Is, відповідь «ні».",
+      "he → isn't."
+     ],
+     "e": "No, he <b>isn't</b>.",
+     "err": {
+      "doesn't": "Питали з Is: No, he <b>isn't</b>.",
+      "aren't": "he → <b>isn't</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Що ти зараз робиш?»",
+     "words": [
+      "doing",
+      "What",
+      "you",
+      "are",
+      "now"
+     ],
+     "a": [
+      "what are you doing now"
+     ],
+     "h": [
+      "Питальне слово → are → хто → дієслово з -ing → коли?",
+      "What → are → you → doing → …"
+     ],
+     "e": "<b>What are you doing now?</b>",
+     "end": "?"
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Is they watching TV?",
+     "bad": 0,
+     "a": "Are they watching TV?",
+     "h": [
+      "they → ?",
+      "they → Are."
+     ],
+     "e": "they → <b>Are</b> they watching TV?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 What are you doing?",
+     "a": [
+      "What are you doing?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "you → are."
+     ],
+     "e": "you → What <b>are</b> you doing?",
+     "err": {
+      "What is you doing?": "you → <b>are</b>.",
+      "What you doing?": "Не забувай are: What <b>are</b> you doing?"
+     }
+    }
+   ]
+  }
+ ]
+}
