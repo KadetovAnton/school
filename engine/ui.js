@@ -778,6 +778,7 @@
       if (btn && !ok) btn.classList.add("wrong");
       if ($("inp")) $("inp").disabled = true;
       if ($("keypad")) $("keypad").parentNode.removeChild($("keypad"));
+      if ($("numbox") && $("numbox").classList.contains("show")) $("numbox").classList.add(ok ? "good" : "badv");
       if (it.type === "num" && $("blank")) { $("blank").textContent = given == null ? "?" : given; $("blank").classList.add(ok ? "good" : "badv"); }
       if ($("chkrow")) $("chkrow").parentNode.removeChild($("chkrow"));
       if ($("almost")) $("almost").innerHTML = "";
@@ -806,7 +807,8 @@
     if ($("readIt")) $("readIt").onclick = function () { SAY.uk(it.read); };
     if (it.type === "num") {
       var val = "", box = $("numbox"), blank = $("blank");
-      var show = function () { box.textContent = val || "?"; box.classList.toggle("empty", !val); if (blank) { blank.textContent = val; blank.classList.toggle("filled", !!val); } };
+      if (!blank) box.classList.add("show"); // у задачах нема пропуску ___ — показуємо окреме поле відповіді
+      var show = function () { box.innerHTML = '<span class="nl">Відповідь:</span> <b>' + (val || "?") + "</b>"; box.classList.toggle("empty", !val); if (blank) { blank.textContent = val; blank.classList.toggle("filled", !!val); } };
       var press = function (k) {
         if (answered) return;
         if (k === "⌫") val = val.slice(0, -1);
