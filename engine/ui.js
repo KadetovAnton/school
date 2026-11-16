@@ -199,10 +199,76 @@
       for (var i = 0; i < bs.length; i++) (function (b) {
         b.onclick = function () {
           var c = null; SUBJ.children.forEach(function (x) { if (x.id === b.getAttribute("data-id")) c = x; });
-          E.setCur(c.id, c.name); applyTheme(); renderSubjects(); toTop();
+          enterChild(c);
         };
       })(bs[i]);
     });
+  }
+
+  /* ================== ВХІД ЗА PIN ================== */
+  var SY = window.SYNC;
+  function goChild(c) { E.setCur(c.id, c.name); applyTheme(); renderSubjects(); toTop(); }
+  function enterChild(c) {
+    if (!SY) return goChild(c);
+    if (SY.has(c.id)) {
+      $app.innerHTML = '<div class="loading">Завантажую прогрес… ⏳</div>';
+      SY.pull(c.id).then(function (r) { if (r === "relogin") pinScreen(c); else goChild(c); });
+    } else pinScreen(c);
+  }
+  function pinScreen(c, mode, first) {
+    if (!mode) {
+      $app.innerHTML = '<div class="loading">Хвилинку… ⏳</div>';
+      SY.status(c.id).then(function (d) { if (d._status !== 200) return offlineScreen(c); pinScreen(c, d.pinSet ? "enter" : "create"); },
+        function () { offlineScreen(c); });
+      return;
+    }
+    var title = mode === "enter" ? "Введи свій PIN" : first ? "Повтори PIN ще раз" : "Придумай свій PIN";
+    var sub = mode === "enter" ? "4 цифри, які ви придумали з татом" : first ? "Щоб точно не помилитися" : "4 цифри — разом з татом. Запам'ятай його: він потрібен на кожному новому пристрої.";
+    $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button></div>' +
+      '<div class="card" style="text-align:center"><div class="big-emoji">' + c.emoji + '</div><h1>' + esc(c.name) + ', ' + title.charAt(0).toLowerCase() + title.slice(1) + '</h1>' +
+      '<p class="muted">' + sub + '</p><div class="pin" id="pin"><i></i><i></i><i></i><i></i></div><div class="pin-err" id="perr"></div>' +
+      '<div class="keypad">' + [1, 2, 3, 4, 5, 6, 7, 8, 9, "", 0, "⌫"].map(function (k) { return k === "" ? "<span></span>" : '<button class="key' + (k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div></div>';
+    $("bk").onclick = function () { renderWho(); toTop(); };
+    var val = "", lock = false;
+    function draw() { var is = $("pin").querySelectorAll("i"); for (var i = 0; i < 4; i++) is[i].className = i < val.length ? "on" : ""; }
+    function err(m) { $("perr").textContent = m; val = ""; draw(); lock = false; }
+    function done() {
+      lock = true;
+      if (mode === "create" && !first) return pinScreen(c, "create", val);
+      if (mode === "create" && first !== val) { toast("PIN не збігся — придумай ще раз"); return pinScreen(c, "create"); }
+      SY.login(c.id, val).then(function (d) {
+        if (d.token) { toast(d.created ? "PIN збережено 👍" : "Вітаю! 👋"); $app.innerHTML = '<div class="loading">Завантажую прогрес… ⏳</div>'; SY.pull(c.id).then(function () { goChild(c); }); }
+        else if (d._status === 401 || d._status === 429 || d._status === 400) err(d.error || "Не вийшло, спробуй ще"); else offlineScreen(c);
+      }, function () { offlineScreen(c); });
+    }
+    function press(k) {
+      if (lock) return;
+      if (k === "⌫") val = val.slice(0, -1); else if (val.length < 4) val += k;
+      $("perr").textContent = ""; draw();
+      if (val.length === 4) setTimeout(done, 120);
+    }
+    var ks = $app.querySelectorAll(".key");
+    for (var i = 0; i < ks.length; i++) (function (b) { b.onclick = function () { press(b.getAttribute("data-k")); }; })(ks[i]);
+    document.onkeydown = function (e) { if (!$("pin")) return; if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); };
+  }
+  function offlineScreen(c) {
+    $app.innerHTML = '<div class="card" style="text-align:center"><div class="big-emoji">📡</div><h2>Немає зв\'язку з сервером</h2>' +
+      '<p class="muted">Можна займатися й так — прогрес збережеться на цьому пристрої, а увійти можна пізніше.</p>' +
+      '<div class="row"><button class="btn ghost" id="bk">← Назад</button><button class="btn full" id="go">Продовжити без входу</button></div></div>';
+    $("bk").onclick = function () { renderWho(); toTop(); };
+    $("go").onclick = function () { goChild(c); };
+  }
+  if (SY) SY.onRemote = function (id) { if (E.cur() === id && !document.querySelector("#stage, .task")) { toast("Оновлено з іншого пристрою 🔄"); renderSubjects(); } };
+
+  /* звіт татові: у Telegram, а якщо не вийшло — скопіювати, як раніше */
+  function sendDad(text, okCb) {
+    var copy = function () {
+      var ok = function () { if (okCb) okCb(); toast("Скопійовано — встав у месенджер"); };
+      try { navigator.clipboard.writeText(text).then(ok, function () { fallbackCopy(text, ok); }); } catch (e) { fallbackCopy(text, ok); }
+    };
+    if (!SY || !SY.has(E.cur())) return copy();
+    toast("Надсилаю… 📨");
+    SY.report(E.cur(), text).then(function (ok) { if (ok) { if (okCb) okCb(); toast("✅ Надіслано татові в Telegram"); } else copy(); });
   }
 
   /* ================== МОЇ ПРЕДМЕТИ ================== */
@@ -212,6 +278,7 @@
       if (!c) return renderWho();
       var P = E.P(), goal = SUBJ.dailyGoal, st = E.streak();
       var html = '<div class="topbar"><button class="back" id="who">⇄ Змінити</button><span class="muted small" style="font-weight:700">' + c.grade + ' клас</span></div>' +
+        (SY && SY.moved ? '<div class="card" style="background:var(--ok-soft)"><b>🏠 Сайт переїхав!</b><br>' + (SY.has(c.id) && E.P().srv ? "Твій прогрес уже перенесено ✅ " : "") + 'Тепер заходь сюди: <a href="https://school.akdtv.pp.ua/"><b>school.akdtv.pp.ua</b></a></div>' : "") +
         '<div class="card"><h1>Привіт, ' + esc(c.name) + '! ' + c.emoji + '</h1>' +
         '<div class="stats">' + freezeChip() + '<span class="stat">⭐ ' + E.starsWeek() + ' за тиждень</span></div>' +
         (hasOpen(c) ? goalBar(E.todayCount(null), goal) : '<div class="today"><div class="today-t">🚀 Твої заняття скоро з\'являться! Тато вже готує.</div></div>') +
@@ -508,14 +575,13 @@
         $("stage").innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🔁</div><h2>Повторення тижня — готово!</h2><p class="muted">' + fmt(s.score) + ' з ' + s.max + ' балів</p>' +
           (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>Тримається 💪</b><br>' + good.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : "") +
           (weak.length ? '<div class="tip" style="text-align:left"><b>Варто освіжити</b> (ці речення вже в «Моїх помилках»)<br>' + weak.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : '<p>Усе пам\'ятаєш — супер! 🔥</p>') +
-          '<div class="row"><button class="btn ghost full" id="copy">📋 Надіслати результат татові</button><button class="btn full" id="go">Далі →</button></div></div>';
+          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати результат татові</button><button class="btn full" id="go">Далі →</button></div></div>';
         $("copy").onclick = function () {
           var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
           var text = [P.name + " — повторення тижня, " + d, "Результат: " + fmt(s.score) + " з " + s.max,
             good.length ? "Тримається:\n" + good.map(function (id) { return "• " + name(id); }).join("\n") : "",
             weak.length ? "Варто освіжити:\n" + weak.map(function (id) { return "• " + name(id); }).join("\n") : "Усе пам'ятає!"].filter(Boolean).join("\n");
-          var ok = function () { toast("Скопійовано — встав у месенджер"); };
-          try { navigator.clipboard.writeText(text).then(ok, function () { fallbackCopy(text, ok); }); } catch (e) { fallbackCopy(text, ok); }
+          sendDad(text);
         };
         $("go").onclick = function () { back(); toTop(); };
       } });
@@ -1059,7 +1125,7 @@
           (ok ? '<div class="stars" style="font-size:30px">' + starsStr(stars) + '</div>' : '<p class="muted">Потрібно ' + pass + '%. Зроби ще раз вправи — там помилки розбираються крок за кроком. У тебе вийде!</p>') +
           (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { return "• " + esc(r.it.p) + " → <b>" + esc(E.answersOf(r.it)[0]) + "</b>"; }).join("<br>") + '</div>' : "") +
           skillList(LES.skills) +
-          '<div class="row"><button class="btn ghost full" id="copy">📋 Надіслати результат татові</button>' +
+          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати результат татові</button>' +
           (ok ? "" : '<button class="btn ghost" id="pr">✍️ До вправ</button><button class="btn" id="retry">↺ Ще раз</button>') +
           '<button class="btn ' + (ok ? "" : "plain") + ' full" id="home">До кабінету' + (ok ? " →" : "") + '</button></div></div>';
         $("copy").onclick = function () { copyReport(pct, stars, wrong); };
@@ -1080,8 +1146,7 @@
     if (rep.length) lines.push("Позначено «тут помилка»:\n" + rep.map(function (r) { return "• " + r.key.split("|")[1] + (r.given != null ? " (відповідь: " + r.given + ")" : ""); }).join("\n"));
     lines.push("Днів поспіль: " + E.streak());
     var text = lines.join("\n");
-    var ok = function () { rep.forEach(function (r) { r.sent = true; }); E.save(); toast("Скопійовано — встав у месенджер"); };
-    try { navigator.clipboard.writeText(text).then(ok, function () { fallbackCopy(text, ok); }); } catch (e) { fallbackCopy(text, ok); }
+    sendDad(text, function () { rep.forEach(function (r) { r.sent = true; }); E.save(); });
   }
   function fallbackCopy(text, ok) {
     try {
@@ -1096,7 +1161,14 @@
   withSubjects(function () {
     applyTheme();
     var h = (location.hash || "").replace("#", "");
-    if (h && child()) { if (SUBS[h]) { setSub(h); renderHome(); } else renderSubjects(); }
-    else renderWho();
+    var start = function () {
+      if (h && child()) { if (SUBS[h]) { setSub(h); renderHome(); } else renderSubjects(); }
+      else renderWho();
+    };
+    var cid = E.cur();
+    // на старому сайті та для дітей, що ще не входили, — спершу екран «Хто вчиться» (там вхід за PIN)
+    if (SY && cid && !SY.has(cid)) return renderWho();
+    if (SY && cid && SY.has(cid)) { SY.pull(cid).then(function (r) { if (r === "relogin") renderWho(); else start(); }); return; }
+    start();
   });
 })();

@@ -187,3 +187,9 @@ body.th-berry{--bg:#FBF0F8;--pri:#9B2C8F;--pri-soft:#F6E2F3;--pri-ink:#741F6B}
 .key.del{background:#F6F1E7;font-size:24px}
 body.kid .opt{font-size:26px;text-align:center;font-weight:900}
 body.kid .task{font-size:17px}
+
+/* вхід за PIN */
+.pin{display:flex;justify-content:center;gap:14px;margin:16px 0 6px}
+.pin i{width:20px;height:20px;border-radius:50%;border:3px solid #c7cbe0;display:block}
+.pin i.on{background:#4f46e5;border-color:#4f46e5}
+.pin-err{min-height:22px;color:#c0392b;font-weight:700;margin-bottom:8px}

@@ -72,7 +72,14 @@
 
   var store = load();
   E.store = function () { return store; };
-  E.save = function () { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+  E.saveRaw = function () { try { localStorage.setItem(KEY, JSON.stringify(store)); } catch (e) {} };
+  /* зберегти; якщо дитина увійшла (sync.js) — позначити зміну і відправити на сервер */
+  E.save = function () {
+    var S = window.SYNC, id = store.cur, p = store.profiles[id];
+    if (S && p && S.ready(id)) p.upd = Date.now();
+    E.saveRaw();
+    if (S && p && S.ready(id)) S.push(id);
+  };
   /* профіль дитини (створюється за потреби) */
   E.profile = function (id, name) {
     var p = store.profiles[id];
