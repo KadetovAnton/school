@@ -138,6 +138,13 @@
     (o.wrHist || []).forEach(function (x) { if (!hk[x.w + "|" + (x.sub || "")]) into.wrHist.push(x); });
     if (o.diag && (!into.diag || (o.diag.d || "") > (into.diag.d || ""))) into.diag = o.diag;
     if (o.reward && (!into.reward || !into.reward.text)) into.reward = o.reward;
+    if (o.blitz) {
+      a = into.blitz = obj(into.blitz); b = o.blitz;
+      if ((b.best || 0) > (a.best || 0)) { a.best = b.best; a.bestD = b.bestD; }
+      var bt = {}; a.hist = a.hist || []; a.hist.forEach(function (x) { bt[x.t] = 1; });
+      (b.hist || []).forEach(function (x) { if (!bt[x.t]) a.hist.push(x); });
+      a.hist.sort(function (x, y) { return x.t - y.t; }); a.hist = a.hist.slice(-60);
+    }
     for (k in o) if (!(k in into) && k !== "srv" && k !== "dirty" && k !== "dseq") into[k] = o[k];
     return into;
   };
@@ -499,6 +506,23 @@
     p.wrHist = p.wrHist.filter(function (x) { return !(x.w === r.w && (x.sub || "english") === E.curSub); }).concat([{ w: r.w, sub: E.curSub, score: score, max: max }]).slice(-60);
     E.save();
     if (first) E.addStars(5, "review");
+  };
+
+  /* ⚡ Блискавка: 60 секунд прикладів з уже початих тем; рекорд — лише проти себе */
+  E.BLITZ = ["m.add10", "m.miss10", "m.add20", "m.sub20", "m.mix20", "m.addnc", "m.subnc", "m.addc", "m.subc", "m.mul23", "m.div23", "m.mul4", "m.div4", "m.mul5", "m.div5", "m.mulmiss", "m.md01"];
+  E.blitzSkills = function () {
+    var p = E.P(), ids = E.BLITZ.filter(function (id) { var s = p.skills[id]; return E.SK[id] && s && (s.n > 0 || s.lvl >= 1); });
+    return ids.length ? ids : E.BLITZ.slice(0, 2).filter(function (id) { return !!E.SK[id]; });
+  };
+  E.blitzInfo = function () { var b = E.P().blitz || {}; return { best: b.best || 0, hist: b.hist || [] }; };
+  E.blitzDone = function (ok, n) {
+    var p = E.P(); if (!p.blitz) p.blitz = { best: 0, hist: [] };
+    var b = p.blitz, prev = b.best || 0, rec = ok > prev;
+    b.hist = (b.hist || []).concat([{ t: Date.now(), d: today(), ok: ok, n: n }]).slice(-60);
+    if (rec) { b.best = ok; b.bestD = today(); }
+    E.save();
+    if (rec && prev > 0) E.addStars(2, "blitz");
+    return { rec: rec, prev: prev };
   };
 
   E.reportIssue = function (it, given) {

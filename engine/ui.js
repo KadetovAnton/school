@@ -387,6 +387,7 @@
     var wDue = E.wordsDue().length, wL = E.wordsLearned();
     var rv = E.review(), rvN = E.reviewSkills().length;
     html += '<div class="card" style="padding:12px 16px">' +
+      (SUB.id === "math2" ? '<button class="lesson open" id="blitzBtn"><span class="ic">⚡</span><span><div class="lt">Блискавка</div><div class="ls">Скільки прикладів встигнеш за 60 секунд?' + (E.blitzInfo().best ? " · рекорд " + E.blitzInfo().best : "") + '</div></span></button>' : "") +
       '<button class="lesson ' + (rv.done ? "done" : rvN >= 2 ? "open" : "lock") + '" id="reviewBtn"><span class="ic">' + (rv.done ? "✅" : "🔁") + '</span><span><div class="lt">Повторення тижня</div><div class="ls">' +
       (rv.done ? "Зроблено цього тижня: " + fmt(rv.score) + " з " + rv.max + " · можна ще раз" : rvN >= 2 ? "По завданню з кожної пройденої теми · ~10 хв · +5 ⭐" : "З'явиться після перших уроків") + '</div></span></button>' + badgesRow() +
       (SUB.words && canSpeak ? '<button class="lesson" id="voiceBtn"><span class="ic">🔊</span><span><div class="lt">Голос озвучки</div><div class="ls">' + esc(SAY.current() || "автоматично") + ' · обрати чіткіший</div></span></button>' : "") +
@@ -429,6 +430,7 @@
     if ($("cont")) $("cont").onclick = function () { DAILY = false; openLesson(cont.file, T.step); };
     if ($("daily")) $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
+    if ($("blitzBtn")) $("blitzBtn").onclick = function () { renderBlitz(); toTop(); };
     if ($("showAll")) $("showAll").onclick = function () { var hs = $app.querySelectorAll(".lesson.hid"); for (var q = 0; q < hs.length; q++) hs[q].classList.remove("hid"); this.parentNode.parentNode.removeChild(this.parentNode); };
     if ($("wordsBtn")) $("wordsBtn").onclick = function () { renderWords(); toTop(); };
     if ($("voiceBtn")) $("voiceBtn").onclick = function () { renderVoices(); toTop(); };
@@ -587,6 +589,96 @@
   }
 
   /* ================== МОЇ ПОМИЛКИ ================== */
+  /* ⚡ Блискавка: 60 секунд, приклади з пройдених тем, без підказок; помилки — в «Мої помилки» */
+  function renderBlitz() {
+    loadAll(function () {
+      var info = E.blitzInfo(), last = info.hist.slice(-5).map(function (x) { return x.ok; });
+      setTitle("Блискавка · " + child().name);
+      $app.innerHTML = '<div class="topbar"><button class="back" id="back">← Назад</button></div><div class="card" id="stage" style="text-align:center">' +
+        '<div class="celebrate">⚡</div><h2>Блискавка</h2>' +
+        '<p>Скільки прикладів встигнеш розв\'язати за <b>60 секунд</b>?</p>' +
+        '<p class="muted small">Приклади з тем, які ти вже ' + G("пройшла", "пройшов") + '. Змагаєшся тільки сам' + G("а", "") + ' з собою 🙂</p>' +
+        (info.best ? '<p class="bl-rec">🏆 Твій рекорд: <b>' + info.best + '</b></p>' + (last.length > 1 ? '<p class="muted small">Останні спроби: ' + last.join(", ") + '</p>' : "") : '<p class="muted small">Перша спроба покаже твій рекорд — потім будеш його бити!</p>') +
+        '<div class="row"><button class="btn full" id="go">▶️ Старт</button></div></div>';
+      $("back").onclick = function () { renderHome(); toTop(); };
+      $("go").onclick = function () { blitzCount(3); };
+    });
+  }
+  function blitzCount(n) {
+    document.body.classList.add("insession");
+    $("stage").innerHTML = '<div class="bl-cd">' + n + '</div><p class="muted">Приготуйся…</p>';
+    if (n > 1) setTimeout(function () { if ($("stage")) blitzCount(n - 1); }, 700);
+    else setTimeout(function () { if ($("stage")) blitzRun(); }, 700);
+  }
+  function blitzRun() {
+    var ids = E.blitzSkills(), used = {}, res = [], T = 60000, t0 = Date.now(), it = null, val = "", lock = false, over = false, tm = null, lastSk = "";
+    $app.querySelector(".topbar").innerHTML = '<button class="back" id="back">✕ Зупинити</button>';
+    $("back").onclick = function () { over = true; clearInterval(tm); document.onkeydown = null; renderBlitz(); toTop(); };
+    function nextIt() {
+      var tries = 0, x = null;
+      while (!x && tries++ < 20) {
+        var pool = ids.length > 1 ? ids.filter(function (id) { return id !== lastSk; }) : ids;
+        var id = pool[Math.floor(Math.random() * pool.length)];
+        x = E.pick(id, 1, used)[0];
+        if (x && (x.type !== "num" || x.long || x.steps || String(x.p).indexOf("___") < 0)) x = null;
+      }
+      if (!x) { used = {}; x = E.pick(ids[0], 1, used)[0]; }
+      used[x.key] = 1; lastSk = x.skill; return x;
+    }
+    function draw() {
+      var ok = res.filter(function (r) { return r.ok; }).length;
+      $("bl-n").textContent = "✓ " + ok;
+      $("bl-p").innerHTML = esc(it.p).replace("___", '<b class="bl-v' + (val ? "" : " e") + '">' + (val || "?") + '</b>');
+    }
+    function show() { it = nextIt(); window.UI_CUR = it; val = ""; lock = false; $("bl-p").className = "bl-p"; draw(); }
+    function tick() {
+      var left = Math.max(0, T - (Date.now() - t0));
+      if ($("bl-t")) { $("bl-t").textContent = Math.ceil(left / 1000); $("bl-bar").style.width = (left / T * 100) + "%"; if (left < 10000) $("bl-t").className = "bl-t low"; }
+      if (left <= 0) end();
+    }
+    function press(k) {
+      if (lock || over) return;
+      if (k === "⌫") val = val.slice(0, -1);
+      else if (k === "✓") { if (val) check(); return; }
+      else if (val.length < 3) val = (val === "0" ? "" : val) + k;
+      draw();
+    }
+    function check() {
+      lock = true;
+      var ok = String(+val) === String(it.a), cur = it;
+      res.push({ it: cur, ok: ok, given: val });
+      E.tick(SUB.id);
+      if (ok) E.fixMistake(cur.key); else E.addMistake(cur, val);
+      $("bl-p").className = "bl-p " + (ok ? "good" : "badv");
+      if (!ok) $("bl-p").innerHTML = esc(cur.p).replace("___", '<s>' + esc(val) + '</s> <b class="bl-v">' + esc(cur.a) + '</b>');
+      setTimeout(function () { if (!over) show(); }, ok ? 250 : 1100);
+    }
+    function end() {
+      if (over) return; over = true; clearInterval(tm); document.onkeydown = null;
+      var ok = res.filter(function (r) { return r.ok; }), bad = res.filter(function (r) { return !r.ok; });
+      var r = E.blitzDone(ok.length, res.length);
+      setTitle("Блискавка · " + child().name);
+      $app.innerHTML = '<div class="card" id="stage" style="text-align:center">' +
+        '<div class="celebrate">' + (r.rec ? "🏆" : "⚡") + '</div><h2>Час!</h2>' +
+        '<div class="bl-big">' + ok.length + '</div><p class="muted" style="margin-top:0">' + (ok.length === 1 ? "правильний приклад" : ok.length % 10 >= 2 && ok.length % 10 <= 4 && (ok.length % 100 < 12 || ok.length % 100 > 14) ? "правильні приклади" : "правильних прикладів") + ' за 60 секунд</p>' +
+        (r.rec && r.prev ? '<p class="bl-rec">🎉 Новий рекорд! Було ' + r.prev + ' — стало ' + ok.length + '. +2 ⭐</p>' :
+          r.rec ? '<p class="bl-rec">Це твій перший рекорд. Спробуй його побити! 💪</p>' :
+          '<p>Рекорд: <b>' + r.prev + '</b>. ' + (r.prev - ok.length <= 2 ? "Зовсім близько! 🔥" : "Ще трохи практики — і поб'єш! 💪") + '</p>') +
+        (bad.length ? '<div class="tip" style="text-align:left"><b>Перевір себе</b> (ці приклади вже в «Моїх помилках»):<br>' + bad.map(function (x) { return "• " + esc(x.it.p.replace("___", x.it.a)) + ' <span class="muted">(було ' + esc(x.given) + ')</span>'; }).join("<br>") + '</div>' : res.length ? '<p>Жодної помилки — супер! 🌟</p>' : "") +
+        '<div class="row"><button class="btn full" id="again">⚡ Ще раз</button></div><div class="row" style="margin-top:8px"><button class="btn ghost full" id="home">← На головну</button></div></div>';
+      $("again").onclick = function () { renderBlitz(); toTop(); };
+      $("home").onclick = function () { renderHome(); toTop(); };
+    }
+    $("stage").innerHTML = '<div class="bl-top"><span class="bl-n" id="bl-n">✓ 0</span><span class="bl-t" id="bl-t">60</span></div>' +
+      '<div class="prog"><i id="bl-bar" style="width:100%"></i></div><div class="bl-p" id="bl-p"></div>' +
+      '<div class="keypad' + (SUB.kid ? " k5" : "") + '" id="keypad">' + (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
+    var ks = $("stage").querySelectorAll(".key");
+    for (var i = 0; i < ks.length; i++) (function (b) { b.onclick = function () { press(b.getAttribute("data-k")); }; })(ks[i]);
+    document.onkeydown = function (e) { if (!$("bl-p")) return; if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); else if (e.key === "Enter") press("✓"); };
+    show(); tm = setInterval(tick, 200);
+  }
+  window.UI_BLITZ = renderBlitz; // для автоматичних перевірок
+
   function renderMistakes() {
     loadAll(function () {
       var ms = E.openMistakes(), fixedN = 0, seenK = {};

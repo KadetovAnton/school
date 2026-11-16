@@ -1,6 +1,10 @@
 import http from "http"; import fs from "fs"; import path from "path";
-import { onRequest } from "./fn.mjs";
-const ROOT = process.argv[2] || "/home/claude/school", kv = new Map();
+import { fileURLToPath } from "url";
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = process.argv[2] || path.join(HERE, ".."), kv = new Map();
+// свіжа копія серверної функції щоразу (імпортувати файл з [[ ]] у назві напряму незручно)
+fs.copyFileSync(path.join(ROOT, "functions/api/[[path]].js"), path.join(HERE, ".fn.mjs"));
+const { onRequest } = await import("./.fn.mjs");
 const DB = { get: async (k, t) => { const v = kv.get(k); return v == null ? null : t === "json" ? JSON.parse(v) : v; }, put: async (k, v) => kv.set(k, v), delete: async k => kv.delete(k) };
 const env = { DB };
 const types = { ".html": "text/html", ".js": "text/javascript", ".css": "text/css", ".json": "application/json", ".png": "image/png", ".mp3": "audio/mpeg" };
