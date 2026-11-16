@@ -1,0 +1,124 @@
+{
+ "id": "l8",
+ "title": "30 головних неправильних дієслів",
+ "skillFiles": [
+  "skills/irr.json"
+ ],
+ "skills": [
+  "irr.1",
+  "irr.2",
+  "irr.3"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "irr.1": 3,
+   "irr.2": 3,
+   "irr.3": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🧩",
+   "h": "Дієслова зі своїм характером",
+   "html": "<p>Деякі дієслова в минулому <b>не беруть -ed</b>, а мають свою форму. Їх треба просто запам'ятати — але їх не так багато, а найчастіших — 30.</p>\n        <div class=\"ex\"><div><div class=\"en\">Yesterday I <b>went</b> to the cinema.</div><div class=\"ua\">Учора я ходила в кіно.</div></div><button class=\"say round\" data-say=\"Yesterday I went to the cinema.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>goed, eated, buyed</s> — так не кажуть. Але форма теж однакова для всіх: I went, she went.</div>"
+  },
+  {
+   "e": "1️⃣",
+   "h": "Група 1: найчастіші",
+   "html": "<table class=\"t\"><tr><td>go</td><td><b>went</b></td><td class=\"muted\">йти</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"go, went\">🔊</button></td></tr><tr><td>have</td><td><b>had</b></td><td class=\"muted\">мати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"have, had\">🔊</button></td></tr><tr><td>do</td><td><b>did</b></td><td class=\"muted\">робити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"do, did\">🔊</button></td></tr><tr><td>see</td><td><b>saw</b></td><td class=\"muted\">бачити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"see, saw\">🔊</button></td></tr><tr><td>come</td><td><b>came</b></td><td class=\"muted\">приходити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"come, came\">🔊</button></td></tr><tr><td>get</td><td><b>got</b></td><td class=\"muted\">отримувати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"get, got\">🔊</button></td></tr><tr><td>make</td><td><b>made</b></td><td class=\"muted\">робити, готувати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"make, made\">🔊</button></td></tr><tr><td>take</td><td><b>took</b></td><td class=\"muted\">брати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"take, took\">🔊</button></td></tr><tr><td>give</td><td><b>gave</b></td><td class=\"muted\">давати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"give, gave\">🔊</button></td></tr><tr><td>eat</td><td><b>ate</b></td><td class=\"muted\">їсти</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"eat, ate\">🔊</button></td></tr></table>"
+  },
+  {
+   "e": "2️⃣",
+   "h": "Група 2: -ought / -aught та інші",
+   "html": "<table class=\"t\"><tr><td>buy</td><td><b>bought</b></td><td class=\"muted\">купувати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"buy, bought\">🔊</button></td></tr><tr><td>bring</td><td><b>brought</b></td><td class=\"muted\">приносити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"bring, brought\">🔊</button></td></tr><tr><td>think</td><td><b>thought</b></td><td class=\"muted\">думати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"think, thought\">🔊</button></td></tr><tr><td>catch</td><td><b>caught</b></td><td class=\"muted\">ловити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"catch, caught\">🔊</button></td></tr><tr><td>teach</td><td><b>taught</b></td><td class=\"muted\">навчати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"teach, taught\">🔊</button></td></tr><tr><td>find</td><td><b>found</b></td><td class=\"muted\">знаходити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"find, found\">🔊</button></td></tr><tr><td>say</td><td><b>said</b></td><td class=\"muted\">сказати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"say, said\">🔊</button></td></tr><tr><td>tell</td><td><b>told</b></td><td class=\"muted\">розповідати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"tell, told\">🔊</button></td></tr><tr><td>read</td><td><b>read</b></td><td class=\"muted\">читати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"read, read\">🔊</button></td></tr><tr><td>write</td><td><b>wrote</b></td><td class=\"muted\">писати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"write, wrote\">🔊</button></td></tr></table><div class=\"tip\">💡 bought, brought, thought, caught, taught — усі звучать на [о:т]. read у минулому пишеться так само, але вимовляється [ред].</div>"
+  },
+  {
+   "e": "3️⃣",
+   "h": "Група 3: i → a та інші",
+   "html": "<table class=\"t\"><tr><td>swim</td><td><b>swam</b></td><td class=\"muted\">плавати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"swim, swam\">🔊</button></td></tr><tr><td>sing</td><td><b>sang</b></td><td class=\"muted\">співати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"sing, sang\">🔊</button></td></tr><tr><td>drink</td><td><b>drank</b></td><td class=\"muted\">пити</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"drink, drank\">🔊</button></td></tr><tr><td>begin</td><td><b>began</b></td><td class=\"muted\">починати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"begin, began\">🔊</button></td></tr><tr><td>run</td><td><b>ran</b></td><td class=\"muted\">бігати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"run, ran\">🔊</button></td></tr><tr><td>sit</td><td><b>sat</b></td><td class=\"muted\">сидіти</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"sit, sat\">🔊</button></td></tr><tr><td>meet</td><td><b>met</b></td><td class=\"muted\">зустрічати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"meet, met\">🔊</button></td></tr><tr><td>leave</td><td><b>left</b></td><td class=\"muted\">залишати, їхати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"leave, left\">🔊</button></td></tr><tr><td>sleep</td><td><b>slept</b></td><td class=\"muted\">спати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"sleep, slept\">🔊</button></td></tr><tr><td>feel</td><td><b>felt</b></td><td class=\"muted\">відчувати</td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"feel, felt\">🔊</button></td></tr></table><div class=\"tip\">💡 swim, sing, drink, begin, run: <b>i/u → a</b> (swam, sang, drank, began, ran). sleep, feel, meet, leave: стають коротшими (slept, felt, met, left).</div>"
+  }
+ ],
+ "examples": {
+  "title": "Мій день народження",
+  "question": {
+   "q": "чому «I <b>read</b> a book yesterday» — а де ж минуле?",
+   "a": "read — неправильне дієслово, у минулому пишеться так само, тільки звучить [ред]."
+  },
+  "items": [
+   [
+    "On my birthday I <b>got</b> up early.",
+    "У свій день народження я рано встала."
+   ],
+   [
+    "Mum <b>made</b> a big chocolate cake.",
+    "Мама спекла великий шоколадний торт."
+   ],
+   [
+    "My friends <b>came</b> at three o'clock.",
+    "Друзі прийшли о третій."
+   ],
+   [
+    "They <b>brought</b> presents, and Dad <b>bought</b> balloons.",
+    "Вони принесли подарунки, а тато купив кульки."
+   ],
+   [
+    "We <b>ate</b> pizza and <b>drank</b> lemonade.",
+    "Ми їли піцу й пили лимонад."
+   ],
+   [
+    "Then we <b>sang</b> songs and <b>took</b> a lot of photos.",
+    "Потім ми співали пісні й багато фотографувались."
+   ],
+   [
+    "In the evening I <b>felt</b> tired but very happy.",
+    "Увечері я почувалася втомленою, але дуже щасливою."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "birthday",
+   "день народження"
+  ],
+  [
+   "present",
+   "подарунок"
+  ],
+  [
+   "party",
+   "свято, вечірка"
+  ],
+  [
+   "guest",
+   "гість"
+  ],
+  [
+   "balloon",
+   "повітряна кулька"
+  ],
+  [
+   "candle",
+   "свічка"
+  ],
+  [
+   "invite",
+   "запрошувати"
+  ],
+  [
+   "celebrate",
+   "святкувати"
+  ],
+  [
+   "wish",
+   "бажання; бажати"
+  ],
+  [
+   "surprise",
+   "сюрприз"
+  ]
+ ]
+}

@@ -1,0 +1,715 @@
+{
+ "topic": "past",
+ "title": "Past Simple: питання і заперечення",
+ "skills": [
+  {
+   "id": "past.neg",
+   "title": "Заперечення: didn't + перша форма",
+   "rule": "didn't + дієслово в першій формі (як у словнику) для всіх: I didn't go, she didn't watch.",
+   "worked": {
+    "p": "Tom ___ to the party last Saturday. (not go)",
+    "steps": [
+     "Минуле (last Saturday) + «не» → <b>didn't</b>.",
+     "Після didn't — перша форма: <b>go</b> (не went!).",
+     "Відповідь: Tom <b>didn't go</b> to the party last Saturday."
+    ]
+   },
+   "alt": "<p>Минуле може бути в реченні <b>лише один раз</b>. Якщо воно вже в didn't, дієслово лишається звичайним:</p>\n        <p>She <b>went</b>. → She <b>didn't go</b>.<br>We <b>watched</b>. → We <b>didn't watch</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Yesterday I ___ go to school.",
+     "o": [
+      "didn't",
+      "don't"
+     ],
+     "a": "didn't",
+     "h": [
+      "Yesterday — минуле.",
+      "Минуле «не» → didn't."
+     ],
+     "e": "yesterday → <b>didn't</b>.",
+     "err": {
+      "don't": "Yesterday — минуле: <b>didn't</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She ___ call me last night.",
+     "o": [
+      "didn't",
+      "doesn't"
+     ],
+     "a": "didn't",
+     "h": [
+      "last night — минуле.",
+      "didn't для всіх."
+     ],
+     "e": "last night → <b>didn't</b>.",
+     "err": {
+      "doesn't": "last night — минуле: <b>didn't</b> для всіх."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "He ___ his homework yesterday.",
+     "o": [
+      "didn't do",
+      "didn't did",
+      "doesn't do"
+     ],
+     "a": "didn't do",
+     "h": [
+      "Минуле → didn't.",
+      "Після didn't — перша форма."
+     ],
+     "e": "<b>didn't do</b>: після didn't — перша форма.",
+     "err": {
+      "didn't did": "Після didn't — перша форма: didn't <b>do</b>.",
+      "doesn't do": "yesterday — минуле: <b>didn't</b> do."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "We ___ TV yesterday. (not watch)",
+     "a": [
+      "didn't watch",
+      "did not watch"
+     ],
+     "h": [
+      "Минуле → didn't.",
+      "Дієслово — перша форма."
+     ],
+     "e": "<b>didn't watch</b>.",
+     "err": {
+      "didn't watched": "Після didn't — перша форма: didn't <b>watch</b>.",
+      "don't watch": "yesterday — минуле: <b>didn't</b> watch.",
+      "not watched": "Потрібен помічник: <b>didn't watch</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "Tom ___ to the party last Saturday. (not go)",
+     "a": [
+      "didn't go",
+      "did not go"
+     ],
+     "h": [
+      "Минуле → didn't.",
+      "go — перша форма, не went."
+     ],
+     "e": "<b>didn't go</b>.",
+     "err": {
+      "didn't went": "Після didn't — перша форма: didn't <b>go</b>.",
+      "doesn't go": "last Saturday — минуле: <b>didn't</b> go."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "My parents ___ a new car last year. (not buy)",
+     "a": [
+      "didn't buy",
+      "did not buy"
+     ],
+     "h": [
+      "Минуле → didn't.",
+      "buy — перша форма."
+     ],
+     "e": "<b>didn't buy</b>.",
+     "err": {
+      "didn't bought": "Після didn't — перша форма: didn't <b>buy</b>.",
+      "don't buy": "last year — минуле: <b>didn't</b> buy."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "I ___ breakfast this morning. (not have)",
+     "a": [
+      "didn't have",
+      "did not have"
+     ],
+     "h": [
+      "Ранок уже минув → didn't.",
+      "have — перша форма."
+     ],
+     "e": "<b>didn't have</b>.",
+     "err": {
+      "didn't had": "Після didn't — перша форма: didn't <b>have</b>.",
+      "don't have": "this morning (уже минув) — <b>didn't</b> have."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She didn't went to school yesterday.",
+     "bad": 2,
+     "a": "She didn't go to school yesterday.",
+     "h": [
+      "Подивись на дієслово після didn't.",
+      "Після didn't — перша форма."
+     ],
+     "e": "didn't + <b>go</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We didn't played football last week.",
+     "bad": 2,
+     "a": "We didn't play football last week.",
+     "h": [
+      "Подивись на дієслово після didn't.",
+      "Після didn't — перша форма."
+     ],
+     "e": "didn't + <b>play</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I didn't see him yesterday.",
+     "a": [
+      "I didn't see him yesterday."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Після didn't — перша форма."
+     ],
+     "e": "didn't + <b>see</b>.",
+     "err": {
+      "I didn't saw him yesterday.": "Після didn't — перша форма: <b>see</b>.",
+      "I don't see him yesterday.": "yesterday — минуле: <b>didn't</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Вони не прийшли вчора».",
+     "words": [
+      "come",
+      "They",
+      "yesterday",
+      "didn't"
+     ],
+     "a": [
+      "they didn't come yesterday",
+      "yesterday they didn't come"
+     ],
+     "h": [
+      "Хто → didn't → дієслово → коли.",
+      "They → didn't → come → …"
+     ],
+     "e": "<b>They didn't come yesterday.</b>"
+    }
+   ]
+  },
+  {
+   "id": "past.q",
+   "title": "Питання: Did…?",
+   "rule": "Did + хто + дієслово в першій формі?",
+   "worked": {
+    "p": "Did Tom ___ you yesterday? (call)",
+    "steps": [
+     "Питання вже починається з <b>Did</b> — минуле там.",
+     "Тому дієслово — перша форма: <b>call</b>.",
+     "Відповідь: Did Tom <b>call</b> you yesterday?"
+    ]
+   },
+   "alt": "<p>Did — це «Do / Does у минулому». Одне слово для всіх:</p>\n        <p>Do you like…? → <b>Did</b> you like…?<br>Does she play…? → <b>Did</b> she play…?</p>\n        <p class=\"muted\">А дієслово, як і з do / does, без змін.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ you see the film yesterday?",
+     "o": [
+      "Did",
+      "Do",
+      "Were"
+     ],
+     "a": "Did",
+     "h": [
+      "yesterday — минуле.",
+      "Питання в минулому → Did."
+     ],
+     "e": "yesterday → <b>Did</b> you see…?",
+     "err": {
+      "Do": "yesterday — минуле: <b>Did</b>.",
+      "Were": "see — дієслово дії, тож питаємо з <b>Did</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Did she ___ the test?",
+     "o": [
+      "pass",
+      "passed"
+     ],
+     "a": "pass",
+     "h": [
+      "Є Did.",
+      "Після Did — перша форма."
+     ],
+     "e": "Did + <b>pass</b>.",
+     "err": {
+      "passed": "Після Did — перша форма: <b>pass</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Did або Do",
+     "p": "___ you go to the sea last summer?",
+     "a": [
+      "Did"
+     ],
+     "h": [
+      "last summer — минуле.",
+      "Did."
+     ],
+     "e": "last summer → <b>Did</b>.",
+     "err": {
+      "Do": "last summer — минуле: <b>Did</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Did або Does",
+     "p": "___ your mum cook dinner yesterday?",
+     "a": [
+      "Did"
+     ],
+     "h": [
+      "yesterday — минуле.",
+      "Did для всіх."
+     ],
+     "e": "yesterday → <b>Did</b>.",
+     "err": {
+      "Does": "yesterday — минуле: <b>Did</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово",
+     "p": "Did Tom ___ you yesterday? (call)",
+     "a": [
+      "call"
+     ],
+     "h": [
+      "Є Did.",
+      "Після Did — перша форма."
+     ],
+     "e": "Did + <b>call</b>.",
+     "err": {
+      "called": "Після Did — перша форма: <b>call</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово",
+     "p": "Did they ___ the bus? (catch)",
+     "a": [
+      "catch"
+     ],
+     "h": [
+      "Є Did.",
+      "Перша форма, не caught."
+     ],
+     "e": "Did + <b>catch</b>.",
+     "err": {
+      "caught": "Після Did — перша форма: <b>catch</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Did you went to the park?",
+     "bad": 2,
+     "a": "Did you go to the park?",
+     "h": [
+      "Подивись на дієслово після Did.",
+      "Перша форма."
+     ],
+     "e": "Did + <b>go</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Do you see Anna yesterday?",
+     "bad": 0,
+     "a": "Did you see Anna yesterday?",
+     "h": [
+      "yesterday — минуле.",
+      "Did."
+     ],
+     "e": "yesterday → <b>Did</b> you see…?"
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Ти бачила мою сумку?»",
+     "words": [
+      "see",
+      "Did",
+      "my",
+      "you",
+      "bag"
+     ],
+     "a": [
+      "did you see my bag"
+     ],
+     "h": [
+      "Did → хто → дієслово → що?",
+      "Did → you → see → …"
+     ],
+     "e": "<b>Did you see my bag?</b>",
+     "end": "?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Did you have a good time?",
+     "a": [
+      "Did you have a good time?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Після Did — have."
+     ],
+     "e": "Did + <b>have</b>.",
+     "err": {
+      "Did you had a good time?": "Після Did — перша форма: <b>have</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "past.short",
+   "title": "Yes, I did / No, she didn't",
+   "rule": "Did…? → Yes, I did. / No, I didn't. Was / Were…? → Yes, I was. / No, it wasn't.",
+   "worked": {
+    "p": "Did Anna call you? — No, she ___.",
+    "steps": [
+     "Питали з <b>Did</b>.",
+     "Відповідаємо тим самим помічником.",
+     "«Ні» → <b>didn't</b>.",
+     "Відповідь: No, she <b>didn't</b>."
+    ]
+   },
+   "alt": "<p>Коротка відповідь — луна першого слова питання:</p>\n        <p><b>Did</b> you…? → Yes, I <b>did</b>. / No, I <b>didn't</b>.<br><b>Were</b> you…? → Yes, I <b>was</b>. / No, I <b>wasn't</b>.<br><b>Was</b> it…? → Yes, it <b>was</b>. / No, it <b>wasn't</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Did you like the film? — Yes, I ___.",
+     "o": [
+      "did",
+      "liked",
+      "do"
+     ],
+     "a": "did",
+     "h": [
+      "Питали з Did.",
+      "Відповідь тим самим словом."
+     ],
+     "e": "Did…? → Yes, I <b>did</b>.",
+     "err": {
+      "liked": "Коротка відповідь — з помічником: Yes, I <b>did</b>.",
+      "do": "Питання в минулому: Yes, I <b>did</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Did Max win? — No, he ___.",
+     "o": [
+      "didn't",
+      "doesn't",
+      "wasn't"
+     ],
+     "a": "didn't",
+     "h": [
+      "Питали з Did.",
+      "«Ні» → didn't."
+     ],
+     "e": "No, he <b>didn't</b>.",
+     "err": {
+      "doesn't": "Питали з Did: No, he <b>didn't</b>.",
+      "wasn't": "Питали з Did: No, he <b>didn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Did your parents go out? — Yes, they ___.",
+     "a": [
+      "did"
+     ],
+     "h": [
+      "Питали з Did.",
+      "did."
+     ],
+     "e": "Yes, they <b>did</b>.",
+     "err": {
+      "went": "Коротка відповідь — з помічником: Yes, they <b>did</b>.",
+      "do": "Питання в минулому: <b>did</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Did Anna call you? — No, she ___.",
+     "a": [
+      "didn't",
+      "did not"
+     ],
+     "h": [
+      "Питали з Did, «ні».",
+      "didn't."
+     ],
+     "e": "No, she <b>didn't</b>.",
+     "err": {
+      "doesn't": "Питали з Did: <b>didn't</b>.",
+      "wasn't": "Питали з Did: <b>didn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Were you at home? — Yes, I ___.",
+     "a": [
+      "was"
+     ],
+     "h": [
+      "Питали з Were.",
+      "I → was."
+     ],
+     "e": "Yes, I <b>was</b>.",
+     "err": {
+      "did": "Питали з Were: Yes, I <b>was</b>.",
+      "were": "З I — <b>was</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Was the test easy? — No, it ___.",
+     "a": [
+      "wasn't",
+      "was not"
+     ],
+     "h": [
+      "Питали з Was.",
+      "it → wasn't."
+     ],
+     "e": "No, it <b>wasn't</b>.",
+     "err": {
+      "didn't": "Питали з Was: No, it <b>wasn't</b>.",
+      "weren't": "it → <b>wasn't</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Did they enjoy the trip? Яка відповідь правильна?",
+     "o": [
+      "Yes, they did.",
+      "Yes, they enjoyed.",
+      "Yes, they do."
+     ],
+     "a": "Yes, they did.",
+     "h": [
+      "Питали з Did.",
+      "Відповідаємо did."
+     ],
+     "e": "Did…? → Yes, they <b>did</b>.",
+     "err": {
+      "Yes, they enjoyed.": "Коротка відповідь — з помічником: Yes, they <b>did</b>.",
+      "Yes, they do.": "Питання в минулому: Yes, they <b>did</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Did she help you? — Yes, she does.",
+     "bad": 7,
+     "a": "Did she help you? — Yes, she did.",
+     "h": [
+      "Питали з Did.",
+      "Відповідь — тим самим словом."
+     ],
+     "e": "Did…? → Yes, she <b>did</b>."
+    }
+   ]
+  },
+  {
+   "id": "past.wh",
+   "title": "Where did you go? What did you do?",
+   "rule": "Питальне слово → did → хто → дієслово в першій формі?",
+   "worked": {
+    "p": "What did you ___ for breakfast? (eat)",
+    "steps": [
+     "Питання з <b>did</b> — минуле вже там.",
+     "Дієслово — перша форма: <b>eat</b> (не ate).",
+     "Відповідь: What did you <b>eat</b> for breakfast?"
+    ]
+   },
+   "alt": "<p>Візьми питання з Did і постав спереду питальне слово:</p>\n        <p>Did you go? → <b>Where</b> did you go?<br>Did you do? → <b>What</b> did you do?<br>Did he cry? → <b>Why</b> did he cry?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Where ___ you go last summer?",
+     "o": [
+      "did",
+      "do",
+      "were"
+     ],
+     "a": "did",
+     "h": [
+      "last summer — минуле.",
+      "did."
+     ],
+     "e": "last summer → Where <b>did</b>…?",
+     "err": {
+      "do": "last summer — минуле: <b>did</b>.",
+      "were": "go — дієслово дії, тож <b>did</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "What ___ she buy yesterday?",
+     "o": [
+      "did",
+      "does"
+     ],
+     "a": "did",
+     "h": [
+      "yesterday — минуле.",
+      "did."
+     ],
+     "e": "yesterday → What <b>did</b>…?",
+     "err": {
+      "does": "yesterday — минуле: <b>did</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши допоміжне слово",
+     "p": "What ___ you do last weekend?",
+     "a": [
+      "did"
+     ],
+     "h": [
+      "last weekend — минуле.",
+      "did."
+     ],
+     "e": "last weekend → <b>did</b>.",
+     "err": {
+      "do": "last weekend — минуле: <b>did</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши допоміжне слово",
+     "p": "Why ___ Tom cry yesterday?",
+     "a": [
+      "did"
+     ],
+     "h": [
+      "yesterday — минуле.",
+      "did."
+     ],
+     "e": "yesterday → Why <b>did</b>…?",
+     "err": {
+      "does": "yesterday — минуле: <b>did</b>.",
+      "was": "cry — дієслово дії, тож <b>did</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово",
+     "p": "What did you ___ for breakfast? (eat)",
+     "a": [
+      "eat"
+     ],
+     "h": [
+      "Є did.",
+      "Перша форма, не ate."
+     ],
+     "e": "did + <b>eat</b>.",
+     "err": {
+      "ate": "Після did — перша форма: <b>eat</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Куди ти ходила вчора?»",
+     "words": [
+      "go",
+      "Where",
+      "yesterday",
+      "you",
+      "did"
+     ],
+     "a": [
+      "where did you go yesterday"
+     ],
+     "h": [
+      "Питальне слово → did → хто → дієслово → коли?",
+      "Where → did → you → go → …"
+     ],
+     "e": "<b>Where did you go yesterday?</b>",
+     "end": "?"
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Що ви робили в суботу?»",
+     "words": [
+      "do",
+      "What",
+      "on",
+      "you",
+      "did",
+      "Saturday"
+     ],
+     "a": [
+      "what did you do on saturday"
+     ],
+     "h": [
+      "Питальне слово → did → хто → дієслово.",
+      "What → did → you → do → …"
+     ],
+     "e": "<b>What did you do on Saturday?</b>",
+     "end": "?"
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Where did you bought this T-shirt?",
+     "bad": 3,
+     "a": "Where did you buy this T-shirt?",
+     "h": [
+      "Подивись на дієслово після did.",
+      "Перша форма."
+     ],
+     "e": "did + <b>buy</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 What did you do yesterday?",
+     "a": [
+      "What did you do yesterday?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Після did — перша форма."
+     ],
+     "e": "What did you <b>do</b>?",
+     "err": {
+      "What did you did yesterday?": "Після did — перша форма: <b>do</b>.",
+      "What you did yesterday?": "Не забувай did: What <b>did</b> you do?"
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,680 @@
+{
+ "topic": "irr",
+ "title": "Неправильні дієслова",
+ "skills": [
+  {
+   "id": "irr.1",
+   "title": "go-went, have-had, see-saw…",
+   "rule": "go → went, have → had, do → did, see → saw, come → came, get → got, make → made, take → took, give → gave, eat → ate.",
+   "worked": {
+    "p": "Yesterday I ___ to the cinema. (go)",
+    "steps": [
+     "Підказка <b>yesterday</b> → минуле.",
+     "go — неправильне дієслово, -ed не додаємо.",
+     "Згадую пару: go → <b>went</b>.",
+     "Відповідь: Yesterday I <b>went</b> to the cinema."
+    ]
+   },
+   "alt": "<p>Проговори пари вголос, як вірш, кілька разів:</p>\n        <p><b>go — went, have — had, do — did,<br>see — saw, come — came, get — got,<br>make — made, take — took, give — gave, eat — ate.</b></p>\n        <p class=\"muted\">Підказка: came, made, gave — «-ame/-ade/-ave», схожі між собою.</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Yesterday I ___ to the cinema. (go)",
+     "a": [
+      "went"
+     ],
+     "h": [
+      "go — неправильне.",
+      "go → w…"
+     ],
+     "e": "go → <b>went</b>.",
+     "err": {
+      "goed": "go — неправильне: <b>went</b>.",
+      "go": "yesterday — минуле: <b>went</b>.",
+      "gone": "gone — третя форма; у Past Simple: <b>went</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "We ___ pizza for dinner last night. (have)",
+     "a": [
+      "had"
+     ],
+     "h": [
+      "have — неправильне.",
+      "have → h…"
+     ],
+     "e": "have → <b>had</b>.",
+     "err": {
+      "haved": "have — неправильне: <b>had</b>.",
+      "has": "last night — минуле: <b>had</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "She ___ her homework yesterday evening. (do)",
+     "a": [
+      "did"
+     ],
+     "h": [
+      "do — неправильне.",
+      "do → d…"
+     ],
+     "e": "do → <b>did</b>.",
+     "err": {
+      "doed": "do — неправильне: <b>did</b>.",
+      "does": "yesterday — минуле: <b>did</b>.",
+      "done": "done — третя форма; у Past Simple: <b>did</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "I ___ a big dog in the park yesterday. (see)",
+     "a": [
+      "saw"
+     ],
+     "h": [
+      "see — неправильне.",
+      "see → s…"
+     ],
+     "e": "see → <b>saw</b>.",
+     "err": {
+      "seed": "see — неправильне: <b>saw</b>.",
+      "seen": "seen — третя форма; у Past Simple: <b>saw</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Tom ___ home late last night. (come)",
+     "a": [
+      "came"
+     ],
+     "h": [
+      "come — неправильне.",
+      "come → c…"
+     ],
+     "e": "come → <b>came</b>.",
+     "err": {
+      "comed": "come — неправильне: <b>came</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "My mum ___ a cake yesterday. (make)",
+     "a": [
+      "made"
+     ],
+     "h": [
+      "make — неправильне.",
+      "make → m…"
+     ],
+     "e": "make → <b>made</b>.",
+     "err": {
+      "maked": "make — неправильне: <b>made</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "He ___ a lot of photos last summer. (take)",
+     "a": [
+      "took"
+     ],
+     "h": [
+      "take — неправильне.",
+      "take → t…"
+     ],
+     "e": "take → <b>took</b>.",
+     "err": {
+      "taked": "take — неправильне: <b>took</b>.",
+      "taken": "taken — третя форма; у Past Simple: <b>took</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Grandpa ___ me a present yesterday. (give)",
+     "a": [
+      "gave"
+     ],
+     "h": [
+      "give — неправильне.",
+      "give → g…"
+     ],
+     "e": "give → <b>gave</b>.",
+     "err": {
+      "gived": "give — неправильне: <b>gave</b>.",
+      "given": "given — третя форма; у Past Simple: <b>gave</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "choice",
+     "p": "Last week I ___ a new phone.",
+     "o": [
+      "got",
+      "getted",
+      "get"
+     ],
+     "a": "got",
+     "h": [
+      "get — неправильне.",
+      "get → g…"
+     ],
+     "e": "get → <b>got</b>.",
+     "err": {
+      "getted": "get — неправильне: <b>got</b>.",
+      "get": "Last week — минуле: <b>got</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ ice cream after school yesterday.",
+     "o": [
+      "ate",
+      "eated",
+      "eat"
+     ],
+     "a": "ate",
+     "h": [
+      "eat — неправильне.",
+      "eat → a…"
+     ],
+     "e": "eat → <b>ate</b>.",
+     "err": {
+      "eated": "eat — неправильне: <b>ate</b>.",
+      "eat": "yesterday — минуле: <b>ate</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Yesterday we goed to the zoo.",
+     "bad": 2,
+     "a": "Yesterday we went to the zoo.",
+     "h": [
+      "Одне дієслово — неправильне.",
+      "go → went."
+     ],
+     "e": "go → <b>went</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I saw my friend yesterday.",
+     "a": [
+      "I saw my friend yesterday."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "see → saw."
+     ],
+     "e": "see → <b>saw</b>.",
+     "err": {
+      "I seed my friend yesterday.": "see — неправильне: <b>saw</b>.",
+      "I see my friend yesterday.": "yesterday — минуле: <b>saw</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "irr.2",
+   "title": "buy-bought, think-thought, write-wrote…",
+   "rule": "buy → bought, bring → brought, think → thought, catch → caught, teach → taught, find → found, say → said, tell → told, read → read, write → wrote.",
+   "worked": {
+    "p": "Mum ___ some bread yesterday. (buy)",
+    "steps": [
+     "Підказка <b>yesterday</b> → минуле.",
+     "buy — неправильне.",
+     "Згадую «сім'ю -ought»: buy → <b>bought</b>.",
+     "Відповідь: Mum <b>bought</b> some bread yesterday."
+    ]
+   },
+   "alt": "<p>П'ять дієслів звучать однаково на кінці [о:т] — запам'ятай їх разом:</p>\n        <p><b>bought, brought, thought</b> (на -ought) і <b>caught, taught</b> (на -aught).</p>\n        <p>Решта: find → found, say → said, tell → told, write → wrote, read → read [ред].</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Mum ___ some bread yesterday. (buy)",
+     "a": [
+      "bought"
+     ],
+     "h": [
+      "buy — неправильне.",
+      "Звучить [бо:т]."
+     ],
+     "e": "buy → <b>bought</b>.",
+     "err": {
+      "buyed": "buy — неправильне: <b>bought</b>.",
+      "brought": "brought — це від bring. buy → <b>bought</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "She ___ her dog to school last Friday. (bring)",
+     "a": [
+      "brought"
+     ],
+     "h": [
+      "bring — неправильне.",
+      "Звучить [бро:т]."
+     ],
+     "e": "bring → <b>brought</b>.",
+     "err": {
+      "bringed": "bring — неправильне: <b>brought</b>.",
+      "brang": "bring → <b>brought</b>.",
+      "bought": "bought — це від buy. bring → <b>brought</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "At first I ___ it was easy. (think)",
+     "a": [
+      "thought"
+     ],
+     "h": [
+      "think — неправильне.",
+      "Звучить [со:т]."
+     ],
+     "e": "think → <b>thought</b>.",
+     "err": {
+      "thinked": "think — неправильне: <b>thought</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "My cat ___ a mouse last night. (catch)",
+     "a": [
+      "caught"
+     ],
+     "h": [
+      "catch — неправильне.",
+      "-aught."
+     ],
+     "e": "catch → <b>caught</b>.",
+     "err": {
+      "catched": "catch — неправильне: <b>caught</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Our teacher ___ us a new song yesterday. (teach)",
+     "a": [
+      "taught"
+     ],
+     "h": [
+      "teach — неправильне.",
+      "-aught."
+     ],
+     "e": "teach → <b>taught</b>.",
+     "err": {
+      "teached": "teach — неправильне: <b>taught</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "I ___ my keys under the sofa this morning. (find)",
+     "a": [
+      "found"
+     ],
+     "h": [
+      "find — неправильне.",
+      "find → f…"
+     ],
+     "e": "find → <b>found</b>.",
+     "err": {
+      "finded": "find — неправильне: <b>found</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "He ___ hello and smiled. (say)",
+     "a": [
+      "said"
+     ],
+     "h": [
+      "say — неправильне.",
+      "Пишеться s-a-i-d."
+     ],
+     "e": "say → <b>said</b>.",
+     "err": {
+      "sayed": "say — неправильне: <b>said</b>.",
+      "says": "smiled — минуле, тож і тут минуле: <b>said</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Dad ___ us a funny story last night. (tell)",
+     "a": [
+      "told"
+     ],
+     "h": [
+      "tell — неправильне.",
+      "tell → t…"
+     ],
+     "e": "tell → <b>told</b>.",
+     "err": {
+      "telled": "tell — неправильне: <b>told</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "choice",
+     "p": "Yesterday I ___ a very interesting book.",
+     "o": [
+      "read",
+      "readed",
+      "reads"
+     ],
+     "a": "read",
+     "h": [
+      "read — неправильне.",
+      "Пишеться так само!"
+     ],
+     "e": "read → <b>read</b> (звучить [ред]).",
+     "err": {
+      "readed": "read у минулому пишеться так само: <b>read</b> [ред].",
+      "reads": "yesterday — минуле: <b>read</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Last week she ___ a letter to her grandma.",
+     "o": [
+      "wrote",
+      "writed",
+      "write"
+     ],
+     "a": "wrote",
+     "h": [
+      "write — неправильне.",
+      "write → wr…"
+     ],
+     "e": "write → <b>wrote</b>.",
+     "err": {
+      "writed": "write — неправильне: <b>wrote</b>.",
+      "write": "Last week — минуле: <b>wrote</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My mum buyed a new dress yesterday.",
+     "bad": 2,
+     "a": "My mum bought a new dress yesterday.",
+     "h": [
+      "Одне дієслово — неправильне.",
+      "buy → bought."
+     ],
+     "e": "buy → <b>bought</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 He told me a secret.",
+     "a": [
+      "He told me a secret."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "tell → told."
+     ],
+     "e": "tell → <b>told</b>.",
+     "err": {
+      "He telled me a secret.": "tell — неправильне: <b>told</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "irr.3",
+   "title": "swim-swam, run-ran, sleep-slept…",
+   "rule": "swim → swam, sing → sang, drink → drank, begin → began, run → ran, sit → sat, meet → met, leave → left, sleep → slept, feel → felt.",
+   "worked": {
+    "p": "We ___ in the sea last summer. (swim)",
+    "steps": [
+     "Підказка <b>last summer</b> → минуле.",
+     "swim — неправильне.",
+     "Правило «i → a»: sw<b>i</b>m → sw<b>a</b>m.",
+     "Відповідь: We <b>swam</b> in the sea last summer."
+    ]
+   },
+   "alt": "<p>Дві «сім'ї»:</p>\n        <p><b>i/u → a:</b> swim → swam, sing → sang, drink → drank, begin → began, run → ran, sit → sat.</p>\n        <p><b>Коротшають:</b> sleep → slept, feel → felt, meet → met, leave → left.</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "We ___ in the sea last summer. (swim)",
+     "a": [
+      "swam"
+     ],
+     "h": [
+      "swim — неправильне.",
+      "i → a."
+     ],
+     "e": "swim → <b>swam</b>.",
+     "err": {
+      "swimmed": "swim — неправильне: <b>swam</b>.",
+      "swum": "swum — третя форма; у Past Simple: <b>swam</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "The children ___ a song at the concert. (sing)",
+     "a": [
+      "sang"
+     ],
+     "h": [
+      "sing — неправильне.",
+      "i → a."
+     ],
+     "e": "sing → <b>sang</b>.",
+     "err": {
+      "singed": "sing — неправильне: <b>sang</b>.",
+      "sung": "sung — третя форма; у Past Simple: <b>sang</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "I ___ a glass of milk last night. (drink)",
+     "a": [
+      "drank"
+     ],
+     "h": [
+      "drink — неправильне.",
+      "i → a."
+     ],
+     "e": "drink → <b>drank</b>.",
+     "err": {
+      "drinked": "drink — неправильне: <b>drank</b>.",
+      "drunk": "drunk — третя форма; у Past Simple: <b>drank</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "The lesson ___ at nine o'clock yesterday. (begin)",
+     "a": [
+      "began"
+     ],
+     "h": [
+      "begin — неправильне.",
+      "i → a."
+     ],
+     "e": "begin → <b>began</b>.",
+     "err": {
+      "beginned": "begin — неправильне: <b>began</b>.",
+      "begun": "begun — третя форма; у Past Simple: <b>began</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Tom ___ very fast and won the race. (run)",
+     "a": [
+      "ran"
+     ],
+     "h": [
+      "run — неправильне.",
+      "u → a."
+     ],
+     "e": "run → <b>ran</b>.",
+     "err": {
+      "runned": "run — неправильне: <b>ran</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "We ___ under a big tree and talked. (sit)",
+     "a": [
+      "sat"
+     ],
+     "h": [
+      "sit — неправильне.",
+      "i → a."
+     ],
+     "e": "sit → <b>sat</b>.",
+     "err": {
+      "sitted": "sit — неправильне: <b>sat</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "I ___ my best friend in the park yesterday. (meet)",
+     "a": [
+      "met"
+     ],
+     "h": [
+      "meet — неправильне.",
+      "Коротшає."
+     ],
+     "e": "meet → <b>met</b>.",
+     "err": {
+      "meeted": "meet — неправильне: <b>met</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple (неправильне!)",
+     "p": "Yesterday the train ___ at six o'clock. (leave)",
+     "a": [
+      "left"
+     ],
+     "h": [
+      "leave — неправильне.",
+      "leave → l…"
+     ],
+     "e": "leave → <b>left</b>.",
+     "err": {
+      "leaved": "leave — неправильне: <b>left</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "choice",
+     "p": "I ___ for ten hours last night.",
+     "o": [
+      "slept",
+      "sleeped",
+      "sleep"
+     ],
+     "a": "slept",
+     "h": [
+      "sleep — неправильне.",
+      "Коротшає."
+     ],
+     "e": "sleep → <b>slept</b>.",
+     "err": {
+      "sleeped": "sleep — неправильне: <b>slept</b>.",
+      "sleep": "last night — минуле: <b>slept</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "After the long walk we ___ tired.",
+     "o": [
+      "felt",
+      "feeled",
+      "feel"
+     ],
+     "a": "felt",
+     "h": [
+      "feel — неправильне.",
+      "Коротшає."
+     ],
+     "e": "feel → <b>felt</b>.",
+     "err": {
+      "feeled": "feel — неправильне: <b>felt</b>.",
+      "feel": "Тут розповідь про минуле: <b>felt</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Yesterday I swimmed in the river.",
+     "bad": 2,
+     "a": "Yesterday I swam in the river.",
+     "h": [
+      "Одне дієслово — неправильне.",
+      "swim → swam."
+     ],
+     "e": "swim → <b>swam</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We met our teacher in the shop.",
+     "a": [
+      "We met our teacher in the shop."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "meet → met."
+     ],
+     "e": "meet → <b>met</b>.",
+     "err": {
+      "We meeted our teacher in the shop.": "meet — неправильне: <b>met</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

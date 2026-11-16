@@ -1,0 +1,124 @@
+{
+ "id": "l7",
+ "title": "Past Simple: правильні дієслова, was / were",
+ "skillFiles": [
+  "skills/past.json"
+ ],
+ "skills": [
+  "past.ed",
+  "past.spell",
+  "past.be"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "past.ed": 3,
+   "past.spell": 3,
+   "past.be": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📅",
+   "h": "Що було вчора",
+   "html": "<p>Past Simple — про дію, яка <b>вже відбулась і закінчилась</b> у минулому.</p>\n        <div class=\"ex\"><div><div class=\"en\">I <b>played</b> football yesterday.</div><div class=\"ua\">Я грав у футбол учора.</div></div><button class=\"say round\" data-say=\"I played football yesterday.\">🔊</button></div>\n        <div class=\"tip\">🔎 <b>Слова-підказки:</b> yesterday (вчора), last week (минулого тижня), last year (минулого року), two days ago (два дні тому), in 2020.</div>"
+  },
+  {
+   "e": "🎉",
+   "h": "+ ed — і все!",
+   "html": "<p>До правильного дієслова додаємо <b>-ed</b>. Форма однакова <b>для всіх</b> — навіть для he / she / it!</p>\n        <table class=\"t\"><tr><td>I / you / we / they</td><td>play<b>ed</b></td></tr><tr><td>he / she / it</td><td>play<b>ed</b></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">She <b>watched</b> TV last night.</div><div class=\"ua\">Вона дивилась телевізор учора ввечері.</div></div><button class=\"say round\" data-say=\"She watched TV last night.\">🔊</button></div>\n        <div class=\"tip\">💡 Гарна новина: хвостика -s для he / she / it у минулому немає.</div>"
+  },
+  {
+   "e": "✏️",
+   "h": "Як писати -ed",
+   "html": "<table class=\"t\"><tr><td>Майже всі</td><td>+ ed</td><td>work → work<b>ed</b></td></tr>\n        <tr><td>німа -e</td><td>+ d</td><td>live → live<b>d</b></td></tr>\n        <tr><td>приголосна + y</td><td>y → ied</td><td>study → stud<b>ied</b></td></tr>\n        <tr><td>голосна + y</td><td>+ ed</td><td>play → play<b>ed</b></td></tr>\n        <tr><td>коротке: голосна + приголосна</td><td>подвоюємо</td><td>stop → sto<b>pped</b><br>plan → pla<b>nned</b></td></tr></table>\n        <div class=\"tip\">💡 Ті самі правила, що й для -ing та -s: studies, stopping, playing.</div>"
+  },
+  {
+   "e": "🕰️",
+   "h": "was / were — минуле від am / is / are",
+   "html": "<table class=\"t\"><tr><td>I / he / she / it</td><td><b>was</b></td><td>wasn't</td></tr>\n        <tr><td>you / we / they</td><td><b>were</b></td><td>weren't</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I <b>was</b> at home yesterday.</div><div class=\"ua\">Учора я був удома.</div></div><button class=\"say round\" data-say=\"I was at home yesterday.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">They <b>were</b> in the park.</div><div class=\"ua\">Вони були в парку.</div></div><button class=\"say round\" data-say=\"They were in the park.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Were</b> you at the party? — Yes, I <b>was</b>.</div><div class=\"ua\">Ти був на вечірці? — Так.</div></div><button class=\"say round\" data-say=\"Were you at the party? Yes, I was.\">🔊</button></div>"
+  }
+ ],
+ "examples": {
+  "title": "Минулої суботи",
+  "question": {
+   "q": "чому «stop<b>ped</b>», але «help<b>ed</b>» без подвоєння?",
+   "a": "stop — коротке слово з голосна + приголосна в кінці, тому p подвоюємо. help закінчується на дві приголосні (lp) — не подвоюємо."
+  },
+  "items": [
+   [
+    "Last Saturday <b>was</b> a great day.",
+    "Минула субота була чудовим днем."
+   ],
+   [
+    "In the morning I <b>helped</b> my mum in the garden.",
+    "Зранку я допомагала мамі в саду."
+   ],
+   [
+    "Then we <b>visited</b> my grandparents.",
+    "Потім ми відвідали бабусю й дідуся."
+   ],
+   [
+    "Grandma <b>cooked</b> a big dinner.",
+    "Бабуся приготувала великий обід."
+   ],
+   [
+    "My brother <b>played</b> with the dog, and I <b>studied</b> for my test.",
+    "Брат грався з собакою, а я вчилася до контрольної."
+   ],
+   [
+    "Our car <b>stopped</b> on the way home!",
+    "Дорогою додому наша машина зупинилась!"
+   ],
+   [
+    "We <b>were</b> tired but happy.",
+    "Ми були втомлені, але щасливі."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "yesterday",
+   "вчора"
+  ],
+  [
+   "last night",
+   "учора ввечері"
+  ],
+  [
+   "last week",
+   "минулого тижня"
+  ],
+  [
+   "last summer",
+   "минулого літа"
+  ],
+  [
+   "ago",
+   "тому (назад)"
+  ],
+  [
+   "then",
+   "потім"
+  ],
+  [
+   "visit",
+   "відвідувати"
+  ],
+  [
+   "help",
+   "допомагати"
+  ],
+  [
+   "clean",
+   "прибирати"
+  ],
+  [
+   "stay",
+   "залишатися"
+  ]
+ ]
+}

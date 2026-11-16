@@ -1,0 +1,126 @@
+{
+ "id": "l9",
+ "title": "Past Simple: питання і заперечення",
+ "skillFiles": [
+  "skills/pastnq.json"
+ ],
+ "skills": [
+  "past.neg",
+  "past.q",
+  "past.short",
+  "past.wh"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "past.neg": 2,
+   "past.q": 2,
+   "past.short": 2,
+   "past.wh": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🙅",
+   "h": "«Не» в минулому: didn't",
+   "html": "<p>Для всіх однаково: <b>didn't</b> + дієслово у <b>першій формі</b> (як у словнику).</p>\n        <div class=\"ex\"><div><div class=\"en\">I <b>didn't watch</b> TV yesterday.</div><div class=\"ua\">Я не дивилась телевізор учора.</div></div><button class=\"say round\" data-say=\"I didn't watch TV yesterday.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">She <b>didn't go</b> to school.</div><div class=\"ua\">Вона не пішла до школи.</div></div><button class=\"say round\" data-say=\"She didn't go to school.\">🔊</button></div>\n        <div class=\"tip\">⚠️ Минуле вже «сховалось» у did, тому дієслово — перша форма: <s>didn't went</s>, <s>didn't watched</s>.</div>"
+  },
+  {
+   "e": "❓",
+   "h": "Питання: Did…?",
+   "html": "<div class=\"rule-box\"><b>Did</b> + хто + дієслово (перша форма)?</div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Did</b> you <b>see</b> the film? — Yes, I <b>did</b>.</div><div class=\"ua\">Ти бачила фільм? — Так.</div></div><button class=\"say round\" data-say=\"Did you see the film? Yes, I did.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Did</b> Max <b>win</b>? — No, he <b>didn't</b>.</div><div class=\"ua\">Макс переміг? — Ні.</div></div><button class=\"say round\" data-say=\"Did Max win? No, he didn't.\">🔊</button></div>\n        <p class=\"muted\">Це як Do / Does у теперішньому, тільки в минулому — одне слово Did для всіх.</p>"
+  },
+  {
+   "e": "🗺️",
+   "h": "Where did you go?",
+   "html": "<div class=\"rule-box\">Питальне слово → <b>did</b> → хто → дієслово?</div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Where did</b> you <b>go</b> last summer?</div><div class=\"ua\">Куди ти їздила минулого літа?</div></div><button class=\"say round\" data-say=\"Where did you go last summer?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>What did</b> you <b>do</b> yesterday?</div><div class=\"ua\">Що ти робила вчора?</div></div><button class=\"say round\" data-say=\"What did you do yesterday?\">🔊</button></div>"
+  },
+  {
+   "e": "🕰️",
+   "h": "А з was / were — без did",
+   "html": "<p>was / were самі вміють робити питання й заперечення:</p>\n        <div class=\"ex\"><div><div class=\"en\"><b>Were</b> you at home? — Yes, I <b>was</b>.</div><div class=\"ua\">Ти була вдома? — Так.</div></div><button class=\"say round\" data-say=\"Were you at home? Yes, I was.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">I <b>wasn't</b> tired.</div><div class=\"ua\">Я не була втомлена.</div></div><button class=\"say round\" data-say=\"I wasn't tired.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>Did you were…?</s> — так не буває.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Як минули вихідні?",
+  "question": {
+   "q": "чому «Did you <b>go</b>», а не «Did you went»?",
+   "a": "Минуле вже в did. Дієслово після did — завжди перша форма."
+  },
+  "items": [
+   [
+    "<b>Did</b> you <b>have</b> a good weekend, Kate?",
+    "Добре провела вихідні, Кейт?"
+   ],
+   [
+    "Yes, I <b>did</b>! We <b>went</b> to the zoo.",
+    "Так! Ми ходили в зоопарк."
+   ],
+   [
+    "<b>Did</b> you <b>see</b> the lions?",
+    "Ти бачила левів?"
+   ],
+   [
+    "No, I <b>didn't</b>. They <b>were</b> asleep.",
+    "Ні. Вони спали."
+   ],
+   [
+    "<b>What did</b> you <b>do</b> on Sunday?",
+    "А що ти робила в неділю?"
+   ],
+   [
+    "I <b>didn't do</b> anything special. I <b>read</b> a book.",
+    "Нічого особливого. Читала книжку."
+   ],
+   [
+    "<b>Were</b> you bored? — No, I <b>wasn't</b>!",
+    "Тобі було нудно? — Ні!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "weekend",
+   "вихідні"
+  ],
+  [
+   "go out",
+   "виходити (гуляти)"
+  ],
+  [
+   "have a good time",
+   "добре провести час"
+  ],
+  [
+   "zoo",
+   "зоопарк"
+  ],
+  [
+   "picnic",
+   "пікнік"
+  ],
+  [
+   "win",
+   "перемагати"
+  ],
+  [
+   "lose",
+   "програвати, губити"
+  ],
+  [
+   "tired",
+   "втомлений"
+  ],
+  [
+   "bored",
+   "знуджений"
+  ],
+  [
+   "special",
+   "особливий"
+  ]
+ ]
+}

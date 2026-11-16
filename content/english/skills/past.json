@@ -1,0 +1,604 @@
+{
+ "topic": "past",
+ "title": "Past Simple: правильні дієслова, was / were",
+ "skills": [
+  {
+   "id": "past.ed",
+   "title": "Past Simple: + ed",
+   "rule": "Минуле правильного дієслова: + ed, однаково для всіх (I played, she played).",
+   "worked": {
+    "p": "She ___ TV yesterday evening. (watch)",
+    "steps": [
+     "Шукаю підказку: <b>yesterday</b> — це минуле.",
+     "watch — правильне дієслово → + <b>ed</b>.",
+     "Для she — та сама форма, без -s.",
+     "Відповідь: She <b>watched</b> TV yesterday evening."
+    ]
+   },
+   "alt": "<p>Уяви, що <b>-ed</b> — це «машина часу»: чіпляєш до дієслова, і воно летить у минуле.</p>\n        <p>work → work<b>ed</b>, visit → visit<b>ed</b>. Для всіх однаково: I worked, she worked, they worked.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Yesterday I ___ football.",
+     "o": [
+      "played",
+      "play"
+     ],
+     "a": "played",
+     "h": [
+      "Yesterday — коли?",
+      "Минуле → + ed."
+     ],
+     "e": "yesterday → <b>played</b>.",
+     "err": {
+      "play": "Yesterday — це минуле: <b>played</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Last week we ___ our grandma.",
+     "o": [
+      "visited",
+      "visit",
+      "visits"
+     ],
+     "a": "visited",
+     "h": [
+      "Last week — минулого тижня.",
+      "Минуле → + ed."
+     ],
+     "e": "last week → <b>visited</b>.",
+     "err": {
+      "visit": "Last week — минуле: <b>visited</b>.",
+      "visits": "Last week — минуле: <b>visited</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "She ___ TV yesterday evening. (watch)",
+     "a": [
+      "watched"
+     ],
+     "h": [
+      "yesterday — минуле.",
+      "+ ed."
+     ],
+     "e": "yesterday → <b>watched</b>.",
+     "err": {
+      "watch": "yesterday — минуле: <b>watched</b>.",
+      "watches": "Це минуле, не теперішнє: <b>watched</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "My dad ___ in a bank ten years ago. (work)",
+     "a": [
+      "worked"
+     ],
+     "h": [
+      "ago — тому, минуле.",
+      "+ ed."
+     ],
+     "e": "ten years ago → <b>worked</b>.",
+     "err": {
+      "works": "ago — це минуле: <b>worked</b>.",
+      "work": "ago — це минуле: <b>worked</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "They ___ the window five minutes ago. (open)",
+     "a": [
+      "opened"
+     ],
+     "h": [
+      "ago — минуле.",
+      "+ ed."
+     ],
+     "e": "ago → <b>opened</b>.",
+     "err": {
+      "open": "ago — минуле: <b>opened</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "I ___ my room last Saturday. (clean)",
+     "a": [
+      "cleaned"
+     ],
+     "h": [
+      "last Saturday — минуле.",
+      "+ ed."
+     ],
+     "e": "last Saturday → <b>cleaned</b>.",
+     "err": {
+      "clean": "last Saturday — минуле: <b>cleaned</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "We ___ to music last night. (listen)",
+     "a": [
+      "listened"
+     ],
+     "h": [
+      "last night — минуле.",
+      "+ ed."
+     ],
+     "e": "last night → <b>listened</b>.",
+     "err": {
+      "listen": "last night — минуле: <b>listened</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Yesterday I help my mum in the kitchen.",
+     "bad": 2,
+     "a": "Yesterday I helped my mum in the kitchen.",
+     "h": [
+      "Yesterday — минуле.",
+      "Дієслову потрібне -ed."
+     ],
+     "e": "yesterday → <b>helped</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Last summer we visit Lviv.",
+     "bad": 3,
+     "a": "Last summer we visited Lviv.",
+     "h": [
+      "Last summer — минуле.",
+      "Дієслову потрібне -ed."
+     ],
+     "e": "last summer → <b>visited</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We played chess yesterday.",
+     "a": [
+      "We played chess yesterday."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "yesterday → + ed."
+     ],
+     "e": "yesterday → <b>played</b>.",
+     "err": {
+      "We play chess yesterday.": "yesterday — минуле: <b>played</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Я дивилася фільм учора».",
+     "words": [
+      "a",
+      "watched",
+      "I",
+      "film",
+      "yesterday"
+     ],
+     "a": [
+      "i watched a film yesterday",
+      "yesterday i watched a film"
+     ],
+     "h": [
+      "Хто → що робив → що → коли.",
+      "I → watched → a film → …"
+     ],
+     "e": "<b>I watched a film yesterday.</b>"
+    }
+   ]
+  },
+  {
+   "id": "past.spell",
+   "title": "Як писати -ed: lived, studied, stopped",
+   "rule": "Німа -e → + d; приголосна + y → ied; голосна + y → + ed; коротке слово з голосна+приголосна → подвоюємо.",
+   "worked": {
+    "p": "The bus ___ near our house. (stop)",
+    "steps": [
+     "Дієслово: <b>stop</b> — коротке, одна голосна o.",
+     "В кінці голосна + приголосна: o + p.",
+     "Подвоюємо p і додаємо -ed.",
+     "Відповідь: The bus <b>stopped</b> near our house."
+    ]
+   },
+   "alt": "<p>Ті самі три перевірки, що й для -ing:</p>\n        <p>1) Німа <b>-e</b>? Додаємо тільки d: live → live<b>d</b>.<br>2) <b>-y</b> після приголосної? → ied: study → stud<b>ied</b>. Після голосної — просто ed: play<b>ed</b>.<br>3) Коротке слово, голосна + приголосна? Подвоюємо: stop → sto<b>pp</b>ed.</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "We ___ in Odesa last year. (live)",
+     "a": [
+      "lived"
+     ],
+     "h": [
+      "live закінчується на німу -e.",
+      "Додаємо тільки d."
+     ],
+     "e": "live → <b>lived</b>.",
+     "err": {
+      "liveed": "Німа -e: додаємо тільки d — <b>lived</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "She ___ English yesterday. (study)",
+     "a": [
+      "studied"
+     ],
+     "h": [
+      "study: перед y приголосна d.",
+      "y → ied."
+     ],
+     "e": "study → <b>studied</b>.",
+     "err": {
+      "studyed": "Перед y приголосна: stud<b>ied</b>.",
+      "studed": "y → ied: <b>studied</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "He ___ computer games all evening. (play)",
+     "a": [
+      "played"
+     ],
+     "h": [
+      "play: перед y голосна a.",
+      "Просто + ed."
+     ],
+     "e": "play → <b>played</b>.",
+     "err": {
+      "plaied": "Перед y голосна (a), тому просто + ed: <b>played</b>.",
+      "plaid": "Просто + ed: <b>played</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "The bus ___ near our house. (stop)",
+     "a": [
+      "stopped"
+     ],
+     "h": [
+      "stop — коротке слово.",
+      "Голосна + приголосна → подвоюємо."
+     ],
+     "e": "stop → <b>stopped</b>.",
+     "err": {
+      "stoped": "Подвоюємо p: <b>stopped</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "I ___ for my friend for an hour. (wait)",
+     "a": [
+      "waited"
+     ],
+     "h": [
+      "wait: дві голосні ai.",
+      "Тут не подвоюємо."
+     ],
+     "e": "wait → <b>waited</b>.",
+     "err": {
+      "waitted": "Перед t дві голосні (ai) — не подвоюємо: <b>waited</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "The baby ___ all night. (cry)",
+     "a": [
+      "cried"
+     ],
+     "h": [
+      "cry: перед y приголосна r.",
+      "y → ied."
+     ],
+     "e": "cry → <b>cried</b>.",
+     "err": {
+      "cryed": "Перед y приголосна: cr<b>ied</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "We ___ a trip to the mountains. (plan)",
+     "a": [
+      "planned"
+     ],
+     "h": [
+      "plan — коротке слово.",
+      "Подвоюємо n."
+     ],
+     "e": "plan → <b>planned</b>.",
+     "err": {
+      "planed": "Подвоюємо n: <b>planned</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "Tom ___ the heavy box. (carry)",
+     "a": [
+      "carried"
+     ],
+     "h": [
+      "carry: перед y приголосна r.",
+      "y → ied."
+     ],
+     "e": "carry → <b>carried</b>.",
+     "err": {
+      "carryed": "Перед y приголосна: carr<b>ied</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple",
+     "p": "She ___ at the funny picture. (smile)",
+     "a": [
+      "smiled"
+     ],
+     "h": [
+      "smile закінчується на німу -e.",
+      "Додаємо тільки d."
+     ],
+     "e": "smile → <b>smiled</b>.",
+     "err": {
+      "smileed": "Німа -e: додаємо тільки d — <b>smiled</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Yesterday I studyed for two hours.",
+     "bad": 2,
+     "a": "Yesterday I studied for two hours.",
+     "h": [
+      "Подивись, як написане дієслово.",
+      "Приголосна + y → ied."
+     ],
+     "e": "study → <b>studied</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "The car stoped at the corner.",
+     "bad": 2,
+     "a": "The car stopped at the corner.",
+     "h": [
+      "Подивись, як написане дієслово.",
+      "stop — подвоюємо p."
+     ],
+     "e": "stop → <b>stopped</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 My sister cried last night.",
+     "a": [
+      "My sister cried last night."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "cry → ied."
+     ],
+     "e": "cry → <b>cried</b>.",
+     "err": {
+      "My sister cryed last night.": "Перед y приголосна: <b>cried</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "past.be",
+   "title": "was / were",
+   "rule": "I / he / she / it → was; you / we / they → were. Заперечення: wasn't / weren't.",
+   "worked": {
+    "p": "You ___ late yesterday!",
+    "steps": [
+     "Хто? <b>You</b>.",
+     "З you завжди <b>were</b> — навіть коли це одна людина.",
+     "Відповідь: You <b>were</b> late yesterday!"
+    ]
+   },
+   "alt": "<p>Підглянь у теперішній час: <b>am / is → was</b>, <b>are → were</b>.</p>\n        <p>I am → I <b>was</b>; she is → she <b>was</b>; they are → they <b>were</b>; you are → you <b>were</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ at home yesterday.",
+     "o": [
+      "was",
+      "were"
+     ],
+     "a": "was",
+     "h": [
+      "Хто? I.",
+      "I → was."
+     ],
+     "e": "I → <b>was</b>.",
+     "err": {
+      "were": "З I — <b>was</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They ___ in the park last Sunday.",
+     "o": [
+      "were",
+      "was"
+     ],
+     "a": "were",
+     "h": [
+      "They — «вони».",
+      "they → were."
+     ],
+     "e": "they → <b>were</b>.",
+     "err": {
+      "was": "they → <b>were</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "The weather ___ cold last week.",
+     "o": [
+      "was",
+      "were"
+     ],
+     "a": "was",
+     "h": [
+      "The weather = it.",
+      "it → was."
+     ],
+     "e": "the weather = it → <b>was</b>.",
+     "err": {
+      "were": "The weather — це it: <b>was</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was або were",
+     "p": "We ___ at school yesterday.",
+     "a": [
+      "were"
+     ],
+     "h": [
+      "We — «ми».",
+      "we → were."
+     ],
+     "e": "we → <b>were</b>.",
+     "err": {
+      "was": "we → <b>were</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was або were",
+     "p": "My grandma ___ a teacher many years ago.",
+     "a": [
+      "was"
+     ],
+     "h": [
+      "My grandma = she.",
+      "she → was."
+     ],
+     "e": "she → <b>was</b>.",
+     "err": {
+      "were": "My grandma — це «вона»: <b>was</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was або were",
+     "p": "You ___ late yesterday!",
+     "a": [
+      "were"
+     ],
+     "h": [
+      "You → ?",
+      "you → were завжди."
+     ],
+     "e": "you → <b>were</b>.",
+     "err": {
+      "was": "З you завжди <b>were</b>, навіть про одну людину."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши wasn't або weren't",
+     "p": "The film ___ interesting, so we left.",
+     "a": [
+      "wasn't",
+      "was not"
+     ],
+     "h": [
+      "The film = it.",
+      "it → wasn't."
+     ],
+     "e": "the film = it → <b>wasn't</b>.",
+     "err": {
+      "weren't": "The film — одне (it): <b>wasn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Was або Were",
+     "p": "___ you at the party last night?",
+     "a": [
+      "Were"
+     ],
+     "h": [
+      "you → ?",
+      "you → Were."
+     ],
+     "e": "you → <b>Were</b> you…?",
+     "err": {
+      "Was": "you → <b>Were</b>.",
+      "Did": "З was / were питання без did: <b>Were</b> you…?"
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My friends was very happy.",
+     "bad": 2,
+     "a": "My friends were very happy.",
+     "h": [
+      "My friends = they.",
+      "they → were."
+     ],
+     "e": "they → <b>were</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I were tired after school.",
+     "bad": 1,
+     "a": "I was tired after school.",
+     "h": [
+      "Хто? I.",
+      "I → was."
+     ],
+     "e": "I → <b>was</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 It was sunny yesterday.",
+     "a": [
+      "It was sunny yesterday."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "it → was."
+     ],
+     "e": "it → <b>was</b>.",
+     "err": {
+      "It were sunny yesterday.": "it → <b>was</b>.",
+      "It is sunny yesterday.": "yesterday — минуле: <b>was</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

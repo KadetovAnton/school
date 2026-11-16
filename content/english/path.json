@@ -69,18 +69,21 @@
    "lessons": [
     {
      "id": "l7",
-     "title": "Past Simple: правильні дієслова (-ed)",
-     "ic": "📅"
+     "title": "Past Simple: правильні дієслова, was / were",
+     "ic": "📅",
+     "file": "lessons/l7.json"
     },
     {
      "id": "l8",
      "title": "30 головних неправильних дієслів",
-     "ic": "🧩"
+     "ic": "🧩",
+     "file": "lessons/l8.json"
     },
     {
      "id": "l9",
      "title": "Past Simple: питання і заперечення",
-     "ic": "🔁"
+     "ic": "🔁",
+     "file": "lessons/l9.json"
     }
    ]
   },
