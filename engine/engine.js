@@ -453,7 +453,7 @@
   E.GEN = E.GEN || {};
   E.makeGen = function (sk) {
     var it = E.GEN[sk.gen](sk.args || {});
-    it.skill = sk.id; it.key = sk.id + "|" + it.p; it.gen = true;
+    it.skill = sk.id; it.key = sk.id + "|" + it.p + (it.uid ? "|" + it.uid : ""); it.gen = true;
     E.ITEM[it.key] = it;
     return it;
   };

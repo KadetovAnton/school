@@ -1,0 +1,31 @@
+{
+ "id": "m15",
+ "title": "Порядок дій і дужки",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.order"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.order": 8
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🎫",
+   "h": "Хто першим?",
+   "html": "<p>1) <b>дужки</b> → 2) <b>множення і ділення</b> → 3) <b>додавання і віднімання</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">20 + 3 · 4 = 20 + 12 = 32</div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">(20 + 3) · 2 = 23 · 2 = 46</div><div class=\"tip\">⚠️ 20 + 3 · 4 — не 92! Множення робимо раніше.</div>"
+  }
+ ]
+}

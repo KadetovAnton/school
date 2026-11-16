@@ -1,0 +1,31 @@
+{
+ "id": "m24",
+ "title": "Повторення 2 класу",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.year"
+ ],
+ "practice": {
+  "perSkill": 10
+ },
+ "test": {
+  "plan": {
+   "m.year": 12
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🏆",
+   "h": "Фінал року!",
+   "html": "<p>Тут завдання з усього, що ти вивчив за рік. Не поспішай, користуйся підказками — і вперед!</p>"
+  }
+ ]
+}

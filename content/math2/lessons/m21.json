@@ -1,0 +1,31 @@
+{
+ "id": "m21",
+ "title": "Гроші: гривні й копійки",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.money"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.money": 8
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🪙",
+   "h": "Гривня і копійка",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1 грн = 100 коп</div><p>50 коп + 50 коп = 1 грн. Разом — додаємо, решта — віднімаємо.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">50 грн − 32 грн = 18 грн решти</div>"
+  }
+ ]
+}

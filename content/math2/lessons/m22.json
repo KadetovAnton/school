@@ -1,0 +1,31 @@
+{
+ "id": "m22",
+ "title": "Ламана і периметр",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.perim"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.perim": 8
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🐜",
+   "h": "Периметр",
+   "html": "<p><b>Довжина ламаної</b> — сума всіх ланок. <b>Периметр</b> — сума всіх сторін фігури.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">Прямокутник 5 і 3: P = 5 + 3 + 5 + 3 = 16 см</div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">Квадрат 4 см: P = 4 · 4 = 16 см</div><div class=\"tip\">⚠️ У прямокутника 4 сторони — не забудь дві інші!</div>"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "id": "m11",
+ "title": "Таблиця множення і ділення на 4",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.mul4",
+  "m.div4"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.mul4": 5,
+   "m.div4": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍀",
+   "h": "Множимо на 4",
+   "html": "<div class=\"pic\"><span class=\"grp\">🍀🍀🍀🍀</span><span class=\"grp\">🍀🍀🍀🍀</span><span class=\"grp\">🍀🍀🍀🍀</span></div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">4 · 3 = 12</div><table class=\"t\"><tr><td>по 4:</td><td>4, 8, 12, 16, 20, 24, 28, 32, 36, 40</td></tr></table><div class=\"tip\">💡 На 4 — це двічі подвоїти: 6 · 2 = 12, 12 · 2 = 24, отже 4 · 6 = 24.</div>"
+  },
+  {
+   "e": "🔁",
+   "h": "Ділимо на 4",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">28 : 4 = 7, бо 4 · 7 = 28</div><p>Знаєш таблицю на 4 — знаєш і ділення на 4.</p>"
+  }
+ ]
+}

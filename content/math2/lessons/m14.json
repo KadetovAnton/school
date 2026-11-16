@@ -1,0 +1,31 @@
+{
+ "id": "m14",
+ "title": "Задачі на множення і ділення",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.probmd"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.probmd": 8
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📦",
+   "h": "Множення чи ділення?",
+   "html": "<table class=\"t\"><tr><td>✖️</td><td>«по 4 у 5 коробках», «купили 3 по 5 грн» — однакові групи, знаємо скільки груп</td></tr><tr><td>➗</td><td>«розклали порівну», «роздали по 4» — шукаємо одну групу або кількість груп</td></tr></table><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">по 5 · 4 рази = 20 &nbsp; | &nbsp; 20 : 4 = 5</div>"
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+{
+ "id": "m16",
+ "title": "Рівняння",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.eq"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.eq": 8
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⚖️",
+   "h": "Що таке рівняння",
+   "html": "<p>Рівняння — рівність, у якій є невідоме число <b>x</b>. Розв'язати — знайти x.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">x + 7 = 15 → x = 15 − 7 = 8</div><p class=\"muted\">Перевірка: 8 + 7 = 15 ✓</p>"
+  },
+  {
+   "e": "🗝️",
+   "h": "Три правила",
+   "html": "<table class=\"t\"><tr><td>x + 5 = 12</td><td>x = 12 − 5</td><td>невідомий доданок</td></tr><tr><td>x − 4 = 6</td><td>x = 6 + 4</td><td>невідоме зменшуване</td></tr><tr><td>15 − x = 9</td><td>x = 15 − 9</td><td>невідомий від'ємник</td></tr></table>"
+  }
+ ]
+}

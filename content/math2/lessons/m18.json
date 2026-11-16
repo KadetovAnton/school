@@ -1,0 +1,38 @@
+{
+ "id": "m18",
+ "title": "Довжина: см, дм, м",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.len",
+  "m.lencmp"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.len": 5,
+   "m.lencmp": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📏",
+   "h": "Сантиметр, дециметр, метр",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1 дм = 10 см &nbsp;&nbsp; 1 м = 10 дм = 100 см</div><p>Олівець — близько 15 см, долоня — 1 дм, крок дорослого — майже 1 м.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">3 дм 4 см = 34 см</div>"
+  },
+  {
+   "e": "⚖️",
+   "h": "Порівнюємо",
+   "html": "<p>Спершу однакові одиниці!</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">5 дм > 48 см, бо 50 см > 48 см</div>"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "id": "m12",
+ "title": "Таблиця множення і ділення на 5",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.mul5",
+  "m.div5"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.mul5": 5,
+   "m.div5": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "✋",
+   "h": "Множимо на 5",
+   "html": "<p>П'ять пальців на руці ✋ — рахуємо п'ятірками:</p><table class=\"t\"><tr><td>по 5:</td><td>5, 10, 15, 20, 25, 30, 35, 40, 45, 50</td></tr></table><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">5 · 6 = 30</div><div class=\"tip\">💡 Відповідь завжди закінчується на 0 або 5.</div>"
+  },
+  {
+   "e": "🕐",
+   "h": "Годинник-підказка",
+   "html": "<p>Кожна цифра на годиннику — ще 5 хвилин: 3 → 15, 8 → 40.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">40 : 5 = 8</div>"
+  }
+ ]
+}

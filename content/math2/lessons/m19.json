@@ -1,0 +1,33 @@
+{
+ "id": "m19",
+ "title": "Маса і місткість: кг і л",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.massvol",
+  "m.units"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.massvol": 5,
+   "m.units": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🏋️",
+   "h": "Кілограм і літр",
+   "html": "<p><b>Кілограм (кг)</b> — скільки важить: пакет цукру — 1 кг.<br><b>Літр (л)</b> — скільки вміщується рідини: пакет молока — 1 л.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">20 л + 8 л = 28 л</div>"
+  }
+ ]
+}

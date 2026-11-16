@@ -1,0 +1,38 @@
+{
+ "id": "m20",
+ "title": "Годинник і час",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.clock",
+  "m.time"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.clock": 5,
+   "m.time": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⏰",
+   "h": "Дві стрілки",
+   "html": "<p><b>Коротка</b> стрілка — години, <b>довга</b> — хвилини.</p><table class=\"t\"><tr><td>довга на 12</td><td>рівно (7:00)</td></tr><tr><td>довга на 3</td><td>15 хв (7:15)</td></tr><tr><td>довга на 6</td><td>30 хв, пів години (7:30)</td></tr><tr><td>довга на 9</td><td>45 хв (7:45)</td></tr></table>"
+  },
+  {
+   "e": "📅",
+   "h": "Скільки триває",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1 год = 60 хв &nbsp;&nbsp; 1 доба = 24 год</div>"
+  }
+ ]
+}

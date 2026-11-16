@@ -1,0 +1,31 @@
+{
+ "id": "m17",
+ "title": "Задачі у 2 дії",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.prob2"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.prob2": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🪜",
+   "h": "Дві сходинки",
+   "html": "<p>Іноді одразу відповісти не можна — бракує одного числа. Тоді:</p><p><b>1-ша дія</b> — знаходимо те, чого бракує.<br><b>2-га дія</b> — відповідаємо на питання.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1) 10 + 3 = 13 &nbsp; 2) 10 + 13 = 23</div>"
+  }
+ ]
+}

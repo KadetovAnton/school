@@ -1,0 +1,31 @@
+{
+ "id": "m23",
+ "title": "Фігури і кути",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.shapes"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "m.shapes": 8
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🔺",
+   "h": "Назва — від кутів",
+   "html": "<table class=\"t\"><tr><td>3 кути</td><td>трикутник</td></tr><tr><td>4 кути</td><td>чотирикутник</td></tr><tr><td>5 кутів</td><td>п'ятикутник</td></tr><tr><td>6 кутів</td><td>шестикутник</td></tr></table><p><b>Прямокутник</b> — чотирикутник, у якого всі кути прямі. <b>Квадрат</b> — прямокутник з однаковими сторонами.</p>"
+  }
+ ]
+}
