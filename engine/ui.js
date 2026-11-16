@@ -185,8 +185,12 @@
       '<div class="prog" style="margin:6px 0 0"><i style="width:' + pct + '%;' + (n >= goal ? "background:var(--ok)" : "") + '"></i></div></div>';
   }
 
+  /* заголовок вкладки браузера */
+  function setTitle(t) { try { document.title = t ? t + " — Домашня школа" : "Домашня школа"; } catch (e) {} }
+
   /* ================== ХТО ВЧИТЬСЯ ================== */
   function renderWho() {
+    setTitle("");
     document.body.className = "";
     withSubjects(function () {
       $app.innerHTML = '<div class="card" style="text-align:center"><div class="big-emoji">🎒</div><h1>Хто сьогодні вчиться?</h1>' +
@@ -308,6 +312,7 @@
     withSubjects(function () {
       var c = child();
       if (!c) return renderWho();
+      setTitle(c.name + ": мої предмети");
       var P = E.P(), goal = SUBJ.dailyGoal, st = E.streak();
       var html = '<div class="topbar"><button class="back" id="who">⇄ Змінити</button><span class="muted small" style="font-weight:700">' + c.grade + ' клас</span></div>' +
         (SY && SY.moved ? '<div class="card" style="background:var(--ok-soft)"><b>🏠 Сайт переїхав!</b><br>' + (SY.has(c.id) && E.P().srv ? "Твій прогрес уже перенесено ✅ " : "") + 'Тепер заходь сюди: <a href="https://school.akdtv.pp.ua/"><b>school.akdtv.pp.ua</b></a></div>' : "") +
@@ -342,6 +347,7 @@
     var P = E.P();
     if (!ALL) return loadAll(function () { ALL = true; renderHome(); });
     if (SUB.diag) applyPlacement();
+    setTitle(SUB.title + " · " + child().name);
     var st = E.streak(), doneCount = 0, allLessons = 0, num = 0;
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
     PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
@@ -735,6 +741,7 @@
   }
   function stepAvailable(i) { var LS = stepsOf(LES), st = E.lesson(LES.id).steps; return i === 0 || st[LS[i - 1].id] || st[LS[i].id]; }
   function renderLesson(stepId) {
+    setTitle(LES.title + " · " + SUB.title);
     var st = E.lesson(LES.id).steps, LS = stepsOf(LES);
     if (stepId && !LS.some(function (s) { return s.id === stepId; })) stepId = null;
     if (!stepId) { var f = null; for (var i = 0; i < LS.length; i++) if (!st[LS[i].id]) { f = LS[i]; break; } stepId = f ? f.id : LS[0].id; }
