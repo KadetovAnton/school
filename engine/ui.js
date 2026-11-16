@@ -268,7 +268,7 @@
     };
     if (!SY || !SY.has(E.cur())) return copy();
     toast("Надсилаю… 📨");
-    SY.report(E.cur(), text).then(function (ok) { if (ok) { if (okCb) okCb(); toast("✅ Надіслано татові в Telegram"); } else copy(); });
+    SY.report(E.cur(), text).then(function (ok) { if (ok) { if (okCb) okCb(); toast("✅ Надіслано батькам у Telegram"); } else copy(); });
   }
 
   /* як показати завдання в списках (помилки, результати тесту, звіт): у «Знайди помилку» речення навмисно з помилкою */
@@ -609,7 +609,7 @@
         $("stage").innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🔁</div><h2>Повторення тижня — готово!</h2><p class="muted">' + fmt(s.score) + ' з ' + s.max + ' балів</p>' +
           (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>Тримається 💪</b><br>' + good.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : "") +
           (weak.length ? '<div class="tip" style="text-align:left"><b>Варто освіжити</b> (ці речення вже в «Моїх помилках»)<br>' + weak.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : '<p>Усе пам\'ятаєш — супер! 🔥</p>') +
-          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати результат татові</button><button class="btn full" id="go">Далі →</button></div></div>';
+          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати батькам у Telegram</button><button class="btn full" id="go">Далі →</button></div></div>';
         $("copy").onclick = function () {
           var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
           var text = [P.name + " — повторення тижня, " + d, "Результат: " + fmt(s.score) + " з " + s.max,
@@ -1175,7 +1175,7 @@
           (ok ? '<div class="stars" style="font-size:30px">' + starsStr(stars) + '</div>' : '<p class="muted">Потрібно ' + pass + '%. Зроби ще раз вправи — там помилки розбираються крок за кроком. У тебе вийде!</p>') +
           (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { return "• " + pText(r.it, true, true) + " → <b>" + esc(E.answersOf(r.it)[0]) + "</b>"; }).join("<br>") + '</div>' : "") +
           skillList(LES.skills) +
-          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати результат татові</button>' +
+          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати батькам у Telegram</button>' +
           (ok ? "" : '<button class="btn ghost" id="pr">✍️ До вправ</button><button class="btn" id="retry">↺ Ще раз</button>') +
           '<button class="btn ' + (ok ? "" : "plain") + ' full" id="home">До кабінету' + (ok ? " →" : "") + '</button></div></div>';
         $("copy").onclick = function () { copyReport(pct, stars, wrong); };
