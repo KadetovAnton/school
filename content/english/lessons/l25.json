@@ -1,0 +1,104 @@
+{
+ "id": "l25",
+ "title": "Пропозиції й запрошення: Would you like…? Let's…",
+ "skillFiles": [
+  "skills/off.json"
+ ],
+ "skills": [
+  "off.would",
+  "off.lets"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "off.would": 4,
+   "off.lets": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "☕",
+   "h": "Would you like…? — ввічлива пропозиція",
+   "html": "<div class=\"ex\"><div><div class=\"en\"><b>Would you like</b> some tea?</div><div class=\"ua\">Хочеш чаю?</div></div><button class=\"say round\" data-say=\"Would you like some tea?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Would you like to come</b> to my party?</div><div class=\"ua\">Хочеш прийти на мою вечірку?</div></div><button class=\"say round\" data-say=\"Would you like to come to my party?\">🔊</button></div>\n        <table class=\"t\"><tr><td>Would you like + <b>щось</b>?</td><td>Would you like an apple?</td></tr>\n        <tr><td>Would you like + <b>to</b> + дієслово?</td><td>Would you like to dance?</td></tr></table>\n        <p>Відповіді: <b>Yes, please.</b> / <b>I'd love to!</b> / <b>No, thank you.</b> / <b>I'm afraid I can't.</b></p>\n        <div class=\"tip\">⚠️ Do you like…? = «Ти любиш…?» (взагалі). Would you like…? = «Хочеш…?» (зараз).</div>"
+  },
+  {
+   "e": "🙌",
+   "h": "Let's… Shall we…? Why don't we…?",
+   "html": "<div class=\"ex\"><div><div class=\"en\"><b>Let's go</b> to the park!</div><div class=\"ua\">Ходімо в парк!</div></div><button class=\"say round\" data-say=\"Let's go to the park!\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Shall we play</b> chess?</div><div class=\"ua\">Зіграємо в шахи?</div></div><button class=\"say round\" data-say=\"Shall we play chess?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Why don't we watch</b> a film?</div><div class=\"ua\">Може, подивимось фільм?</div></div><button class=\"say round\" data-say=\"Why don't we watch a film?\">🔊</button></div>\n        <p>Після Let's / Shall we / Why don't we — дієслово <b>без to</b>.</p>\n        <p>Відповіді: <b>That's a good idea!</b> / <b>Great!</b> / <b>Sorry, I can't.</b></p>"
+  }
+ ],
+ "examples": {
+  "title": "Плануємо суботу",
+  "question": {
+   "q": "чому «Would you like <b>to come</b>», а «Let's <b>go</b>» без to?",
+   "a": "Після would like — to + дієслово. Після Let's, Shall we, Why don't we — без to."
+  },
+  "items": [
+   [
+    "Hi Kate! <b>Would you like to come</b> to my place on Saturday?",
+    "Привіт, Кейт! Хочеш прийти до мене в суботу?"
+   ],
+   [
+    "<b>I'd love to!</b> What shall we do?",
+    "Із задоволенням! Що робитимемо?"
+   ],
+   [
+    "<b>Let's bake</b> a cake!",
+    "Давай спечемо торт!"
+   ],
+   [
+    "<b>Why don't we invite</b> Max too? — <b>That's a good idea!</b>",
+    "Може, запросимо ще й Макса? — Гарна ідея!"
+   ],
+   [
+    "<b>Would you like</b> some lemonade? — <b>Yes, please.</b>",
+    "Хочеш лимонаду? — Так, будь ласка."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "invite",
+   "запрошувати"
+  ],
+  [
+   "invitation",
+   "запрошення"
+  ],
+  [
+   "accept",
+   "приймати"
+  ],
+  [
+   "refuse",
+   "відмовляти"
+  ],
+  [
+   "suggest",
+   "пропонувати"
+  ],
+  [
+   "idea",
+   "ідея"
+  ],
+  [
+   "I'd love to",
+   "із задоволенням"
+  ],
+  [
+   "I'm afraid",
+   "на жаль, боюся"
+  ],
+  [
+   "Yes, please",
+   "так, будь ласка"
+  ],
+  [
+   "No, thank you",
+   "ні, дякую"
+  ]
+ ]
+}

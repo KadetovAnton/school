@@ -1,0 +1,104 @@
+{
+ "id": "l19",
+ "title": "Чиє це? 's, whose, this / these",
+ "skillFiles": [
+  "skills/pos.json"
+ ],
+ "skills": [
+  "pos.s",
+  "pos.this"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "pos.s": 4,
+   "pos.this": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🎒",
+   "h": "Чиє? — 's",
+   "html": "<p>Щоб сказати «Анин», «татів», додаємо <b>'s</b> (апостроф + s):</p>\n        <div class=\"ex\"><div><div class=\"en\">This is <b>Anna's</b> bag.</div><div class=\"ua\">Це Анина сумка.</div></div><button class=\"say round\" data-say=\"This is Anna's bag.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">My <b>dad's</b> car is red.</div><div class=\"ua\">Татова машина червона.</div></div><button class=\"say round\" data-say=\"My dad's car is red.\">🔊</button></div>\n        <div class=\"tip\">⚠️ Апостроф обов'язковий: <s>Annas bag</s> → <b>Anna's</b> bag. Питання «чий?» — <b>Whose</b>: Whose bag is this?</div>"
+  },
+  {
+   "e": "👉",
+   "h": "this / these, that / those",
+   "html": "<table class=\"t\"><tr><td></td><td>одне</td><td>багато</td></tr>\n        <tr><td>поруч (цей)</td><td><b>this</b> book</td><td><b>these</b> books</td></tr>\n        <tr><td>далеко (той)</td><td><b>that</b> house</td><td><b>those</b> houses</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\"><b>These</b> shoes are new. Look at <b>those</b> birds!</div><div class=\"ua\">Ці черевики нові. Подивись на тих птахів!</div></div><button class=\"say round\" data-say=\"These shoes are new. Look at those birds!\">🔊</button></div>"
+  }
+ ],
+ "examples": {
+  "title": "Загублені речі",
+  "question": {
+   "q": "чому «<b>Whose</b> jacket», а не «Who's jacket»?",
+   "a": "Who's = who is («хто є»). «Чия?» — Whose."
+  },
+  "items": [
+   [
+    "<b>Whose</b> jacket is this?",
+    "Чия це куртка?"
+   ],
+   [
+    "It's <b>Max's</b> jacket.",
+    "Це Максова куртка."
+   ],
+   [
+    "And <b>these</b> gloves? Are they <b>Kate's</b>?",
+    "А ці рукавички? Вони Катині?"
+   ],
+   [
+    "No, <b>those</b> gloves over there are Kate's.",
+    "Ні, Катині — ті рукавички он там."
+   ],
+   [
+    "<b>This</b> is my <b>sister's</b> umbrella.",
+    "Це парасолька моєї сестри."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "whose",
+   "чий"
+  ],
+  [
+   "jacket",
+   "куртка"
+  ],
+  [
+   "gloves",
+   "рукавички"
+  ],
+  [
+   "umbrella",
+   "парасолька"
+  ],
+  [
+   "backpack",
+   "рюкзак"
+  ],
+  [
+   "keys",
+   "ключі"
+  ],
+  [
+   "lost",
+   "загублений"
+  ],
+  [
+   "find",
+   "знаходити"
+  ],
+  [
+   "over there",
+   "он там"
+  ],
+  [
+   "here",
+   "тут"
+  ]
+ ]
+}

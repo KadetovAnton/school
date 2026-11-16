@@ -1,0 +1,564 @@
+{
+ "topic": "be",
+ "title": "Дієслово to be",
+ "skills": [
+  {
+   "id": "be.form",
+   "title": "am / is / are",
+   "rule": "I → am; he / she / it → is; you / we / they → are.",
+   "worked": {
+    "p": "My parents ___ at work.",
+    "steps": [
+     "Хто? <b>My parents</b> — двоє = they.",
+     "they → <b>are</b>.",
+     "Відповідь: My parents <b>are</b> at work."
+    ]
+   },
+   "alt": "<p>Запам'ятай як три «пари»:</p><div class=\"rule-box\" style=\"font-weight:800\">I am · he / she / it is · you / we / they are</div>\n        <p>Не знаєш, хто це? Заміни: my mum → she → is; my friends → they → are.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ twelve years old.",
+     "o": [
+      "am",
+      "is",
+      "are"
+     ],
+     "a": "am",
+     "h": [
+      "Хто? I.",
+      "I → am."
+     ],
+     "e": "I <b>am</b>.",
+     "err": {
+      "is": "З I — <b>am</b>.",
+      "are": "З I — <b>am</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "My mum ___ a doctor.",
+     "o": [
+      "is",
+      "am",
+      "are"
+     ],
+     "a": "is",
+     "h": [
+      "My mum = she.",
+      "she → is."
+     ],
+     "e": "she → <b>is</b>.",
+     "err": {
+      "are": "My mum — одна людина (she): <b>is</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ friends.",
+     "o": [
+      "are",
+      "is",
+      "am"
+     ],
+     "a": "are",
+     "h": [
+      "We — «ми».",
+      "we → are."
+     ],
+     "e": "we → <b>are</b>.",
+     "err": {
+      "is": "we → <b>are</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "The cat ___ on the sofa.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "The cat = it.",
+      "it → is."
+     ],
+     "e": "it → <b>is</b>.",
+     "err": {
+      "are": "Кіт один (it): <b>is</b>.",
+      "am": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "My parents ___ at work.",
+     "a": [
+      "are"
+     ],
+     "h": [
+      "My parents = they.",
+      "they → are."
+     ],
+     "e": "they → <b>are</b>.",
+     "err": {
+      "is": "Батьків двоє (they): <b>are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "You ___ my best friend.",
+     "a": [
+      "are"
+     ],
+     "h": [
+      "you → ?",
+      "you → are."
+     ],
+     "e": "you → <b>are</b>.",
+     "err": {
+      "is": "З you завжди <b>are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am, is або are",
+     "p": "It ___ cold today.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "it → ?",
+      "it → is."
+     ],
+     "e": "it → <b>is</b>.",
+     "err": {
+      "are": "it → <b>is</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She are my sister.",
+     "bad": 1,
+     "a": "She is my sister.",
+     "h": [
+      "She → ?",
+      "is."
+     ],
+     "e": "she → <b>is</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I is hungry.",
+     "bad": 1,
+     "a": "I am hungry.",
+     "h": [
+      "I → ?",
+      "am."
+     ],
+     "e": "I → <b>am</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 They are in the garden.",
+     "a": [
+      "They are in the garden."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "they → are."
+     ],
+     "e": "they → <b>are</b>.",
+     "err": {
+      "They is in the garden.": "they → <b>are</b>.",
+      "They in the garden.": "Не забувай are: They <b>are</b> in the garden."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Мій брат — учень».",
+     "words": [
+      "is",
+      "My",
+      "a",
+      "brother",
+      "pupil"
+     ],
+     "a": [
+      "my brother is a pupil"
+     ],
+     "h": [
+      "Хто → is → хто він.",
+      "My brother → is → a pupil."
+     ],
+     "e": "<b>My brother is a pupil.</b>"
+    }
+   ]
+  },
+  {
+   "id": "be.neg",
+   "title": "am not / isn't / aren't",
+   "rule": "I am not (I'm not); he / she / it isn't; you / we / they aren't.",
+   "worked": {
+    "p": "My friends ___ here.",
+    "steps": [
+     "Хто? <b>My friends</b> = they → are.",
+     "Заперечення: are + not = <b>aren't</b>.",
+     "Відповідь: My friends <b>aren't</b> here."
+    ]
+   },
+   "alt": "<p>Просто додай <b>not</b> після am / is / are:</p><p>I am → I <b>am not</b><br>she is → she <b>isn't</b><br>they are → they <b>aren't</b></p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ tired.",
+     "o": [
+      "am not",
+      "isn't",
+      "aren't"
+     ],
+     "a": "am not",
+     "h": [
+      "I → am.",
+      "am not."
+     ],
+     "e": "I <b>am not</b>.",
+     "err": {
+      "isn't": "З I — <b>am not</b>.",
+      "aren't": "З I — <b>am not</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Tom ___ at school today.",
+     "o": [
+      "isn't",
+      "aren't",
+      "am not"
+     ],
+     "a": "isn't",
+     "h": [
+      "Tom = he.",
+      "isn't."
+     ],
+     "e": "he → <b>isn't</b>.",
+     "err": {
+      "aren't": "Tom — один (he): <b>isn't</b>.",
+      "am not": "am — тільки з I."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They ___ from London.",
+     "o": [
+      "aren't",
+      "isn't",
+      "am not"
+     ],
+     "a": "aren't",
+     "h": [
+      "They — «вони».",
+      "aren't."
+     ],
+     "e": "they → <b>aren't</b>.",
+     "err": {
+      "isn't": "they → <b>aren't</b>.",
+      "am not": "am — тільки з I."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am not, isn't або aren't",
+     "p": "The shop ___ open on Sunday.",
+     "a": [
+      "isn't",
+      "is not"
+     ],
+     "h": [
+      "The shop = it.",
+      "isn't."
+     ],
+     "e": "it → <b>isn't</b>.",
+     "err": {
+      "aren't": "Магазин один: <b>isn't</b>.",
+      "doesn't": "Тут помічник is: <b>isn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am not, isn't або aren't",
+     "p": "We ___ late.",
+     "a": [
+      "aren't",
+      "are not"
+     ],
+     "h": [
+      "We → are.",
+      "aren't."
+     ],
+     "e": "we → <b>aren't</b>.",
+     "err": {
+      "isn't": "we → <b>aren't</b>.",
+      "don't": "Тут помічник are: <b>aren't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am not, isn't або aren't",
+     "p": "I ___ a teacher.",
+     "a": [
+      "am not"
+     ],
+     "h": [
+      "I → am.",
+      "am not."
+     ],
+     "e": "I <b>am not</b>.",
+     "err": {
+      "amn't": "amn't не буває: I <b>am not</b>.",
+      "isn't": "З I — <b>am not</b>.",
+      "don't": "Тут помічник am: I <b>am not</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My friends isn't here.",
+     "bad": 2,
+     "a": "My friends aren't here.",
+     "h": [
+      "My friends = they.",
+      "aren't."
+     ],
+     "e": "they → <b>aren't</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "It aren't my bag.",
+     "bad": 1,
+     "a": "It isn't my bag.",
+     "h": [
+      "It → ?",
+      "isn't."
+     ],
+     "e": "it → <b>isn't</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She isn't at home.",
+     "a": [
+      "She isn't at home."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "she → isn't."
+     ],
+     "e": "she → <b>isn't</b>.",
+     "err": {
+      "She aren't at home.": "she → <b>isn't</b>.",
+      "She don't at home.": "Тут помічник is: <b>isn't</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "be.q",
+   "title": "Am I…? Is she…? Are you…?",
+   "rule": "Am / Is / Are на початок: Are you ready? — Yes, I am. / No, I'm not.",
+   "worked": {
+    "p": "___ your sister twelve?",
+    "steps": [
+     "Про кого? <b>your sister</b> = she.",
+     "she → <b>Is</b> на початок.",
+     "Відповідь: <b>Is</b> your sister twelve?"
+    ]
+   },
+   "alt": "<p>Питання — це просто речення, де am / is / are <b>помінявся місцями</b>:</p><p>You are ready. → <b>Are</b> you ready?<br>It is your pen. → <b>Is</b> it your pen?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ you ready?",
+     "o": [
+      "Are",
+      "Is",
+      "Do"
+     ],
+     "a": "Are",
+     "h": [
+      "you → ?",
+      "Are."
+     ],
+     "e": "<b>Are</b> you…?",
+     "err": {
+      "Is": "you → <b>Are</b>.",
+      "Do": "Тут помічник are: <b>Are</b> you ready?"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ your sister twelve?",
+     "o": [
+      "Is",
+      "Are",
+      "Does"
+     ],
+     "a": "Is",
+     "h": [
+      "your sister = she.",
+      "Is."
+     ],
+     "e": "<b>Is</b> your sister…?",
+     "err": {
+      "Are": "Сестра одна (she): <b>Is</b>.",
+      "Does": "Тут помічник is: <b>Is</b> your sister…?"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Is it your pen? — Yes, it ___.",
+     "o": [
+      "is",
+      "does",
+      "are"
+     ],
+     "a": "is",
+     "h": [
+      "Питали з Is.",
+      "Відповідь тим самим словом."
+     ],
+     "e": "Yes, it <b>is</b>.",
+     "err": {
+      "does": "Питали з Is: Yes, it <b>is</b>.",
+      "are": "it → <b>is</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Am, Is або Are",
+     "p": "___ I late?",
+     "a": [
+      "Am"
+     ],
+     "h": [
+      "I → ?",
+      "Am."
+     ],
+     "e": "<b>Am</b> I…?",
+     "err": {
+      "Is": "З I — <b>Am</b>.",
+      "Are": "З I — <b>Am</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Am, Is або Are",
+     "p": "___ they your friends?",
+     "a": [
+      "Are"
+     ],
+     "h": [
+      "they → ?",
+      "Are."
+     ],
+     "e": "<b>Are</b> they…?",
+     "err": {
+      "Is": "they → <b>Are</b>.",
+      "Do": "Тут помічник are: <b>Are</b> they…?"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Are you hungry? — No, I ___.",
+     "a": [
+      "am not",
+      "'m not"
+     ],
+     "h": [
+      "Питали з Are you.",
+      "No, I'm not."
+     ],
+     "e": "No, I'<b>m not</b>.",
+     "err": {
+      "amn't": "amn't не буває: No, I'<b>m not</b>.",
+      "don't": "Питали з Are: No, I'<b>m not</b>.",
+      "aren't": "З I — <b>am not</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Is Anna at school? — Yes, she ___.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "Питали з Is.",
+      "Yes, she is."
+     ],
+     "e": "Yes, she <b>is</b>.",
+     "err": {
+      "does": "Питали з Is: Yes, she <b>is</b>.",
+      "are": "she → <b>is</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Скільки тобі років?»",
+     "words": [
+      "old",
+      "How",
+      "you",
+      "are"
+     ],
+     "a": [
+      "how old are you"
+     ],
+     "h": [
+      "How old → are → you?",
+      "Дослівно: «Наскільки старий ти?»"
+     ],
+     "e": "<b>How old are you?</b>",
+     "end": "?"
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Is they at home?",
+     "bad": 0,
+     "a": "Are they at home?",
+     "h": [
+      "they → ?",
+      "Are."
+     ],
+     "e": "<b>Are</b> they…?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Where are my keys?",
+     "a": [
+      "Where are my keys?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "keys — багато → are."
+     ],
+     "e": "Where <b>are</b> my keys?",
+     "err": {
+      "Where is my keys?": "keys — їх кілька: <b>are</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

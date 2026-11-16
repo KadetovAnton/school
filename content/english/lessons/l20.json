@@ -1,0 +1,108 @@
+{
+ "id": "l20",
+ "title": "Прийменники: in / on / at, under, next to",
+ "skillFiles": [
+  "skills/prep.json"
+ ],
+ "skills": [
+  "prep.place",
+  "prep.time"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "prep.place": 4,
+   "prep.time": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📦",
+   "h": "Де? in, on, under…",
+   "html": "<table class=\"t\"><tr><td><b>in</b></td><td>у, всередині</td><td>in the box, in Kyiv</td></tr>\n        <tr><td><b>on</b></td><td>на (поверхні)</td><td>on the table, on the wall</td></tr>\n        <tr><td><b>under</b></td><td>під</td><td>under the bed</td></tr>\n        <tr><td><b>next to</b></td><td>поруч з</td><td>next to the window</td></tr>\n        <tr><td><b>between</b></td><td>між</td><td>between the bank and the cafe</td></tr>\n        <tr><td><b>behind</b> / <b>in front of</b></td><td>за / перед</td><td>behind the sofa</td></tr>\n        <tr><td><b>at</b></td><td>біля точки, на місці</td><td>at the bus stop, at school, at home</td></tr></table>"
+  },
+  {
+   "e": "🕐",
+   "h": "Коли? in, on, at",
+   "html": "<table class=\"t\"><tr><td><b>at</b></td><td>точний час</td><td>at 7 o'clock, at night</td></tr>\n        <tr><td><b>on</b></td><td>день, дата</td><td>on Monday, on the 5th of May</td></tr>\n        <tr><td><b>in</b></td><td>місяць, рік, пора року, частина дня</td><td>in May, in 2013, in winter, in the morning</td></tr></table>\n        <div class=\"tip\">💡 Від меншого до більшого: <b>at</b> (година) → <b>on</b> (день) → <b>in</b> (місяць, рік).</div>"
+  }
+ ],
+ "examples": {
+  "title": "Моя кімната і мій тиждень",
+  "question": {
+   "q": "чому «<b>on</b> Monday», а «<b>in</b> the morning»?",
+   "a": "Дні — on. Частини дня (ранок, вечір) — in (крім at night)."
+  },
+  "items": [
+   [
+    "My bed is <b>next to</b> the window.",
+    "Моє ліжко біля вікна."
+   ],
+   [
+    "My books are <b>on</b> the shelf, and my clothes are <b>in</b> the wardrobe.",
+    "Книжки на полиці, а одяг у шафі."
+   ],
+   [
+    "My cat sleeps <b>under</b> the bed.",
+    "Кіт спить під ліжком."
+   ],
+   [
+    "I get up <b>at</b> seven <b>in</b> the morning.",
+    "Я встаю о сьомій ранку."
+   ],
+   [
+    "We have English <b>on</b> Tuesday and Thursday.",
+    "Англійська в нас у вівторок і четвер."
+   ],
+   [
+    "My birthday is <b>in</b> May.",
+    "Мій день народження в травні."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "under",
+   "під"
+  ],
+  [
+   "behind",
+   "за, позаду"
+  ],
+  [
+   "in front of",
+   "перед"
+  ],
+  [
+   "between",
+   "між"
+  ],
+  [
+   "next to",
+   "поруч з"
+  ],
+  [
+   "Monday",
+   "понеділок"
+  ],
+  [
+   "weekend",
+   "вихідні"
+  ],
+  [
+   "morning",
+   "ранок"
+  ],
+  [
+   "evening",
+   "вечір"
+  ],
+  [
+   "at night",
+   "вночі"
+  ]
+ ]
+}

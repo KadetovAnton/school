@@ -1,0 +1,349 @@
+{
+ "topic": "off",
+ "title": "Пропозиції й запрошення",
+ "skills": [
+  {
+   "id": "off.would",
+   "title": "Would you like…? / I'd like…",
+   "rule": "Would you like + щось? Would you like + to + дієслово? Відповідь: Yes, please / I'd love to / No, thank you.",
+   "worked": {
+    "p": "Would you like ___ with us? (play)",
+    "steps": [
+     "Після <b>would like</b> — to + дієслово.",
+     "→ <b>to play</b>.",
+     "Відповідь: Would you like <b>to play</b> with us?"
+    ]
+   },
+   "alt": "<p>Would you like = «Чи не хочеш…?» — ввічливо. Після нього або річ (some tea), або <b>to</b> + дія (to come).</p><p>Не плутай з Do you like…? — «Ти любиш…?»</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ you like some tea?",
+     "o": [
+      "Would",
+      "Do",
+      "Will"
+     ],
+     "a": "Would",
+     "h": [
+      "Пропонуємо чай зараз.",
+      "Would you like…?"
+     ],
+     "e": "<b>Would</b> you like…?",
+     "err": {
+      "Do": "Do you like = «чи любиш». Пропозиція — <b>Would</b> you like?",
+      "Will": "Пропозиція — <b>Would</b> you like?"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Would you like ___ to the cinema?",
+     "o": [
+      "to go",
+      "go",
+      "going"
+     ],
+     "a": "to go",
+     "h": [
+      "Після would like…",
+      "to + дієслово."
+     ],
+     "e": "would like <b>to go</b>.",
+     "err": {
+      "go": "Після would like — <b>to</b> go.",
+      "going": "Після would like — <b>to go</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Would you like to come? — Yes, ___!",
+     "o": [
+      "I'd love to",
+      "I love",
+      "I would like"
+     ],
+     "a": "I'd love to",
+     "h": [
+      "Радо погоджуємось.",
+      "I'd love to!"
+     ],
+     "e": "<b>I'd love to!</b>",
+     "err": {
+      "I love": "Погодитись на запрошення — <b>I'd love to!</b>",
+      "I would like": "Природніше: <b>I'd love to!</b>"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Would you like an apple? Як ввічливо відмовитись?",
+     "o": [
+      "No, thank you.",
+      "No, I wouldn't like.",
+      "No, I don't."
+     ],
+     "a": "No, thank you.",
+     "h": [
+      "Ввічлива відмова.",
+      "No, thank you."
+     ],
+     "e": "<b>No, thank you.</b>",
+     "err": {
+      "No, I wouldn't like.": "Ввічливо: <b>No, thank you.</b>",
+      "No, I don't.": "Ввічливо: <b>No, thank you.</b>"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши потрібне слово",
+     "p": "Would you like ___ cake?",
+     "a": [
+      "some"
+     ],
+     "h": [
+      "Пропонуємо — some, навіть у питанні.",
+      "some."
+     ],
+     "e": "<b>some</b> cake.",
+     "err": {
+      "any": "У пропозиціях — <b>some</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в правильній формі",
+     "p": "Would you like ___ with us? (play)",
+     "a": [
+      "to play"
+     ],
+     "h": [
+      "would like + to.",
+      "to play."
+     ],
+     "e": "<b>to play</b>.",
+     "err": {
+      "play": "Після would like — <b>to</b> play.",
+      "playing": "Після would like — <b>to play</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши потрібне слово",
+     "p": "___ you like a cup of coffee?",
+     "a": [
+      "Would"
+     ],
+     "h": [
+      "Ввічлива пропозиція.",
+      "Would."
+     ],
+     "e": "<b>Would</b> you like…?",
+     "err": {
+      "Do": "Пропозиція — <b>Would</b> you like…?",
+      "Will": "Пропозиція — <b>Would</b> you like…?"
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Would you like go to the park?",
+     "bad": 3,
+     "a": "Would you like to go to the park?",
+     "h": [
+      "Після would like…",
+      "…to + дієслово."
+     ],
+     "e": "would like <b>to go</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Would you like to come to my party?",
+     "a": [
+      "Would you like to come to my party?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "would like + to come."
+     ],
+     "e": "<b>Would you like to come</b>…?",
+     "err": {
+      "Do you like to come to my party?": "Запрошення — <b>Would</b> you like…?",
+      "Would you like come to my party?": "Після would like — <b>to</b> come."
+     }
+    }
+   ]
+  },
+  {
+   "id": "off.lets",
+   "title": "Let's… Shall we…? Why don't we…?",
+   "rule": "Let's / Shall we / Why don't we + дієслово без to. Відповідь: That's a good idea! / Sorry, I can't.",
+   "worked": {
+    "p": "Let's ___ Grandma tomorrow. (visit)",
+    "steps": [
+     "Після <b>Let's</b> — дієслово без to.",
+     "→ <b>visit</b>.",
+     "Відповідь: Let's <b>visit</b> Grandma tomorrow."
+    ]
+   },
+   "alt": "<p>Let's = let us, «давай(те)». Після Let's, Shall we, Why don't we — «голе» дієслово, як після can.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ go to the park!",
+     "o": [
+      "Let's",
+      "Shall",
+      "Why"
+     ],
+     "a": "Let's",
+     "h": [
+      "«Ходімо!»",
+      "Let's."
+     ],
+     "e": "<b>Let's</b> go…!",
+     "err": {
+      "Shall": "Shall — у питанні: Shall we go? Тут <b>Let's</b>.",
+      "Why": "Повністю: Why don't we go? Тут <b>Let's</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Let's ___ a pizza!",
+     "o": [
+      "make",
+      "to make",
+      "making"
+     ],
+     "a": "make",
+     "h": [
+      "Після Let's…",
+      "…без to."
+     ],
+     "e": "Let's <b>make</b>.",
+     "err": {
+      "to make": "Після Let's — без to: <b>make</b>.",
+      "making": "Після Let's — перша форма: <b>make</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ we play chess?",
+     "o": [
+      "Shall",
+      "Let's",
+      "Do"
+     ],
+     "a": "Shall",
+     "h": [
+      "Пропозиція-питання.",
+      "Shall we…?"
+     ],
+     "e": "<b>Shall</b> we…?",
+     "err": {
+      "Let's": "Let's — без питання: Let's play. Питання — <b>Shall</b> we?",
+      "Do": "Пропозиція — <b>Shall</b> we play?"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Why don't we ___ a film?",
+     "o": [
+      "watch",
+      "to watch",
+      "watching"
+     ],
+     "a": "watch",
+     "h": [
+      "Після Why don't we…",
+      "…без to."
+     ],
+     "e": "<b>watch</b>.",
+     "err": {
+      "to watch": "Після Why don't we — без to: <b>watch</b>.",
+      "watching": "Перша форма: <b>watch</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Let's go swimming! Як погодитись?",
+     "o": [
+      "That's a good idea!",
+      "Yes, I go.",
+      "Yes, I like."
+     ],
+     "a": "That's a good idea!",
+     "h": [
+      "Погоджуємось на пропозицію.",
+      "That's a good idea!"
+     ],
+     "e": "<b>That's a good idea!</b>",
+     "err": {
+      "Yes, I go.": "Погодитись: <b>That's a good idea!</b>",
+      "Yes, I like.": "Погодитись: <b>That's a good idea!</b>"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово",
+     "p": "Let's ___ Grandma tomorrow. (visit)",
+     "a": [
+      "visit"
+     ],
+     "h": [
+      "Після Let's — без to.",
+      "visit."
+     ],
+     "e": "Let's <b>visit</b>.",
+     "err": {
+      "to visit": "Після Let's — без to: <b>visit</b>.",
+      "visiting": "Перша форма: <b>visit</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Let's або Shall",
+     "p": "___ we meet at five?",
+     "a": [
+      "Shall"
+     ],
+     "h": [
+      "Це питання (знак ?).",
+      "Shall we…?"
+     ],
+     "e": "<b>Shall</b> we meet…?",
+     "err": {
+      "Let's": "Це питання: <b>Shall</b> we…?"
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Let's to go home.",
+     "bad": 1,
+     "a": "Let's go home.",
+     "h": [
+      "Після Let's…",
+      "…to зайве."
+     ],
+     "e": "Let's <b>go</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Shall we go to the cinema?",
+     "a": [
+      "Shall we go to the cinema?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Shall we + go."
+     ],
+     "e": "<b>Shall we go</b>…?",
+     "err": {
+      "Shall we to go to the cinema?": "Після Shall we — без to."
+     }
+    }
+   ]
+  }
+ ]
+}

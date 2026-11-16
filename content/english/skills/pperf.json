@@ -1,0 +1,505 @@
+{
+ "topic": "pperf",
+ "title": "Past Perfect",
+ "skills": [
+  {
+   "id": "pperf.form",
+   "title": "had + третя форма",
+   "rule": "had + третя форма для всіх: I had finished, she had seen.",
+   "worked": {
+    "p": "I didn't go to the cinema because I ___ that film before. (see)",
+    "steps": [
+     "Фільм бачила <b>раніше</b> за «не пішла» → Past Perfect.",
+     "had + третя форма: see – saw – <b>seen</b>.",
+     "Відповідь: I <b>had seen</b> that film before."
+    ]
+   },
+   "alt": "<p>Це як Present Perfect (have / has + третя форма), тільки «на крок назад у минуле»: have / has → <b>had</b>.</p><p>I have eaten → I <b>had</b> eaten. She has gone → she <b>had</b> gone.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "When we arrived, the film ___ started.",
+     "o": [
+      "had",
+      "has",
+      "have"
+     ],
+     "a": "had",
+     "h": [
+      "Фільм почався раніше, ніж ми прийшли (минуле).",
+      "had."
+     ],
+     "e": "<b>had</b> started.",
+     "err": {
+      "has": "Розповідь про минуле: <b>had</b> started.",
+      "have": "Розповідь про минуле: <b>had</b> started."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She had ___ her homework before dinner.",
+     "o": [
+      "done",
+      "did",
+      "do"
+     ],
+     "a": "done",
+     "h": [
+      "Після had — третя форма.",
+      "do – did – done."
+     ],
+     "e": "had <b>done</b>.",
+     "err": {
+      "did": "Після had — третя форма: <b>done</b>.",
+      "do": "Після had — третя форма: <b>done</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши had + третю форму",
+     "p": "By 10 o'clock I ___ my room. (clean)",
+     "a": [
+      "had cleaned",
+      "'d cleaned"
+     ],
+     "h": [
+      "By 10 o'clock — до 10-ї (у минулому).",
+      "had + cleaned."
+     ],
+     "e": "<b>had cleaned</b>.",
+     "err": {
+      "have cleaned": "Це минуле: <b>had</b> cleaned.",
+      "cleaned": "By … — до моменту в минулому: <b>had cleaned</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши had + третю форму",
+     "p": "They ___ the tickets before the trip. (buy)",
+     "a": [
+      "had bought",
+      "'d bought"
+     ],
+     "h": [
+      "Купили раніше за поїздку.",
+      "buy – bought – bought."
+     ],
+     "e": "<b>had bought</b>.",
+     "err": {
+      "had buyed": "buy — неправильне: <b>bought</b>.",
+      "has bought": "Це минуле: <b>had</b> bought."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши had + третю форму",
+     "p": "I didn't go to the cinema because I ___ that film before. (see)",
+     "a": [
+      "had seen",
+      "'d seen"
+     ],
+     "h": [
+      "Бачила раніше.",
+      "see – saw – seen."
+     ],
+     "e": "<b>had seen</b>.",
+     "err": {
+      "have seen": "Розповідь про минуле: <b>had</b> seen.",
+      "had saw": "Третя форма: <b>seen</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши had + третю форму",
+     "p": "When I got home, my brother ___ all the cake. (eat)",
+     "a": [
+      "had eaten",
+      "'d eaten"
+     ],
+     "h": [
+      "Брат з'їв раніше, ніж я прийшла.",
+      "eat – ate – eaten."
+     ],
+     "e": "<b>had eaten</b>.",
+     "err": {
+      "had ate": "Третя форма: <b>eaten</b>.",
+      "ate": "Він з'їв ще до того, як я прийшла: <b>had eaten</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "When I came, they has left.",
+     "bad": 4,
+     "a": "When I came, they had left.",
+     "h": [
+      "Розповідь про минуле.",
+      "has → had."
+     ],
+     "e": "they <b>had</b> left."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She had wrote the letter before lunch.",
+     "bad": 2,
+     "a": "She had written the letter before lunch.",
+     "h": [
+      "Після had — третя форма.",
+      "write – wrote – written."
+     ],
+     "e": "had <b>written</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 The train had left when we arrived.",
+     "a": [
+      "The train had left when we arrived."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Потяг поїхав раніше → had left."
+     ],
+     "e": "<b>had left</b>.",
+     "err": {
+      "The train has left when we arrived.": "Розповідь про минуле: <b>had</b> left."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pperf.negq",
+   "title": "hadn't, Had you…?",
+   "rule": "hadn't + третя форма; Had + хто + третя форма? — Yes, I had. / No, she hadn't.",
+   "worked": {
+    "p": "We ___ the news before you told us. (not hear)",
+    "steps": [
+     "Ми не чули раніше, ніж ти сказала → Past Perfect.",
+     "Заперечення: <b>hadn't</b> + третя форма.",
+     "hear – heard – <b>heard</b>.",
+     "Відповідь: We <b>hadn't heard</b> the news."
+    ]
+   },
+   "alt": "<p>Усе крутиться довкола <b>had</b>: «не» — hadn't, питання — Had на початок. did тут не потрібен.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ finished when the bell rang.",
+     "o": [
+      "hadn't",
+      "didn't",
+      "haven't"
+     ],
+     "a": "hadn't",
+     "h": [
+      "Ще не закінчила до дзвінка.",
+      "hadn't."
+     ],
+     "e": "<b>hadn't</b> finished.",
+     "err": {
+      "didn't": "Після didn't — перша форма. Тут: <b>hadn't</b> finished.",
+      "haven't": "Розповідь про минуле: <b>hadn't</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ you eaten before you came?",
+     "o": [
+      "Had",
+      "Did",
+      "Have"
+     ],
+     "a": "Had",
+     "h": [
+      "eaten — третя форма, дія раніше.",
+      "Had."
+     ],
+     "e": "<b>Had</b> you eaten…?",
+     "err": {
+      "Did": "eaten — третя форма, тож <b>Had</b>.",
+      "Have": "Розповідь про минуле: <b>Had</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Had she seen the film before? — No, she ___.",
+     "o": [
+      "hadn't",
+      "didn't",
+      "hasn't"
+     ],
+     "a": "hadn't",
+     "h": [
+      "Питали з Had.",
+      "hadn't."
+     ],
+     "e": "No, she <b>hadn't</b>.",
+     "err": {
+      "didn't": "Питали з Had: <b>hadn't</b>.",
+      "hasn't": "Питали з Had: <b>hadn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши заперечення з дієсловом",
+     "p": "We ___ the news before you told us. (not hear)",
+     "a": [
+      "hadn't heard",
+      "had not heard"
+     ],
+     "h": [
+      "hadn't + третя форма.",
+      "hear – heard – heard."
+     ],
+     "e": "<b>hadn't heard</b>.",
+     "err": {
+      "didn't hear": "Не чули ще ДО того → <b>hadn't heard</b>.",
+      "hadn't heared": "hear — неправильне: <b>heard</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши Had",
+     "p": "___ they left before you arrived?",
+     "a": [
+      "Had"
+     ],
+     "h": [
+      "left — третя форма, раніше.",
+      "Had."
+     ],
+     "e": "<b>Had</b> they left…?",
+     "err": {
+      "Did": "left тут — третя форма: <b>Had</b>.",
+      "Have": "Розповідь про минуле: <b>Had</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Had you done your homework? — Yes, I ___.",
+     "a": [
+      "had"
+     ],
+     "h": [
+      "Питали з Had.",
+      "Yes, I had."
+     ],
+     "e": "Yes, I <b>had</b>.",
+     "err": {
+      "did": "Питали з Had: Yes, I <b>had</b>.",
+      "have": "Питали з Had: Yes, I <b>had</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Had you saw the film before?",
+     "bad": 2,
+     "a": "Had you seen the film before?",
+     "h": [
+      "Після Had — третя форма.",
+      "see – saw – seen."
+     ],
+     "e": "Had you <b>seen</b>…?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She hadn't seen the sea before.",
+     "a": [
+      "She hadn't seen the sea before."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "hadn't + seen."
+     ],
+     "e": "<b>hadn't seen</b>.",
+     "err": {
+      "She didn't seen the sea before.": "Після didn't — перша форма; тут <b>hadn't</b> seen."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pperf.mix",
+   "title": "Past Simple чи Past Perfect",
+   "rule": "Дія, яка сталася раніше за іншу в минулому, — had + третя форма; пізніша — Past Simple. by the time → Past Perfect.",
+   "worked": {
+    "p": "By the time we arrived, the party ___. (finish)",
+    "steps": [
+     "Дві дії: ми прийшли і вечірка закінчилась.",
+     "Що раніше? Вечірка закінчилась <b>до</b> нашого приходу.",
+     "Раніша дія → <b>had finished</b>.",
+     "Відповідь: the party <b>had finished</b>."
+    ]
+   },
+   "alt": "<p>Намалюй стрілку часу ⏪: дія лівіше (раніше) — had + третя форма, дія правіше — Past Simple.</p><p>⬅️ the film <b>had started</b> … ➡️ we <b>arrived</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "When I arrived at the station, the train ___.",
+     "o": [
+      "had left",
+      "leaves",
+      "has left"
+     ],
+     "a": "had left",
+     "h": [
+      "Потяг поїхав раніше, ніж я прийшла.",
+      "had left."
+     ],
+     "e": "<b>had left</b>.",
+     "err": {
+      "leaves": "Розповідь про минуле, дія раніше: <b>had left</b>.",
+      "has left": "Розповідь про минуле: <b>had</b> left."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "After she ___ her homework, she watched TV.",
+     "o": [
+      "had done",
+      "has done",
+      "does"
+     ],
+     "a": "had done",
+     "h": [
+      "Спершу уроки, потім телевізор.",
+      "had done."
+     ],
+     "e": "<b>had done</b>.",
+     "err": {
+      "has done": "Розповідь про минуле: <b>had</b> done.",
+      "does": "Розповідь про минуле: <b>had done</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I ___ my keys, so I couldn't open the door.",
+     "o": [
+      "had lost",
+      "have lost",
+      "lose"
+     ],
+     "a": "had lost",
+     "h": [
+      "Ключі загубила раніше.",
+      "had lost."
+     ],
+     "e": "<b>had lost</b>.",
+     "err": {
+      "have lost": "Розповідь про минуле: <b>had</b> lost.",
+      "lose": "Розповідь про минуле: <b>had lost</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Яке речення правильне?",
+     "o": [
+      "When I came home, my brother had eaten all the cake.",
+      "When I came home, my brother has eaten all the cake."
+     ],
+     "a": "When I came home, my brother had eaten all the cake.",
+     "h": [
+      "Розповідь про минуле.",
+      "Раніша дія → had eaten."
+     ],
+     "e": "…my brother <b>had eaten</b>…",
+     "err": {
+      "When I came home, my brother has eaten all the cake.": "Розповідь про минуле: <b>had</b> eaten."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Past Simple або Past Perfect)",
+     "p": "By the time we arrived, the party ___. (finish)",
+     "a": [
+      "had finished",
+      "'d finished"
+     ],
+     "h": [
+      "By the time — до того моменту.",
+      "had + finished."
+     ],
+     "e": "<b>had finished</b>.",
+     "err": {
+      "finished": "By the time — вечірка закінчилась ДО того: <b>had finished</b>.",
+      "has finished": "Розповідь про минуле: <b>had</b> finished."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Past Simple або Past Perfect)",
+     "p": "By 2020 my family ___ to Kyiv. (move)",
+     "a": [
+      "had moved",
+      "'d moved"
+     ],
+     "h": [
+      "By 2020 — до 2020 року.",
+      "had + moved."
+     ],
+     "e": "<b>had moved</b>.",
+     "err": {
+      "moved": "By 2020 — до того моменту: <b>had moved</b>.",
+      "has moved": "Це минуле: <b>had</b> moved."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Past Simple або Past Perfect)",
+     "p": "Before that trip I ___ snow. (never see)",
+     "a": [
+      "had never seen",
+      "'d never seen"
+     ],
+     "h": [
+      "Досвід до моменту в минулому.",
+      "had never + seen."
+     ],
+     "e": "<b>had never seen</b>.",
+     "err": {
+      "never saw": "Досвід до моменту в минулому: <b>had never seen</b>.",
+      "have never seen": "Це про минуле: <b>had</b> never seen.",
+      "had never saw": "Третя форма: <b>seen</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "When we got to the station, the train has left.",
+     "bad": 8,
+     "a": "When we got to the station, the train had left.",
+     "h": [
+      "Розповідь про минуле.",
+      "has → had."
+     ],
+     "e": "the train <b>had</b> left."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 By the time I woke up, Mum had made breakfast.",
+     "a": [
+      "By the time I woke up, Mum had made breakfast."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "By the time → had made."
+     ],
+     "e": "<b>had made</b>.",
+     "err": {
+      "By the time I woke up, Mum made breakfast.": "By the time — сніданок був готовий ДО того: <b>had made</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

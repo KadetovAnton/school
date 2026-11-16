@@ -1,0 +1,111 @@
+{
+ "id": "l23",
+ "title": "Past Perfect: що сталося раніше",
+ "skillFiles": [
+  "skills/pperf.json"
+ ],
+ "skills": [
+  "pperf.form",
+  "pperf.negq",
+  "pperf.mix"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "pperf.form": 3,
+   "pperf.negq": 2,
+   "pperf.mix": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⏪",
+   "h": "«Минуле в минулому»",
+   "html": "<p>Коли розповідаємо про минуле і хочемо показати, що одна дія сталася <b>ще раніше</b> за іншу.</p>\n        <div class=\"rule-box\"><b>had</b> + третя форма — для всіх однаково</div>\n        <div class=\"ex\"><div><div class=\"en\">When we arrived, the film <b>had started</b>.</div><div class=\"ua\">Коли ми прийшли, фільм уже почався.</div></div><button class=\"say round\" data-say=\"When we arrived, the film had started.\">🔊</button></div>\n        <p class=\"muted\">Спершу почався фільм (had started), потім ми прийшли (arrived).</p>"
+  },
+  {
+   "e": "🙅",
+   "h": "Заперечення і питання",
+   "html": "<div class=\"ex\"><div><div class=\"en\">I <b>hadn't finished</b> when the bell rang.</div><div class=\"ua\">Я ще не закінчила, коли пролунав дзвоник.</div></div><button class=\"say round\" data-say=\"I hadn't finished when the bell rang.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Had</b> you <b>eaten</b> before you came? — Yes, I <b>had</b>.</div><div class=\"ua\">Ти поїла, перш ніж прийти? — Так.</div></div><button class=\"say round\" data-say=\"Had you eaten before you came? Yes, I had.\">🔊</button></div>"
+  },
+  {
+   "e": "🔎",
+   "h": "Підказки",
+   "html": "<p>by the time (до того часу як), by 10 o'clock (до 10-ї), already, never … before, before / after.</p>\n        <div class=\"ex\"><div><div class=\"en\">By the time I woke up, Mum <b>had made</b> breakfast.</div><div class=\"ua\">Коли я прокинулась, мама вже приготувала сніданок.</div></div><button class=\"say round\" data-say=\"By the time I woke up, Mum had made breakfast.\">🔊</button></div>\n        <div class=\"tip\">💡 Дві дії в минулому: та, що <b>раніше</b> — had + третя форма; та, що пізніше — звичайний Past Simple.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Запізнились!",
+  "question": {
+   "q": "чому «the train <b>had left</b>», а «we <b>arrived</b>»?",
+   "a": "Потяг поїхав раніше (Past Perfect), а ми прибули пізніше (Past Simple)."
+  },
+  "items": [
+   [
+    "Last Sunday we went to the station to meet Grandma.",
+    "Минулої неділі ми поїхали на вокзал зустріти бабусю."
+   ],
+   [
+    "But when we <b>arrived</b>, her train <b>had</b> already <b>come</b>!",
+    "Але коли ми приїхали, її потяг уже прибув!"
+   ],
+   [
+    "Grandma <b>had waited</b> for twenty minutes.",
+    "Бабуся чекала двадцять хвилин."
+   ],
+   [
+    "She <b>had bought</b> a coffee and <b>had found</b> a seat.",
+    "Вона купила каву і знайшла місце."
+   ],
+   [
+    "She wasn't angry because she <b>had read</b> half of her book!",
+    "Вона не сердилась, бо встигла прочитати пів книжки!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "by the time",
+   "до того часу як"
+  ],
+  [
+   "before",
+   "до, перед тим як"
+  ],
+  [
+   "after",
+   "після того як"
+  ],
+  [
+   "already",
+   "вже"
+  ],
+  [
+   "station",
+   "вокзал"
+  ],
+  [
+   "arrive",
+   "прибувати"
+  ],
+  [
+   "leave",
+   "від'їжджати"
+  ],
+  [
+   "wait",
+   "чекати"
+  ],
+  [
+   "angry",
+   "сердитий"
+  ],
+  [
+   "half",
+   "половина"
+  ]
+ ]
+}

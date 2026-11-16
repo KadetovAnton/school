@@ -1,0 +1,382 @@
+{
+ "topic": "tag",
+ "title": "Розділові запитання",
+ "skills": [
+  {
+   "id": "tag.be",
+   "title": "…, isn't it? …, can't they?",
+   "rule": "Хвостик з того ж помічника (is, are, was, can): ствердження → з not, заперечення → без not. У хвостику — займенник.",
+   "worked": {
+    "p": "Tom is your friend, ___?",
+    "steps": [
+     "Помічник: <b>is</b>. Речення стверджувальне.",
+     "Ствердження → хвостик із not: <b>isn't</b>.",
+     "Tom → займенник <b>he</b>.",
+     "Відповідь: Tom is your friend, <b>isn't he</b>?"
+    ]
+   },
+   "alt": "<p>Хвостик — це «дзеркало»: що в реченні «так», у хвостику «ні», і навпаки.</p><p>It <b>is</b> → <b>isn't</b> it? · You <b>aren't</b> → <b>are</b> you? · They <b>can</b> → <b>can't</b> they?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "It's cold today, ___?",
+     "o": [
+      "isn't it",
+      "is it",
+      "doesn't it"
+     ],
+     "a": "isn't it",
+     "h": [
+      "Помічник is, ствердження.",
+      "→ isn't it."
+     ],
+     "e": "…, <b>isn't it</b>?",
+     "err": {
+      "is it": "Ствердження → хвостик із not: <b>isn't it</b>.",
+      "doesn't it": "Помічник is: <b>isn't it</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "You are tired, ___?",
+     "o": [
+      "aren't you",
+      "are you",
+      "don't you"
+     ],
+     "a": "aren't you",
+     "h": [
+      "Помічник are, ствердження.",
+      "→ aren't you."
+     ],
+     "e": "…, <b>aren't you</b>?",
+     "err": {
+      "are you": "Ствердження → з not: <b>aren't you</b>.",
+      "don't you": "Помічник are: <b>aren't you</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She isn't at home, ___?",
+     "o": [
+      "is she",
+      "isn't she"
+     ],
+     "a": "is she",
+     "h": [
+      "Заперечення isn't.",
+      "→ хвостик без not."
+     ],
+     "e": "…, <b>is she</b>?",
+     "err": {
+      "isn't she": "Заперечення → хвостик без not: <b>is she</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They can swim, ___?",
+     "o": [
+      "can't they",
+      "don't they",
+      "can they"
+     ],
+     "a": "can't they",
+     "h": [
+      "Помічник can, ствердження.",
+      "→ can't they."
+     ],
+     "e": "…, <b>can't they</b>?",
+     "err": {
+      "don't they": "Помічник can: <b>can't they</b>.",
+      "can they": "Ствердження → з not: <b>can't they</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "Tom is your friend, ___?",
+     "a": [
+      "isn't he"
+     ],
+     "h": [
+      "Помічник is, ствердження.",
+      "Tom → he."
+     ],
+     "e": "…, <b>isn't he</b>?",
+     "err": {
+      "is he": "Ствердження → з not: <b>isn't he</b>.",
+      "isn't Tom": "У хвостику — займенник: <b>isn't he</b>.",
+      "doesn't he": "Помічник is: <b>isn't he</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "You weren't at school yesterday, ___?",
+     "a": [
+      "were you"
+     ],
+     "h": [
+      "Заперечення weren't.",
+      "→ без not."
+     ],
+     "e": "…, <b>were you</b>?",
+     "err": {
+      "weren't you": "Заперечення → хвостик без not: <b>were you</b>.",
+      "did you": "Помічник were: <b>were you</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "We can go now, ___?",
+     "a": [
+      "can't we"
+     ],
+     "h": [
+      "Помічник can, ствердження.",
+      "→ can't we."
+     ],
+     "e": "…, <b>can't we</b>?",
+     "err": {
+      "can we": "Ствердження → з not: <b>can't we</b>.",
+      "don't we": "Помічник can: <b>can't we</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "Your sister was ill, ___?",
+     "a": [
+      "wasn't she"
+     ],
+     "h": [
+      "Помічник was, ствердження.",
+      "your sister → she."
+     ],
+     "e": "…, <b>wasn't she</b>?",
+     "err": {
+      "was she": "Ствердження → з not: <b>wasn't she</b>.",
+      "didn't she": "Помічник was: <b>wasn't she</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "It's a nice day, is it?",
+     "bad": 4,
+     "a": "It's a nice day, isn't it?",
+     "h": [
+      "Речення стверджувальне.",
+      "Хвостик — з not."
+     ],
+     "e": "…, <b>isn't</b> it?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 You're from Kyiv, aren't you?",
+     "a": [
+      "You're from Kyiv, aren't you?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Ствердження → aren't you."
+     ],
+     "e": "…, <b>aren't you</b>?",
+     "err": {
+      "You're from Kyiv, are you?": "Ствердження → хвостик із not: <b>aren't you</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "tag.do",
+   "title": "…, don't you? …, didn't they?",
+   "rule": "Звичайне дієслово → хвостик з do / does / did: You like…, don't you? She lives…, doesn't she? They went…, didn't they?",
+   "worked": {
+    "p": "Anna plays the piano, ___?",
+    "steps": [
+     "Помічника немає — дієслово plays (Present Simple, she).",
+     "Беремо <b>does</b>; ствердження → <b>doesn't</b>.",
+     "Anna → <b>she</b>.",
+     "Відповідь: …, <b>doesn't she</b>?"
+    ]
+   },
+   "alt": "<p>Якщо в реченні немає is / are / can, «помічник» прихований: like → do, likes → does, liked / went → did.</p><p>You <b>like</b> → <b>don't</b> you? · She <b>likes</b> → <b>doesn't</b> she? · They <b>went</b> → <b>didn't</b> they?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "You like pizza, ___?",
+     "o": [
+      "don't you",
+      "do you",
+      "aren't you"
+     ],
+     "a": "don't you",
+     "h": [
+      "like — звичайне дієслово.",
+      "→ don't you."
+     ],
+     "e": "…, <b>don't you</b>?",
+     "err": {
+      "do you": "Ствердження → з not: <b>don't you</b>.",
+      "aren't you": "like — звичайне дієслово, тож do: <b>don't you</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She lives in Lviv, ___?",
+     "o": [
+      "doesn't she",
+      "don't she",
+      "isn't she"
+     ],
+     "a": "doesn't she",
+     "h": [
+      "lives — she, Present Simple.",
+      "→ doesn't she."
+     ],
+     "e": "…, <b>doesn't she</b>?",
+     "err": {
+      "don't she": "she → <b>doesn't</b>.",
+      "isn't she": "lives — звичайне дієслово: <b>doesn't she</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They went to the zoo, ___?",
+     "o": [
+      "didn't they",
+      "don't they",
+      "weren't they"
+     ],
+     "a": "didn't they",
+     "h": [
+      "went — минуле.",
+      "→ didn't they."
+     ],
+     "e": "…, <b>didn't they</b>?",
+     "err": {
+      "don't they": "went — минуле: <b>didn't they</b>.",
+      "weren't they": "went — звичайне дієслово: <b>didn't they</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "He doesn't eat meat, ___?",
+     "o": [
+      "does he",
+      "doesn't he"
+     ],
+     "a": "does he",
+     "h": [
+      "Заперечення doesn't.",
+      "→ без not."
+     ],
+     "e": "…, <b>does he</b>?",
+     "err": {
+      "doesn't he": "Заперечення → хвостик без not: <b>does he</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "Anna plays the piano, ___?",
+     "a": [
+      "doesn't she"
+     ],
+     "h": [
+      "plays — she.",
+      "→ doesn't she."
+     ],
+     "e": "…, <b>doesn't she</b>?",
+     "err": {
+      "does she": "Ствердження → з not: <b>doesn't she</b>.",
+      "don't she": "she → <b>doesn't</b>.",
+      "isn't she": "plays — звичайне дієслово: <b>doesn't she</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "You didn't call me, ___?",
+     "a": [
+      "did you"
+     ],
+     "h": [
+      "Заперечення didn't.",
+      "→ без not."
+     ],
+     "e": "…, <b>did you</b>?",
+     "err": {
+      "didn't you": "Заперечення → хвостик без not: <b>did you</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "Your parents work in Kyiv, ___?",
+     "a": [
+      "don't they"
+     ],
+     "h": [
+      "work — they.",
+      "→ don't they."
+     ],
+     "e": "…, <b>don't they</b>?",
+     "err": {
+      "doesn't they": "they → <b>don't</b>.",
+      "don't your parents": "У хвостику — займенник: <b>don't they</b>.",
+      "do they": "Ствердження → з not: <b>don't they</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши розділове запитання (хвостик)",
+     "p": "We watched a good film, ___?",
+     "a": [
+      "didn't we"
+     ],
+     "h": [
+      "watched — минуле.",
+      "→ didn't we."
+     ],
+     "e": "…, <b>didn't we</b>?",
+     "err": {
+      "don't we": "watched — минуле: <b>didn't we</b>.",
+      "did we": "Ствердження → з not: <b>didn't we</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "You like English, do you?",
+     "bad": 3,
+     "a": "You like English, don't you?",
+     "h": [
+      "Речення стверджувальне.",
+      "Хвостик — з not."
+     ],
+     "e": "…, <b>don't</b> you?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She speaks English, doesn't she?",
+     "a": [
+      "She speaks English, doesn't she?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "speaks → doesn't she."
+     ],
+     "e": "…, <b>doesn't she</b>?",
+     "err": {
+      "She speaks English, don't she?": "she → <b>doesn't</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

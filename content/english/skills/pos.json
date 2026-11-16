@@ -1,0 +1,376 @@
+{
+ "topic": "pos",
+ "title": "Чиє це",
+ "skills": [
+  {
+   "id": "pos.s",
+   "title": "Присвійний 's: Anna's, my dad's",
+   "rule": "Чиє? → ім'я + 's: Anna's bag, my dad's car. Питання — Whose?",
+   "worked": {
+    "p": "This is ___ room. (Tom)",
+    "steps": [
+     "Чия кімната? Томова.",
+     "До Tom додаємо <b>'s</b>.",
+     "Відповідь: This is <b>Tom's</b> room."
+    ]
+   },
+   "alt": "<p>'s — це англійський «суфікс чиєсті»: Анин → Anna<b>'s</b>, мамин → mum<b>'s</b>, другів → friend<b>'s</b>.</p><p class=\"muted\">Не забудь апостроф — без нього Annas звучить як «багато Ань».</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "This is ___ bag.",
+     "o": [
+      "Anna's",
+      "Annas",
+      "Anna"
+     ],
+     "a": "Anna's",
+     "h": [
+      "Чия сумка?",
+      "Anna + 's."
+     ],
+     "e": "<b>Anna's</b> bag.",
+     "err": {
+      "Annas": "Потрібен апостроф: <b>Anna's</b>.",
+      "Anna": "Чия? <b>Anna's</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "choice",
+     "p": "My ___ car is red.",
+     "o": [
+      "dad's",
+      "dads",
+      "dad"
+     ],
+     "a": "dad's",
+     "h": [
+      "Чия машина?",
+      "dad + 's."
+     ],
+     "e": "my <b>dad's</b> car.",
+     "err": {
+      "dads": "Потрібен апостроф: <b>dad's</b>.",
+      "dad": "Чия? <b>dad's</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "choice",
+     "p": "Whose book is it? — It's ___.",
+     "o": [
+      "Max's",
+      "Maxs",
+      "Max"
+     ],
+     "a": "Max's",
+     "h": [
+      "Чия книжка?",
+      "Max + 's."
+     ],
+     "e": "It's <b>Max's</b>.",
+     "err": {
+      "Maxs": "Потрібен апостроф: <b>Max's</b>.",
+      "Max": "Чия? <b>Max's</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "choice",
+     "p": "___ phone is ringing?",
+     "o": [
+      "Whose",
+      "Who's",
+      "Who"
+     ],
+     "a": "Whose",
+     "h": [
+      "«Чий телефон?»",
+      "Whose."
+     ],
+     "e": "<b>Whose</b> phone…?",
+     "err": {
+      "Who's": "Who's = who is. «Чий» — <b>Whose</b>.",
+      "Who": "Who — «хто». «Чий» — <b>Whose</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши з 's",
+     "p": "This is ___ room. (Tom)",
+     "a": [
+      "Tom's"
+     ],
+     "h": [
+      "Чия кімната?",
+      "Tom + 's."
+     ],
+     "e": "<b>Tom's</b> room.",
+     "err": {
+      "Toms": "Не забудь апостроф: <b>Tom's</b>.",
+      "Tom": "Чия? <b>Tom's</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши з 's",
+     "p": "Where is ___ phone? (my mum)",
+     "a": [
+      "my mum's"
+     ],
+     "h": [
+      "Чий телефон?",
+      "my mum + 's."
+     ],
+     "e": "<b>my mum's</b> phone.",
+     "err": {
+      "my mums": "Не забудь апостроф: <b>mum's</b>.",
+      "my mum": "Чий? <b>my mum's</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши з 's",
+     "p": "___ cat is very fat. (Kate)",
+     "a": [
+      "Kate's"
+     ],
+     "h": [
+      "Чий кіт?",
+      "Kate + 's."
+     ],
+     "e": "<b>Kate's</b> cat.",
+     "err": {
+      "Kates": "Не забудь апостроф: <b>Kate's</b>.",
+      "Kate": "Чий? <b>Kate's</b>."
+     },
+     "apos": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "This is my sister bike.",
+     "bad": 3,
+     "a": "This is my sister's bike.",
+     "h": [
+      "Чий велосипед?",
+      "sister + 's."
+     ],
+     "e": "my <b>sister's</b> bike.",
+     "apos": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Peters dog is black.",
+     "bad": 0,
+     "a": "Peter's dog is black.",
+     "h": [
+      "Чий собака?",
+      "Потрібен апостроф."
+     ],
+     "e": "<b>Peter's</b> dog.",
+     "apos": true
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 It's my friend's house.",
+     "a": [
+      "It's my friend's house."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Чий? friend's."
+     ],
+     "e": "my <b>friend's</b> house.",
+     "err": {
+      "It's my friend house.": "Чий? <b>friend's</b>.",
+      "It's my friends house.": "Потрібен апостроф: <b>friend's</b>."
+     },
+     "apos": true
+    }
+   ]
+  },
+  {
+   "id": "pos.this",
+   "title": "this / these, that / those",
+   "rule": "this (цей) — these (ці): поруч; that (той) — those (ті): далеко.",
+   "worked": {
+    "p": "___ apples are sweet.",
+    "steps": [
+     "apples — багато.",
+     "Поруч і багато → <b>These</b>.",
+     "Відповідь: <b>These</b> apples are sweet."
+    ]
+   },
+   "alt": "<p>Однина ↔ множина: th<b>is</b> ↔ th<b>ese</b>, th<b>at</b> ↔ th<b>ose</b>.</p><p>Можна торкнутися рукою — this / these. Показуєш пальцем удалину — that / those.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ book is interesting.",
+     "o": [
+      "This",
+      "These"
+     ],
+     "a": "This",
+     "h": [
+      "book — одна.",
+      "This."
+     ],
+     "e": "<b>This</b> book.",
+     "err": {
+      "These": "book — одна: <b>This</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ shoes are new.",
+     "o": [
+      "These",
+      "This"
+     ],
+     "a": "These",
+     "h": [
+      "shoes — багато.",
+      "These."
+     ],
+     "e": "<b>These</b> shoes.",
+     "err": {
+      "This": "shoes — множина: <b>These</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Look at ___ birds in the sky!",
+     "o": [
+      "those",
+      "that"
+     ],
+     "a": "those",
+     "h": [
+      "birds — багато, далеко.",
+      "those."
+     ],
+     "e": "<b>those</b> birds.",
+     "err": {
+      "that": "birds — множина: <b>those</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Is ___ your house over there?",
+     "o": [
+      "that",
+      "this"
+     ],
+     "a": "that",
+     "h": [
+      "over there — он там, далеко.",
+      "that."
+     ],
+     "e": "<b>that</b> … over there.",
+     "err": {
+      "this": "over there — далеко: <b>that</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши this або these",
+     "p": "___ apples are sweet.",
+     "a": [
+      "These"
+     ],
+     "h": [
+      "apples — багато.",
+      "These."
+     ],
+     "e": "<b>These</b> apples.",
+     "err": {
+      "This": "apples — множина: <b>These</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши that або those",
+     "p": "Who is ___ girl over there?",
+     "a": [
+      "that"
+     ],
+     "h": [
+      "girl — одна.",
+      "that."
+     ],
+     "e": "<b>that</b> girl.",
+     "err": {
+      "those": "girl — одна: <b>that</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши this або these",
+     "p": "___ is my favourite song.",
+     "a": [
+      "This"
+     ],
+     "h": [
+      "song — одна.",
+      "This."
+     ],
+     "e": "<b>This</b> is…",
+     "err": {
+      "These": "song — одна: <b>This</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "This books are mine.",
+     "bad": 0,
+     "a": "These books are mine.",
+     "h": [
+      "books — багато.",
+      "These."
+     ],
+     "e": "<b>These</b> books."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Those flowers are beautiful.",
+     "a": [
+      "Those flowers are beautiful."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "flowers — багато, далеко → those."
+     ],
+     "e": "<b>Those</b> flowers.",
+     "err": {
+      "That flowers are beautiful.": "flowers — множина: <b>Those</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Whose jacket is this?",
+     "a": [
+      "Whose jacket is this?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "«Чия?» — Whose."
+     ],
+     "e": "<b>Whose</b> jacket…?",
+     "err": {
+      "Who's jacket is this?": "«Чия» — <b>Whose</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

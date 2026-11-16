@@ -97,8 +97,8 @@ label.lbl{display:block;font-weight:700;margin:6px 0 6px}
 <div class="wrap"><div id="app" class="card"></div></div>
 <div id="toast" class="toast"></div>
 
-<script src="engine/engine.js?v=2.9.1"></script>
-<script src="engine/speech.js?v=2.9.1"></script>
+<script src="engine/engine.js?v=2.10.0"></script>
+<script src="engine/speech.js?v=2.10.0"></script>
 <script>
 const TOPICS = {
   be:    "Дієслово to be (5 клас)",
@@ -118,11 +118,11 @@ const READING = "Tom lives in a small village. Every morning he gets up at seven
 
 const Q = [
  // to be
- {t:"be",type:"choice",p:"My brother ___ twelve years old.",o:["is","are","am"],a:"is",
+ {ls:["l17"],t:"be",type:"choice",p:"My brother ___ twelve years old.",o:["is","are","am"],a:"is",
   h:["Хто? <b>My brother</b> — це «він» (he).","З he / she / it вживаємо одну форму to be — яку?"],
   e:"he / she / it → <b>is</b>; I → <b>am</b>; we / you / they → <b>are</b>.",
   err:{"are":"<b>are</b> — для we / you / they. А «мій брат» — це один «він» (he).","am":"<b>am</b> буває тільки з I."}},
- {t:"be",type:"choice",p:"___ you ready for the test?",o:["Are","Is","Am"],a:"Are",
+ {ls:["l17"],t:"be",type:"choice",p:"___ you ready for the test?",o:["Are","Is","Am"],a:"Are",
   h:["У питанні to be стоїть на самому початку.","Яка форма to be йде з <b>you</b>?"],
   e:"you → <b>are</b>. У питанні просто міняємо місцями: You are ready → <b>Are</b> you ready?",
   err:{"is":"is — для he / she / it. З you → <b>Are</b>.","am":"am — тільки з I. З you → <b>Are</b>."}},
@@ -416,7 +416,7 @@ const lvl = p => p>=80 ? "ok" : p>=50 ? "mid" : "low";
 const lvlText = {ok:"✓ знає", mid:"підтягнути", low:"почати з цього"};
 
 // Підлаштування плану: урок можна пропустити, якщо ВСІ його питання розв'язані правильно і без підказки
-const LESSON_T = {l1:"Present Simple",l2:"Present Simple: заперечення і питання",l3:"Present Continuous",l4:"Simple чи Continuous",l5:"There is / There are",
+const LESSON_T = {l17:"Дієслово to be",l1:"Present Simple",l2:"Present Simple: заперечення і питання",l3:"Present Continuous",l4:"Simple чи Continuous",l5:"There is / There are",
   l7:"Past Simple: правильні дієслова",l8:"Неправильні дієслова",l9:"Past Simple: питання і заперечення",l10:"Ступені порівняння",l11:"can / must",l12:"Past Continuous",l13:"Present Perfect"};
 function placement(){
   const by = {};

@@ -1,0 +1,104 @@
+{
+ "id": "l22",
+ "title": "Розділові запитання: …, isn't it?",
+ "skillFiles": [
+  "skills/tag.json"
+ ],
+ "skills": [
+  "tag.be",
+  "tag.do"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "tag.be": 4,
+   "tag.do": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🤔",
+   "h": "«…, правда ж?»",
+   "html": "<p>Розділове запитання — речення + маленький «хвостик», яким просимо погодитись: «…, чи не так?», «…, правда?»</p>\n        <div class=\"ex\"><div><div class=\"en\">It's cold today, <b>isn't it</b>?</div><div class=\"ua\">Сьогодні холодно, правда ж?</div></div><button class=\"say round\" data-say=\"It's cold today, isn't it?\">🔊</button></div>\n        <div class=\"rule-box\"><b>Ствердження → хвостик із not.<br>Заперечення → хвостик без not.</b></div>\n        <div class=\"ex\"><div><div class=\"en\">She isn't at home, <b>is she</b>?</div><div class=\"ua\">Її немає вдома, так?</div></div><button class=\"say round\" data-say=\"She isn't at home, is she?\">🔊</button></div>"
+  },
+  {
+   "e": "🧩",
+   "h": "Хвостик з того ж помічника",
+   "html": "<table class=\"t\"><tr><td>is / are / was / were / can</td><td>повторюємо його</td><td>You <b>are</b> tired, <b>aren't</b> you?<br>They <b>can</b> swim, <b>can't</b> they?</td></tr>\n        <tr><td>звичайне дієслово</td><td>do / does / did</td><td>You <b>like</b> pizza, <b>don't</b> you?<br>She <b>lives</b> here, <b>doesn't</b> she?<br>They <b>went</b> home, <b>didn't</b> they?</td></tr></table>\n        <div class=\"tip\">💡 У хвостику — тільки займенник: Tom is nice, isn't <b>he</b>? (не isn't Tom)</div>"
+  }
+ ],
+ "examples": {
+  "title": "Нова учениця",
+  "question": {
+   "q": "чому «You like English, <b>don't</b> you», а «You're new, <b>aren't</b> you»?",
+   "a": "like — звичайне дієслово, тож хвостик із do. Друге речення з are, тож хвостик з are."
+  },
+  "items": [
+   [
+    "You're new here, <b>aren't you</b>?",
+    "Ти тут новенька, так?"
+   ],
+   [
+    "Yes, I am. Our school is big, <b>isn't it</b>?",
+    "Так. Наша школа велика, правда ж?"
+   ],
+   [
+    "You like English, <b>don't you</b>?",
+    "Тобі ж подобається англійська?"
+   ],
+   [
+    "Our teacher speaks very fast, <b>doesn't she</b>?",
+    "Наша вчителька говорить дуже швидко, правда?"
+   ],
+   [
+    "You didn't bring your book, <b>did you</b>? Here, take mine!",
+    "Ти ж не взяла підручник? Ось, візьми мій!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "agree",
+   "погоджуватися"
+  ],
+  [
+   "right",
+   "правильний; праві"
+  ],
+  [
+   "new",
+   "новий"
+  ],
+  [
+   "classmate",
+   "однокласник"
+  ],
+  [
+   "sure",
+   "впевнений"
+  ],
+  [
+   "of course",
+   "звичайно"
+  ],
+  [
+   "exactly",
+   "саме так"
+  ],
+  [
+   "I think so",
+   "я так думаю"
+  ],
+  [
+   "I don't think so",
+   "я так не думаю"
+  ],
+  [
+   "really",
+   "справді"
+  ]
+ ]
+}

@@ -1,0 +1,376 @@
+{
+ "topic": "ppc",
+ "title": "Present Perfect Continuous",
+ "skills": [
+  {
+   "id": "ppc.form",
+   "title": "have / has been + -ing, for / since",
+   "rule": "have / has been + -ing — почалось і триває досі. for + скільки часу; since + з якого моменту.",
+   "worked": {
+    "p": "It ___ all day. (rain)",
+    "steps": [
+     "Дощ почався зранку і <b>досі</b> йде.",
+     "it → <b>has been</b> + raining.",
+     "Відповідь: It <b>has been raining</b> all day."
+    ]
+   },
+   "alt": "<p>Три цеглинки: <b>have / has</b> + <b>been</b> + <b>-ing</b>. Жодної не пропускай.</p><p>for — «скільки» (two hours), since — «відколи» (Monday).</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ English for three years.",
+     "o": [
+      "have been learning",
+      "am learning",
+      "learn"
+     ],
+     "a": "have been learning",
+     "h": [
+      "for three years — і досі.",
+      "have been + -ing."
+     ],
+     "e": "<b>have been learning</b>.",
+     "err": {
+      "am learning": "З for … (скільки часу досі) — <b>have been learning</b>.",
+      "learn": "Дія триває досі: <b>have been learning</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She has been ___ since 9 o'clock.",
+     "o": [
+      "working",
+      "worked",
+      "work"
+     ],
+     "a": "working",
+     "h": [
+      "has been + …",
+      "-ing."
+     ],
+     "e": "has been <b>working</b>.",
+     "err": {
+      "worked": "Після has been — -ing: <b>working</b>.",
+      "work": "Після has been — -ing: <b>working</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "How long ___ you been waiting?",
+     "o": [
+      "have",
+      "has",
+      "are"
+     ],
+     "a": "have",
+     "h": [
+      "you → have.",
+      "have been waiting."
+     ],
+     "e": "How long <b>have</b> you…?",
+     "err": {
+      "has": "you → <b>have</b>.",
+      "are": "have been + -ing: <b>have</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We have lived here ___ 2015.",
+     "o": [
+      "since",
+      "for"
+     ],
+     "a": "since",
+     "h": [
+      "2015 — момент, з якого.",
+      "since."
+     ],
+     "e": "<b>since</b> 2015.",
+     "err": {
+      "for": "2015 — це момент: <b>since</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "He has been playing ___ two hours.",
+     "o": [
+      "for",
+      "since"
+     ],
+     "a": "for",
+     "h": [
+      "two hours — скільки часу.",
+      "for."
+     ],
+     "e": "<b>for</b> two hours.",
+     "err": {
+      "since": "two hours — проміжок: <b>for</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has been + дієслово з -ing",
+     "p": "It ___ all day. (rain)",
+     "a": [
+      "has been raining",
+      "'s been raining"
+     ],
+     "h": [
+      "it → has.",
+      "has been + raining."
+     ],
+     "e": "<b>has been raining</b>.",
+     "err": {
+      "is raining": "all day — з ранку і досі: <b>has been raining</b>.",
+      "have been raining": "it → <b>has</b> been."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has been + дієслово з -ing",
+     "p": "I ___ for you for an hour! (wait)",
+     "a": [
+      "have been waiting",
+      "'ve been waiting"
+     ],
+     "h": [
+      "I → have.",
+      "have been + waiting."
+     ],
+     "e": "<b>have been waiting</b>.",
+     "err": {
+      "am waiting": "for an hour — і досі: <b>have been waiting</b>.",
+      "has been waiting": "З I — <b>have</b> been."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши for або since",
+     "p": "They have been friends ___ 2020.",
+     "a": [
+      "since"
+     ],
+     "h": [
+      "2020 — момент.",
+      "since."
+     ],
+     "e": "<b>since</b> 2020.",
+     "err": {
+      "for": "2020 — момент, з якого: <b>since</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши for або since",
+     "p": "I've been reading this book ___ a week.",
+     "a": [
+      "for"
+     ],
+     "h": [
+      "a week — скільки часу.",
+      "for."
+     ],
+     "e": "<b>for</b> a week.",
+     "err": {
+      "since": "a week — проміжок: <b>for</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She have been studying all morning.",
+     "bad": 1,
+     "a": "She has been studying all morning.",
+     "h": [
+      "She → ?",
+      "has."
+     ],
+     "e": "she <b>has</b> been."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 How long have you been learning English?",
+     "a": [
+      "How long have you been learning English?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Як довго (і досі) → have you been learning."
+     ],
+     "e": "How long <b>have</b> you <b>been learning</b>…?",
+     "err": {
+      "How long are you learning English?": "Як довго (і досі) — <b>have you been learning</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pp.vs",
+   "title": "Present Perfect чи Past Simple",
+   "rule": "Є час у минулому (yesterday, last week, ago, in 2020) → Past Simple. Досвід, результат зараз, ever / never / just / yet, час не названо → Present Perfect.",
+   "worked": {
+    "p": "I ___ this film last week. (see)",
+    "steps": [
+     "Є підказка часу: <b>last week</b>.",
+     "Конкретний час у минулому → Past Simple.",
+     "see → <b>saw</b>.",
+     "Відповідь: I <b>saw</b> this film last week."
+    ]
+   },
+   "alt": "<p>Шукай «годинник» у реченні 🕰️: yesterday, last…, ago, in 2020, when…? Є → Past Simple. Немає, а важливий результат чи досвід → Present Perfect.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ my homework. Can I go out now?",
+     "o": [
+      "have done",
+      "did"
+     ],
+     "a": "have done",
+     "h": [
+      "Результат зараз (можна гуляти).",
+      "Present Perfect."
+     ],
+     "e": "<b>have done</b>.",
+     "err": {
+      "did": "Важливий результат зараз, час не названо: <b>have done</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I ___ my homework yesterday.",
+     "o": [
+      "did",
+      "have done"
+     ],
+     "a": "did",
+     "h": [
+      "yesterday — конкретний час.",
+      "Past Simple."
+     ],
+     "e": "yesterday → <b>did</b>.",
+     "err": {
+      "have done": "З yesterday — Past Simple: <b>did</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ to Lviv last summer.",
+     "o": [
+      "went",
+      "have gone"
+     ],
+     "a": "went",
+     "h": [
+      "last summer — конкретний час.",
+      "Past Simple."
+     ],
+     "e": "last summer → <b>went</b>.",
+     "err": {
+      "have gone": "З last summer — Past Simple: <b>went</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Present Perfect або Past Simple)",
+     "p": "I ___ this film last week. (see)",
+     "a": [
+      "saw"
+     ],
+     "h": [
+      "last week — конкретний час.",
+      "see → saw."
+     ],
+     "e": "<b>saw</b>.",
+     "err": {
+      "have seen": "З last week — Past Simple: <b>saw</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Present Perfect або Past Simple)",
+     "p": "I ___ this film three times. (see)",
+     "a": [
+      "have seen",
+      "'ve seen"
+     ],
+     "h": [
+      "Досвід, час не названо.",
+      "have + seen."
+     ],
+     "e": "<b>have seen</b>.",
+     "err": {
+      "saw": "Досвід без конкретного часу — <b>have seen</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Present Perfect або Past Simple)",
+     "p": "My sister ___ her leg — she can't walk! (break)",
+     "a": [
+      "has broken",
+      "'s broken"
+     ],
+     "h": [
+      "Результат зараз — не може ходити.",
+      "has + broken."
+     ],
+     "e": "<b>has broken</b>.",
+     "err": {
+      "broke": "Важливий результат зараз: <b>has broken</b>.",
+      "has broke": "Третя форма: <b>broken</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово (Present Perfect або Past Simple)",
+     "p": "Shakespeare ___ many plays. (write)",
+     "a": [
+      "wrote"
+     ],
+     "h": [
+      "Шекспір жив давно — це закінчене минуле.",
+      "write → wrote."
+     ],
+     "e": "<b>wrote</b>.",
+     "err": {
+      "has written": "Шекспір жив давно, його час минув: <b>wrote</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I have seen him yesterday.",
+     "bad": 1,
+     "a": "I saw him yesterday.",
+     "h": [
+      "yesterday → Past Simple.",
+      "have тут зайве: I saw."
+     ],
+     "e": "yesterday → <b>I saw</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Have you finished your project yet?",
+     "a": [
+      "Have you finished your project yet?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "yet → Present Perfect."
+     ],
+     "e": "<b>Have</b> you <b>finished</b>… yet?",
+     "err": {
+      "Did you finish your project yet?": "yet → Present Perfect: <b>Have you finished</b>…?"
+     }
+    }
+   ]
+  }
+ ]
+}

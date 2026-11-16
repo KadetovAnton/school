@@ -1,0 +1,410 @@
+{
+ "topic": "prep",
+ "title": "Прийменники",
+ "skills": [
+  {
+   "id": "prep.place",
+   "title": "Де? in / on / at, under, next to, between",
+   "rule": "in — у, всередині; on — на поверхні; at — біля точки (at the bus stop, at school); under — під; next to — поруч; between — між; behind — за.",
+   "worked": {
+    "p": "The picture is ___ the wall.",
+    "steps": [
+     "Картина висить на поверхні стіни.",
+     "На поверхні → <b>on</b>.",
+     "Відповідь: The picture is <b>on</b> the wall."
+    ]
+   },
+   "alt": "<p>Уяви коробку 📦: всередині — <b>in</b>, зверху — <b>on</b>, під нею — <b>under</b>, поруч — <b>next to</b>, позаду — <b>behind</b>.</p><p><b>at</b> — коли місце як «точка зустрічі»: at the door, at the bus stop, at school.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "The book is ___ the table.",
+     "o": [
+      "on",
+      "in",
+      "at"
+     ],
+     "a": "on",
+     "h": [
+      "Книжка лежить на столі.",
+      "На поверхні → on."
+     ],
+     "e": "<b>on</b> the table.",
+     "err": {
+      "in": "Книжка не всередині стола, а на ньому: <b>on</b>.",
+      "at": "На поверхні — <b>on</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "My clothes are ___ the wardrobe.",
+     "o": [
+      "in",
+      "on"
+     ],
+     "a": "in",
+     "h": [
+      "Одяг усередині шафи.",
+      "in."
+     ],
+     "e": "<b>in</b> the wardrobe.",
+     "err": {
+      "on": "Одяг усередині шафи: <b>in</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "«М'яч під ліжком»: The ball is ___ the bed.",
+     "o": [
+      "under",
+      "on",
+      "in"
+     ],
+     "a": "under",
+     "h": [
+      "під → ?",
+      "under."
+     ],
+     "e": "<b>under</b> the bed.",
+     "err": {
+      "on": "«під» — <b>under</b>.",
+      "in": "«під» — <b>under</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "«Аптека між банком і кафе»: The chemist's is ___ the bank and the cafe.",
+     "o": [
+      "between",
+      "next to",
+      "behind"
+     ],
+     "a": "between",
+     "h": [
+      "між → ?",
+      "between."
+     ],
+     "e": "<b>between</b>.",
+     "err": {
+      "next to": "«між» — <b>between</b>.",
+      "behind": "«між» — <b>between</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прийменник",
+     "p": "«Я живу в Києві»: I live ___ Kyiv.",
+     "a": [
+      "in"
+     ],
+     "h": [
+      "Місто — всередині.",
+      "in."
+     ],
+     "e": "<b>in</b> Kyiv.",
+     "err": {
+      "at": "Місто, країна — <b>in</b>.",
+      "on": "Місто — <b>in</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прийменник",
+     "p": "«Картина на стіні»: The picture is ___ the wall.",
+     "a": [
+      "on"
+     ],
+     "h": [
+      "На поверхні стіни.",
+      "on."
+     ],
+     "e": "<b>on</b> the wall.",
+     "err": {
+      "in": "На поверхні — <b>on</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прийменник",
+     "p": "«Ми зустрілися на зупинці»: We met ___ the bus stop.",
+     "a": [
+      "at"
+     ],
+     "h": [
+      "Зупинка — точка.",
+      "at."
+     ],
+     "e": "<b>at</b> the bus stop.",
+     "err": {
+      "on": "Точка, місце зустрічі — <b>at</b>.",
+      "in": "Точка, місце зустрічі — <b>at</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прийменник",
+     "p": "«Кіт сидить за диваном»: The cat is ___ the sofa.",
+     "a": [
+      "behind"
+     ],
+     "h": [
+      "за, позаду → ?",
+      "behind."
+     ],
+     "e": "<b>behind</b> the sofa.",
+     "err": {
+      "after": "after — «після» (про час). «За, позаду» — <b>behind</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прийменник",
+     "p": "«Біля школи є парк»: There is a park ___ the school.",
+     "a": [
+      "next to",
+      "near"
+     ],
+     "h": [
+      "поруч → ?",
+      "next to."
+     ],
+     "e": "<b>next to</b> the school.",
+     "err": {
+      "next": "Повністю: <b>next to</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My keys are in the table.",
+     "bad": 3,
+     "a": "My keys are on the table.",
+     "h": [
+      "Ключі лежать на столі.",
+      "on."
+     ],
+     "e": "<b>on</b> the table."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 The cat is under the bed.",
+     "a": [
+      "The cat is under the bed."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "під → under."
+     ],
+     "e": "<b>under</b> the bed."
+    }
+   ]
+  },
+  {
+   "id": "prep.time",
+   "title": "Коли? at 7, on Monday, in May",
+   "rule": "at — точний час (at 7 o'clock); on — день, дата (on Monday); in — місяць, рік, пора року, частина дня (in May, in 2013, in winter, in the morning).",
+   "worked": {
+    "p": "My birthday is ___ the 5th of May.",
+    "steps": [
+     "Тут конкретна <b>дата</b> (5 травня).",
+     "День, дата → <b>on</b>.",
+     "Відповідь: <b>on</b> the 5th of May."
+    ]
+   },
+   "alt": "<p>Сходинки від маленького до великого:</p><p>🕐 <b>at</b> seven → 📅 <b>on</b> Monday → 🗓️ <b>in</b> May, <b>in</b> 2013, <b>in</b> winter</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "My birthday is ___ May.",
+     "o": [
+      "in",
+      "on",
+      "at"
+     ],
+     "a": "in",
+     "h": [
+      "May — місяць.",
+      "Місяць → in."
+     ],
+     "e": "<b>in</b> May.",
+     "err": {
+      "on": "Місяць — <b>in</b>.",
+      "at": "Місяць — <b>in</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "The lesson starts ___ nine o'clock.",
+     "o": [
+      "at",
+      "in",
+      "on"
+     ],
+     "a": "at",
+     "h": [
+      "Точний час.",
+      "at."
+     ],
+     "e": "<b>at</b> nine.",
+     "err": {
+      "in": "Точний час — <b>at</b>.",
+      "on": "Точний час — <b>at</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We don't go to school ___ Sunday.",
+     "o": [
+      "on",
+      "in",
+      "at"
+     ],
+     "a": "on",
+     "h": [
+      "Sunday — день.",
+      "День → on."
+     ],
+     "e": "<b>on</b> Sunday.",
+     "err": {
+      "in": "Дні тижня — <b>on</b>.",
+      "at": "Дні тижня — <b>on</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ the morning I drink tea.",
+     "o": [
+      "In",
+      "On",
+      "At"
+     ],
+     "a": "In",
+     "h": [
+      "Частина дня.",
+      "in the morning."
+     ],
+     "e": "<b>In</b> the morning.",
+     "err": {
+      "On": "Частина дня — <b>in</b> the morning.",
+      "At": "Частина дня — <b>in</b> the morning."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши in, on або at",
+     "p": "I was born ___ 2013.",
+     "a": [
+      "in"
+     ],
+     "h": [
+      "Рік.",
+      "in."
+     ],
+     "e": "<b>in</b> 2013.",
+     "err": {
+      "on": "Рік — <b>in</b>.",
+      "at": "Рік — <b>in</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши in, on або at",
+     "p": "See you ___ Monday!",
+     "a": [
+      "on"
+     ],
+     "h": [
+      "День тижня.",
+      "on."
+     ],
+     "e": "<b>on</b> Monday.",
+     "err": {
+      "in": "Дні тижня — <b>on</b>.",
+      "at": "Дні тижня — <b>on</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши in, on або at",
+     "p": "I go to bed ___ ten o'clock.",
+     "a": [
+      "at"
+     ],
+     "h": [
+      "Точний час.",
+      "at."
+     ],
+     "e": "<b>at</b> ten.",
+     "err": {
+      "in": "Точний час — <b>at</b>.",
+      "on": "Точний час — <b>at</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши in, on або at",
+     "p": "It's very cold ___ winter.",
+     "a": [
+      "in"
+     ],
+     "h": [
+      "Пора року.",
+      "in."
+     ],
+     "e": "<b>in</b> winter.",
+     "err": {
+      "on": "Пора року — <b>in</b>.",
+      "at": "Пора року — <b>in</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши in, on або at",
+     "p": "My birthday is ___ the 5th of May.",
+     "a": [
+      "on"
+     ],
+     "h": [
+      "Конкретна дата.",
+      "on."
+     ],
+     "e": "<b>on</b> the 5th of May.",
+     "err": {
+      "in": "Конкретна дата — <b>on</b>.",
+      "at": "Конкретна дата — <b>on</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I get up on seven o'clock.",
+     "bad": 3,
+     "a": "I get up at seven o'clock.",
+     "h": [
+      "Точний час.",
+      "at."
+     ],
+     "e": "<b>at</b> seven."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We have English on Tuesday.",
+     "a": [
+      "We have English on Tuesday."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "День → on."
+     ],
+     "e": "<b>on</b> Tuesday.",
+     "err": {
+      "We have English in Tuesday.": "Дні тижня — <b>on</b>.",
+      "We have English at Tuesday.": "Дні тижня — <b>on</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

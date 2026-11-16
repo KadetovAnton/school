@@ -1,0 +1,109 @@
+{
+ "id": "l21",
+ "title": "much / many / a lot of",
+ "skillFiles": [
+  "skills/qty.json"
+ ],
+ "skills": [
+  "qty.mm",
+  "qty.how"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "qty.mm": 5,
+   "qty.how": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍎",
+   "h": "many — те, що рахуємо",
+   "html": "<p><b>many</b> — з тим, що можна порахувати: apples, friends, books, people.</p>\n        <div class=\"ex\"><div><div class=\"en\">I haven't got <b>many</b> friends here.</div><div class=\"ua\">У мене тут небагато друзів.</div></div><button class=\"say round\" data-say=\"I haven't got many friends here.\">🔊</button></div>"
+  },
+  {
+   "e": "🥛",
+   "h": "much — те, що не рахуємо",
+   "html": "<p><b>much</b> — з тим, що не рахують штуками: milk, water, time, money, bread.</p>\n        <div class=\"ex\"><div><div class=\"en\">There isn't <b>much</b> milk.</div><div class=\"ua\">Молока небагато.</div></div><button class=\"say round\" data-say=\"There isn't much milk.\">🔊</button></div>\n        <div class=\"tip\">💡 У стверджувальних реченнях частіше кажуть <b>a lot of</b> — підходить до всього: a lot of friends, a lot of milk.</div>"
+  },
+  {
+   "e": "❓",
+   "h": "How much? How many?",
+   "html": "<div class=\"ex\"><div><div class=\"en\"><b>How many</b> brothers have you got?</div><div class=\"ua\">Скільки в тебе братів?</div></div><button class=\"say round\" data-say=\"How many brothers have you got?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>How much</b> water do you drink?</div><div class=\"ua\">Скільки води ти п'єш?</div></div><button class=\"say round\" data-say=\"How much water do you drink?\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>How much</b> is it?</div><div class=\"ua\">Скільки це коштує?</div></div><button class=\"say round\" data-say=\"How much is it?\">🔊</button></div>\n        <p class=\"muted\">Про ціну — завжди How much.</p>"
+  }
+ ],
+ "examples": {
+  "title": "Похід у магазин",
+  "question": {
+   "q": "чому «How <b>many</b> eggs», а «How <b>much</b> sugar»?",
+   "a": "Яйця рахуємо (one, two…) — many. Цукор не рахуємо штуками — much."
+  },
+  "items": [
+   [
+    "We need to buy food. We haven't got <b>much</b> bread.",
+    "Треба купити їжі. Хліба мало."
+   ],
+   [
+    "How <b>many</b> eggs do we need? — Ten.",
+    "Скільки яєць треба? — Десять."
+   ],
+   [
+    "How <b>much</b> sugar? — Not <b>much</b>, just one kilo.",
+    "Скільки цукру? — Небагато, лише кілограм."
+   ],
+   [
+    "There are <b>a lot of</b> people in the shop today.",
+    "Сьогодні в магазині багато людей."
+   ],
+   [
+    "How <b>much</b> is this cake? — 200 hryvnias.",
+    "Скільки коштує цей торт? — 200 гривень."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "sugar",
+   "цукор"
+  ],
+  [
+   "salt",
+   "сіль"
+  ],
+  [
+   "water",
+   "вода"
+  ],
+  [
+   "money",
+   "гроші"
+  ],
+  [
+   "time",
+   "час"
+  ],
+  [
+   "people",
+   "люди"
+  ],
+  [
+   "price",
+   "ціна"
+  ],
+  [
+   "cost",
+   "коштувати"
+  ],
+  [
+   "kilo",
+   "кілограм"
+  ],
+  [
+   "bottle",
+   "пляшка"
+  ]
+ ]
+}

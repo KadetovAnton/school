@@ -1,0 +1,469 @@
+{
+ "topic": "hg",
+ "title": "have got",
+ "skills": [
+  {
+   "id": "hg.form",
+   "title": "have got / has got",
+   "rule": "I / you / we / they → have got; he / she / it → has got.",
+   "worked": {
+    "p": "Tom ___ two brothers.",
+    "steps": [
+     "Tom = <b>he</b>.",
+     "he → <b>has got</b>.",
+     "Відповідь: Tom <b>has got</b> two brothers."
+    ]
+   },
+   "alt": "<p>Як з Present Simple: для he / she / it «хвостик» з'являється і тут — ha<b>s</b> got.</p><p>I have got → she ha<b>s</b> got.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ a dog.",
+     "o": [
+      "have got",
+      "has got"
+     ],
+     "a": "have got",
+     "h": [
+      "Хто? I.",
+      "have got."
+     ],
+     "e": "I <b>have got</b>.",
+     "err": {
+      "has got": "З I — <b>have got</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "My sister ___ long hair.",
+     "o": [
+      "has got",
+      "have got"
+     ],
+     "a": "has got",
+     "h": [
+      "My sister = she.",
+      "has got."
+     ],
+     "e": "she → <b>has got</b>.",
+     "err": {
+      "have got": "Сестра — she: <b>has got</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ a big garden.",
+     "o": [
+      "have got",
+      "has got"
+     ],
+     "a": "have got",
+     "h": [
+      "We — «ми».",
+      "have got."
+     ],
+     "e": "we → <b>have got</b>.",
+     "err": {
+      "has got": "we → <b>have got</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have got або has got",
+     "p": "Tom ___ two brothers.",
+     "a": [
+      "has got",
+      "'s got"
+     ],
+     "h": [
+      "Tom = he.",
+      "has got."
+     ],
+     "e": "<b>has got</b>.",
+     "err": {
+      "have got": "Tom = he → <b>has got</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have got або has got",
+     "p": "They ___ a new car.",
+     "a": [
+      "have got",
+      "'ve got"
+     ],
+     "h": [
+      "They → ?",
+      "have got."
+     ],
+     "e": "<b>have got</b>.",
+     "err": {
+      "has got": "they → <b>have got</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have got або has got",
+     "p": "The cat ___ green eyes.",
+     "a": [
+      "has got",
+      "'s got"
+     ],
+     "h": [
+      "The cat = it.",
+      "has got."
+     ],
+     "e": "<b>has got</b>.",
+     "err": {
+      "have got": "Кіт — it: <b>has got</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She have got a new phone.",
+     "bad": 1,
+     "a": "She has got a new phone.",
+     "h": [
+      "She → ?",
+      "has."
+     ],
+     "e": "she → <b>has</b> got."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We has got a lot of books.",
+     "bad": 1,
+     "a": "We have got a lot of books.",
+     "h": [
+      "We → ?",
+      "have."
+     ],
+     "e": "we → <b>have</b> got."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 He has got a red bike.",
+     "a": [
+      "He has got a red bike."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "he → has got."
+     ],
+     "e": "<b>has got</b>.",
+     "err": {
+      "He have got a red bike.": "he → <b>has</b> got."
+     }
+    }
+   ]
+  },
+  {
+   "id": "hg.neg",
+   "title": "haven't got / hasn't got",
+   "rule": "haven't got / hasn't got. Без don't!",
+   "worked": {
+    "p": "My brother ___ a computer.",
+    "steps": [
+     "My brother = he → has.",
+     "Заперечення: <b>hasn't got</b>.",
+     "Відповідь: My brother <b>hasn't got</b> a computer."
+    ]
+   },
+   "alt": "<p>«Не» чіпляється до have / has: have → <b>haven't</b> got, has → <b>hasn't</b> got. do / does тут не потрібні.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ a cat.",
+     "o": [
+      "haven't got",
+      "hasn't got"
+     ],
+     "a": "haven't got",
+     "h": [
+      "I → have.",
+      "haven't got."
+     ],
+     "e": "<b>haven't got</b>.",
+     "err": {
+      "hasn't got": "З I — <b>haven't got</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Dad ___ a car.",
+     "o": [
+      "hasn't got",
+      "haven't got"
+     ],
+     "a": "hasn't got",
+     "h": [
+      "Dad = he.",
+      "hasn't got."
+     ],
+     "e": "<b>hasn't got</b>.",
+     "err": {
+      "haven't got": "Dad = he → <b>hasn't got</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши haven't got або hasn't got",
+     "p": "We ___ any pets.",
+     "a": [
+      "haven't got",
+      "have not got"
+     ],
+     "h": [
+      "We → have.",
+      "haven't got."
+     ],
+     "e": "<b>haven't got</b>.",
+     "err": {
+      "hasn't got": "we → <b>haven't got</b>.",
+      "don't have got": "Так не кажуть: <b>haven't got</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши haven't got або hasn't got",
+     "p": "My brother ___ a computer.",
+     "a": [
+      "hasn't got",
+      "has not got"
+     ],
+     "h": [
+      "he → has.",
+      "hasn't got."
+     ],
+     "e": "<b>hasn't got</b>.",
+     "err": {
+      "haven't got": "My brother = he → <b>hasn't got</b>.",
+      "doesn't have got": "Так не кажуть: <b>hasn't got</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши haven't got або hasn't got",
+     "p": "They ___ a garden.",
+     "a": [
+      "haven't got",
+      "have not got"
+     ],
+     "h": [
+      "They → have.",
+      "haven't got."
+     ],
+     "e": "<b>haven't got</b>.",
+     "err": {
+      "hasn't got": "they → <b>haven't got</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She haven't got a sister.",
+     "bad": 1,
+     "a": "She hasn't got a sister.",
+     "h": [
+      "She → ?",
+      "hasn't."
+     ],
+     "e": "she → <b>hasn't</b> got."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I don't have got a bike.",
+     "bad": 1,
+     "a": "I haven't got a bike.",
+     "h": [
+      "have got не дружить з don't.",
+      "I haven't got."
+     ],
+     "e": "<b>I haven't got</b> — без don't."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We haven't got much time.",
+     "a": [
+      "We haven't got much time."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "we → haven't got."
+     ],
+     "e": "<b>haven't got</b>.",
+     "err": {
+      "We hasn't got much time.": "we → <b>haven't</b> got."
+     }
+    }
+   ]
+  },
+  {
+   "id": "hg.q",
+   "title": "Have you got…? Has she got…?",
+   "rule": "Have / Has + хто + got …? — Yes, I have. / No, she hasn't.",
+   "worked": {
+    "p": "___ Anna got a bike?",
+    "steps": [
+     "Anna = she → <b>Has</b>.",
+     "Has на початок, got — після того, хто.",
+     "Відповідь: <b>Has</b> Anna got a bike?"
+    ]
+   },
+   "alt": "<p>have / has виходить наперед, а got лишається на місці:</p><p>You have got a pet. → <b>Have</b> you got a pet?<br>Відповідь коротка: Yes, I <b>have</b>. / No, I <b>haven't</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ you got a pet?",
+     "o": [
+      "Have",
+      "Has",
+      "Do"
+     ],
+     "a": "Have",
+     "h": [
+      "you → ?",
+      "Have."
+     ],
+     "e": "<b>Have</b> you got…?",
+     "err": {
+      "Has": "you → <b>Have</b>.",
+      "Do": "З got питаємо через <b>Have</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ your dad got a car?",
+     "o": [
+      "Has",
+      "Have",
+      "Does"
+     ],
+     "a": "Has",
+     "h": [
+      "your dad = he.",
+      "Has."
+     ],
+     "e": "<b>Has</b> your dad got…?",
+     "err": {
+      "Have": "Тато — he: <b>Has</b>.",
+      "Does": "З got питаємо через <b>Has</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Have you got a sister? — Yes, I ___.",
+     "o": [
+      "have",
+      "got",
+      "do"
+     ],
+     "a": "have",
+     "h": [
+      "Питали з Have.",
+      "Yes, I have."
+     ],
+     "e": "Yes, I <b>have</b>.",
+     "err": {
+      "got": "Коротка відповідь: Yes, I <b>have</b>.",
+      "do": "Питали з Have: Yes, I <b>have</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Have або Has",
+     "p": "___ they got a dog?",
+     "a": [
+      "Have"
+     ],
+     "h": [
+      "they → ?",
+      "Have."
+     ],
+     "e": "<b>Have</b> they got…?",
+     "err": {
+      "Has": "they → <b>Have</b>.",
+      "Do": "З got — <b>Have</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Have або Has",
+     "p": "___ Anna got a bike?",
+     "a": [
+      "Has"
+     ],
+     "h": [
+      "Anna = she.",
+      "Has."
+     ],
+     "e": "<b>Has</b> Anna got…?",
+     "err": {
+      "Have": "Anna = she → <b>Has</b>.",
+      "Does": "З got — <b>Has</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Has your cat got a toy? — No, it ___.",
+     "a": [
+      "hasn't",
+      "has not"
+     ],
+     "h": [
+      "Питали з Has, «ні».",
+      "hasn't."
+     ],
+     "e": "No, it <b>hasn't</b>.",
+     "err": {
+      "haven't": "it → <b>hasn't</b>.",
+      "doesn't": "Питали з Has: <b>hasn't</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«У тебе є брат?»",
+     "words": [
+      "got",
+      "Have",
+      "a",
+      "you",
+      "brother"
+     ],
+     "a": [
+      "have you got a brother"
+     ],
+     "h": [
+      "Have → you → got → a brother?",
+      "got іде після you."
+     ],
+     "e": "<b>Have you got a brother?</b>",
+     "end": "?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Have you got a pen?",
+     "a": [
+      "Have you got a pen?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "you → Have."
+     ],
+     "e": "<b>Have</b> you got…?",
+     "err": {
+      "Has you got a pen?": "you → <b>Have</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

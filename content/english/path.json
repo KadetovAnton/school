@@ -5,8 +5,14 @@
   {
    "n": 1,
    "title": "Фундамент",
-   "sub": "Теперішній час",
+   "sub": "to be і теперішній час (5–6 клас)",
    "lessons": [
+    {
+     "id": "l17",
+     "title": "Дієслово to be: am / is / are",
+     "ic": "🙂",
+     "file": "lessons/l17.json"
+    },
     {
      "id": "l1",
      "title": "Present Simple: що я роблю щодня",
@@ -36,13 +42,25 @@
   {
    "n": 2,
    "title": "Опис світу",
-   "sub": "Що де є, чиє це",
+   "sub": "Що в мене є, де і чиє (5–6 клас)",
    "lessons": [
+    {
+     "id": "l18",
+     "title": "have got / has got",
+     "ic": "🎒",
+     "file": "lessons/l18.json"
+    },
     {
      "id": "l5",
      "title": "There is / There are",
      "ic": "🏠",
      "file": "lessons/l5.json"
+    },
+    {
+     "id": "l20",
+     "title": "Прийменники: in / on / at, under, next to",
+     "ic": "📦",
+     "file": "lessons/l20.json"
     },
     {
      "id": "l6",
@@ -51,10 +69,22 @@
      "file": "lessons/l6.json"
     },
     {
+     "id": "l21",
+     "title": "much / many / a lot of",
+     "ic": "🧺",
+     "file": "lessons/l21.json"
+    },
+    {
      "id": "l14",
      "title": "Артиклі a / an / the",
      "ic": "🅰️",
      "file": "lessons/l14.json"
+    },
+    {
+     "id": "l19",
+     "title": "Чиє це? 's, whose, this / these",
+     "ic": "🔑",
+     "file": "lessons/l19.json"
     },
     {
      "id": "l15",
@@ -67,7 +97,7 @@
   {
    "n": 3,
    "title": "Минуле",
-   "sub": "Що було вчора",
+   "sub": "Що було вчора (6 клас)",
    "lessons": [
     {
      "id": "l7",
@@ -91,8 +121,8 @@
   },
   {
    "n": 4,
-   "title": "Майбутнє і порівняння",
-   "sub": "Що буде, що краще, що треба",
+   "title": "Майбутнє, порівняння, правила",
+   "sub": "6–7 клас",
    "lessons": [
     {
      "id": "l16",
@@ -108,17 +138,29 @@
     },
     {
      "id": "l11",
-     "title": "must / can / mustn't",
+     "title": "can / must / mustn't",
      "ic": "🚦",
      "file": "lessons/l11.json"
+    },
+    {
+     "id": "l25",
+     "title": "Пропозиції й запрошення: Would you like…? Let's…",
+     "ic": "☕",
+     "file": "lessons/l25.json"
     }
    ]
   },
   {
    "n": 5,
-   "title": "Наздоганяємо 7 клас",
-   "sub": "Програма класу",
+   "title": "7 клас (НУШ)",
+   "sub": "Програма року",
    "lessons": [
+    {
+     "id": "l22",
+     "title": "Розділові запитання: …, isn't it?",
+     "ic": "🤔",
+     "file": "lessons/l22.json"
+    },
     {
      "id": "l12",
      "title": "Past Continuous",
@@ -130,6 +172,18 @@
      "title": "Present Perfect",
      "ic": "✅",
      "file": "lessons/l13.json"
+    },
+    {
+     "id": "l24",
+     "title": "Present Perfect Continuous; Present Perfect чи Past Simple",
+     "ic": "⏳",
+     "file": "lessons/l24.json"
+    },
+    {
+     "id": "l23",
+     "title": "Past Perfect: що сталося раніше",
+     "ic": "⏪",
+     "file": "lessons/l23.json"
     }
    ]
   }

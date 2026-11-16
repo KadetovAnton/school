@@ -1,0 +1,109 @@
+{
+ "id": "l24",
+ "title": "Present Perfect Continuous; Present Perfect чи Past Simple",
+ "skillFiles": [
+  "skills/ppc.json"
+ ],
+ "skills": [
+  "ppc.form",
+  "pp.vs"
+ ],
+ "practice": {
+  "perSkill": 5
+ },
+ "test": {
+  "plan": {
+   "ppc.form": 4,
+   "pp.vs": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⏳",
+   "h": "Як довго? — have been + -ing",
+   "html": "<p>Дія почалась у минулому і <b>триває досі</b>.</p>\n        <div class=\"rule-box\"><b>have / has been</b> + дієслово з <b>-ing</b></div>\n        <div class=\"ex\"><div><div class=\"en\">I <b>have been learning</b> English for five years.</div><div class=\"ua\">Я вчу англійську вже п'ять років.</div></div><button class=\"say round\" data-say=\"I have been learning English for five years.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">How long <b>have</b> you <b>been waiting</b>?</div><div class=\"ua\">Скільки ти вже чекаєш?</div></div><button class=\"say round\" data-say=\"How long have you been waiting?\">🔊</button></div>"
+  },
+  {
+   "e": "📏",
+   "h": "for чи since",
+   "html": "<table class=\"t\"><tr><td><b>for</b></td><td>скільки часу</td><td>for two hours, for a week, for five years</td></tr>\n        <tr><td><b>since</b></td><td>з якого моменту</td><td>since 9 o'clock, since Monday, since 2020</td></tr></table>"
+  },
+  {
+   "e": "⚖️",
+   "h": "Present Perfect чи Past Simple",
+   "html": "<table class=\"t\"><tr><td><b>Past Simple</b></td><td>є час у минулому: yesterday, last week, in 2020, ago</td><td>I <b>saw</b> it yesterday.</td></tr>\n        <tr><td><b>Present Perfect</b></td><td>час не важливий; досвід (ever, never); результат зараз; just / already / yet</td><td>I <b>have seen</b> it three times.</td></tr></table>\n        <div class=\"tip\">⚠️ <s>I have seen him yesterday</s> — з yesterday тільки Past Simple: I <b>saw</b> him yesterday.</div>"
+  }
+ ],
+ "examples": {
+  "title": "На тренуванні",
+  "question": {
+   "q": "чому «I <b>have been playing</b>», а «I <b>started</b> in 2021»?",
+   "a": "Граю досі (з 2021 і тепер) — have been playing. Почала в конкретний момент у минулому — started."
+  },
+  "items": [
+   [
+    "How long <b>have</b> you <b>been playing</b> volleyball?",
+    "Як довго ти граєш у волейбол?"
+   ],
+   [
+    "I<b>'ve been playing</b> for three years. I <b>started</b> in 2021.",
+    "Граю три роки. Почала в 2021."
+   ],
+   [
+    "Our coach <b>has been working</b> here since 2019.",
+    "Наш тренер працює тут з 2019 року."
+   ],
+   [
+    "We<b>'ve won</b> five games this season!",
+    "Цього сезону ми виграли п'ять ігор!"
+   ],
+   [
+    "Last Saturday we <b>won</b> against the best team.",
+    "Минулої суботи ми виграли в найкращої команди."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "for",
+   "протягом (скільки часу)"
+  ],
+  [
+   "since",
+   "з (якогось моменту)"
+  ],
+  [
+   "how long",
+   "як довго"
+  ],
+  [
+   "coach",
+   "тренер"
+  ],
+  [
+   "team",
+   "команда"
+  ],
+  [
+   "season",
+   "сезон"
+  ],
+  [
+   "practise",
+   "тренуватися"
+  ],
+  [
+   "win",
+   "вигравати"
+  ],
+  [
+   "match",
+   "матч"
+  ],
+  [
+   "still",
+   "досі, все ще"
+  ]
+ ]
+}

@@ -1,0 +1,345 @@
+{
+ "topic": "qty",
+ "title": "much / many",
+ "skills": [
+  {
+   "id": "qty.mm",
+   "title": "much чи many, a lot of",
+   "rule": "many — з тим, що рахуємо (friends, apples); much — з тим, що не рахуємо (milk, time, money). a lot of — до всього.",
+   "worked": {
+    "p": "Did you spend ___ money?",
+    "steps": [
+     "money — гроші. Рахуємо «одна гроша, дві…»? Ні.",
+     "Не рахуємо → <b>much</b>.",
+     "Відповідь: Did you spend <b>much</b> money?"
+    ]
+   },
+   "alt": "<p>Спробуй поставити число: «три яблука» — можна → <b>many</b>. «Три молока» — дивно → <b>much</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "There isn't ___ milk.",
+     "o": [
+      "much",
+      "many"
+     ],
+     "a": "much",
+     "h": [
+      "milk рахуємо?",
+      "Ні → much."
+     ],
+     "e": "<b>much</b> milk.",
+     "err": {
+      "many": "milk не рахуємо: <b>much</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I haven't got ___ friends here.",
+     "o": [
+      "many",
+      "much"
+     ],
+     "a": "many",
+     "h": [
+      "friends рахуємо?",
+      "Так → many."
+     ],
+     "e": "<b>many</b> friends.",
+     "err": {
+      "much": "friends рахуємо: <b>many</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She has got ___ books.",
+     "o": [
+      "a lot of",
+      "much"
+     ],
+     "a": "a lot of",
+     "h": [
+      "Це ствердження.",
+      "У ствердженні — a lot of."
+     ],
+     "e": "<b>a lot of</b> books.",
+     "err": {
+      "much": "books рахуємо, і в ствердженні кажуть <b>a lot of</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We don't have ___ time.",
+     "o": [
+      "much",
+      "many"
+     ],
+     "a": "much",
+     "h": [
+      "time рахуємо?",
+      "Ні → much."
+     ],
+     "e": "<b>much</b> time.",
+     "err": {
+      "many": "time не рахуємо: <b>much</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "There aren't ___ people in the park.",
+     "a": [
+      "many"
+     ],
+     "h": [
+      "people рахуємо?",
+      "Так → many."
+     ],
+     "e": "<b>many</b> people.",
+     "err": {
+      "much": "people рахуємо: <b>many</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "I don't drink ___ coffee.",
+     "a": [
+      "much"
+     ],
+     "h": [
+      "coffee рахуємо?",
+      "Ні → much."
+     ],
+     "e": "<b>much</b> coffee.",
+     "err": {
+      "many": "coffee не рахуємо: <b>much</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "Are there ___ apples in the bag?",
+     "a": [
+      "many"
+     ],
+     "h": [
+      "apples рахуємо?",
+      "Так → many."
+     ],
+     "e": "<b>many</b> apples.",
+     "err": {
+      "much": "apples рахуємо: <b>many</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "Did you spend ___ money?",
+     "a": [
+      "much"
+     ],
+     "h": [
+      "money рахуємо штуками?",
+      "Ні → much."
+     ],
+     "e": "<b>much</b> money.",
+     "err": {
+      "many": "money не рахуємо штуками: <b>much</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There isn't many water in the bottle.",
+     "bad": 2,
+     "a": "There isn't much water in the bottle.",
+     "h": [
+      "water рахуємо?",
+      "Ні → much."
+     ],
+     "e": "<b>much</b> water."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I don't have much friends.",
+     "bad": 3,
+     "a": "I don't have many friends.",
+     "h": [
+      "friends рахуємо?",
+      "Так → many."
+     ],
+     "e": "<b>many</b> friends."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We haven't got much bread.",
+     "a": [
+      "We haven't got much bread."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "bread не рахуємо → much."
+     ],
+     "e": "<b>much</b> bread.",
+     "err": {
+      "We haven't got many bread.": "bread не рахуємо: <b>much</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "qty.how",
+   "title": "How much? How many?",
+   "rule": "How many + те, що рахуємо? How much + те, що не рахуємо? Ціна — How much is it?",
+   "worked": {
+    "p": "How ___ brothers have you got?",
+    "steps": [
+     "brothers — рахуємо.",
+     "→ <b>How many</b>.",
+     "Відповідь: How <b>many</b> brothers have you got?"
+    ]
+   },
+   "alt": "<p>Після How many — слово в множині: How many <b>books</b>? Після How much — без множини: How much <b>water</b>? І про гроші: How much is it?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "How ___ apples do you want?",
+     "o": [
+      "many",
+      "much"
+     ],
+     "a": "many",
+     "h": [
+      "apples рахуємо.",
+      "many."
+     ],
+     "e": "How <b>many</b>…?",
+     "err": {
+      "much": "apples рахуємо: How <b>many</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "How ___ is this T-shirt? — It's 300 hryvnias.",
+     "o": [
+      "much",
+      "many"
+     ],
+     "a": "much",
+     "h": [
+      "Питаємо про ціну.",
+      "How much."
+     ],
+     "e": "Ціна → How <b>much</b>.",
+     "err": {
+      "many": "Про ціну завжди How <b>much</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "How ___ sugar do you need?",
+     "o": [
+      "much",
+      "many"
+     ],
+     "a": "much",
+     "h": [
+      "sugar рахуємо?",
+      "Ні → much."
+     ],
+     "e": "How <b>much</b> sugar?",
+     "err": {
+      "many": "sugar не рахуємо: How <b>much</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "How ___ brothers have you got?",
+     "a": [
+      "many"
+     ],
+     "h": [
+      "brothers рахуємо.",
+      "many."
+     ],
+     "e": "How <b>many</b>…?",
+     "err": {
+      "much": "brothers рахуємо: <b>many</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "How ___ water do you drink a day?",
+     "a": [
+      "much"
+     ],
+     "h": [
+      "water рахуємо?",
+      "Ні → much."
+     ],
+     "e": "How <b>much</b>…?",
+     "err": {
+      "many": "water не рахуємо: <b>much</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши much або many",
+     "p": "How ___ pupils are there in your class?",
+     "a": [
+      "many"
+     ],
+     "h": [
+      "pupils рахуємо.",
+      "many."
+     ],
+     "e": "How <b>many</b>…?",
+     "err": {
+      "much": "pupils рахуємо: <b>many</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Скільки це коштує?»",
+     "words": [
+      "much",
+      "How",
+      "it",
+      "is"
+     ],
+     "a": [
+      "how much is it"
+     ],
+     "h": [
+      "Про ціну: How much…",
+      "How → much → is → it?"
+     ],
+     "e": "<b>How much is it?</b>",
+     "end": "?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 How many lessons have you got today?",
+     "a": [
+      "How many lessons have you got today?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "lessons рахуємо → many."
+     ],
+     "e": "How <b>many</b> lessons…?",
+     "err": {
+      "How much lessons have you got today?": "lessons рахуємо: How <b>many</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,111 @@
+{
+ "id": "l18",
+ "title": "have got / has got",
+ "skillFiles": [
+  "skills/hg.json"
+ ],
+ "skills": [
+  "hg.form",
+  "hg.neg",
+  "hg.q"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "hg.form": 3,
+   "hg.neg": 2,
+   "hg.q": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🎒",
+   "h": "«У мене є» — have got",
+   "html": "<table class=\"t\"><tr><td>I / you / we / they</td><td><b>have got</b></td><td class=\"muted\">I've got</td></tr>\n        <tr><td>he / she / it</td><td><b>has got</b></td><td class=\"muted\">she's got</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I <b>have got</b> a dog. My sister <b>has got</b> a cat.</div><div class=\"ua\">У мене є собака. У сестри є кіт.</div></div><button class=\"say round\" data-say=\"I have got a dog. My sister has got a cat.\">🔊</button></div>\n        <div class=\"tip\">💡 Українською «у мене є», а англійською дослівно «я маю».</div>"
+  },
+  {
+   "e": "🙅",
+   "h": "«Немає»: haven't got / hasn't got",
+   "html": "<div class=\"ex\"><div><div class=\"en\">We <b>haven't got</b> a car. He <b>hasn't got</b> a phone.</div><div class=\"ua\">У нас немає машини. У нього немає телефону.</div></div><button class=\"say round\" data-say=\"We haven't got a car. He hasn't got a phone.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>I don't have got</s> — так не кажуть.</div>"
+  },
+  {
+   "e": "❓",
+   "h": "Питання: Have / Has … got?",
+   "html": "<div class=\"ex\"><div><div class=\"en\"><b>Have</b> you <b>got</b> a pet? — Yes, I <b>have</b>.</div><div class=\"ua\">У тебе є домашня тварина? — Так.</div></div><button class=\"say round\" data-say=\"Have you got a pet? Yes, I have.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Has</b> your dad <b>got</b> a car? — No, he <b>hasn't</b>.</div><div class=\"ua\">У твого тата є машина? — Ні.</div></div><button class=\"say round\" data-say=\"Has your dad got a car? No, he hasn't.\">🔊</button></div>"
+  }
+ ],
+ "examples": {
+  "title": "Мій портрет",
+  "question": {
+   "q": "чому «I <b>have</b> got», а «Anna <b>has</b> got»?",
+   "a": "З I — have. Anna = she, а з he / she / it — has."
+  },
+  "items": [
+   [
+    "I<b>'ve got</b> long brown hair and blue eyes.",
+    "У мене довге каштанове волосся і блакитні очі."
+   ],
+   [
+    "My best friend <b>has got</b> short hair.",
+    "У моєї найкращої подруги коротке волосся."
+   ],
+   [
+    "We <b>haven't got</b> a dog, but we<b>'ve got</b> two cats.",
+    "Собаки в нас немає, зате є два коти."
+   ],
+   [
+    "My brother <b>has got</b> a new bike.",
+    "У брата новий велосипед."
+   ],
+   [
+    "<b>Have</b> you <b>got</b> any brothers or sisters?",
+    "У тебе є брати чи сестри?"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "hair",
+   "волосся"
+  ],
+  [
+   "eyes",
+   "очі"
+  ],
+  [
+   "long",
+   "довгий"
+  ],
+  [
+   "short",
+   "короткий"
+  ],
+  [
+   "fair hair",
+   "світле волосся"
+  ],
+  [
+   "dark hair",
+   "темне волосся"
+  ],
+  [
+   "pet",
+   "домашній улюбленець"
+  ],
+  [
+   "glasses",
+   "окуляри"
+  ],
+  [
+   "phone",
+   "телефон"
+  ],
+  [
+   "bike",
+   "велосипед"
+  ]
+ ]
+}

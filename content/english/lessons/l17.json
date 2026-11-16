@@ -1,0 +1,111 @@
+{
+ "id": "l17",
+ "title": "Дієслово to be: am / is / are",
+ "skillFiles": [
+  "skills/be.json"
+ ],
+ "skills": [
+  "be.form",
+  "be.neg",
+  "be.q"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "be.form": 3,
+   "be.neg": 2,
+   "be.q": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🙂",
+   "h": "am / is / are — «є», «бути»",
+   "html": "<p>Українською ми часто пропускаємо «є»: «Я учениця», «Вона вдома». Англійською це слово <b>обов'язкове</b>.</p>\n        <table class=\"t\"><tr><td>I</td><td><b>am</b></td><td class=\"muted\">I'm</td></tr>\n        <tr><td>he / she / it</td><td><b>is</b></td><td class=\"muted\">she's, it's</td></tr>\n        <tr><td>you / we / they</td><td><b>are</b></td><td class=\"muted\">we're, they're</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I <b>am</b> twelve. My brother <b>is</b> eight.</div><div class=\"ua\">Мені дванадцять. Моєму братові вісім.</div></div><button class=\"say round\" data-say=\"I am twelve. My brother is eight.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>I twelve</s>, <s>She at home</s> — без am / is / are не можна.</div>"
+  },
+  {
+   "e": "🙅",
+   "h": "Заперечення: not",
+   "html": "<table class=\"t\"><tr><td>I <b>am not</b></td><td class=\"muted\">I'm not</td></tr>\n        <tr><td>he / she / it <b>is not</b></td><td class=\"muted\">isn't</td></tr>\n        <tr><td>you / we / they <b>are not</b></td><td class=\"muted\">aren't</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">She <b>isn't</b> at home. We <b>aren't</b> late.</div><div class=\"ua\">Її немає вдома. Ми не запізнились.</div></div><button class=\"say round\" data-say=\"She isn't at home. We aren't late.\">🔊</button></div>\n        <div class=\"tip\">⚠️ «amn't» не буває: тільки I'm not / I am not.</div>"
+  },
+  {
+   "e": "❓",
+   "h": "Питання: am / is / are наперед",
+   "html": "<div class=\"ex\"><div><div class=\"en\"><b>Are</b> you ready? — Yes, I <b>am</b>.</div><div class=\"ua\">Ти готова? — Так.</div></div><button class=\"say round\" data-say=\"Are you ready? Yes, I am.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Is</b> it your pen? — No, it <b>isn't</b>.</div><div class=\"ua\">Це твоя ручка? — Ні.</div></div><button class=\"say round\" data-say=\"Is it your pen? No, it isn't.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">How old <b>are</b> you? Where <b>is</b> my bag?</div><div class=\"ua\">Скільки тобі років? Де моя сумка?</div></div><button class=\"say round\" data-say=\"How old are you? Where is my bag?\">🔊</button></div>\n        <div class=\"tip\">⚠️ Тут не потрібні do / does: <s>Do you ready?</s> → <b>Are</b> you ready?</div>"
+  }
+ ],
+ "examples": {
+  "title": "Знайомтеся!",
+  "question": {
+   "q": "чому «My parents <b>are</b>», а «My dog <b>is</b>»?",
+   "a": "Батьків двоє (they) — are. Собака один (it) — is."
+  },
+  "items": [
+   [
+    "Hi! I <b>am</b> Anya. I<b>'m</b> twelve.",
+    "Привіт! Я Аня. Мені дванадцять."
+   ],
+   [
+    "My parents <b>are</b> very kind.",
+    "Мої батьки дуже добрі."
+   ],
+   [
+    "My brother Artem <b>is</b> eight. He <b>isn't</b> at school now.",
+    "Моєму брату Артему вісім. Зараз він не в школі."
+   ],
+   [
+    "Our dog <b>is</b> big and funny.",
+    "Наш собака великий і кумедний."
+   ],
+   [
+    "<b>Are</b> you my new classmate? — Yes, I <b>am</b>!",
+    "Ти мій новий однокласник? — Так!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "kind",
+   "добрий"
+  ],
+  [
+   "funny",
+   "кумедний"
+  ],
+  [
+   "happy",
+   "щасливий"
+  ],
+  [
+   "sad",
+   "сумний"
+  ],
+  [
+   "hungry",
+   "голодний"
+  ],
+  [
+   "ready",
+   "готовий"
+  ],
+  [
+   "late",
+   "запізнений; пізно"
+  ],
+  [
+   "at home",
+   "вдома"
+  ],
+  [
+   "at school",
+   "у школі"
+  ],
+  [
+   "years old",
+   "років (про вік)"
+  ]
+ ]
+}

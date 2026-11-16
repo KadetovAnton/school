@@ -425,6 +425,14 @@
       .replace(/\s+/g, " ")
       .trim();
   };
+  /* для завдань, де апостроф важливий (Tom's): лишаємо його, лише вирівнюємо ’ → ' */
+  E.normA = function (s) {
+    return String(s).toLowerCase()
+      .replace(/[’`ʼ]/g, "'")
+      .replace(/[.!?,;:«»"“”]/g, "")
+      .replace(/\s+/g, " ")
+      .trim();
+  };
   function answersOf(it) {
     if (it.type === "choice" || it.type === "fix") return [it.a];
     return Array.isArray(it.a) ? it.a : [it.a];
@@ -479,14 +487,15 @@
       var w = it.p.split(" ");
       return { st: "wrong", right: right, msg: "Слово «" + w[+given].replace(/[.,!?]/g, "") + "» тут правильне 🙂 Помилка в слові «<b>" + w[it.bad].replace(/[.,!?]/g, "") + "</b>»." };
     }
-    var g = E.norm(given), i;
-    for (i = 0; i < ans.length; i++) if (E.norm(ans[i]) === g) return { st: "ok", right: ans[i] };
+    var nf = it.apos ? E.normA : E.norm;
+    var g = nf(given), i;
+    for (i = 0; i < ans.length; i++) if (nf(ans[i]) === g) return { st: "ok", right: ans[i] };
     if (it.err) {
       var ks = Object.keys(it.err);
-      for (i = 0; i < ks.length; i++) if (E.norm(ks[i]) === g) return { st: "wrong", msg: it.err[ks[i]], right: right };
+      for (i = 0; i < ks.length; i++) if (nf(ks[i]) === g) return { st: "wrong", msg: it.err[ks[i]], right: right };
     }
     if ((it.type === "input" || it.type === "dict") && !it.strict) { // strict — правопис і є правилом, описок не прощаємо
-      for (i = 0; i < ans.length; i++) { var rn = E.norm(ans[i]); if (isTypo(rn, g, guardOf(it, rn))) return { st: "typo", right: ans[i] }; }
+      for (i = 0; i < ans.length; i++) { var rn = nf(ans[i]); if (isTypo(rn, g, guardOf(it, rn))) return { st: "typo", right: ans[i] }; }
     }
     return { st: "wrong", right: right };
   };
