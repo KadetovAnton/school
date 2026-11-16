@@ -76,7 +76,7 @@
   /* зберегти; якщо дитина увійшла (sync.js) — позначити зміну і відправити на сервер */
   E.save = function () {
     var S = window.SYNC, id = store.cur, p = store.profiles[id];
-    if (S && p && S.ready(id)) p.upd = Date.now();
+    if (S && p && S.ready(id)) { p.dirty = true; p.dseq = (p.dseq || 0) + 1; }
     E.saveRaw();
     if (S && p && S.ready(id)) S.push(id);
   };
@@ -88,7 +88,62 @@
     if (name && !p.name) p.name = name;
     return p;
   };
-  E.setCur = function (id, name) { E.profile(id, name); store.cur = id; E.save(); };
+  E.setCur = function (id, name) { E.profile(id, name); store.cur = id; E.saveRaw(); };
+
+  /* Злиття двох версій прогресу дитини (з різних пристроїв) — нічого не губимо.
+     into змінюється на місці (щоб посилання в екранах лишались дійсними). */
+  function obj(x) { return x && typeof x === "object" ? x : {}; }
+  E.mergeProfile = function (into, o) {
+    if (!o || typeof o !== "object") return into;
+    var k, a, b;
+    into.days = (into.days || []).concat((o.days || []).filter(function (d) { return (into.days || []).indexOf(d) < 0; })).sort();
+    into.daily = obj(into.daily); for (k in obj(o.daily)) { a = into.daily[k] = obj(into.daily[k]); for (var sb in obj(o.daily[k])) a[sb] = Math.max(a[sb] || 0, o.daily[k][sb] || 0); }
+    into.skills = obj(into.skills); for (k in obj(o.skills)) { a = into.skills[k]; b = o.skills[k]; if (!a || (b.n || 0) > (a.n || 0) || ((b.n || 0) === (a.n || 0) && (b.last || "") > (a.last || ""))) into.skills[k] = b; }
+    into.lessons = obj(into.lessons); for (k in obj(o.lessons)) {
+      a = into.lessons[k]; b = o.lessons[k];
+      if (!a) { into.lessons[k] = b; continue; }
+      a.stars = Math.max(a.stars || 0, b.stars || 0); a.best = Math.max(a.best || 0, b.best || 0);
+      a.steps = obj(a.steps); for (var st in obj(b.steps)) if (b.steps[st]) a.steps[st] = true;
+      if (b.skip) a.skip = true; if (b.early) a.early = true;
+    }
+    into.seen = obj(into.seen); for (k in obj(o.seen)) if (!into.seen[k] || o.seen[k] > into.seen[k]) into.seen[k] = o.seen[k];
+    into.mistakes = into.mistakes || []; var mk = {};
+    into.mistakes.forEach(function (m) { mk[m.key] = m; });
+    (o.mistakes || []).forEach(function (m) { var x = mk[m.key]; if (!x) { into.mistakes.push(m); mk[m.key] = m; } else { if (m.fixed) x.fixed = m.fixed; if ((m.d || "") > (x.d || "")) x.d = m.d; } });
+    into.reports = into.reports || []; var rk = {};
+    into.reports.forEach(function (r) { rk[r.key + "|" + r.d + "|" + r.given] = r; });
+    (o.reports || []).forEach(function (r) { var x = rk[r.key + "|" + r.d + "|" + r.given]; if (!x) into.reports.push(r); else if (r.sent) x.sent = true; });
+    // журнал зірок: однакові записи можуть бути законно — беремо більшу кількість з двох версій
+    var cntA = {}, cntB = {}, key = function (x) { return x.d + "|" + x.n + "|" + x.why; };
+    (into.stars || []).forEach(function (x) { cntA[key(x)] = (cntA[key(x)] || 0) + 1; });
+    (o.stars || []).forEach(function (x) { cntB[key(x)] = (cntB[key(x)] || 0) + 1; });
+    into.stars = into.stars || [];
+    for (k in cntB) for (var i = cntA[k] || 0; i < cntB[k]; i++) { var pp = k.split("|"); into.stars.push({ d: pp[0], n: +pp[1], why: pp.slice(2).join("|") }); }
+    into.stars.sort(function (x, y) { return x.d < y.d ? -1 : x.d > y.d ? 1 : 0; });
+    ["rewardWeeks", "badges"].forEach(function (f) { into[f] = obj(into[f]); for (var q in obj(o[f])) if (!into[f][q] || o[f][q] < into[f][q]) into[f][q] = o[f][q]; });
+    into.cnt = obj(into.cnt); for (k in obj(o.cnt)) into.cnt[k] = Math.max(into.cnt[k] || 0, o.cnt[k] || 0);
+    into.words = obj(into.words); for (k in obj(o.words)) { a = into.words[k]; b = o.words[k]; if (!a || (b.n || 0) > (a.n || 0)) into.words[k] = b; }
+    into.plans = obj(into.plans); for (k in obj(o.plans)) {
+      a = into.plans[k]; b = o.plans[k];
+      if (!a || (b.d || "") > (a.d || "")) into.plans[k] = b;
+      else if (a.d === b.d) for (var f2 in b) if (b[f2] === true) a[f2] = true;
+    }
+    into.wrs = obj(into.wrs); for (k in obj(o.wrs)) {
+      a = into.wrs[k]; b = o.wrs[k];
+      if (!a || (b.w || "") > (a.w || "")) into.wrs[k] = b;
+      else if (a.w === b.w && b.done && !a.done) into.wrs[k] = b;
+    }
+    into.wrHist = into.wrHist || []; var hk = {};
+    into.wrHist.forEach(function (x) { hk[x.w + "|" + (x.sub || "")] = 1; });
+    (o.wrHist || []).forEach(function (x) { if (!hk[x.w + "|" + (x.sub || "")]) into.wrHist.push(x); });
+    if (o.diag && (!into.diag || (o.diag.d || "") > (into.diag.d || ""))) into.diag = o.diag;
+    if (o.reward && (!into.reward || !into.reward.text)) into.reward = o.reward;
+    for (k in o) if (!(k in into) && k !== "srv" && k !== "dirty" && k !== "dseq") into[k] = o[k];
+    return into;
+  };
+  E.hasProgress = function (p) {
+    return !!p && ((p.days && p.days.length) || Object.keys(obj(p.lessons)).length || Object.keys(obj(p.skills)).length || Object.keys(obj(p.words)).length) ? true : false;
+  };
   E.cur = function () { return store.profiles[store.cur] ? store.cur : ""; };
   E.P = function () { return E.profile(store.cur || "guest"); };
   E.save();

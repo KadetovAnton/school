@@ -262,6 +262,7 @@
     $("bk").onclick = function () { renderWho(); toTop(); };
     $("go").onclick = function () { goChild(c); };
   }
+  if (SY) SY.onLogout = function () { toast("Потрібно знову ввести PIN — зайди через «⇄ Змінити»"); };
   if (SY) SY.onRemote = function (id) { if (E.cur() === id && !document.querySelector("#stage, .task")) { toast("Оновлено з іншого пристрою 🔄"); renderSubjects(); } };
 
   /* звіт татові: у Telegram, а якщо не вийшло — скопіювати, як раніше */

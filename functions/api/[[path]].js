@@ -35,7 +35,11 @@ export async function onRequest({ request: req, env, params }) {
   const path = (params.path || []).join("/");
   const url = new URL(req.url);
   let body = {};
-  if (req.method === "POST" || req.method === "PUT") { try { body = await req.json(); } catch (e) {} }
+  if (req.method === "POST" || req.method === "PUT") {
+    const raw = await req.text();
+    if (raw.length > 400000) return J(req, { error: "завеликий запит" }, 413);
+    try { body = JSON.parse(raw); } catch (e) {}
+  }
 
   if (path === "ping") return J(req, { ok: true, db: true, tg: !!env.TG_TOKEN, chat: !!env.TG_CHAT });
 
@@ -74,8 +78,9 @@ export async function onRequest({ request: req, env, params }) {
     return J(req, s || { p: null, upd: 0 });
   }
   if (path === "progress" && req.method === "PUT") {
-    const p = body.p;
-    if (!p || typeof p !== "object") return J(req, { error: "p" }, 400);
+    const p = body.p, isObj = x => x && typeof x === "object" && !Array.isArray(x);
+    if (!isObj(p) || !Array.isArray(p.days) || !isObj(p.lessons) || !isObj(p.skills) || !Array.isArray(p.mistakes))
+      return J(req, { error: "неправильний формат прогресу" }, 400);
     const s = await env.DB.get("prog:" + kid, "json");
     // хтось інший (інший пристрій) уже зберіг новішу версію — віддаємо її
     if (s && s.upd && body.base !== s.upd && !body.force) return J(req, { conflict: true, p: s.p, upd: s.upd }, 409);
@@ -85,7 +90,13 @@ export async function onRequest({ request: req, env, params }) {
   }
 
   // звіт татові в Telegram
-  if (path === "report" && req.method === "POST") return J(req, await tg(env, body.text || ""));
+  if (path === "report" && req.method === "POST") {
+    // не більше 30 звітів на день від дитини — щоб групу не можна було заспамити
+    const rk = "rep:" + kid + ":" + new Date().toISOString().slice(0, 10), n = +(await env.DB.get(rk) || 0);
+    if (n >= 30) return J(req, { ok: false, error: "забагато звітів за день" }, 429);
+    await env.DB.put(rk, String(n + 1), { expirationTtl: 2 * 86400 });
+    return J(req, await tg(env, String(body.text || "").slice(0, 3500)));
+  }
 
   return J(req, { error: "not found" }, 404);
 }
