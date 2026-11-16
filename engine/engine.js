@@ -388,6 +388,39 @@
     return out;
   };
 
+  /* «Повторення тижня»: по 1–2 завдання з КОЖНОЇ вже початої навички (давно не бачені — першими), до 12 */
+  E.reviewSkills = function () {
+    var p = E.P();
+    return Object.keys(p.skills).filter(function (id) { return E.SK[id] && (p.skills[id].lvl >= 1 || p.skills[id].n > 0); });
+  };
+  E.reviewItems = function (n) {
+    n = n || 12;
+    var p = E.P(), ids = E.reviewSkills(), used = {}, out = [];
+    ids.sort(function (a, b) { return (p.skills[a].last || "") < (p.skills[b].last || "") ? -1 : 1; });
+    for (var round = 0; round < 3 && out.length < n && ids.length; round++) {
+      for (var i = 0; i < ids.length && out.length < n; i++) {
+        var x = E.pick(ids[i], 1, used)[0];
+        if (x && !used[x.key]) { used[x.key] = 1; out.push(x); }
+      }
+    }
+    // перемішуємо, щоб теми не йшли підряд
+    for (var j = out.length - 1; j > 0; j--) { var k = Math.floor(Math.random() * (j + 1)); var t = out[j]; out[j] = out[k]; out[k] = t; }
+    return out;
+  };
+  E.review = function () {
+    var p = E.P(), w = weekStart(today());
+    if (!p.wr || p.wr.w !== w) p.wr = { w: w, done: false };
+    return p.wr;
+  };
+  E.reviewDone = function (score, max, bySkill) {
+    var p = E.P(), r = E.review(), first = !r.done;
+    r.done = true; r.score = score; r.max = max; r.d = today(); r.by = bySkill;
+    if (!p.wrHist) p.wrHist = [];
+    p.wrHist = p.wrHist.filter(function (x) { return x.w !== r.w; }).concat([{ w: r.w, score: score, max: max }]).slice(-30);
+    E.save();
+    if (first) E.addStars(5, "review");
+  };
+
   E.reportIssue = function (it, given) {
     E.P().reports.push({ key: it.key, given: given == null ? null : String(given), d: today() });
     E.save();

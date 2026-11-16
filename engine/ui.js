@@ -234,7 +234,7 @@
     var T = lessonTarget(), next = T && T.next ? T : null, cont = T ? T.l : null;
     var dg = P.diag && P.diag.v === 2 ? P.diag : null;
     var pendingDiag = !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
-    var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && plan.words && plan.mist;
+    var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && plan.words && plan.mist && (!plan.reviewPart || plan.review);
 
     var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">🇬🇧 Англійська</span></div>' +
       '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
@@ -248,7 +248,10 @@
 
     html += rewardCard();
     var wDue = E.wordsDue().length, wL = E.wordsLearned();
-    html += '<div class="card" style="padding:12px 16px">' + badgesRow() +
+    var rv = E.review(), rvN = E.reviewSkills().length;
+    html += '<div class="card" style="padding:12px 16px">' +
+      '<button class="lesson ' + (rv.done ? "done" : rvN >= 2 ? "open" : "lock") + '" id="reviewBtn"><span class="ic">' + (rv.done ? "✅" : "🔁") + '</span><span><div class="lt">Повторення тижня</div><div class="ls">' +
+      (rv.done ? "Зроблено цього тижня: " + fmt(rv.score) + " з " + rv.max + " · можна ще раз" : rvN >= 2 ? "По завданню з кожної пройденої теми · ~10 хв · +5 ⭐" : "З'явиться після перших уроків") + '</div></span></button>' + badgesRow() +
       '<button class="lesson" id="wordsBtn"><span class="ic">🃏</span><span><div class="lt">Мої слова</div><div class="ls">вивчено ' + wL + (wDue ? " · на сьогодні " + wDue : "") + ' · 11 тем</div></span></button>' +
       '<button class="lesson" id="mist"><span class="ic">📝</span><span><div class="lt">Мої помилки</div><div class="ls">' +
       (nMist ? nMist + " " + (nMist === 1 ? "речення чекає" : "речень чекають") + " на виправлення" : "Усі виправлено 🎉") + '</div></span></button></div>';
@@ -288,6 +291,7 @@
     $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
     $("wordsBtn").onclick = function () { renderWords(); toTop(); };
+    $("reviewBtn").onclick = function () { if (rvN >= 2) { DAILY = false; runReview(renderHome); } };
     var bs = $app.querySelectorAll(".lesson[data-file]");
     for (var j = 0; j < bs.length; j++) (function (b) {
       var f = b.getAttribute("data-file");
@@ -369,6 +373,9 @@
       var plan = E.plan(), T = lessonTarget();
       var warm = E.warmItems(5), mist = E.openMistakes();
       var wl = plan.words ? [] : E.wordSession();
+      var wd = new Date().getDay(), weekend = wd === 6 || wd === 0, rv = E.review();
+      var withReview = (weekend && E.reviewSkills().length >= 2 && !plan.noReview) || plan.reviewPart;
+      if (withReview) { plan.reviewPart = true; plan.review = plan.review || rv.done; }
       if (!plan.words && !wl.length) plan.words = true;
       if (!warm.length) plan.warm = true;   // ще нічого повторювати
       if (!mist.length) plan.mist = true;   // помилок немає
@@ -376,9 +383,11 @@
       var parts = [
         { id: "warm", ic: "🔥", t: "Розминка", s: plan.warm && warm.length ? "Зроблено" : warm.length ? warm.length + " " + tasksW(warm.length) + " на вже пройдене, вперемішку" : "Сьогодні не потрібна: ще нема що повторювати", done: plan.warm },
         { id: "lesson", ic: "📘", t: plan.lesson || !T ? "Крок уроку" : "Урок " + T.n + ": " + T.stepT.toLowerCase(), s: plan.lesson ? "Зроблено" : T ? T.l.title : "", done: plan.lesson },
+        withReview ? { id: "review", ic: "🔁", t: "Повторення тижня", s: plan.review ? "Зроблено" : "По завданню з кожної пройденої теми · ~10 хв", done: plan.review } : null,
         { id: "words", ic: "🃏", t: "Слова", s: plan.words ? "Зроблено" : wl.length + " " + (wl.length === 1 ? "слово" : wl.length < 5 ? "слова" : "слів") + ": повторення і нові", done: plan.words },
         { id: "mist", ic: "📝", t: "Мої помилки", s: mist.length ? Math.min(mist.length, 5) + (Math.min(mist.length, 5) === 1 ? " речення" : Math.min(mist.length, 5) < 5 ? " речення" : " речень") + " виправити" : (E.P().mistakes.length ? "Усі помилки виправлено 🎉" : "Помилок поки немає 🙂"), done: plan.mist }
       ];
+      parts = parts.filter(Boolean);
       var cur = null; parts.forEach(function (x) { if (!cur && !x.done) cur = x; });
       var allDone = !cur;
       if (allDone && !plan.paid) { plan.paid = true; E.save(); E.cnt("daysDone"); E.addStars(5, "day"); toast("⭐ +5 за заняття на сьогодні!"); }
@@ -386,17 +395,18 @@
       var html = '<div class="topbar"><button class="back" id="back">← Кабінет</button><span class="muted small" style="font-weight:700">🇬🇧 Заняття на сьогодні</span></div>' +
         '<div class="card' + (allDone ? '" style="text-align:center"' : '"') + '>' +
         (allDone ? '<div class="celebrate">🎉</div><h1>Заняття на сьогодні виконано!</h1><p class="muted">Ти молодець. Завтра буде нова розминка — серія днів росте 🔥</p>'
-                 : '<h1>Заняття на сьогодні</h1><p class="muted">Чотири коротких частини, приблизно 15–20 хвилин.</p>') +
+                 : '<h1>Заняття на сьогодні</h1><p class="muted">' + (withReview ? "Сьогодні вихідний — додалось повторення тижня." : "Чотири коротких частини, приблизно 15–20 хвилин.") + '</p>') +
         goalBar(n, SUBJ.dailyGoal) + '</div><div class="card">';
       parts.forEach(function (x, i) {
         html += '<button class="lesson ' + (x.done ? "done" : x === cur ? "open" : "") + '" data-p="' + x.id + '"><span class="ic">' + (x.done ? "✅" : x.ic) + '</span>' +
           '<span><div class="lt">' + (i + 1) + '. ' + esc(x.t) + '</div><div class="ls">' + esc(x.s) + '</div></span></button>';
       });
       html += (allDone ? '<div class="row"><button class="btn ghost full" id="more">💪 Хочу ще: наступний крок уроку</button><button class="btn full" id="home">До кабінету</button></div>'
-                       : '<div class="row"><button class="btn full" id="go2">' + (cur.id === "warm" ? "Почати розминку →" : cur.id === "lesson" ? "До уроку →" : cur.id === "words" ? "До слів →" : "Виправити помилки →") + '</button></div>') + '</div>';
+                       : '<div class="row"><button class="btn full" id="go2">' + (cur.id === "warm" ? "Почати розминку →" : cur.id === "lesson" ? "До уроку →" : cur.id === "words" ? "До слів →" : cur.id === "review" ? "До повторення →" : "Виправити помилки →") + '</button></div>') + '</div>';
       $app.innerHTML = html;
       var start = function (id) {
         if (id === "warm") return runPart("warm", warm.length ? warm : E.warmItems(5));
+        if (id === "review") return runReview(function () { plan.review = true; E.save(); renderDaily(); });
         if (id === "words") {
           var list = E.wordSession();
           if (!list.length) { plan.words = true; E.save(); return renderDaily(); }
@@ -461,6 +471,38 @@
         } });
         toTop();
       };
+    });
+  }
+
+  /* ================== ПОВТОРЕННЯ ТИЖНЯ ================== */
+  function runReview(back) {
+    loadAll(function () {
+      var items = E.reviewItems(12);
+      if (!items.length) { back(); return; }
+      $app.innerHTML = '<div class="topbar"><button class="back" id="back">← Назад</button><span class="muted small" style="font-weight:700">🔁 Повторення тижня</span></div><div id="stage"></div>';
+      $("back").onclick = function () { stopSay(); back(); toTop(); };
+      runSession($("stage"), { items: items, mode: "review", onDone: function (s) {
+        var by = {};
+        s.res.forEach(function (r) { var id = r.it.skill; if (!by[id]) by[id] = { ok: 0, n: 0 }; by[id].n++; if (r.ok) by[id].ok++; });
+        E.reviewDone(s.score, s.max, by);
+        var good = [], weak = [];
+        Object.keys(by).forEach(function (id) { (by[id].ok === by[id].n ? good : weak).push(id); });
+        var name = function (id) { return E.SK[id] ? E.SK[id].title : id; };
+        $("stage").innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🔁</div><h2>Повторення тижня — готово!</h2><p class="muted">' + fmt(s.score) + ' з ' + s.max + ' балів</p>' +
+          (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>Тримається 💪</b><br>' + good.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : "") +
+          (weak.length ? '<div class="tip" style="text-align:left"><b>Варто освіжити</b> (ці речення вже в «Моїх помилках»)<br>' + weak.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : '<p>Усе пам\'ятаєш — супер! 🔥</p>') +
+          '<div class="row"><button class="btn ghost full" id="copy">📋 Надіслати результат татові</button><button class="btn full" id="go">Далі →</button></div></div>';
+        $("copy").onclick = function () {
+          var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
+          var text = [P.name + " — повторення тижня, " + d, "Результат: " + fmt(s.score) + " з " + s.max,
+            good.length ? "Тримається:\n" + good.map(function (id) { return "• " + name(id); }).join("\n") : "",
+            weak.length ? "Варто освіжити:\n" + weak.map(function (id) { return "• " + name(id); }).join("\n") : "Усе пам'ятає!"].filter(Boolean).join("\n");
+          var ok = function () { toast("Скопійовано — встав у месенджер"); };
+          try { navigator.clipboard.writeText(text).then(ok, function () { fallbackCopy(text, ok); }); } catch (e) { fallbackCopy(text, ok); }
+        };
+        $("go").onclick = function () { back(); toTop(); };
+      } });
+      toTop();
     });
   }
 
@@ -806,7 +848,7 @@
     var used = {}, main = o.items, i = 0, res = [], errSkills = [], fixed = 0, flagged = [];
     main.forEach(function (it) { used[it.key] = 1; });
     var isP = o.mode === "practice";
-    var CHIP = { practice: "✍️ Вправи", test: "🏆 Міні-тест", warm: "🔥 Розминка", mist: "📝 Мої помилки" };
+    var CHIP = { practice: "✍️ Вправи", test: "🏆 Міні-тест", warm: "🔥 Розминка", mist: "📝 Мої помилки", review: "🔁 Повторення тижня" };
 
     function rec(it, r) {
       E.tick("english");
