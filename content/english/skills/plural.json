@@ -1,0 +1,571 @@
+{
+ "topic": "pl",
+ "title": "Множина іменників, some / any",
+ "skills": [
+  {
+   "id": "pl.reg",
+   "title": "Множина: -s, -es, -ies",
+   "rule": "+s; після -s, -sh, -ch, -x → +es; приголосна + y → ies; голосна + y → +s.",
+   "worked": {
+    "p": "Kyiv and Lviv are big ___. (city)",
+    "steps": [
+     "Слово: <b>city</b>, закінчується на -y.",
+     "Що перед y? Буква <b>t</b> — приголосна.",
+     "Приголосна + y → y міняємо на <b>ies</b>.",
+     "Відповідь: big <b>cities</b>."
+    ]
+   },
+   "alt": "<p>Це ті самі правила, що для he / she / it (watch<b>es</b>, stud<b>ies</b>, play<b>s</b>):</p>\n        <p>box → box<b>es</b> (язик заплітається на «boxs»)<br>city → cit<b>ies</b> (перед y приголосна)<br>toy → toy<b>s</b> (перед y голосна)</p>",
+   "items": [
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "I have two ___. (box)",
+     "a": [
+      "boxes"
+     ],
+     "h": [
+      "box закінчується на -x.",
+      "Після -x → +es."
+     ],
+     "e": "box → <b>boxes</b>.",
+     "err": {
+      "boxs": "Після -x додаємо -es: box<b>es</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "There are three ___ in the street. (bus)",
+     "a": [
+      "buses"
+     ],
+     "h": [
+      "bus закінчується на -s.",
+      "Після -s → +es."
+     ],
+     "e": "bus → <b>buses</b>.",
+     "err": {
+      "buss": "Після -s додаємо -es: bus<b>es</b>.",
+      "busses": "Пишемо з одною s: <b>buses</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "Kyiv and Lviv are big ___. (city)",
+     "a": [
+      "cities"
+     ],
+     "h": [
+      "city закінчується на -y.",
+      "Перед y приголосна → ies."
+     ],
+     "e": "city → <b>cities</b>.",
+     "err": {
+      "citys": "Перед y приголосна (t): cit<b>ies</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "My little brother has a lot of ___. (toy)",
+     "a": [
+      "toys"
+     ],
+     "h": [
+      "toy закінчується на -y.",
+      "Перед y голосна → просто +s."
+     ],
+     "e": "toy → <b>toys</b>.",
+     "err": {
+      "toies": "Перед y голосна (o), тому просто +s: toy<b>s</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "We have five ___ today. (lesson)",
+     "a": [
+      "lessons"
+     ],
+     "h": [
+      "lesson — звичайне слово.",
+      "Просто +s."
+     ],
+     "e": "lesson → <b>lessons</b>.",
+     "err": {
+      "lessones": "Тут просто +s: lesson<b>s</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "She has two ___. (watch)",
+     "a": [
+      "watches"
+     ],
+     "h": [
+      "watch закінчується на -ch.",
+      "Після -ch → +es."
+     ],
+     "e": "watch → <b>watches</b>.",
+     "err": {
+      "watchs": "Після -ch додаємо -es: watch<b>es</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "There are many ___ in the sky. (star)",
+     "a": [
+      "stars"
+     ],
+     "h": [
+      "star — звичайне слово.",
+      "Просто +s."
+     ],
+     "e": "star → <b>stars</b>.",
+     "err": {
+      "stares": "Тут просто +s: star<b>s</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "Put the ___ on the table. (dish)",
+     "a": [
+      "dishes"
+     ],
+     "h": [
+      "dish закінчується на -sh.",
+      "Після -sh → +es."
+     ],
+     "e": "dish → <b>dishes</b>.",
+     "err": {
+      "dishs": "Після -sh додаємо -es: dish<b>es</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There are three boxs on the floor.",
+     "bad": 3,
+     "a": "There are three boxes on the floor.",
+     "h": [
+      "Подивись на множину.",
+      "box → +es."
+     ],
+     "e": "box → <b>boxes</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We visited two big citys.",
+     "bad": 4,
+     "a": "We visited two big cities.",
+     "h": [
+      "Подивись на множину.",
+      "Приголосна + y → ies."
+     ],
+     "e": "city → <b>cities</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 There are five benches in the park.",
+     "a": [
+      "There are five benches in the park."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "bench → +es."
+     ],
+     "e": "bench → <b>benches</b>.",
+     "err": {
+      "There are five benchs in the park.": "Після -ch додаємо -es: bench<b>es</b>.",
+      "There is five benches in the park.": "benches — багато: There <b>are</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pl.irr",
+   "title": "Винятки: men, children, teeth, mice",
+   "rule": "man → men, woman → women, child → children, person → people, foot → feet, tooth → teeth, mouse → mice; sheep, fish — не змінюються.",
+   "worked": {
+    "p": "My ___ are cold. (foot)",
+    "steps": [
+     "Слово: <b>foot</b> — нога (стопа).",
+     "Це виняток: не foots.",
+     "foot → <b>feet</b> (oo → ee).",
+     "Відповідь: My <b>feet</b> are cold."
+    ]
+   },
+   "alt": "<p>Винятки легше запам'ятати парами:</p>\n        <p>f<b>oo</b>t → f<b>ee</b>t, t<b>oo</b>th → t<b>ee</b>th (oo → ee)<br>m<b>a</b>n → m<b>e</b>n, wom<b>a</b>n → wom<b>e</b>n (a → e)<br>child → child<b>ren</b>, mouse → mice, person → people</p>\n        <p class=\"muted\">sheep і fish однакові в однині й множині.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "one man — two ___",
+     "o": [
+      "men",
+      "mans"
+     ],
+     "a": "men",
+     "h": [
+      "man — виняток.",
+      "a → e."
+     ],
+     "e": "man → <b>men</b>.",
+     "err": {
+      "mans": "man — виняток: <b>men</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "one child — three ___",
+     "o": [
+      "children",
+      "childs"
+     ],
+     "a": "children",
+     "h": [
+      "child — виняток.",
+      "child + ren."
+     ],
+     "e": "child → <b>children</b>.",
+     "err": {
+      "childs": "child — виняток: <b>children</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "one tooth — many ___",
+     "o": [
+      "teeth",
+      "tooths"
+     ],
+     "a": "teeth",
+     "h": [
+      "tooth — виняток.",
+      "oo → ee."
+     ],
+     "e": "tooth → <b>teeth</b>.",
+     "err": {
+      "tooths": "tooth — виняток: <b>teeth</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "There are two ___ in the photo. (woman)",
+     "a": [
+      "women"
+     ],
+     "h": [
+      "woman — виняток.",
+      "a → e."
+     ],
+     "e": "woman → <b>women</b>.",
+     "err": {
+      "womans": "woman — виняток: <b>women</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "Cats like to catch ___. (mouse)",
+     "a": [
+      "mice"
+     ],
+     "h": [
+      "mouse — виняток.",
+      "Зовсім нове слово."
+     ],
+     "e": "mouse → <b>mice</b>.",
+     "err": {
+      "mouses": "mouse — виняток: <b>mice</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "My ___ are cold. (foot)",
+     "a": [
+      "feet"
+     ],
+     "h": [
+      "foot — виняток.",
+      "oo → ee."
+     ],
+     "e": "foot → <b>feet</b>.",
+     "err": {
+      "foots": "foot — виняток: <b>feet</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "There are a lot of ___ in the street. (person)",
+     "a": [
+      "people"
+     ],
+     "h": [
+      "person — виняток.",
+      "Зовсім нове слово."
+     ],
+     "e": "person → <b>people</b>.",
+     "err": {
+      "persons": "Зазвичай кажемо <b>people</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши слово в множині",
+     "p": "The farmer has ten ___. (sheep)",
+     "a": [
+      "sheep"
+     ],
+     "h": [
+      "sheep — особливе слово.",
+      "У множині не змінюється."
+     ],
+     "e": "sheep → <b>sheep</b>.",
+     "err": {
+      "sheeps": "sheep у множині не змінюється: ten <b>sheep</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There are five childs in the yard.",
+     "bad": 3,
+     "a": "There are five children in the yard.",
+     "h": [
+      "Подивись на множину.",
+      "child — виняток."
+     ],
+     "e": "child → <b>children</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Brush your teeth twice a day.",
+     "a": [
+      "Brush your teeth twice a day."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "tooth → teeth."
+     ],
+     "e": "tooth → <b>teeth</b>.",
+     "err": {
+      "Brush your tooths twice a day.": "tooth — виняток: <b>teeth</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "some.any",
+   "title": "some чи any",
+   "rule": "some — у ствердженні і пропозиціях; any — у запереченні й питанні.",
+   "worked": {
+    "p": "We don't have ___ bread.",
+    "steps": [
+     "Яке речення? <b>don't</b> — заперечення.",
+     "У запереченні — <b>any</b>.",
+     "Відповідь: We don't have <b>any</b> bread."
+    ]
+   },
+   "alt": "<p>Простий тест: у реченні є <b>not</b> (don't, isn't, aren't) або це питання? → <b>any</b>. Інакше → <b>some</b>.</p>\n        <p>Виняток: коли щось пропонуєш чи просиш — <b>some</b>: Would you like some juice?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "There are ___ apples on the table.",
+     "o": [
+      "some",
+      "any"
+     ],
+     "a": "some",
+     "h": [
+      "Це ствердження.",
+      "У ствердженні — some."
+     ],
+     "e": "Ствердження → <b>some</b>.",
+     "err": {
+      "any": "У ствердженні — <b>some</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "There aren't ___ apples on the table.",
+     "o": [
+      "any",
+      "some"
+     ],
+     "a": "any",
+     "h": [
+      "Це заперечення.",
+      "У запереченні — any."
+     ],
+     "e": "Заперечення → <b>any</b>.",
+     "err": {
+      "some": "У запереченні — <b>any</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Are there ___ apples on the table?",
+     "o": [
+      "any",
+      "some"
+     ],
+     "a": "any",
+     "h": [
+      "Це питання.",
+      "У питанні — any."
+     ],
+     "e": "Питання → <b>any</b>.",
+     "err": {
+      "some": "У питанні — <b>any</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Would you like ___ tea?",
+     "o": [
+      "some",
+      "any"
+     ],
+     "a": "some",
+     "h": [
+      "Це пропозиція.",
+      "У пропозиціях — some."
+     ],
+     "e": "Пропозиція → <b>some</b>.",
+     "err": {
+      "any": "Коли щось пропонуємо — <b>some</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши some або any",
+     "p": "I have ___ new friends at school.",
+     "a": [
+      "some"
+     ],
+     "h": [
+      "Це ствердження.",
+      "some."
+     ],
+     "e": "Ствердження → <b>some</b>.",
+     "err": {
+      "any": "У ствердженні — <b>some</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши some або any",
+     "p": "We don't have ___ bread.",
+     "a": [
+      "any"
+     ],
+     "h": [
+      "don't — заперечення.",
+      "any."
+     ],
+     "e": "Заперечення → <b>any</b>.",
+     "err": {
+      "some": "У запереченні — <b>any</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши some або any",
+     "p": "Is there ___ juice in the fridge?",
+     "a": [
+      "any"
+     ],
+     "h": [
+      "Це питання.",
+      "any."
+     ],
+     "e": "Питання → <b>any</b>.",
+     "err": {
+      "some": "У питанні — <b>any</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши some або any",
+     "p": "There is ___ cheese on the plate.",
+     "a": [
+      "some"
+     ],
+     "h": [
+      "Це ствердження.",
+      "some."
+     ],
+     "e": "Ствердження → <b>some</b>.",
+     "err": {
+      "any": "У ствердженні — <b>some</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There are any cakes in the kitchen.",
+     "bad": 2,
+     "a": "There are some cakes in the kitchen.",
+     "h": [
+      "Це ствердження.",
+      "У ствердженні — some."
+     ],
+     "e": "Ствердження → <b>some</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I don't have some money.",
+     "bad": 3,
+     "a": "I don't have any money.",
+     "h": [
+      "don't — заперечення.",
+      "У запереченні — any."
+     ],
+     "e": "Заперечення → <b>any</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Are there any eggs in the fridge?",
+     "a": [
+      "Are there any eggs in the fridge?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Питання → any."
+     ],
+     "e": "Питання → <b>any</b>.",
+     "err": {
+      "Are there some eggs in the fridge?": "У питанні — <b>any</b>.",
+      "Is there any eggs in the fridge?": "eggs — багато: <b>Are</b> there…?"
+     }
+    }
+   ]
+  }
+ ]
+}

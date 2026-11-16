@@ -41,12 +41,14 @@
     {
      "id": "l5",
      "title": "There is / There are",
-     "ic": "🏠"
+     "ic": "🏠",
+     "file": "lessons/l5.json"
     },
     {
      "id": "l6",
      "title": "Множина іменників, some / any",
-     "ic": "🍎"
+     "ic": "🍎",
+     "file": "lessons/l6.json"
     },
     {
      "id": "l14",

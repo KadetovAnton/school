@@ -1,0 +1,119 @@
+{
+ "id": "l6",
+ "title": "Множина іменників, some / any",
+ "skillFiles": [
+  "skills/plural.json"
+ ],
+ "skills": [
+  "pl.reg",
+  "pl.irr",
+  "some.any"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "pl.reg": 3,
+   "pl.irr": 2,
+   "some.any": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍎",
+   "h": "Множина: зазвичай + s",
+   "html": "<table class=\"t\"><tr><td>Майже всі</td><td>+ s</td><td>book → book<b>s</b><br>apple → apple<b>s</b></td></tr>\n        <tr><td>-s, -sh, -ch, -x</td><td>+ es</td><td>bus → bus<b>es</b><br>box → box<b>es</b><br>watch → watch<b>es</b></td></tr>\n        <tr><td>приголосна + y</td><td>y → ies</td><td>city → cit<b>ies</b></td></tr>\n        <tr><td>голосна + y</td><td>+ s</td><td>toy → toy<b>s</b></td></tr></table>\n        <div class=\"tip\">💡 Знайомо? Це ті самі правила, що й для he / she / it у Present Simple: watches, studies, plays.</div>"
+  },
+  {
+   "e": "🧒",
+   "h": "Слова-винятки",
+   "html": "<table class=\"t\"><tr><td>man → <b>men</b></td><td>woman → <b>women</b></td></tr>\n        <tr><td>child → <b>children</b></td><td>person → <b>people</b></td></tr>\n        <tr><td>foot → <b>feet</b></td><td>tooth → <b>teeth</b></td></tr>\n        <tr><td>mouse → <b>mice</b></td><td>sheep → <b>sheep</b>, fish → <b>fish</b></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">There are five <b>children</b> in the yard.</div><div class=\"ua\">У дворі п'ятеро дітей.</div></div><button class=\"say round\" data-say=\"There are five children in the yard.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>childs, mans, tooths, mouses, sheeps</s> — так не буває.</div>"
+  },
+  {
+   "e": "🧺",
+   "h": "some чи any",
+   "html": "<table class=\"t\"><tr><td>ствердження</td><td><b>some</b></td><td>There are <b>some</b> apples.</td></tr>\n        <tr><td>заперечення</td><td><b>any</b></td><td>There aren't <b>any</b> apples.</td></tr>\n        <tr><td>питання</td><td><b>any</b></td><td>Are there <b>any</b> apples?</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">Would you like <b>some</b> tea?</div><div class=\"ua\">Хочеш чаю?</div></div><button class=\"say round\" data-say=\"Would you like some tea?\">🔊</button></div>\n        <div class=\"tip\">💡 Коли щось <b>пропонуємо</b> чи просимо — some навіть у питанні: Would you like <b>some</b> tea? Can I have <b>some</b> water?</div>"
+  }
+ ],
+ "examples": {
+  "title": "На кухні в бабусі",
+  "question": {
+   "q": "чому «Would you like <b>some</b> cake?» — це ж питання?",
+   "a": "Бо бабуся пропонує торт. У пропозиціях кажемо some."
+  },
+  "items": [
+   [
+    "There are <b>some</b> <b>cakes</b> on the table.",
+    "На столі є кілька тістечок."
+   ],
+   [
+    "There aren't <b>any</b> <b>bananas</b>, but there are <b>some</b> <b>apples</b>.",
+    "Бананів немає, але є кілька яблук."
+   ],
+   [
+    "Grandma has three <b>cats</b> and two <b>dogs</b>.",
+    "У бабусі три коти і два собаки."
+   ],
+   [
+    "Her cats catch <b>mice</b> in the garden.",
+    "Її коти ловлять мишей у саду."
+   ],
+   [
+    "There are a lot of <b>boxes</b> and <b>dishes</b> in the kitchen.",
+    "На кухні багато коробок і тарілок."
+   ],
+   [
+    "Are there <b>any</b> eggs? — Yes, there are ten!",
+    "Яйця є? — Так, десять!"
+   ],
+   [
+    "Would you like <b>some</b> tea, <b>children</b>?",
+    "Хочете чаю, діти?"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "plate",
+   "тарілка"
+  ],
+  [
+   "cup",
+   "чашка"
+  ],
+  [
+   "glass",
+   "склянка"
+  ],
+  [
+   "fridge",
+   "холодильник"
+  ],
+  [
+   "bread",
+   "хліб"
+  ],
+  [
+   "cheese",
+   "сир"
+  ],
+  [
+   "butter",
+   "вершкове масло"
+  ],
+  [
+   "egg",
+   "яйце"
+  ],
+  [
+   "juice",
+   "сік"
+  ],
+  [
+   "cake",
+   "торт / тістечко"
+  ]
+ ]
+}

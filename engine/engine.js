@@ -181,6 +181,8 @@
     { id: "es", e: "🔤", t: "Майстер -es", s: "Засвоїти -s, -sh, -ch, -x, -o → + es", ok: function (p) { return p.skills["ps.es"] && p.skills["ps.es"].lvl >= 3; } },
     { id: "t100", e: "💯", t: "100 завдань", s: "Виконати 100 завдань", ok: function (p) { return totalTasks(p) >= 100; } },
     { id: "t500", e: "⭐", t: "500 завдань", s: "Виконати 500 завдань", ok: function (p) { return totalTasks(p) >= 500; } },
+    { id: "w50", e: "🃏", t: "50 слів", s: "Вивчити 50 слів (коробка 4+)", ok: function (p) { return E.wordsLearned(p) >= 50; } },
+    { id: "w100", e: "📚", t: "100 слів", s: "Вивчити 100 слів", ok: function (p) { return E.wordsLearned(p) >= 100; } },
     { id: "reward1", e: "🎁", t: "Перша нагорода", s: "Зібрати зірки на тижневу нагороду", ok: function (p) { return (p.cnt && p.cnt.rewards) >= 1; } }
   ];
   E.cnt = function (k, n) { var p = E.P(); if (!p.cnt) p.cnt = {}; p.cnt[k] = (p.cnt[k] || 0) + (n || 1); E.save(); E.checkBadges(); };
@@ -203,6 +205,64 @@
     checking = false;
     if (out.length && E.onBadge) out.forEach(function (b) { E.onBadge(b); });
     return out;
+  };
+
+  /* ---------- слова: коробки ----------
+     P.words[en] = {box 1..5, due, n, ok, bad}. Правильно → коробка вище, слово повертається рідше;
+     помилка → коробка 1, завтра знову. «Вивчено» — коробка 4+. */
+  E.WBOX = [0, 1, 2, 4, 8, 16];
+  E.DICT = {};   // en → ua
+  E.WSETS = [];  // набори слів за темами
+  E.addDict = function (list) { (list || []).forEach(function (x) { if (!E.DICT[x[0]]) E.DICT[x[0]] = x[1]; }); };
+  function words() { var p = E.P(); return p.words || (p.words = {}); }
+  E.wordBox = function (en) { var w = words()[en]; return w ? w.box : 0; };
+  E.wordsLearned = function (prof) { var ws = (prof || E.P()).words || {}, n = 0; for (var k in ws) if (ws[k].box >= 4) n++; return n; };
+  E.wordsDue = function () {
+    var ws = words(), t = today();
+    return Object.keys(ws).filter(function (k) { return E.DICT[k] && ws[k].due <= t; })
+      .sort(function (a, b) { return ws[a].box - ws[b].box || (ws[a].due < ws[b].due ? -1 : 1); });
+  };
+  /* слова з уроку: потрапляють у коробку 1 (повторення завтра) */
+  E.addWords = function (list) {
+    var ws = words(), t = today();
+    (list || []).forEach(function (x) { if (!ws[x[0]]) ws[x[0]] = { box: 1, due: addDays(t, 1), n: 0, ok: 0, bad: 0 }; });
+    E.save();
+  };
+  E.wordAnswer = function (en, ok) {
+    var ws = words(), t = today(), w = ws[en] || (ws[en] = { box: 0, due: t, n: 0, ok: 0, bad: 0 }), was = w.box;
+    w.n++;
+    if (ok) { w.ok++; w.box = Math.min(w.box + 1, 5); w.due = addDays(t, was === 5 ? 30 : E.WBOX[w.box]); }
+    else { w.bad++; w.box = 1; w.due = addDays(t, 1); }
+    E.save();
+    if (ok && w.box === 4 && was === 3) E.addStars(1, "word");
+    E.checkBadges();
+    return w.box;
+  };
+  /* набір на сьогодні: слова, яким пора (до 10), + нові з поточної теми (до 5), разом до 12 */
+  E.wordSession = function (max) {
+    max = max || 12;
+    var p = E.P(), ws = words(), due = E.wordsDue().slice(0, 10), out = due.slice(), nNew = 0;
+    if (!p.wset && E.WSETS.length) p.wset = E.WSETS[0].id;
+    for (var g = 0; g < E.WSETS.length && out.length < max && nNew < 5; g++) {
+      var set = null; E.WSETS.forEach(function (x) { if (x.id === p.wset) set = x; });
+      if (!set) break;
+      var fresh = set.words.filter(function (x) { return !ws[x[0]] && out.indexOf(x[0]) < 0; });
+      if (!fresh.length) { // тема пройдена — беремо наступну
+        var i = E.WSETS.indexOf(set), nx = null;
+        for (var j = 1; j <= E.WSETS.length; j++) { var c = E.WSETS[(i + j) % E.WSETS.length]; if (c.words.some(function (x) { return !ws[x[0]]; })) { nx = c; break; } }
+        if (!nx) break; p.wset = nx.id; continue;
+      }
+      while (fresh.length && out.length < max && nNew < 5) { out.push(fresh.shift()[0]); nNew++; }
+    }
+    E.save();
+    return out;
+  };
+  E.checkWord = function (right, given) {
+    var f = function (x) { return E.norm(x).replace(/-/g, " ").replace(/\s+/g, " "); };
+    var r = f(right), g = f(given);
+    if (r === g) return "ok";
+    if (r.length >= 5 && dist(r, g) === 1) return "typo";
+    return "wrong";
   };
 
   /* ---------- навички ---------- */
@@ -305,7 +365,7 @@
   /* план «Заняття на сьогодні»: розминка → крок уроку → помилки */
   E.plan = function () {
     var p = E.P(), t = today();
-    if (!p.plan || p.plan.d !== t) p.plan = { d: t, warm: false, lesson: false, mist: false };
+    if (!p.plan || p.plan.d !== t) p.plan = { d: t, warm: false, lesson: false, words: false, mist: false };
     return p.plan;
   };
   /* розминка: спершу навички, яким пора повторитися, далі — давно не бачені з уже почате */

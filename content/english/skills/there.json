@@ -1,0 +1,547 @@
+{
+ "topic": "there",
+ "title": "There is / There are",
+ "skills": [
+  {
+   "id": "there.form",
+   "title": "There is чи There are",
+   "rule": "Одна річ або те, що не рахують штуками (milk) → There is. Багато → There are.",
+   "worked": {
+    "p": "There ___ three bedrooms in our flat.",
+    "steps": [
+     "Що є? <b>three bedrooms</b> — три спальні.",
+     "Їх багато.",
+     "Багато → <b>There are</b>.",
+     "Відповідь: There <b>are</b> three bedrooms in our flat."
+    ]
+   },
+   "alt": "<p>Подивись на слово <b>одразу після</b> There is / are:</p>\n        <p>a cat, an apple, some milk → <b>is</b><br>two cats, many apples, some books → <b>are</b></p>\n        <p class=\"muted\">Є закінчення -s (books, cats) чи число більше за один — майже завжди are.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "There ___ a cat on the sofa.",
+     "o": [
+      "is",
+      "are"
+     ],
+     "a": "is",
+     "h": [
+      "a cat — скільки котів?",
+      "Один → is."
+     ],
+     "e": "a cat — один → There <b>is</b>.",
+     "err": {
+      "are": "a cat — один кіт, тож <b>is</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "There ___ two books on the table.",
+     "o": [
+      "is",
+      "are"
+     ],
+     "a": "are",
+     "h": [
+      "two books — скільки?",
+      "Багато → are."
+     ],
+     "e": "two books → There <b>are</b>.",
+     "err": {
+      "is": "two books — їх дві, тож <b>are</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "There ___ some milk in the fridge.",
+     "o": [
+      "is",
+      "are"
+     ],
+     "a": "is",
+     "h": [
+      "milk рахують штуками?",
+      "Не рахують → is."
+     ],
+     "e": "milk — не рахують штуками → There <b>is</b>.",
+     "err": {
+      "are": "milk не рахують штуками — з ним <b>is</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши is або are",
+     "p": "There ___ three bedrooms in our flat.",
+     "a": [
+      "are"
+     ],
+     "h": [
+      "three bedrooms — скільки?",
+      "Багато → are."
+     ],
+     "e": "three bedrooms → There <b>are</b>.",
+     "err": {
+      "is": "three bedrooms — їх три, тож <b>are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши is або are",
+     "p": "There ___ an apple in my bag.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "an apple — скільки?",
+      "Одне → is."
+     ],
+     "e": "an apple → There <b>is</b>.",
+     "err": {
+      "are": "an apple — одне яблуко, тож <b>is</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши is або are",
+     "p": "There ___ a lot of children in the park.",
+     "a": [
+      "are"
+     ],
+     "h": [
+      "children — одна дитина чи багато?",
+      "Багато → are."
+     ],
+     "e": "children — багато дітей → There <b>are</b>.",
+     "err": {
+      "is": "children — це багато дітей, тож <b>are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши is або are",
+     "p": "There ___ some water in the glass.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "water рахують штуками?",
+      "Не рахують → is."
+     ],
+     "e": "water — не рахують штуками → There <b>is</b>.",
+     "err": {
+      "are": "water не рахують штуками — з ним <b>is</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There are a big tree in our garden.",
+     "bad": 1,
+     "a": "There is a big tree in our garden.",
+     "h": [
+      "a big tree — скільки дерев?",
+      "Одне → is."
+     ],
+     "e": "a tree — одне → There <b>is</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There is five chairs in the kitchen.",
+     "bad": 1,
+     "a": "There are five chairs in the kitchen.",
+     "h": [
+      "five chairs — скільки?",
+      "Багато → are."
+     ],
+     "e": "five chairs → There <b>are</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 There are two windows in my room.",
+     "a": [
+      "There are two windows in my room."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "two windows → are."
+     ],
+     "e": "two windows → There <b>are</b>.",
+     "err": {
+      "There is two windows in my room.": "two windows — багато: There <b>are</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«У нашому місті є парк».",
+     "words": [
+      "is",
+      "There",
+      "a",
+      "park",
+      "in",
+      "our",
+      "town"
+     ],
+     "a": [
+      "there is a park in our town",
+      "in our town there is a park"
+     ],
+     "h": [
+      "There is → що → де.",
+      "There → is → a park → …"
+     ],
+     "e": "<b>There is a park in our town.</b>"
+    }
+   ]
+  },
+  {
+   "id": "there.neg",
+   "title": "There isn't / There aren't any",
+   "rule": "Одна річ → There isn't a … Багато → There aren't any …",
+   "worked": {
+    "p": "There ___ any pictures on the wall.",
+    "steps": [
+     "Що? <b>pictures</b> — картини, багато.",
+     "Багато → are, заперечення → <b>aren't</b>.",
+     "any вже стоїть — так і треба в запереченні.",
+     "Відповідь: There <b>aren't</b> any pictures on the wall."
+    ]
+   },
+   "alt": "<p>Заперечення — це просто <b>not</b> після is / are:</p>\n        <p>There is → There <b>isn't</b> (a lift)<br>There are → There <b>aren't</b> (any shops)</p>\n        <p class=\"muted\">some у запереченні перетворюється на any: some apples → any apples.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "There ___ any eggs in the fridge.",
+     "o": [
+      "aren't",
+      "isn't"
+     ],
+     "a": "aren't",
+     "h": [
+      "eggs — скільки?",
+      "Багато → aren't."
+     ],
+     "e": "eggs → There <b>aren't</b> any.",
+     "err": {
+      "isn't": "eggs — їх багато, тож <b>aren't</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "There ___ a TV in my bedroom.",
+     "o": [
+      "isn't",
+      "aren't"
+     ],
+     "a": "isn't",
+     "h": [
+      "a TV — скільки?",
+      "Один → isn't."
+     ],
+     "e": "a TV → There <b>isn't</b>.",
+     "err": {
+      "aren't": "a TV — один, тож <b>isn't</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "There aren't ___ shops in our village.",
+     "o": [
+      "any",
+      "some"
+     ],
+     "a": "any",
+     "h": [
+      "Це заперечення.",
+      "У запереченні — any."
+     ],
+     "e": "Заперечення → <b>any</b>.",
+     "err": {
+      "some": "У запереченні — <b>any</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши isn't або aren't",
+     "p": "There ___ a lift in our building.",
+     "a": [
+      "isn't",
+      "is not"
+     ],
+     "h": [
+      "a lift — скільки?",
+      "Один → isn't."
+     ],
+     "e": "a lift → There <b>isn't</b>.",
+     "err": {
+      "aren't": "a lift — один, тож <b>isn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши isn't або aren't",
+     "p": "There ___ any pictures on the wall.",
+     "a": [
+      "aren't",
+      "are not"
+     ],
+     "h": [
+      "pictures — скільки?",
+      "Багато → aren't."
+     ],
+     "e": "pictures → There <b>aren't</b> any.",
+     "err": {
+      "isn't": "pictures — їх багато, тож <b>aren't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши some або any",
+     "p": "There aren't ___ cars in the street.",
+     "a": [
+      "any"
+     ],
+     "h": [
+      "Це заперечення.",
+      "У запереченні — any."
+     ],
+     "e": "Заперечення → <b>any</b>.",
+     "err": {
+      "some": "У запереченні — <b>any</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There isn't any apples in the box.",
+     "bad": 1,
+     "a": "There aren't any apples in the box.",
+     "h": [
+      "apples — скільки?",
+      "Багато → aren't."
+     ],
+     "e": "apples → There <b>aren't</b> any."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "There aren't some books on the shelf.",
+     "bad": 2,
+     "a": "There aren't any books on the shelf.",
+     "h": [
+      "Це заперечення.",
+      "some → any."
+     ],
+     "e": "У запереченні — <b>any</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 There isn't a cinema in our village.",
+     "a": [
+      "There isn't a cinema in our village."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "a cinema — один → isn't."
+     ],
+     "e": "a cinema → There <b>isn't</b>.",
+     "err": {
+      "There aren't a cinema in our village.": "a cinema — один: There <b>isn't</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "there.q",
+   "title": "Is there…? Are there…? How many…?",
+   "rule": "Is there a …? / Are there any …? Відповідь: Yes, there is. / No, there aren't.",
+   "worked": {
+    "p": "___ there any bananas in the kitchen?",
+    "steps": [
+     "Про що питаю? <b>bananas</b> — багато.",
+     "Багато → <b>Are</b> на початок.",
+     "У питанні — any.",
+     "Відповідь: <b>Are</b> there any bananas in the kitchen?"
+    ]
+   },
+   "alt": "<p>Питання — це There is / are, де слова <b>помінялись місцями</b>:</p>\n        <p>There <b>is</b> a park. → <b>Is</b> there a park?<br>There <b>are</b> cafes. → <b>Are</b> there any cafes?</p>\n        <p>Відповідаємо тими ж словами: Yes, there <b>is</b>. / No, there <b>aren't</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ there a bank near here?",
+     "o": [
+      "Is",
+      "Are"
+     ],
+     "a": "Is",
+     "h": [
+      "a bank — скільки?",
+      "Один → Is."
+     ],
+     "e": "a bank → <b>Is</b> there…?",
+     "err": {
+      "Are": "a bank — один, тож <b>Is</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ there any cafes in your town?",
+     "o": [
+      "Are",
+      "Is"
+     ],
+     "a": "Are",
+     "h": [
+      "cafes — скільки?",
+      "Багато → Are."
+     ],
+     "e": "cafes → <b>Are</b> there…?",
+     "err": {
+      "Is": "cafes — їх багато, тож <b>Are</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Is there a park near your school? — Yes, there ___.",
+     "o": [
+      "is",
+      "are",
+      "does"
+     ],
+     "a": "is",
+     "h": [
+      "Питали з Is.",
+      "Відповідаємо тим самим словом."
+     ],
+     "e": "Is there…? → Yes, there <b>is</b>.",
+     "err": {
+      "are": "Питали з Is: Yes, there <b>is</b>.",
+      "does": "Питали з Is: Yes, there <b>is</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Is або Are",
+     "p": "___ there a computer in your classroom?",
+     "a": [
+      "Is"
+     ],
+     "h": [
+      "a computer — скільки?",
+      "Один → Is."
+     ],
+     "e": "a computer → <b>Is</b> there…?",
+     "err": {
+      "Are": "a computer — один, тож <b>Is</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Is або Are",
+     "p": "___ there any bananas in the kitchen?",
+     "a": [
+      "Are"
+     ],
+     "h": [
+      "bananas — скільки?",
+      "Багато → Are."
+     ],
+     "e": "bananas → <b>Are</b> there…?",
+     "err": {
+      "Is": "bananas — їх багато, тож <b>Are</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Are there any apples? — No, there ___.",
+     "a": [
+      "aren't",
+      "are not"
+     ],
+     "h": [
+      "Питали з Are, відповідь «ні».",
+      "are → aren't."
+     ],
+     "e": "No, there <b>aren't</b>.",
+     "err": {
+      "isn't": "Питали з Are: No, there <b>aren't</b>.",
+      "don't": "Тут помічник are: No, there <b>aren't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Is there a lamp on the desk? — Yes, there ___.",
+     "a": [
+      "is"
+     ],
+     "h": [
+      "Питали з Is.",
+      "Відповідь тим самим словом."
+     ],
+     "e": "Yes, there <b>is</b>.",
+     "err": {
+      "are": "Питали з Is: Yes, there <b>is</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Скільки учнів у твоєму класі?»",
+     "words": [
+      "many",
+      "How",
+      "pupils",
+      "are",
+      "there",
+      "in",
+      "your",
+      "class"
+     ],
+     "a": [
+      "how many pupils are there in your class"
+     ],
+     "h": [
+      "How many → кого → are there → де?",
+      "How many → pupils → are → there → …"
+     ],
+     "e": "<b>How many pupils are there in your class?</b>",
+     "end": "?"
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Is there any eggs in the fridge?",
+     "bad": 0,
+     "a": "Are there any eggs in the fridge?",
+     "h": [
+      "eggs — скільки?",
+      "Багато → Are."
+     ],
+     "e": "eggs → <b>Are</b> there any eggs…?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Is there a shop near your house?",
+     "a": [
+      "Is there a shop near your house?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "a shop — один → Is."
+     ],
+     "e": "a shop → <b>Is</b> there…?",
+     "err": {
+      "Are there a shop near your house?": "a shop — один: <b>Is</b> there…?"
+     }
+    }
+   ]
+  }
+ ]
+}

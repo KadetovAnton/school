@@ -1,0 +1,124 @@
+{
+ "id": "l5",
+ "title": "There is / There are",
+ "skillFiles": [
+  "skills/there.json"
+ ],
+ "skills": [
+  "there.form",
+  "there.neg",
+  "there.q"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "there.form": 3,
+   "there.neg": 3,
+   "there.q": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🏠",
+   "h": "Що десь є",
+   "html": "<p>Коли розповідаємо, <b>що є</b> в кімнаті, місті, сумці, кажемо <b>There is</b> або <b>There are</b>.</p>\n        <table class=\"t\"><tr><td>одна річ</td><td><b>There is</b> a / an …</td><td class=\"muted\">There's</td></tr>\n        <tr><td>багато речей</td><td><b>There are</b> …</td><td></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\"><b>There is</b> a cat on the sofa.</div><div class=\"ua\">На дивані (є) кіт.</div></div><button class=\"say round\" data-say=\"There is a cat on the sofa.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>There are</b> two books on the table.</div><div class=\"ua\">На столі (є) дві книжки.</div></div><button class=\"say round\" data-say=\"There are two books on the table.\">🔊</button></div>\n        <div class=\"tip\">💡 Українською «є» часто пропускаємо, а англійською There is / are обов'язкове.</div>"
+  },
+  {
+   "e": "🥛",
+   "h": "Те, що не рахують штуками",
+   "html": "<p>milk, water, bread, juice, cheese, money — їх не рахують «одна, дві». З ними завжди <b>is</b>:</p>\n        <div class=\"ex\"><div><div class=\"en\"><b>There is</b> some milk in the fridge.</div><div class=\"ua\">У холодильнику є трохи молока.</div></div><button class=\"say round\" data-say=\"There is some milk in the fridge.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>There are some milk</s> → There <b>is</b> some milk.</div>"
+  },
+  {
+   "e": "🙅",
+   "h": "Чого немає",
+   "html": "<table class=\"t\"><tr><td>одна річ</td><td>There <b>isn't</b> a …</td></tr>\n        <tr><td>багато</td><td>There <b>aren't any</b> …</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">There <b>isn't</b> a TV in my room.</div><div class=\"ua\">У моїй кімнаті немає телевізора.</div></div><button class=\"say round\" data-say=\"There isn't a TV in my room.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">There <b>aren't any</b> shops in our village.</div><div class=\"ua\">У нашому селі немає магазинів.</div></div><button class=\"say round\" data-say=\"There aren't any shops in our village.\">🔊</button></div>\n        <p class=\"muted\">У запереченні замість some кажемо <b>any</b>.</p>"
+  },
+  {
+   "e": "❓",
+   "h": "Питання і відповіді",
+   "html": "<p>Is / Are виходить наперед:</p>\n        <div class=\"ex\"><div><div class=\"en\"><b>Is there</b> a bank near here? — Yes, there <b>is</b>.</div><div class=\"ua\">Тут поруч є банк? — Так.</div></div><button class=\"say round\" data-say=\"Is there a bank near here? Yes, there is.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Are there any</b> cafes in your town? — No, there <b>aren't</b>.</div><div class=\"ua\">У твоєму місті є кафе? — Ні.</div></div><button class=\"say round\" data-say=\"Are there any cafes in your town? No, there aren't.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>How many</b> pupils <b>are there</b> in your class?</div><div class=\"ua\">Скільки учнів у твоєму класі?</div></div><button class=\"say round\" data-say=\"How many pupils are there in your class?\">🔊</button></div>"
+  }
+ ],
+ "examples": {
+  "title": "Моя кімната",
+  "question": {
+   "q": "чому «There <b>is</b> a desk», але «There <b>are</b> two shelves»?",
+   "a": "Стіл один — is. Полиць дві, їх багато — are."
+  },
+  "items": [
+   [
+    "My room is small but cosy.",
+    "Моя кімната маленька, але затишна."
+   ],
+   [
+    "<b>There is</b> a bed next to the window.",
+    "Біля вікна стоїть ліжко."
+   ],
+   [
+    "<b>There is</b> a desk and a chair.",
+    "Є стіл і стілець."
+   ],
+   [
+    "<b>There are</b> two shelves with books.",
+    "Є дві полиці з книжками."
+   ],
+   [
+    "<b>There are</b> some posters on the wall.",
+    "На стіні кілька плакатів."
+   ],
+   [
+    "<b>There isn't</b> a TV in my room.",
+    "У моїй кімнаті немає телевізора."
+   ],
+   [
+    "<b>Is there</b> a computer? — Yes, <b>there is</b>!",
+    "Комп'ютер є? — Так, є!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "bed",
+   "ліжко"
+  ],
+  [
+   "desk",
+   "письмовий стіл"
+  ],
+  [
+   "chair",
+   "стілець"
+  ],
+  [
+   "lamp",
+   "лампа"
+  ],
+  [
+   "shelf",
+   "полиця"
+  ],
+  [
+   "carpet",
+   "килим"
+  ],
+  [
+   "mirror",
+   "дзеркало"
+  ],
+  [
+   "on",
+   "на"
+  ],
+  [
+   "under",
+   "під"
+  ],
+  [
+   "next to",
+   "поруч з"
+  ]
+ ]
+}
