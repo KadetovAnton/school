@@ -127,13 +127,13 @@
     {
      "type": "input",
      "task": "Впиши дієслово в Past Simple",
-     "p": "I ___ breakfast this morning. (not have)",
+     "p": "I ___ breakfast yesterday morning. (not have)",
      "a": [
       "didn't have",
       "did not have"
      ],
      "h": [
-      "Ранок уже минув → didn't.",
+      "Учора — минуле → didn't.",
       "have — перша форма."
      ],
      "e": "<b>didn't have</b>.",

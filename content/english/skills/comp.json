@@ -453,7 +453,7 @@
     {
      "type": "input",
      "task": "Впиши прикметник у потрібній формі",
-     "p": "This is the ___ film I know. (bad)",
+     "p": "This is the ___ film I have ever seen. (bad)",
      "a": [
       "worst"
      ],

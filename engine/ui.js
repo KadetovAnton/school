@@ -928,7 +928,7 @@
             var st = it.steps[si], row = $("stp" + si);
             if (E.norm(val) !== E.norm(st.a)) {
               row.classList.add("bad");
-              return finish(val, null, { st: "wrong", right: E.answersOf(it)[0], msg: "У " + (si + 1) + "-й дії (" + esc(st.q.toLowerCase().replace(/\?$/, "")) + ") має вийти <b>" + st.a + "</b>" + (st.how ? ": " + st.how : "") + "." });
+              return finish(val, null, { st: "wrong", right: E.answersOf(it)[0], msg: "У " + (si + 1) + "-й дії (" + esc((st.q.charAt(0).toLowerCase() + st.q.slice(1)).replace(/\?$/, "")) + ") має вийти <b>" + st.a + "</b>" + (st.how ? ": " + st.how : "") + "." });
             }
             row.classList.remove("cur"); row.classList.add("ok");
             si++; val = ""; blank = $("sv" + si); $("stp" + si).classList.add("cur"); show();
