@@ -1,0 +1,43 @@
+{
+ "id": "m2",
+ "title": "Додавання через десяток: 8 + 5",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.add20",
+  "m.add20s"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.add20": 5,
+   "m.add20s": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🥚",
+   "h": "Спершу — до 10!",
+   "html": "<p>Коли додаємо і переходимо через 10, найлегше спершу <b>доповнити до 10</b>.</p><div class=\"pic\">🍎🍎🍎🍎🍎🍎🍎🍎 + ⭐⭐⭐⭐⭐</div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">8 + 5 = 8 + 2 + 3 = 13</div><p class=\"muted\">8 і ще 2 — це 10. З п'яти лишилось 3. 10 і 3 — тринадцять.</p>"
+  },
+  {
+   "e": "🍫",
+   "h": "Розклади друге число",
+   "html": "<p>Число можна розламати на дві частини, як шоколадку:</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">5 = 2 + 3 &nbsp;&nbsp; 6 = 4 + 2 &nbsp;&nbsp; 7 = 3 + 4</div><p>Першу частину беремо, щоб вийшло 10, другу — додаємо до 10.</p>"
+  },
+  {
+   "e": "🔟",
+   "h": "Пам'ятай пари до 10",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">1+9 · 2+8 · 3+7 · 4+6 · 5+5</div><p>Ці пари — твої помічники: 7 + <b>3</b> = 10, отже 7 + 5 = 10 + 2 = 12.</p>"
+  }
+ ]
+}

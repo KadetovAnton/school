@@ -1,0 +1,33 @@
+{
+ "id": "m8",
+ "title": "Задачі до 100",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.prob100",
+  "m.mix100"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.prob100": 4,
+   "m.mix100": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🧠",
+   "h": "План розв'язання",
+   "html": "<p>1) Прочитай (або натисни 🔊). 2) Що відомо, що знайти? 3) Більше чи менше? 4) Порахуй і перевір.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">більше → + &nbsp;&nbsp; менше → −</div>"
+  }
+ ]
+}

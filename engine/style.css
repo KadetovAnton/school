@@ -161,3 +161,22 @@ body.th-berry{--bg:#FBF0F8;--pri:#9B2C8F;--pri-soft:#F6E2F3;--pri-ink:#741F6B}
 .topbar{gap:10px}
 .back{white-space:nowrap;flex:0 0 auto}
 .topbar>span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;min-width:0;text-align:right}
+/* --- математика / молодші --- */
+.prompt.big{font-size:34px;text-align:center;font-weight:900;letter-spacing:.5px;margin:10px 0 14px}
+.prompt.big.long{font-size:21px;font-weight:700;text-align:left;letter-spacing:0;line-height:1.45}
+.prompt .blank.filled,.prompt .blank.good,.prompt .blank.badv{border-bottom:0;background:var(--pri-soft);color:var(--pri-ink);border-radius:10px;padding:0 10px;min-width:56px;text-align:center;transform:none}
+.prompt .blank.good{background:var(--ok-soft);color:var(--ok)}
+.prompt .blank.badv{background:var(--bad-soft);color:var(--bad);text-decoration:line-through}
+.pic{text-align:center;font-size:30px;line-height:1.35;margin:4px 0 8px;letter-spacing:2px;word-break:break-word}
+.pic .grp{display:inline-block;margin:0 10px}
+.pic .lbl{display:block;font-size:13px;letter-spacing:0;color:var(--muted);font-weight:800}
+.ten{display:inline-block;width:14px;height:64px;margin:0 3px;border-radius:4px;background:repeating-linear-gradient(to bottom,var(--pri) 0 5px,#fff 5px 6.4px);vertical-align:bottom}
+.one{display:inline-block;width:14px;height:14px;margin:0 2px;border-radius:3px;background:var(--sun);vertical-align:bottom}
+.numbox{display:none}
+.keypad{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:6px}
+.key{font:inherit;font-size:30px;font-weight:900;padding:12px 0;border-radius:16px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer;min-height:62px}
+.key:active{transform:scale(.96)}
+.key.ok{background:var(--ok);border-color:var(--ok);color:#fff}
+.key.del{background:#F6F1E7;font-size:24px}
+body.kid .opt{font-size:26px;text-align:center;font-weight:900}
+body.kid .task{font-size:17px}

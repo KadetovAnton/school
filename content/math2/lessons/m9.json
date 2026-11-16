@@ -1,0 +1,38 @@
+{
+ "id": "m9",
+ "title": "Множення: на 2 і на 3",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.mulsum",
+  "m.mul23"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.mulsum": 3,
+   "m.mul23": 5
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍽️",
+   "h": "Що таке множення",
+   "html": "<p>Коли додаємо <b>однакові</b> числа, можна записати коротше — множенням:</p><div class=\"pic\"><span class=\"grp\">🍓🍓🍓</span><span class=\"grp\">🍓🍓🍓</span><span class=\"grp\">🍓🍓🍓</span><span class=\"grp\">🍓🍓🍓</span></div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">3 + 3 + 3 + 3 = 3 · 4 = 12</div><p class=\"muted\">«По 3 узяти 4 рази».</p>"
+  },
+  {
+   "e": "🐸",
+   "h": "Таблиця на 2 і на 3",
+   "html": "<table class=\"t\"><tr><td>по 2:</td><td>2, 4, 6, 8, 10, 12, 14, 16, 18, 20</td></tr><tr><td>по 3:</td><td>3, 6, 9, 12, 15, 18, 21, 24, 27, 30</td></tr></table><p>2 · 7 — сьомий «стрибок» по 2: <b>14</b>.</p><div class=\"tip\">💡 Від перестановки множників результат не змінюється: 2 · 7 = 7 · 2.</div>"
+  }
+ ]
+}

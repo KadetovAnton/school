@@ -6,6 +6,7 @@
    "name": "Аня",
    "emoji": "👧",
    "grade": 7,
+   "g": "f",
    "subjects": [
     {
      "id": "english",
@@ -60,11 +61,13 @@
    "name": "Артем",
    "emoji": "👦",
    "grade": 2,
+   "g": "m",
    "subjects": [
     {
      "id": "math2",
      "title": "Математика",
-     "ic": "🔢"
+     "ic": "🔢",
+     "open": true
     },
     {
      "id": "ukrainian2",

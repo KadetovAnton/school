@@ -15,11 +15,12 @@
   try { synth = window.speechSynthesis || null; } catch (e) {}
   S.can = !!synth && typeof window.SpeechSynthesisUtterance === "function";
 
-  var voice = null;
+  var voice = null, voiceUk = null;
   function pick() {
     try {
       var vs = synth.getVoices() || [], by = function (re) { for (var i = 0; i < vs.length; i++) if (re.test(vs[i].lang)) return vs[i]; return null; };
       voice = by(/^en[-_]GB/i) || by(/^en[-_]US/i) || by(/^en/i) || null;
+      voiceUk = by(/^uk/i) || null;
     } catch (e) {}
   }
   if (S.can) { pick(); try { synth.addEventListener ? synth.addEventListener("voiceschanged", pick) : (synth.onvoiceschanged = pick); } catch (e) {} }
@@ -30,20 +31,21 @@
     try { var a = new Audio(base + "silent.mp3"); a.setAttribute("playsinline", ""); var p = a.play(); if (p && p.catch) p.catch(function () {}); } catch (e) {}
   }
 
-  function utter(text, rate) {
+  function utter(text, rate, lang) {
     var u = new SpeechSynthesisUtterance(text);
-    if (!voice) pick();
-    if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = "en-GB";
+    if (!voice || !voiceUk) pick();
+    if (lang === "uk") { if (voiceUk) { u.voice = voiceUk; u.lang = voiceUk.lang; } else u.lang = "uk-UA"; }
+    else if (voice) { u.voice = voice; u.lang = voice.lang; } else u.lang = "en-GB";
     u.rate = rate || 0.9; u.volume = 1; u.pitch = 1;
     return u;
   }
-  S.say = function (text, rate) {
+  S.say = function (text, rate, lang) {
     if (!S.can || !text) return;
     try {
       unlock();
       if (synth.speaking || synth.pending) synth.cancel();
       if (synth.paused) synth.resume();
-      synth.speak(utter(text, rate));
+      synth.speak(utter(text, rate, lang));
     } catch (e) {}
   };
   S.list = function (texts, rate) {
@@ -54,5 +56,6 @@
       texts.forEach(function (t) { synth.speak(utter(t, rate)); });
     } catch (e) {}
   };
+  S.uk = function (text) { S.say(text, 0.95, "uk"); }; // українською — для завдань молодших
   S.stop = function () { try { if (synth && (synth.speaking || synth.pending)) synth.cancel(); } catch (e) {} };
 })();

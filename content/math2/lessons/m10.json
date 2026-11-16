@@ -1,0 +1,38 @@
+{
+ "id": "m10",
+ "title": "Ділення на 2 і на 3",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.div23",
+  "m.divprob"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.div23": 5,
+   "m.divprob": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍬",
+   "h": "Ділимо порівну",
+   "html": "<p>Ділення — це роздати <b>порівну</b>.</p><div class=\"pic\"><span class=\"grp\">🍬🍬🍬</span><span class=\"grp\">🍬🍬🍬</span></div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">6 : 2 = 3</div><p class=\"muted\">6 цукерок на 2 дітей — по 3 кожному.</p>"
+  },
+  {
+   "e": "🔁",
+   "h": "Ділення через множення",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">14 : 2 = 7, бо 2 · 7 = 14</div><p>Знаєш таблицю множення — знаєш і ділення!</p>"
+  }
+ ]
+}

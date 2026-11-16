@@ -1,0 +1,45 @@
+{
+ "id": "m1",
+ "title": "Повторюємо: числа до 20",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.cmp20",
+  "m.add10",
+  "m.miss10"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "m.cmp20": 3,
+   "m.add10": 3,
+   "m.miss10": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🐊",
+   "h": "Більше чи менше?",
+   "html": "<p>Знак завжди відкритий до <b>більшого</b> числа, як рот крокодила 🐊.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">9 > 4 &nbsp;&nbsp; 4 < 9 &nbsp;&nbsp; 5 = 5</div><div class=\"pic\">🍎🍎🍎🍎🍎🍎🍎🍎🍎 &nbsp; > &nbsp; 🍎🍎🍎🍎</div>"
+  },
+  {
+   "e": "✋",
+   "h": "Плюс і мінус",
+   "html": "<p><b>+</b> — додаємо, стало більше. <b>−</b> — забираємо, стало менше.</p><div class=\"pic\">🍓🍓🍓🍓 + 🍓🍓 = 6</div><div class=\"pic\">🐟🐟🐟🐟🐟 − 🐟🐟 = 3</div>"
+  },
+  {
+   "e": "🪜",
+   "h": "Пропущене число",
+   "html": "<p>4 + <b>?</b> = 9. Рахуй кроки від 4 до 9: 5, 6, 7, 8, 9 — це <b>5</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">4 + 5 = 9</div>"
+  }
+ ]
+}

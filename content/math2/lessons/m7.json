@@ -1,0 +1,38 @@
+{
+ "id": "m7",
+ "title": "До 100 з переходом через десяток",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.addc",
+  "m.subc"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.addc": 4,
+   "m.subc": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🎀",
+   "h": "Новий десяток",
+   "html": "<p>Якщо одиниць набралось 10 або більше — 10 з них стають новим десятком.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">38 + 5 = 43</div><p class=\"muted\">8 + 5 = 13: це 1 десяток і 3. Десятків було 3, стало 4 → 43.</p>"
+  },
+  {
+   "e": "🤝",
+   "h": "Позичаємо десяток",
+   "html": "<p>Одиниць не вистачає? «Позич» один десяток — одиниць стане на 10 більше.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">42 − 7 = 35</div><p class=\"muted\">Від 2 не відняти 7. Беремо десяток: 12 − 7 = 5, десятків лишилось 3 → 35.</p>"
+  }
+ ]
+}

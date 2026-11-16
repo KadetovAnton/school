@@ -1,0 +1,45 @@
+{
+ "id": "m5",
+ "title": "Числа до 100: десятки й одиниці",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.tens",
+  "m.cmp100",
+  "m.seq100"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "m.tens": 3,
+   "m.cmp100": 3,
+   "m.seq100": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "✏️",
+   "h": "Пачки по 10",
+   "html": "<p>Синя смужка — <b>десяток</b> (10), жовтий квадратик — <b>одиниця</b> (1).</p><div class=\"pic\"><span class=\"ten\"></span><span class=\"ten\"></span><span class=\"ten\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span></div><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">36 = 3 дес. 6 од.</div><p class=\"muted\">Перша цифра — десятки, друга — одиниці.</p>"
+  },
+  {
+   "e": "⚖️",
+   "h": "Порівнюємо",
+   "html": "<p>Спершу десятки: у кого більше — те число більше. Десятків порівну? Тоді одиниці.</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">47 < 52 &nbsp;&nbsp; 63 > 61</div>"
+  },
+  {
+   "e": "📏",
+   "h": "Сусіди",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">59 → 60 &nbsp;&nbsp; 69 ← 70</div><p>Після 59 — 60: дев'ять одиниць і ще одна стали новим десятком.</p>"
+  }
+ ]
+}

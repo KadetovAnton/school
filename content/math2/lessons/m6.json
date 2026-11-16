@@ -1,0 +1,38 @@
+{
+ "id": "m6",
+ "title": "Додавання і віднімання до 100 без переходу",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.addnc",
+  "m.subnc"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.addnc": 4,
+   "m.subnc": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📦",
+   "h": "Десятки до десятків",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">34 + 25 = 59</div><p>Десятки: 30 + 20 = 50. Одиниці: 4 + 5 = 9. Разом — 59.</p><div class=\"pic\"><span class=\"ten\"></span><span class=\"ten\"></span><span class=\"ten\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span> &nbsp;+&nbsp; <span class=\"ten\"></span><span class=\"ten\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span><span class=\"one\"></span></div>"
+  },
+  {
+   "e": "✂️",
+   "h": "Віднімаємо так само",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">68 − 25 = 43</div><p>Десятки: 60 − 20 = 40. Одиниці: 8 − 5 = 3.</p><div class=\"tip\">⚠️ 34 + 5: п'ятірка — це <b>одиниці</b>! 34 + 5 = 39, а не 84.</div>"
+  }
+ ]
+}

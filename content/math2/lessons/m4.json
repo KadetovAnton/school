@@ -1,0 +1,38 @@
+{
+ "id": "m4",
+ "title": "Задачі до 20",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/math.json"
+ ],
+ "skills": [
+  "m.prob20",
+  "m.mix20"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "m.prob20": 4,
+   "m.mix20": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🔍",
+   "h": "Як розв'язати задачу",
+   "html": "<p>1) Що відомо? 2) Що треба знайти? 3) Стало <b>більше</b> чи <b>менше</b>?</p><div class=\"rule-box\" style=\"text-align:center;font-size:22px;font-weight:900\">більше → + &nbsp;&nbsp; менше → −</div><p>Натисни <b>🔊 Прочитай</b>, якщо хочеш послухати задачу.</p>"
+  },
+  {
+   "e": "🗝️",
+   "h": "Слова-підказки",
+   "html": "<table class=\"t\"><tr><td>➕</td><td>ще, подарували, разом, всього, на … більше</td></tr><tr><td>➖</td><td>залишилось, полетіли, віддали, на … менше</td></tr></table>"
+  }
+ ]
+}

@@ -266,11 +266,13 @@
   };
 
   /* ---------- навички ---------- */
+  E.curSub = "english"; // поточний предмет (кабінет, план дня, помилки, повторення — окремо для кожного)
   E.SK = {}; // id → навичка зі змісту
   E.ITEM = {}; // key → завдання
-  E.addSkills = function (json) {
+  E.addSkills = function (json, subject) {
     (json.skills || []).forEach(function (s) {
       s.topic = json.topic;
+      s.subject = subject || "english";
       (s.items || []).forEach(function (it) {
         it.skill = s.id;
         it.key = s.id + "|" + it.p + (it.type === "choice" ? "|" + it.a : "");
@@ -327,18 +329,22 @@
   E.flag = function (id) { E.sk(id).flag = true; E.save(); };
   E.unflag = function (id) { E.sk(id).flag = false; E.save(); };
   /* навички, яким пора на повторення (для розминки) */
+  function ofSub(id) { return E.SK[id] && E.SK[id].subject === E.curSub; }
+  E.ofSub = ofSub;
   E.dueSkills = function () {
     var p = E.P(), t = today();
     return Object.keys(p.skills).filter(function (id) {
       var s = p.skills[id];
-      return E.SK[id] && s.lvl >= 2 && s.due && s.due <= t;
+      return ofSub(id) && s.lvl >= 2 && s.due && s.due <= t;
     });
   };
 
   /* ---------- помилки і звіти ---------- */
   E.addMistake = function (it, given) {
     var p = E.P();
-    p.mistakes.push({ key: it.key, skill: it.skill, given: given == null ? null : String(given), d: today(), fixed: false });
+    var m = { key: it.key, skill: it.skill, sub: E.curSub, given: given == null ? null : String(given), d: today(), fixed: false };
+    if (it.gen) m.it = JSON.parse(JSON.stringify(it)); // згенероване завдання зберігаємо цілим, щоб повторити
+    p.mistakes.push(m);
     if (p.mistakes.length > 300) p.mistakes = p.mistakes.slice(-300);
     E.save();
   };
@@ -356,7 +362,9 @@
     var seen = {}, out = [], ms = E.P().mistakes;
     for (var i = ms.length - 1; i >= 0; i--) {
       var m = ms[i];
-      if (m.fixed || seen[m.key] || !E.ITEM[m.key]) continue;
+      if (m.fixed || seen[m.key] || (m.sub || "english") !== E.curSub) continue;
+      if (!E.ITEM[m.key] && m.it) E.ITEM[m.key] = m.it;
+      if (!E.ITEM[m.key]) continue;
       seen[m.key] = 1; out.push(m);
     }
     return out;
@@ -364,15 +372,19 @@
 
   /* план «Заняття на сьогодні»: розминка → крок уроку → помилки */
   E.plan = function () {
-    var p = E.P(), t = today();
-    if (!p.plan || p.plan.d !== t) p.plan = { d: t, warm: false, lesson: false, words: false, mist: false };
-    return p.plan;
+    var p = E.P(), t = today(), sub = E.curSub;
+    if (!p.plans) p.plans = {};
+    if (p.plan && sub === "english" && !p.plans.english) p.plans.english = p.plan; // перенос старого плану
+    var pl = p.plans[sub];
+    if (!pl || pl.d !== t) pl = p.plans[sub] = { d: t, warm: false, lesson: false, words: false, mist: false };
+    p.plan = p.plans.english || p.plan;
+    return pl;
   };
   /* розминка: спершу навички, яким пора повторитися, далі — давно не бачені з уже почате */
   E.warmItems = function (n, onlyIds) {
     var p = E.P(), due = E.dueSkills(), t = today();
     var started = Object.keys(p.skills).filter(function (id) {
-      return E.SK[id] && p.skills[id].lvl >= 1 && due.indexOf(id) < 0 && (!onlyIds || onlyIds.indexOf(id) >= 0);
+      return ofSub(id) && p.skills[id].lvl >= 1 && due.indexOf(id) < 0 && (!onlyIds || onlyIds.indexOf(id) >= 0);
     });
     started.sort(function (a, b) { return (p.skills[a].last || "") < (p.skills[b].last || "") ? -1 : 1; });
     // сьогоднішні навички — в кінець (їх і так щойно тренували)
@@ -391,7 +403,7 @@
   /* «Повторення тижня»: по 1–2 завдання з КОЖНОЇ вже початої навички (давно не бачені — першими), до 12 */
   E.reviewSkills = function () {
     var p = E.P();
-    return Object.keys(p.skills).filter(function (id) { return E.SK[id] && (p.skills[id].lvl >= 1 || p.skills[id].n > 0); });
+    return Object.keys(p.skills).filter(function (id) { return ofSub(id) && (p.skills[id].lvl >= 1 || p.skills[id].n > 0); });
   };
   E.reviewItems = function (n) {
     n = n || 12;
@@ -408,15 +420,17 @@
     return out;
   };
   E.review = function () {
-    var p = E.P(), w = weekStart(today());
-    if (!p.wr || p.wr.w !== w) p.wr = { w: w, done: false };
-    return p.wr;
+    var p = E.P(), w = weekStart(today()), sub = E.curSub;
+    if (!p.wrs) p.wrs = {};
+    if (p.wr && sub === "english" && !p.wrs.english) p.wrs.english = p.wr;
+    if (!p.wrs[sub] || p.wrs[sub].w !== w) p.wrs[sub] = { w: w, done: false };
+    return p.wrs[sub];
   };
   E.reviewDone = function (score, max, bySkill) {
     var p = E.P(), r = E.review(), first = !r.done;
     r.done = true; r.score = score; r.max = max; r.d = today(); r.by = bySkill;
     if (!p.wrHist) p.wrHist = [];
-    p.wrHist = p.wrHist.filter(function (x) { return x.w !== r.w; }).concat([{ w: r.w, score: score, max: max }]).slice(-30);
+    p.wrHist = p.wrHist.filter(function (x) { return !(x.w === r.w && (x.sub || "english") === E.curSub); }).concat([{ w: r.w, sub: E.curSub, score: score, max: max }]).slice(-60);
     E.save();
     if (first) E.addStars(5, "review");
   };
@@ -427,12 +441,30 @@
   };
 
   /* ---------- підбір завдань ---------- */
-  E.markSeen = function (it) { E.P().seen[it.key] = today(); };
+  E.markSeen = function (it) { if (!it.gen) E.P().seen[it.key] = today(); };
+  /* Навички-генератори (математика): завдання створюються на льоту функцією E.GEN[sk.gen] */
+  E.GEN = E.GEN || {};
+  E.makeGen = function (sk) {
+    var it = E.GEN[sk.gen](sk.args || {});
+    it.skill = sk.id; it.key = sk.id + "|" + it.p; it.gen = true;
+    E.ITEM[it.key] = it;
+    return it;
+  };
   /* n завдань навички: спершу ті, що ще не траплялись у цій сесії (used),
      серед них — давно не бачені; при нестачі — повтор найдавніших. */
   E.pick = function (id, n, used, avoid) {
     var sk = E.SK[id];
     if (!sk) return [];
+    if (sk.gen) {
+      var g = [], tries = 0;
+      while (g.length < n && tries < 80) {
+        tries++;
+        var it = E.makeGen(sk);
+        if ((used && used[it.key]) || (avoid && it.key === avoid) || g.some(function (o) { return o.key === it.key; })) continue;
+        g.push(it);
+      }
+      return g;
+    }
     var seen = E.P().seen;
     var all = sk.items.filter(function (it) { return !(E.noAudio && it.type === "dict"); }).map(function (it) { return { it: it, r: Math.random() }; });
     all.sort(function (a, b) {
@@ -468,6 +500,7 @@
   };
   function answersOf(it) {
     if (it.type === "choice" || it.type === "fix") return [it.a];
+    if (it.type === "num") return [String(it.a)];
     return Array.isArray(it.a) ? it.a : [it.a];
   }
   E.answersOf = answersOf;
