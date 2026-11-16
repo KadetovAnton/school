@@ -1,9 +1,14 @@
-// Тимчасово: показує номер чату, з якого написали боту /start (щоб тато вписав TG_CHAT). Після налаштування видалити.
-export async function onRequest({ env }) {
+// Тимчасово: налаштування Telegram. Показує номер чату, а з ?test=1 — шле пробне повідомлення в TG_CHAT. Після налаштування видалити.
+export async function onRequest({ env, request }) {
   if (!env.TG_TOKEN) return Response.json({ error: "нема TG_TOKEN" });
-  const t = String(env.TG_TOKEN).trim();
-  const r = await fetch("https://api.telegram.org/bot" + t + "/getUpdates").then(x => x.json());
+  const t = String(env.TG_TOKEN).trim(), api = "https://api.telegram.org/bot" + t + "/";
+  if (new URL(request.url).searchParams.get("test") && env.TG_CHAT) {
+    const r = await fetch(api + "sendMessage", { method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ chat_id: String(env.TG_CHAT).trim(), text: "✅ Домашня школа підключена! Сюди приходитимуть результати Ані й Артема." }) }).then(x => x.json());
+    return new Response(JSON.stringify({ sent: !!r.ok, error: r.description || null }), { headers: { "Content-Type": "application/json; charset=utf-8" } });
+  }
+  const r = await fetch(api + "getUpdates").then(x => x.json());
   const chats = {};
   (r.result || []).forEach(u => { const m = u.message || u.my_chat_member; if (m && m.chat) chats[m.chat.id] = m.chat.first_name || m.chat.title || ""; });
-  return Response.json({ ok: r.ok, error: r.description || null, token_looks_ok: /^\d{6,}:[\w-]{30,}$/.test(t), token_length: t.length, chats, tg_chat_set: !!env.TG_CHAT });
+  return new Response(JSON.stringify({ ok: r.ok, error: r.description || null, chats, tg_chat_set: !!env.TG_CHAT }), { headers: { "Content-Type": "application/json; charset=utf-8" } });
 }
