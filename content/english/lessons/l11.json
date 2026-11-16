@@ -1,0 +1,119 @@
+{
+ "id": "l11",
+ "title": "can / must / mustn't",
+ "skillFiles": [
+  "skills/mod.json"
+ ],
+ "skills": [
+  "mod.can",
+  "mod.must",
+  "mod.form"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "mod.can": 3,
+   "mod.must": 3,
+   "mod.form": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "💪",
+   "h": "can — вмію, можу, можна",
+   "html": "<table class=\"t\"><tr><td>вмію</td><td>I <b>can</b> swim.</td></tr><tr><td>не вмію / не можу</td><td>I <b>can't</b> (cannot) drive.</td></tr>\n        <tr><td>можна?</td><td><b>Can</b> I open the window?</td></tr><tr><td>відповідь</td><td>Yes, you <b>can</b>. / No, you <b>can't</b>.</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">My sister <b>can play</b> the piano.</div><div class=\"ua\">Моя сестра вміє грати на піаніно.</div></div><button class=\"say round\" data-say=\"My sister can play the piano.\">🔊</button></div>"
+  },
+  {
+   "e": "🚦",
+   "h": "must і mustn't — правила",
+   "html": "<table class=\"t\"><tr><td><b>must</b></td><td>треба, обов'язково</td><td>You <b>must</b> wear a helmet.</td></tr>\n        <tr><td><b>mustn't</b></td><td>не можна, заборонено</td><td>You <b>mustn't</b> run here.</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">You <b>mustn't use</b> your phone in class.</div><div class=\"ua\">На уроці не можна користуватися телефоном.</div></div><button class=\"say round\" data-say=\"You mustn't use your phone in class.\">🔊</button></div>"
+  },
+  {
+   "e": "🧩",
+   "h": "Як їх будувати",
+   "html": "<div class=\"rule-box\">can / must + <b>перша форма</b> — для всіх однаково</div>\n        <p>✓ She <b>can sing</b>. ✓ He <b>must go</b>.</p>\n        <div class=\"tip\">⚠️ Три пастки: <s>she cans</s> (без -s), <s>can to sing</s> (без to), <s>Do you can…?</s> (питання без do: <b>Can you</b>…?).</div>"
+  }
+ ],
+ "examples": {
+  "title": "Правила басейну",
+  "question": {
+   "q": "чому «You <b>must</b> take a shower», а не «You must to take»?",
+   "a": "Після must (і can) — перша форма без to."
+  },
+  "items": [
+   [
+    "Welcome to our swimming pool! Can you swim?",
+    "Ласкаво просимо до басейну! Ти вмієш плавати?"
+   ],
+   [
+    "You <b>must</b> take a shower before swimming.",
+    "Перед плаванням треба прийняти душ."
+   ],
+   [
+    "You <b>must</b> wear a swimming cap.",
+    "Обов'язково вдягни шапочку."
+   ],
+   [
+    "You <b>mustn't</b> run near the pool.",
+    "Біля басейну не можна бігати."
+   ],
+   [
+    "You <b>mustn't</b> eat in the water.",
+    "У воді не можна їсти."
+   ],
+   [
+    "Children <b>can't</b> swim in the deep part without an adult.",
+    "Діти не можуть плавати на глибині без дорослого."
+   ],
+   [
+    "<b>Can</b> I jump? — Yes, you <b>can</b>, but be careful!",
+    "Можна стрибнути? — Так, але обережно!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "rule",
+   "правило"
+  ],
+  [
+   "allowed",
+   "дозволено"
+  ],
+  [
+   "dangerous",
+   "небезпечний"
+  ],
+  [
+   "helmet",
+   "шолом"
+  ],
+  [
+   "careful",
+   "обережний"
+  ],
+  [
+   "quiet",
+   "тихий"
+  ],
+  [
+   "forget",
+   "забувати"
+  ],
+  [
+   "remember",
+   "пам'ятати"
+  ],
+  [
+   "ill",
+   "хворий"
+  ],
+  [
+   "try",
+   "намагатися, пробувати"
+  ]
+ ]
+}

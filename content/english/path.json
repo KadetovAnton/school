@@ -53,12 +53,14 @@
     {
      "id": "l14",
      "title": "Артиклі a / an / the",
-     "ic": "🅰️"
+     "ic": "🅰️",
+     "file": "lessons/l14.json"
     },
     {
      "id": "l15",
-     "title": "Займенники: my / mine / myself",
-     "ic": "🙋"
+     "title": "Займенники: me / mine / myself",
+     "ic": "🙋",
+     "file": "lessons/l15.json"
     }
    ]
   },
@@ -95,17 +97,20 @@
     {
      "id": "l16",
      "title": "Майбутнє: will і be going to",
-     "ic": "🔮"
+     "ic": "🔮",
+     "file": "lessons/l16.json"
     },
     {
      "id": "l10",
      "title": "Ступені порівняння",
-     "ic": "📏"
+     "ic": "📏",
+     "file": "lessons/l10.json"
     },
     {
      "id": "l11",
      "title": "must / can / mustn't",
-     "ic": "🚦"
+     "ic": "🚦",
+     "file": "lessons/l11.json"
     }
    ]
   },
@@ -117,12 +122,14 @@
     {
      "id": "l12",
      "title": "Past Continuous",
-     "ic": "🎬"
+     "ic": "🎬",
+     "file": "lessons/l12.json"
     },
     {
      "id": "l13",
      "title": "Present Perfect",
-     "ic": "✅"
+     "ic": "✅",
+     "file": "lessons/l13.json"
     }
    ]
   }

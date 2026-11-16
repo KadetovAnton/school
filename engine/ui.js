@@ -628,7 +628,10 @@
       return cap(ws.join(" ")) + (it.end || ".");
     }
     if (it.type === "fix" || it.type === "dict") return right;
-    if (it.p.indexOf("___") >= 0) return it.p.replace("___", right).replace(/\s*\(.*?\)\s*$/, "");
+    if (it.p.indexOf("___") >= 0) {
+      var r = /^—/.test(right) ? "" : right; // «— (нічого)»: артикль не потрібен
+      return cap(it.p.replace("___", r).replace(/\s*\(.*?\)\s*$/, "").replace(/\s+/g, " ").trim());
+    }
     return right;
   }
   function showTask(root, it, cfg) {

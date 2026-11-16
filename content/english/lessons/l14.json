@@ -1,0 +1,115 @@
+{
+ "id": "l14",
+ "title": "Артиклі a / an / the",
+ "skillFiles": [
+  "skills/art.json"
+ ],
+ "skills": [
+  "art.aan",
+  "art.the",
+  "art.zero"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "art.aan": 3,
+   "art.the": 3,
+   "art.zero": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🅰️",
+   "h": "a чи an — вирішує звук",
+   "html": "<p><b>a / an</b> — «один, якийсь». Ставимо перед однією річчю, яку можна порахувати.</p>\n        <table class=\"t\"><tr><td><b>a</b></td><td>перед приголосним <u>звуком</u></td><td>a book, a dog, a <b>u</b>niversity [ю]</td></tr>\n        <tr><td><b>an</b></td><td>перед голосним <u>звуком</u></td><td>an apple, an egg, an <b>h</b>our [ауе]</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I have <b>an</b> apple and <b>a</b> banana.</div><div class=\"ua\">У мене є яблуко і банан.</div></div><button class=\"say round\" data-say=\"I have an apple and a banana.\">🔊</button></div>\n        <div class=\"tip\">💡 Важить звук, а не буква: <b>an</b> hour (h не читається), але <b>a</b> university (звучить «ю»).</div>"
+  },
+  {
+   "e": "👉",
+   "h": "the — «той самий»",
+   "html": "<p><b>the</b> — коли зрозуміло, про що саме мова:</p>\n        <p>1) уже згадували: I have <b>a</b> dog. <b>The</b> dog is funny.<br>2) воно одне таке: <b>the</b> sun, <b>the</b> moon, <b>the</b> sky<br>3) найкращий / перший: <b>the</b> best, <b>the</b> first floor<br>4) зрозуміло з ситуації: Close <b>the</b> door, please.</p>\n        <div class=\"ex\"><div><div class=\"en\">I bought <b>a</b> cake. <b>The</b> cake was delicious.</div><div class=\"ua\">Я купила торт. Торт був смачний.</div></div><button class=\"say round\" data-say=\"I bought a cake. The cake was delicious.\">🔊</button></div>"
+  },
+  {
+   "e": "🚫",
+   "h": "Коли артикль не потрібен",
+   "html": "<table class=\"t\"><tr><td>загалом, у множині</td><td>Cats like milk.</td></tr>\n        <tr><td>їжа за розкладом</td><td>have breakfast / lunch / dinner</td></tr>\n        <tr><td>спорт, ігри</td><td>play football, play chess</td></tr>\n        <tr><td>мови, країни, імена</td><td>speak English, live in Ukraine, Anna</td></tr>\n        <tr><td>звичні місця</td><td>go to school, go to bed, at home</td></tr></table>\n        <div class=\"tip\">⚠️ <s>play the football</s>, <s>go to the bed</s>, <s>have a breakfast</s>.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Сова на дачі",
+  "question": {
+   "q": "чому «<b>an</b> owl», а потім «<b>the</b> owl»?",
+   "a": "Спершу сова «якась», згадуємо вперше — an (owl на голосний звук). Далі це та сама сова — the."
+  },
+  "items": [
+   [
+    "Last summer we stayed in <b>a</b> small house in the country.",
+    "Минулого літа ми жили в маленькому будиночку за містом."
+   ],
+   [
+    "One night I saw <b>an</b> owl in <b>a</b> tree.",
+    "Одної ночі я побачила сову на дереві."
+   ],
+   [
+    "<b>The</b> owl looked at me with big yellow eyes.",
+    "Сова дивилась на мене великими жовтими очима."
+   ],
+   [
+    "<b>The</b> moon was very bright.",
+    "Місяць був дуже яскравий."
+   ],
+   [
+    "In the morning we had breakfast in the garden.",
+    "Зранку ми снідали в саду."
+   ],
+   [
+    "Then my brother and I played football.",
+    "Потім ми з братом грали у футбол."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "owl",
+   "сова"
+  ],
+  [
+   "island",
+   "острів"
+  ],
+  [
+   "orange",
+   "апельсин"
+  ],
+  [
+   "ice cream",
+   "морозиво"
+  ],
+  [
+   "hour",
+   "година"
+  ],
+  [
+   "idea",
+   "ідея"
+  ],
+  [
+   "uniform",
+   "форма (одяг)"
+  ],
+  [
+   "university",
+   "університет"
+  ],
+  [
+   "sky",
+   "небо"
+  ],
+  [
+   "moon",
+   "місяць"
+  ]
+ ]
+}

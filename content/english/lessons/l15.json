@@ -1,0 +1,115 @@
+{
+ "id": "l15",
+ "title": "Займенники: me / mine / myself",
+ "skillFiles": [
+  "skills/pron.json"
+ ],
+ "skills": [
+  "pr.obj",
+  "pr.poss",
+  "pr.self"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "pr.obj": 3,
+   "pr.poss": 3,
+   "pr.self": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🙋",
+   "h": "Хто? і Кого? Кому?",
+   "html": "<table class=\"t\"><tr><td>хто?</td><td>кого? кому?</td></tr>\n        <tr><td>I</td><td><b>me</b></td></tr><tr><td>you</td><td><b>you</b></td></tr><tr><td>he</td><td><b>him</b></td></tr>\n        <tr><td>she</td><td><b>her</b></td></tr><tr><td>it</td><td><b>it</b></td></tr><tr><td>we</td><td><b>us</b></td></tr><tr><td>they</td><td><b>them</b></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I like <b>her</b>. She likes <b>me</b>.</div><div class=\"ua\">Мені подобається вона. Я подобаюсь їй.</div></div><button class=\"say round\" data-say=\"I like her. She likes me.\">🔊</button></div>\n        <div class=\"tip\">💡 Після дієслова і після with, to, for — друга колонка: help <b>me</b>, with <b>him</b>, to <b>them</b>.</div>"
+  },
+  {
+   "e": "🎒",
+   "h": "my чи mine",
+   "html": "<table class=\"t\"><tr><td>перед іменником</td><td>без іменника</td></tr>\n        <tr><td><b>my</b> bag</td><td>It's <b>mine</b>.</td></tr><tr><td><b>your</b> pen</td><td>It's <b>yours</b>.</td></tr>\n        <tr><td><b>his</b> book</td><td>It's <b>his</b>.</td></tr><tr><td><b>her</b> phone</td><td>It's <b>hers</b>.</td></tr>\n        <tr><td><b>our</b> house</td><td>It's <b>ours</b>.</td></tr><tr><td><b>their</b> dog</td><td>It's <b>theirs</b>.</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">This is <b>my</b> bag. That bag is <b>yours</b>.</div><div class=\"ua\">Це моя сумка. Та сумка — твоя.</div></div><button class=\"say round\" data-say=\"This is my bag. That bag is yours.\">🔊</button></div>"
+  },
+  {
+   "e": "🪞",
+   "h": "Сам, собі: myself",
+   "html": "<table class=\"t\"><tr><td>I → <b>myself</b></td><td>we → <b>ourselves</b></td></tr>\n        <tr><td>you → <b>yourself</b></td><td>you (ви) → <b>yourselves</b></td></tr>\n        <tr><td>he → <b>himself</b>, she → <b>herself</b></td><td>they → <b>themselves</b></td></tr>\n        <tr><td>it → <b>itself</b></td><td></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">I made this cake <b>myself</b>.</div><div class=\"ua\">Я сама спекла цей торт.</div></div><button class=\"say round\" data-say=\"I made this cake myself.\">🔊</button></div>\n        <div class=\"tip\">⚠️ <s>hisself</s>, <s>theirselves</s> — так не буває: <b>himself</b>, <b>themselves</b>.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Чий це рюкзак?",
+  "question": {
+   "q": "чому «It's <b>mine</b>», а не «It's my»?",
+   "a": "Після mine немає іменника. my завжди потребує слова після себе: my bag."
+  },
+  "items": [
+   [
+    "Whose backpack is this? Is it <b>yours</b>?",
+    "Чий це рюкзак? Твій?"
+   ],
+   [
+    "No, it isn't <b>mine</b>. <b>My</b> backpack is blue.",
+    "Ні, не мій. Мій рюкзак синій."
+   ],
+   [
+    "Maybe it's Oleh's. Ask <b>him</b>!",
+    "Може, Олегів. Спитай його!"
+   ],
+   [
+    "Oleh, is this backpack <b>yours</b>? — Yes, it's <b>mine</b>! Thank you!",
+    "Олеже, це твій рюкзак? — Так, мій! Дякую!"
+   ],
+   [
+    "He bought it <b>himself</b> with his own money.",
+    "Він сам купив його за власні гроші."
+   ],
+   [
+    "The girls looked at <b>us</b> and smiled.",
+    "Дівчата подивились на нас і усміхнулись."
+   ]
+  ]
+ },
+ "words": [
+  [
+   "neighbour",
+   "сусід"
+  ],
+  [
+   "classmate",
+   "однокласник"
+  ],
+  [
+   "best friend",
+   "найкращий друг"
+  ],
+  [
+   "together",
+   "разом"
+  ],
+  [
+   "alone",
+   "сам, на самоті"
+  ],
+  [
+   "share",
+   "ділитися"
+  ],
+  [
+   "borrow",
+   "позичати (брати)"
+  ],
+  [
+   "lend",
+   "позичати (давати)"
+  ],
+  [
+   "own",
+   "власний"
+  ],
+  [
+   "belong to",
+   "належати"
+  ]
+ ]
+}

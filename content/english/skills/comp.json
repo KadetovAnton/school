@@ -1,0 +1,538 @@
+{
+ "topic": "comp",
+ "title": "Ступені порівняння",
+ "skills": [
+  {
+   "id": "comp.er",
+   "title": "Короткі слова: taller, the tallest",
+   "rule": "Коротке слово: + er / the + est. Німа -e → r / st; подвоєння (big → bigger); y → ier / iest.",
+   "worked": {
+    "p": "July is the ___ month. (hot)",
+    "steps": [
+     "«the …» — найбільш → <b>-est</b>.",
+     "hot — коротке: голосна + приголосна → подвоюємо t.",
+     "Відповідь: the <b>hottest</b> month."
+    ]
+   },
+   "alt": "<p>Двоє порівнюємо → <b>-er + than</b>: taller than.<br>Найбільш з усіх → <b>the + -est</b>: the tallest.</p>\n        <p>Правопис як у -ed / -ing: nice → nicer, big → bigger, easy → easier.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "An elephant is ___ than a horse.",
+     "o": [
+      "bigger",
+      "biger",
+      "more big"
+     ],
+     "a": "bigger",
+     "h": [
+      "big — коротке слово.",
+      "Подвоюємо g + er."
+     ],
+     "e": "big → <b>bigger</b>.",
+     "err": {
+      "biger": "Подвоюємо g: <b>bigger</b>.",
+      "more big": "Коротке слово — + er: <b>bigger</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "My brother is ___ than me. (tall)",
+     "a": [
+      "taller"
+     ],
+     "h": [
+      "Порівнюємо двох → -er.",
+      "tall + er."
+     ],
+     "e": "<b>taller</b> than.",
+     "err": {
+      "more tall": "Коротке слово — + er: <b>taller</b>.",
+      "tallest": "Порівнюємо двох (than) — <b>taller</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "This is the ___ day of the year. (cold)",
+     "a": [
+      "coldest"
+     ],
+     "h": [
+      "the … → -est.",
+      "cold + est."
+     ],
+     "e": "the <b>coldest</b>.",
+     "err": {
+      "most cold": "Коротке слово — + est: <b>coldest</b>.",
+      "colder": "the … — найбільш: <b>coldest</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "Maths is ___ than history. (easy)",
+     "a": [
+      "easier"
+     ],
+     "h": [
+      "easy: y після приголосної.",
+      "y → ier."
+     ],
+     "e": "easy → <b>easier</b>.",
+     "err": {
+      "easyer": "y → i: <b>easier</b>.",
+      "more easy": "Коротке слово — <b>easier</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "July is the ___ month. (hot)",
+     "a": [
+      "hottest"
+     ],
+     "h": [
+      "hot — коротке, подвоюємо t.",
+      "+ est."
+     ],
+     "e": "hot → <b>hottest</b>.",
+     "err": {
+      "hotest": "Подвоюємо t: <b>hottest</b>.",
+      "hotter": "the … — найбільш: <b>hottest</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "Your bag is ___ than mine. (heavy)",
+     "a": [
+      "heavier"
+     ],
+     "h": [
+      "heavy: y після приголосної.",
+      "y → ier."
+     ],
+     "e": "heavy → <b>heavier</b>.",
+     "err": {
+      "heavyer": "y → i: <b>heavier</b>.",
+      "more heavy": "Слово на -y — <b>heavier</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "Kyiv is ___ than Lviv. (big)",
+     "a": [
+      "bigger"
+     ],
+     "h": [
+      "big — коротке, подвоюємо g.",
+      "+ er."
+     ],
+     "e": "big → <b>bigger</b>.",
+     "err": {
+      "biger": "Подвоюємо g: <b>bigger</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "This is the ___ pizza in town! (nice)",
+     "a": [
+      "nicest"
+     ],
+     "h": [
+      "nice — німа -e.",
+      "+ st."
+     ],
+     "e": "nice → <b>nicest</b>.",
+     "err": {
+      "niceest": "Німа -e: тільки + st — <b>nicest</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My cat is more small than your dog.",
+     "bad": 3,
+     "a": "My cat is smaller than your dog.",
+     "h": [
+      "small — коротке слово.",
+      "more тут зайве: smaller."
+     ],
+     "e": "<b>smaller</b> — без more."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Today is the hotest day.",
+     "bad": 3,
+     "a": "Today is the hottest day.",
+     "h": [
+      "hot — подвоюємо t.",
+      "hottest."
+     ],
+     "e": "<b>hottest</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 My sister is younger than me.",
+     "a": [
+      "My sister is younger than me."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "young → younger."
+     ],
+     "e": "<b>younger</b> than.",
+     "err": {
+      "My sister is more young than me.": "Коротке слово — <b>younger</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "comp.more",
+   "title": "Довгі слова: more / the most",
+   "rule": "Довге слово: more … than / the most …",
+   "worked": {
+    "p": "A car is ___ than a bike. (expensive)",
+    "steps": [
+     "expensive — довге слово.",
+     "Порівнюємо дві речі (than) → <b>more</b>.",
+     "Відповідь: <b>more expensive</b> than a bike."
+    ]
+   },
+   "alt": "<p>Якщо слово довге й важко вимовити з -er («expensiver» 😵), ставимо перед ним <b>more</b> або <b>the most</b>.</p>\n        <p>beautiful → more beautiful → the most beautiful</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "This book is ___ than that one.",
+     "o": [
+      "more interesting",
+      "interestinger"
+     ],
+     "a": "more interesting",
+     "h": [
+      "interesting — довге.",
+      "more + interesting."
+     ],
+     "e": "<b>more interesting</b>.",
+     "err": {
+      "interestinger": "Довге слово — <b>more interesting</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She is the ___ girl in our class.",
+     "o": [
+      "most beautiful",
+      "beautifullest",
+      "more beautiful"
+     ],
+     "a": "most beautiful",
+     "h": [
+      "the … — найбільш.",
+      "the most + довге слово."
+     ],
+     "e": "the <b>most beautiful</b>.",
+     "err": {
+      "beautifullest": "Довге слово — the <b>most beautiful</b>.",
+      "more beautiful": "the … — найбільш: <b>most beautiful</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "A car is ___ than a bike. (expensive)",
+     "a": [
+      "more expensive"
+     ],
+     "h": [
+      "Довге слово.",
+      "Порівнюємо двоє → more."
+     ],
+     "e": "<b>more expensive</b>.",
+     "err": {
+      "expensiver": "Довге слово — <b>more expensive</b>.",
+      "most expensive": "Порівнюємо дві речі (than) — <b>more</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "This is the ___ film of the year. (popular)",
+     "a": [
+      "most popular"
+     ],
+     "h": [
+      "the … — найбільш.",
+      "the most + popular."
+     ],
+     "e": "the <b>most popular</b>.",
+     "err": {
+      "popularest": "Довге слово — <b>most popular</b>.",
+      "more popular": "the … — найбільш: <b>most popular</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "English is ___ than maths for me. (difficult)",
+     "a": [
+      "more difficult"
+     ],
+     "h": [
+      "Довге слово.",
+      "more + difficult."
+     ],
+     "e": "<b>more difficult</b>.",
+     "err": {
+      "difficulter": "Довге слово — <b>more difficult</b>.",
+      "most difficult": "Порівнюємо двоє (than) — <b>more</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "Lviv is one of the ___ cities in Ukraine. (beautiful)",
+     "a": [
+      "most beautiful"
+     ],
+     "h": [
+      "the … — найбільш.",
+      "the most + beautiful."
+     ],
+     "e": "the <b>most beautiful</b>.",
+     "err": {
+      "beautifullest": "Довге слово — <b>most beautiful</b>.",
+      "more beautiful": "one of the … — <b>most beautiful</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "This exercise is difficulter than that one.",
+     "bad": 3,
+     "a": "This exercise is more difficult than that one.",
+     "h": [
+      "difficult — довге слово.",
+      "more difficult."
+     ],
+     "e": "<b>more difficult</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "It's the more important day of my life.",
+     "bad": 2,
+     "a": "It's the most important day of my life.",
+     "h": [
+      "the … — найбільш.",
+      "the most."
+     ],
+     "e": "the <b>most</b> important."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Football is more popular than tennis.",
+     "a": [
+      "Football is more popular than tennis."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Довге слово → more."
+     ],
+     "e": "<b>more popular</b>.",
+     "err": {
+      "Football is popularer than tennis.": "Довге слово — <b>more popular</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "comp.irr",
+   "title": "good-better-best, bad-worse-worst; than",
+   "rule": "good → better → the best; bad → worse → the worst. «ніж» — than.",
+   "worked": {
+    "p": "My English is ___ now than last year. (good)",
+    "steps": [
+     "Порівнюємо «зараз» і «торік» — двоє (than).",
+     "good — виняток: <b>better</b>.",
+     "Відповідь: My English is <b>better</b> now."
+    ]
+   },
+   "alt": "<p>Ці слова «перевдягаються» повністю — їх треба запам'ятати:</p>\n        <p><b>good → better → the best</b> 👍<br><b>bad → worse → the worst</b> 👎</p>\n        <p class=\"muted\">І не плутай: <b>than</b> — «ніж», <b>then</b> — «потім».</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "My mark is ___ than yours.",
+     "o": [
+      "better",
+      "gooder",
+      "more good"
+     ],
+     "a": "better",
+     "h": [
+      "good — виняток.",
+      "good → better."
+     ],
+     "e": "<b>better</b>.",
+     "err": {
+      "gooder": "good — виняток: <b>better</b>.",
+      "more good": "good — виняток: <b>better</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "This is the ___ day of my life!",
+     "o": [
+      "best",
+      "goodest",
+      "better"
+     ],
+     "a": "best",
+     "h": [
+      "the … — найбільш.",
+      "good → the best."
+     ],
+     "e": "the <b>best</b>.",
+     "err": {
+      "goodest": "good — виняток: the <b>best</b>.",
+      "better": "the … — найкращий: <b>best</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "The weather today is ___ than yesterday.",
+     "o": [
+      "worse",
+      "badder",
+      "more bad"
+     ],
+     "a": "worse",
+     "h": [
+      "bad — виняток.",
+      "bad → worse."
+     ],
+     "e": "<b>worse</b>.",
+     "err": {
+      "badder": "bad — виняток: <b>worse</b>.",
+      "more bad": "bad — виняток: <b>worse</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "She is the ___ singer in our school. (good)",
+     "a": [
+      "best"
+     ],
+     "h": [
+      "the … — найкраща.",
+      "good → best."
+     ],
+     "e": "the <b>best</b>.",
+     "err": {
+      "goodest": "good — виняток: <b>best</b>.",
+      "better": "the … — найкраща: <b>best</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "This is the ___ film I know. (bad)",
+     "a": [
+      "worst"
+     ],
+     "h": [
+      "the … — найгірший.",
+      "bad → worst."
+     ],
+     "e": "the <b>worst</b>.",
+     "err": {
+      "baddest": "bad — виняток: <b>worst</b>.",
+      "worse": "the … — найгірший: <b>worst</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши прикметник у потрібній формі",
+     "p": "My English is ___ now than last year. (good)",
+     "a": [
+      "better"
+     ],
+     "h": [
+      "Порівнюємо двоє (than).",
+      "good → better."
+     ],
+     "e": "<b>better</b>.",
+     "err": {
+      "gooder": "good — виняток: <b>better</b>.",
+      "best": "Порівнюємо двоє (than) — <b>better</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши than або then",
+     "p": "My dog is bigger ___ your cat.",
+     "a": [
+      "than"
+     ],
+     "h": [
+      "«ніж».",
+      "than."
+     ],
+     "e": "bigger <b>than</b>.",
+     "err": {
+      "then": "«ніж» — <b>than</b>; then — «потім».",
+      "that": "«ніж» — <b>than</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Your drawing is more better than mine.",
+     "bad": 3,
+     "a": "Your drawing is better than mine.",
+     "h": [
+      "better уже означає «кращий».",
+      "more тут зайве."
+     ],
+     "e": "<b>better</b> — без more."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 This is the best day ever!",
+     "a": [
+      "This is the best day ever!"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "good → the best."
+     ],
+     "e": "the <b>best</b>.",
+     "err": {
+      "This is the goodest day ever!": "good — виняток: the <b>best</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

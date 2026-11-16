@@ -1,0 +1,517 @@
+{
+ "topic": "mod",
+ "title": "Модальні дієслова",
+ "skills": [
+  {
+   "id": "mod.can",
+   "title": "can / can't",
+   "rule": "can — вмію / можу / можна; can't — не вмію / не можу. Can I…? — Yes, you can.",
+   "worked": {
+    "p": "Penguins ___ fly.",
+    "steps": [
+     "Пінгвіни вміють літати? Ні.",
+     "Не вміють → <b>can't</b>.",
+     "Відповідь: Penguins <b>can't</b> fly."
+    ]
+   },
+   "alt": "<p>can = «вмію / можу», а can't = «не вмію / не можу». Одне слово — для всіх: I can, she can, they can.</p>\n        <p>Питання: просто постав can на початок — <b>Can</b> you swim? Відповідь: Yes, I <b>can</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ swim very well.",
+     "o": [
+      "can",
+      "cans",
+      "can to"
+     ],
+     "a": "can",
+     "h": [
+      "can однакове для всіх.",
+      "Без -s, без to."
+     ],
+     "e": "I <b>can</b> swim.",
+     "err": {
+      "cans": "can — без -s: <b>can</b>.",
+      "can to": "Після can — без to."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "My little brother ___ read yet.",
+     "o": [
+      "can't",
+      "doesn't can"
+     ],
+     "a": "can't",
+     "h": [
+      "Ще не вміє.",
+      "Заперечення — can't."
+     ],
+     "e": "<b>can't</b> read.",
+     "err": {
+      "doesn't can": "Заперечення: <b>can't</b>, без doesn't."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ I open the window?",
+     "o": [
+      "Can",
+      "Do"
+     ],
+     "a": "Can",
+     "h": [
+      "Просимо дозволу.",
+      "Can на початок."
+     ],
+     "e": "<b>Can</b> I…?",
+     "err": {
+      "Do": "Дозвіл питаємо з <b>Can</b> I…?"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши can або can't",
+     "p": "Penguins ___ fly.",
+     "a": [
+      "can't",
+      "cannot"
+     ],
+     "h": [
+      "Чи літають пінгвіни?",
+      "Ні → can't."
+     ],
+     "e": "<b>can't</b> fly.",
+     "err": {
+      "can": "Пінгвіни не літають: <b>can't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши can або can't",
+     "p": "Birds ___ fly.",
+     "a": [
+      "can"
+     ],
+     "h": [
+      "Чи літають птахи?",
+      "Так → can."
+     ],
+     "e": "Birds <b>can</b> fly.",
+     "err": {
+      "can't": "Птахи вміють літати: <b>can</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши can або can't",
+     "p": "Sorry, I ___ come to your party. I'm ill.",
+     "a": [
+      "can't",
+      "cannot"
+     ],
+     "h": [
+      "Хвора — не зможу.",
+      "can't."
+     ],
+     "e": "<b>can't</b> come.",
+     "err": {
+      "can": "Я хвора — не зможу: <b>can't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Can you ride a bike? — Yes, I ___.",
+     "a": [
+      "can"
+     ],
+     "h": [
+      "Питали з Can.",
+      "Yes, I can."
+     ],
+     "e": "Yes, I <b>can</b>.",
+     "err": {
+      "do": "Питали з Can: Yes, I <b>can</b>.",
+      "ride": "Коротка відповідь: Yes, I <b>can</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Can your sister swim? — No, she ___.",
+     "a": [
+      "can't",
+      "cannot"
+     ],
+     "h": [
+      "Питали з Can, «ні».",
+      "can't."
+     ],
+     "e": "No, she <b>can't</b>.",
+     "err": {
+      "doesn't": "Питали з Can: No, she <b>can't</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She cans play the piano.",
+     "bad": 1,
+     "a": "She can play the piano.",
+     "h": [
+      "can однакове для всіх.",
+      "Без -s."
+     ],
+     "e": "<b>can</b> — без -s."
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«Можна мені трохи води?»",
+     "words": [
+      "have",
+      "Can",
+      "some",
+      "I",
+      "water"
+     ],
+     "a": [
+      "can i have some water"
+     ],
+     "h": [
+      "Can → I → have → що?",
+      "Can → I → have → some water."
+     ],
+     "e": "<b>Can I have some water?</b>",
+     "end": "?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I can't find my keys.",
+     "a": [
+      "I can't find my keys."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Заперечення — can't."
+     ],
+     "e": "<b>can't</b> find.",
+     "err": {
+      "I don't can find my keys.": "Заперечення: <b>can't</b>, без don't."
+     }
+    }
+   ]
+  },
+  {
+   "id": "mod.must",
+   "title": "must / mustn't",
+   "rule": "must — треба, обов'язково; mustn't — не можна, заборонено.",
+   "worked": {
+    "p": "You ___ swim here. It's dangerous!",
+    "steps": [
+     "Небезпечно — значить, плавати <b>заборонено</b>.",
+     "Заборона → <b>mustn't</b>.",
+     "Відповідь: You <b>mustn't</b> swim here."
+    ]
+   },
+   "alt": "<p>Уяви дорожні знаки:</p>\n        <p>🟦 must — «обов'язково» (пристебнись, вдягни шолом)<br>⛔ mustn't — «заборонено» (не бігай, не їж тут)</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "You ___ wear a helmet when you ride a bike.",
+     "o": [
+      "must",
+      "mustn't"
+     ],
+     "a": "must",
+     "h": [
+      "Шолом — це обов'язково.",
+      "must."
+     ],
+     "e": "<b>must</b> wear.",
+     "err": {
+      "mustn't": "Шолом — обов'язково: <b>must</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "You ___ use your phone during the test.",
+     "o": [
+      "mustn't",
+      "must"
+     ],
+     "a": "mustn't",
+     "h": [
+      "На контрольній телефон…",
+      "заборонено → mustn't."
+     ],
+     "e": "<b>mustn't</b> use.",
+     "err": {
+      "must": "Телефон на контрольній заборонений: <b>mustn't</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We ___ be late for school.",
+     "o": [
+      "mustn't",
+      "must"
+     ],
+     "a": "mustn't",
+     "h": [
+      "Запізнюватися…",
+      "не можна → mustn't."
+     ],
+     "e": "<b>mustn't</b> be late.",
+     "err": {
+      "must": "Запізнюватися не можна: <b>mustn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши must або mustn't",
+     "p": "You ___ brush your teeth twice a day.",
+     "a": [
+      "must"
+     ],
+     "h": [
+      "Це обов'язково.",
+      "must."
+     ],
+     "e": "<b>must</b>.",
+     "err": {
+      "mustn't": "Чистити зуби — обов'язково: <b>must</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши must або mustn't",
+     "p": "You ___ swim here. It's dangerous!",
+     "a": [
+      "mustn't",
+      "must not"
+     ],
+     "h": [
+      "Небезпечно.",
+      "Заборона → mustn't."
+     ],
+     "e": "<b>mustn't</b>.",
+     "err": {
+      "must": "Небезпечно — заборонено: <b>mustn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши must або mustn't",
+     "p": "Pupils ___ run in the corridor.",
+     "a": [
+      "mustn't",
+      "must not"
+     ],
+     "h": [
+      "Бігати в коридорі…",
+      "не можна."
+     ],
+     "e": "<b>mustn't</b> run.",
+     "err": {
+      "must": "Бігати в коридорі не можна: <b>mustn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши must або mustn't",
+     "p": "I ___ do my homework before dinner.",
+     "a": [
+      "must"
+     ],
+     "h": [
+      "Треба зробити.",
+      "must."
+     ],
+     "e": "<b>must</b> do.",
+     "err": {
+      "mustn't": "Уроки — треба: <b>must</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "You mustn't to talk in the library.",
+     "bad": 2,
+     "a": "You mustn't talk in the library.",
+     "h": [
+      "Після mustn't…",
+      "…без to."
+     ],
+     "e": "mustn't <b>talk</b> — без to."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 You must listen to the teacher.",
+     "a": [
+      "You must listen to the teacher."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "must + перша форма."
+     ],
+     "e": "<b>must listen</b>.",
+     "err": {
+      "You must to listen to the teacher.": "Після must — без to."
+     }
+    }
+   ]
+  },
+  {
+   "id": "mod.form",
+   "title": "can / must + перша форма (без to, без -s)",
+   "rule": "can / must + перша форма для всіх. Без -s, без to, питання без do: Can you…?",
+   "worked": {
+    "p": "My dad can ___ very tasty pizza. (cook)",
+    "steps": [
+     "Після <b>can</b> — перша форма.",
+     "Без -s (хоч і dad), без to.",
+     "Відповідь: My dad can <b>cook</b> very tasty pizza."
+    ]
+   },
+   "alt": "<p>can і must — «сильні» слова: вони самі роблять усю роботу, тому дієслово після них лишається «голим»:</p>\n        <p>she can <b>sing</b> (не sings), he must <b>go</b> (не to go), <b>Can</b> you…? (не Do you can…?)</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "He can ___ English well.",
+     "o": [
+      "speak",
+      "speaks",
+      "to speak"
+     ],
+     "a": "speak",
+     "h": [
+      "Після can…",
+      "…перша форма."
+     ],
+     "e": "can <b>speak</b>.",
+     "err": {
+      "speaks": "Після can — без -s: <b>speak</b>.",
+      "to speak": "Після can — без to: <b>speak</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She must ___ her room.",
+     "o": [
+      "clean",
+      "cleans",
+      "to clean"
+     ],
+     "a": "clean",
+     "h": [
+      "Після must…",
+      "…перша форма."
+     ],
+     "e": "must <b>clean</b>.",
+     "err": {
+      "cleans": "Після must — без -s: <b>clean</b>.",
+      "to clean": "Після must — без to: <b>clean</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Яке питання правильне?",
+     "o": [
+      "Can you help me?",
+      "Do you can help me?",
+      "Can you to help me?"
+     ],
+     "a": "Can you help me?",
+     "h": [
+      "Питання з can…",
+      "…без do і без to."
+     ],
+     "e": "<b>Can you help</b> me?",
+     "err": {
+      "Do you can help me?": "Питання з can — без do: <b>Can you</b>…?",
+      "Can you to help me?": "Після can — без to."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово",
+     "p": "My dad can ___ very tasty pizza. (cook)",
+     "a": [
+      "cook"
+     ],
+     "h": [
+      "Після can — перша форма.",
+      "Без -s."
+     ],
+     "e": "can <b>cook</b>.",
+     "err": {
+      "cooks": "Після can — без -s: <b>cook</b>.",
+      "to cook": "Після can — без to: <b>cook</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово",
+     "p": "Tom must ___ to the doctor. (go)",
+     "a": [
+      "go"
+     ],
+     "h": [
+      "Після must — перша форма.",
+      "Без -es."
+     ],
+     "e": "must <b>go</b>.",
+     "err": {
+      "goes": "Після must — без -es: <b>go</b>.",
+      "to go": "Після must — без to: <b>go</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My sister can sings very well.",
+     "bad": 3,
+     "a": "My sister can sing very well.",
+     "h": [
+      "Подивись на дієслово після can.",
+      "Без -s."
+     ],
+     "e": "can <b>sing</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Do you can swim?",
+     "bad": 0,
+     "a": "Can you swim?",
+     "h": [
+      "Питання з can…",
+      "…без do."
+     ],
+     "e": "<b>Can</b> you swim?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She can speak three languages.",
+     "a": [
+      "She can speak three languages."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "can + перша форма."
+     ],
+     "e": "can <b>speak</b>.",
+     "err": {
+      "She can speaks three languages.": "Після can — без -s: <b>speak</b>.",
+      "She cans speak three languages.": "can — без -s."
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,115 @@
+{
+ "id": "l16",
+ "title": "Майбутнє: will і be going to",
+ "skillFiles": [
+  "skills/fut.json"
+ ],
+ "skills": [
+  "fut.will",
+  "fut.going",
+  "fut.choice"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "fut.will": 3,
+   "fut.going": 3,
+   "fut.choice": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🔮",
+   "h": "will — буде, думаю, вирішила",
+   "html": "<p><b>will</b> + перша форма — однаково для всіх.</p>\n        <div class=\"ex\"><div><div class=\"en\">I think it <b>will rain</b> tomorrow.</div><div class=\"ua\">Думаю, завтра буде дощ.</div></div><button class=\"say round\" data-say=\"I think it will rain tomorrow.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">The phone is ringing. I <b>will answer</b> it!</div><div class=\"ua\">Телефон дзвонить. Я відповім!</div></div><button class=\"say round\" data-say=\"The phone is ringing. I will answer it!\">🔊</button></div>\n        <table class=\"t\"><tr><td>заперечення</td><td><b>won't</b> (= will not)</td></tr><tr><td>питання</td><td><b>Will</b> you help me?</td></tr><tr><td>коротко</td><td>I'll, she'll, we'll</td></tr></table>\n        <div class=\"tip\">⚠️ Після will — без to і без -s: <s>will to go</s>, <s>will goes</s>.</div>"
+  },
+  {
+   "e": "🗓️",
+   "h": "be going to — збираюсь, уже план",
+   "html": "<div class=\"rule-box\">am / is / are + <b>going to</b> + перша форма</div>\n        <div class=\"ex\"><div><div class=\"en\">I <b>am going to visit</b> my grandma on Saturday.</div><div class=\"ua\">У суботу я збираюсь навідати бабусю.</div></div><button class=\"say round\" data-say=\"I am going to visit my grandma on Saturday.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">Look at those clouds! It <b>is going to rain</b>.</div><div class=\"ua\">Подивись на ті хмари! Зараз буде дощ.</div></div><button class=\"say round\" data-say=\"Look at those clouds! It is going to rain.\">🔊</button></div>\n        <p class=\"muted\">Заперечення: I'm not / she isn't / they aren't going to… Питання: Are you going to…?</p>"
+  },
+  {
+   "e": "⚖️",
+   "h": "will чи going to?",
+   "html": "<table class=\"t\"><tr><td><b>going to</b></td><td>план, уже вирішено заздалегідь; бачимо ознаки зараз (хмари → дощ)</td></tr>\n        <tr><td><b>will</b></td><td>рішення в цю секунду; думка, прогноз (I think, maybe, probably); обіцянка</td></tr></table>\n        <div class=\"tip\">💡 «Я вже купила квитки» → going to. «О, телефон! Я відповім» → will.</div>"
+  }
+ ],
+ "examples": {
+  "title": "Плани на канікули",
+  "question": {
+   "q": "чому «I'<b>ll</b> help you», а не «I'm going to help you»?",
+   "a": "Мама попросила щойно, і рішення допомогти прийнято в цю секунду — will."
+  },
+  "items": [
+   [
+    "Next summer we <b>are going to travel</b> to the Carpathians.",
+    "Наступного літа ми збираємось у Карпати."
+   ],
+   [
+    "Dad has already bought the tickets.",
+    "Тато вже купив квитки."
+   ],
+   [
+    "We <b>are going to climb</b> Hoverla!",
+    "Ми збираємось піднятися на Говерлу!"
+   ],
+   [
+    "I think it <b>will be</b> hard, but I <b>won't give</b> up.",
+    "Думаю, буде важко, але я не здамся."
+   ],
+   [
+    "Mum: «Can somebody help me with the bags?» — «I<b>'ll help</b> you!»",
+    "Мама: «Хтось допоможе з сумками?» — «Я допоможу!»"
+   ],
+   [
+    "Maybe we <b>will see</b> a bear!",
+    "Може, ми побачимо ведмедя!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "plan",
+   "план; планувати"
+  ],
+  [
+   "future",
+   "майбутнє"
+  ],
+  [
+   "tomorrow",
+   "завтра"
+  ],
+  [
+   "next week",
+   "наступного тижня"
+  ],
+  [
+   "soon",
+   "скоро"
+  ],
+  [
+   "later",
+   "пізніше"
+  ],
+  [
+   "maybe",
+   "можливо"
+  ],
+  [
+   "probably",
+   "напевно"
+  ],
+  [
+   "hope",
+   "сподіватися"
+  ],
+  [
+   "dream",
+   "мрія; мріяти"
+  ]
+ ]
+}

@@ -1,0 +1,115 @@
+{
+ "id": "l10",
+ "title": "Ступені порівняння",
+ "skillFiles": [
+  "skills/comp.json"
+ ],
+ "skills": [
+  "comp.er",
+  "comp.more",
+  "comp.irr"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "comp.er": 3,
+   "comp.more": 3,
+   "comp.irr": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📏",
+   "h": "Короткі слова: -er, -est",
+   "html": "<table class=\"t\"><tr><td>tall</td><td>tall<b>er</b> (вищий)</td><td>the tall<b>est</b> (найвищий)</td></tr>\n        <tr><td>nice</td><td>nice<b>r</b></td><td>the nice<b>st</b></td></tr>\n        <tr><td>big</td><td>bi<b>gg</b>er</td><td>the bi<b>gg</b>est</td></tr>\n        <tr><td>easy</td><td>eas<b>ier</b></td><td>the eas<b>iest</b></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">My brother is <b>taller than</b> me.</div><div class=\"ua\">Мій брат вищий за мене.</div></div><button class=\"say round\" data-say=\"My brother is taller than me.\">🔊</button></div>\n        <div class=\"tip\">💡 «ніж» — <b>than</b>. Найвищий — завжди з <b>the</b>: the tallest. Правила правопису ті самі: німа -e, подвоєння, y → i.</div>"
+  },
+  {
+   "e": "📚",
+   "h": "Довгі слова: more, most",
+   "html": "<table class=\"t\"><tr><td>interesting</td><td><b>more</b> interesting</td><td>the <b>most</b> interesting</td></tr>\n        <tr><td>beautiful</td><td><b>more</b> beautiful</td><td>the <b>most</b> beautiful</td></tr>\n        <tr><td>expensive</td><td><b>more</b> expensive</td><td>the <b>most</b> expensive</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">This book is <b>more interesting than</b> that one.</div><div class=\"ua\">Ця книжка цікавіша за ту.</div></div><button class=\"say round\" data-say=\"This book is more interesting than that one.\">🔊</button></div>\n        <div class=\"tip\">⚠️ Або -er, або more — не разом: <s>more bigger</s>, <s>interestinger</s>.</div>"
+  },
+  {
+   "e": "🏆",
+   "h": "Винятки",
+   "html": "<table class=\"t\"><tr><td>good</td><td><b>better</b></td><td>the <b>best</b></td></tr>\n        <tr><td>bad</td><td><b>worse</b></td><td>the <b>worst</b></td></tr>\n        <tr><td>far</td><td><b>farther</b></td><td>the <b>farthest</b></td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">This is <b>the best</b> day of my life!</div><div class=\"ua\">Це найкращий день у моєму житті!</div></div><button class=\"say round\" data-say=\"This is the best day of my life!\">🔊</button></div>"
+  }
+ ],
+ "examples": {
+  "title": "Тварини-рекордсмени",
+  "question": {
+   "q": "чому «the <b>fastest</b>», а «the <b>most dangerous</b>»?",
+   "a": "fast — коротке слово (-est). dangerous — довге (most)."
+  },
+  "items": [
+   [
+    "The blue whale is <b>the biggest</b> animal in the world.",
+    "Синій кит — найбільша тварина у світі."
+   ],
+   [
+    "The cheetah is <b>the fastest</b> animal on land.",
+    "Гепард — найшвидша тварина на суші."
+   ],
+   [
+    "An elephant is <b>heavier than</b> a car.",
+    "Слон важчий за автомобіль."
+   ],
+   [
+    "A giraffe is <b>taller than</b> any other animal.",
+    "Жираф вищий за будь-яку іншу тварину."
+   ],
+   [
+    "Some people think sharks are <b>more dangerous than</b> lions.",
+    "Дехто вважає, що акули небезпечніші за левів."
+   ],
+   [
+    "But for me, cats are <b>the best</b> animals!",
+    "Але для мене найкращі тварини — коти!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "tall",
+   "високий (про людину)"
+  ],
+  [
+   "short",
+   "низький; короткий"
+  ],
+  [
+   "fast",
+   "швидкий"
+  ],
+  [
+   "slow",
+   "повільний"
+  ],
+  [
+   "strong",
+   "сильний"
+  ],
+  [
+   "weak",
+   "слабкий"
+  ],
+  [
+   "cheap",
+   "дешевий"
+  ],
+  [
+   "expensive",
+   "дорогий"
+  ],
+  [
+   "heavy",
+   "важкий"
+  ],
+  [
+   "dangerous",
+   "небезпечний"
+  ]
+ ]
+}

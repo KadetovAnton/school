@@ -1,0 +1,570 @@
+{
+ "topic": "pron",
+ "title": "Займенники",
+ "skills": [
+  {
+   "id": "pr.obj",
+   "title": "me, him, her, us, them",
+   "rule": "Після дієслова і після with / to / for: me, you, him, her, it, us, them.",
+   "worked": {
+    "p": "Anna is in the garden. Go and see ___. (she)",
+    "steps": [
+     "Займенник стоїть <b>після дієслова</b> see.",
+     "Після дієслова — «кого?»: she → <b>her</b>.",
+     "Відповідь: Go and see <b>her</b>."
+    ]
+   },
+   "alt": "<p>Українською теж змінюємо: «вона» → «її», «вони» → «їх». Англійською так само:</p>\n        <p>she → <b>her</b>, he → <b>him</b>, they → <b>them</b>, we → <b>us</b>, I → <b>me</b>.</p>\n        <p class=\"muted\">Перша колонка (I, she, they) — тільки на початку, хто діє. Після дієслова — друга.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "This is my sister. Do you know ___?",
+     "o": [
+      "her",
+      "she"
+     ],
+     "a": "her",
+     "h": [
+      "Займенник після дієслова know.",
+      "she → her."
+     ],
+     "e": "after know → <b>her</b>.",
+     "err": {
+      "she": "Після дієслова — <b>her</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Tom is my friend. I play with ___ every day.",
+     "o": [
+      "him",
+      "he"
+     ],
+     "a": "him",
+     "h": [
+      "Після with.",
+      "he → him."
+     ],
+     "e": "with <b>him</b>.",
+     "err": {
+      "he": "Після with — <b>him</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Can you help ___, please?",
+     "o": [
+      "me",
+      "I"
+     ],
+     "a": "me",
+     "h": [
+      "Після дієслова help.",
+      "I → me."
+     ],
+     "e": "help <b>me</b>.",
+     "err": {
+      "I": "Після дієслова — <b>me</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Our parents love ___ very much.",
+     "o": [
+      "us",
+      "we"
+     ],
+     "a": "us",
+     "h": [
+      "Після дієслова love.",
+      "we → us."
+     ],
+     "e": "love <b>us</b>.",
+     "err": {
+      "we": "Після дієслова — <b>us</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "I have two cats. I love ___ very much. (they)",
+     "a": [
+      "them"
+     ],
+     "h": [
+      "Після love.",
+      "they → them."
+     ],
+     "e": "love <b>them</b>.",
+     "err": {
+      "they": "Після дієслова — <b>them</b>.",
+      "their": "their — «їхній». Тут потрібно <b>them</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "Where is my phone? I can't find ___. (it)",
+     "a": [
+      "it"
+     ],
+     "h": [
+      "Після find.",
+      "it → it (не змінюється)."
+     ],
+     "e": "find <b>it</b>.",
+     "err": {
+      "its": "its — «його» (чий). Тут <b>it</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "Anna is in the garden. Go and see ___. (she)",
+     "a": [
+      "her"
+     ],
+     "h": [
+      "Після see.",
+      "she → her."
+     ],
+     "e": "see <b>her</b>.",
+     "err": {
+      "she": "Після дієслова — <b>her</b>.",
+      "hers": "hers — «її» (чий). Тут <b>her</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "Dad is at work. Call ___, please. (he)",
+     "a": [
+      "him"
+     ],
+     "h": [
+      "Після call.",
+      "he → him."
+     ],
+     "e": "call <b>him</b>.",
+     "err": {
+      "he": "Після дієслова — <b>him</b>.",
+      "his": "his — «його» (чий). Тут <b>him</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "We're at home. Come and visit ___! (we)",
+     "a": [
+      "us"
+     ],
+     "h": [
+      "Після visit.",
+      "we → us."
+     ],
+     "e": "visit <b>us</b>.",
+     "err": {
+      "we": "Після дієслова — <b>us</b>.",
+      "our": "our — «наш». Тут <b>us</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Give it to I, please.",
+     "bad": 3,
+     "a": "Give it to me, please.",
+     "h": [
+      "Після to.",
+      "I → me."
+     ],
+     "e": "to <b>me</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I see they every day.",
+     "bad": 2,
+     "a": "I see them every day.",
+     "h": [
+      "Після see.",
+      "they → them."
+     ],
+     "e": "see <b>them</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Can you help me?",
+     "a": [
+      "Can you help me?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Після help — me."
+     ],
+     "e": "help <b>me</b>.",
+     "err": {
+      "Can you help I?": "Після дієслова — <b>me</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pr.poss",
+   "title": "my / mine, your / yours, her / hers",
+   "rule": "Перед іменником: my, your, his, her, our, their. Без іменника: mine, yours, his, hers, ours, theirs.",
+   "worked": {
+    "p": "This is Anna's book. It's ___. (вона)",
+    "steps": [
+     "Чия книжка? Анина — «її».",
+     "Після займенника <b>немає іменника</b> (It's ___.).",
+     "Без іменника: her → <b>hers</b>.",
+     "Відповідь: It's <b>hers</b>."
+    ]
+   },
+   "alt": "<p>Подивись, що стоїть <b>після</b> пропуску:</p>\n        <p>є іменник (bag, book, dog) → my, your, her, our, their<br>нічого немає (крапка) → mine, yours, hers, ours, theirs</p>\n        <p class=\"muted\">Підказка: у другій колонці майже всі мають -s на кінці (yours, hers, ours, theirs), а mine — виняток.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "This is ___ bag.",
+     "o": [
+      "my",
+      "mine"
+     ],
+     "a": "my",
+     "h": [
+      "Після пропуску є іменник bag.",
+      "Перед іменником → my."
+     ],
+     "e": "<b>my</b> bag.",
+     "err": {
+      "mine": "Перед іменником — <b>my</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "This bag is ___.",
+     "o": [
+      "mine",
+      "my"
+     ],
+     "a": "mine",
+     "h": [
+      "Після пропуску немає іменника.",
+      "Без іменника → mine."
+     ],
+     "e": "It's <b>mine</b>.",
+     "err": {
+      "my": "Після немає іменника — <b>mine</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Is this pen ___?",
+     "o": [
+      "yours",
+      "your"
+     ],
+     "a": "yours",
+     "h": [
+      "Після пропуску немає іменника.",
+      "→ yours."
+     ],
+     "e": "Is it <b>yours</b>?",
+     "err": {
+      "your": "Без іменника після — <b>yours</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ house is very big.",
+     "o": [
+      "Their",
+      "Theirs"
+     ],
+     "a": "Their",
+     "h": [
+      "Після пропуску є house.",
+      "→ Their."
+     ],
+     "e": "<b>Their</b> house.",
+     "err": {
+      "Theirs": "Перед іменником — <b>Their</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "This is Anna's book. It's ___. (вона)",
+     "a": [
+      "hers"
+     ],
+     "h": [
+      "Без іменника після.",
+      "her → hers."
+     ],
+     "e": "It's <b>hers</b>.",
+     "err": {
+      "her": "Без іменника — <b>hers</b>.",
+      "she": "Тут треба «її» (чия?): <b>hers</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "Is it your phone or ___? (я)",
+     "a": [
+      "mine"
+     ],
+     "h": [
+      "Без іменника після.",
+      "→ mine."
+     ],
+     "e": "or <b>mine</b>.",
+     "err": {
+      "my": "Без іменника — <b>mine</b>.",
+      "me": "Тут треба «мій» (чий?): <b>mine</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "This is our classroom. It's ___. (ми)",
+     "a": [
+      "ours"
+     ],
+     "h": [
+      "Без іменника.",
+      "our → ours."
+     ],
+     "e": "It's <b>ours</b>.",
+     "err": {
+      "our": "Без іменника — <b>ours</b>.",
+      "us": "Тут треба «наш» (чий?): <b>ours</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник",
+     "p": "Tom and Kate have a dog. ___ dog is white. (вони)",
+     "a": [
+      "Their"
+     ],
+     "h": [
+      "Після пропуску є dog.",
+      "→ Their."
+     ],
+     "e": "<b>Their</b> dog.",
+     "err": {
+      "Theirs": "Перед іменником — <b>Their</b>.",
+      "They": "Тут треба «їхній» (чий?): <b>Their</b>.",
+      "Them": "Тут треба «їхній» (чий?): <b>Their</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "This is my pencil and that is your.",
+     "bad": 7,
+     "a": "This is my pencil and that is yours.",
+     "h": [
+      "Після останнього займенника нема іменника.",
+      "your → yours."
+     ],
+     "e": "that is <b>yours</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Mine room is small.",
+     "bad": 0,
+     "a": "My room is small.",
+     "h": [
+      "Після займенника є іменник room.",
+      "mine → my."
+     ],
+     "e": "<b>My</b> room."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 This book is mine.",
+     "a": [
+      "This book is mine."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Без іменника → mine."
+     ],
+     "e": "is <b>mine</b>.",
+     "err": {
+      "This book is my.": "Без іменника — <b>mine</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pr.self",
+   "title": "myself, himself, themselves",
+   "rule": "Сам / собі: myself, yourself, himself, herself, itself, ourselves, yourselves, themselves.",
+   "worked": {
+    "p": "We cleaned the room ___. (самі)",
+    "steps": [
+     "Хто? <b>We</b>.",
+     "we → our + <b>selves</b> (бо нас багато).",
+     "Відповідь: We cleaned the room <b>ourselves</b>."
+    ]
+   },
+   "alt": "<p>Однина → <b>-self</b>, множина → <b>-selves</b>:</p>\n        <p>my<b>self</b>, your<b>self</b>, him<b>self</b>, her<b>self</b>, it<b>self</b><br>our<b>selves</b>, your<b>selves</b>, them<b>selves</b></p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I made this cake ___.",
+     "o": [
+      "myself",
+      "me"
+     ],
+     "a": "myself",
+     "h": [
+      "Сама — хто зробив?",
+      "I → myself."
+     ],
+     "e": "I … <b>myself</b>.",
+     "err": {
+      "me": "«Сама» — <b>myself</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She looked at ___ in the mirror.",
+     "o": [
+      "herself",
+      "her"
+     ],
+     "a": "herself",
+     "h": [
+      "На себе саму.",
+      "she → herself."
+     ],
+     "e": "<b>herself</b>.",
+     "err": {
+      "her": "Дивилась на себе саму: <b>herself</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Be careful! Don't hurt ___!",
+     "o": [
+      "yourself",
+      "you"
+     ],
+     "a": "yourself",
+     "h": [
+      "Не порань себе.",
+      "you → yourself."
+     ],
+     "e": "<b>yourself</b>.",
+     "err": {
+      "you": "Не порань себе: <b>yourself</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник з -self / -selves",
+     "p": "He did his homework ___. (сам)",
+     "a": [
+      "himself"
+     ],
+     "h": [
+      "he → him + self.",
+      "Не his!"
+     ],
+     "e": "<b>himself</b>.",
+     "err": {
+      "hisself": "Правильно: <b>himself</b>.",
+      "him": "«Сам» — <b>himself</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник з -self / -selves",
+     "p": "We cleaned the room ___. (самі)",
+     "a": [
+      "ourselves"
+     ],
+     "h": [
+      "we → our + selves.",
+      "Множина → -selves."
+     ],
+     "e": "<b>ourselves</b>.",
+     "err": {
+      "ourself": "Для we — множина: <b>ourselves</b>.",
+      "us": "«Самі» — <b>ourselves</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник з -self / -selves",
+     "p": "They built the house ___. (самі)",
+     "a": [
+      "themselves"
+     ],
+     "h": [
+      "they → them + selves.",
+      "Не their!"
+     ],
+     "e": "<b>themselves</b>.",
+     "err": {
+      "theirselves": "Правильно: <b>themselves</b>.",
+      "themself": "Множина: <b>themselves</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши займенник з -self / -selves",
+     "p": "The machine turns off ___. (сама)",
+     "a": [
+      "itself"
+     ],
+     "h": [
+      "The machine = it.",
+      "it → itself."
+     ],
+     "e": "<b>itself</b>.",
+     "err": {
+      "herself": "Машина — це it: <b>itself</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I can do it meself.",
+     "bad": 4,
+     "a": "I can do it myself.",
+     "h": [
+      "I → ?",
+      "my + self."
+     ],
+     "e": "<b>myself</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She did it herself.",
+     "a": [
+      "She did it herself."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "she → herself."
+     ],
+     "e": "<b>herself</b>.",
+     "err": {
+      "She did it sheself.": "Правильно: <b>herself</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

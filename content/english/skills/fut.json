@@ -1,0 +1,563 @@
+{
+ "topic": "fut",
+ "title": "Майбутній час",
+ "skills": [
+  {
+   "id": "fut.will",
+   "title": "will / won't + перша форма",
+   "rule": "will + перша форма для всіх; won't = will not; Will you…?",
+   "worked": {
+    "p": "I'm sure you ___ the test. (pass)",
+    "steps": [
+     "Я впевнена — це прогноз, думка → <b>will</b>.",
+     "Після will — перша форма, без to, без -s: <b>pass</b>.",
+     "Відповідь: you <b>will pass</b> the test."
+    ]
+   },
+   "alt": "<p>will — це «чарівна кнопка майбутнього»: ставиш перед дієсловом, а саме дієслово не чіпаєш.</p>\n        <p>I go → I <b>will go</b>; she plays → she <b>will play</b> (без -s!); I don't → I <b>won't</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I think it ___ rain tomorrow.",
+     "o": [
+      "will",
+      "wills"
+     ],
+     "a": "will",
+     "h": [
+      "will однакове для всіх.",
+      "Без -s."
+     ],
+     "e": "it <b>will</b> rain.",
+     "err": {
+      "wills": "will однакове для всіх, без -s: <b>will</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She will ___ you tomorrow.",
+     "o": [
+      "call",
+      "calls",
+      "to call"
+     ],
+     "a": "call",
+     "h": [
+      "Після will — перша форма.",
+      "Без -s, без to."
+     ],
+     "e": "will <b>call</b>.",
+     "err": {
+      "calls": "Після will — перша форма: <b>call</b>.",
+      "to call": "Після will — без to: <b>call</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Don't worry, I ___ tell anybody.",
+     "o": [
+      "won't",
+      "don't"
+     ],
+     "a": "won't",
+     "h": [
+      "Обіцянка на майбутнє.",
+      "will not = won't."
+     ],
+     "e": "<b>won't</b> tell.",
+     "err": {
+      "don't": "Це обіцянка на майбутнє: <b>won't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши will або won't + дієслово",
+     "p": "Tomorrow I ___ my grandma. (visit)",
+     "a": [
+      "will visit",
+      "'ll visit"
+     ],
+     "h": [
+      "tomorrow — майбутнє.",
+      "will + перша форма."
+     ],
+     "e": "<b>will visit</b>.",
+     "err": {
+      "visit": "tomorrow — майбутнє: <b>will visit</b>.",
+      "will visits": "Після will — перша форма: <b>will visit</b>.",
+      "will to visit": "Після will — без to: <b>will visit</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши will або won't + дієслово",
+     "p": "I'm sure you ___ the test. (pass)",
+     "a": [
+      "will pass",
+      "'ll pass"
+     ],
+     "h": [
+      "Впевненість, прогноз → will.",
+      "will + перша форма."
+     ],
+     "e": "<b>will pass</b>.",
+     "err": {
+      "will passed": "Після will — перша форма: <b>will pass</b>.",
+      "pass": "Це про майбутнє: <b>will pass</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши will або won't + дієслово",
+     "p": "It's very cold. I think it ___ tomorrow. (snow)",
+     "a": [
+      "will snow",
+      "'ll snow"
+     ],
+     "h": [
+      "I think — думка про майбутнє.",
+      "will + snow."
+     ],
+     "e": "<b>will snow</b>.",
+     "err": {
+      "snows": "Це про завтра: <b>will snow</b>.",
+      "will snows": "Після will — перша форма: <b>will snow</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши will або won't + дієслово",
+     "p": "My dad ___ late tonight. (not be)",
+     "a": [
+      "won't be",
+      "will not be"
+     ],
+     "h": [
+      "Заперечення → won't.",
+      "won't + be."
+     ],
+     "e": "<b>won't be</b>.",
+     "err": {
+      "willn't be": "Правильно: <b>won't</b> be.",
+      "won't is": "Після won't — перша форма: <b>be</b>.",
+      "doesn't be": "Майбутнє: <b>won't be</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши потрібне слово",
+     "p": "___ you help me with my homework?",
+     "a": [
+      "Will"
+     ],
+     "h": [
+      "Прохання на майбутнє.",
+      "Will you…?"
+     ],
+     "e": "<b>Will</b> you help me?",
+     "err": {
+      "Do": "Прохання про майбутню допомогу: <b>Will</b> you…?",
+      "Are": "Тут <b>Will</b> you help…?"
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I will to call you later.",
+     "bad": 2,
+     "a": "I will call you later.",
+     "h": [
+      "Після will…",
+      "…без to."
+     ],
+     "e": "will <b>call</b> — без to."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She wills come tomorrow.",
+     "bad": 1,
+     "a": "She will come tomorrow.",
+     "h": [
+      "will однакове для всіх.",
+      "Без -s."
+     ],
+     "e": "<b>will</b> — без -s."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I will see you tomorrow.",
+     "a": [
+      "I will see you tomorrow."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "will + перша форма."
+     ],
+     "e": "<b>will see</b>.",
+     "err": {
+      "I will saw you tomorrow.": "Після will — перша форма: <b>see</b>.",
+      "I see you tomorrow.": "tomorrow — майбутнє: <b>will see</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "fut.going",
+   "title": "am / is / are going to",
+   "rule": "am / is / are + going to + перша форма: план або ознаки зараз.",
+   "worked": {
+    "p": "We ___ a film tonight. (watch)",
+    "steps": [
+     "Хто? <b>We</b> → are.",
+     "План на вечір → <b>going to</b>.",
+     "+ перша форма: <b>watch</b>.",
+     "Відповідь: We <b>are going to watch</b> a film tonight."
+    ]
+   },
+   "alt": "<p>Це три цеглинки, і жодну не можна пропустити:</p>\n        <div class=\"rule-box\" style=\"font-weight:800\">am / is / are + going to + дієслово</div>\n        <p>I <b>am</b> going to read. She <b>is</b> going to sing. They <b>are</b> going to play.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ going to visit my aunt.",
+     "o": [
+      "am",
+      "is",
+      "are"
+     ],
+     "a": "am",
+     "h": [
+      "Хто? I.",
+      "I → am."
+     ],
+     "e": "I <b>am</b> going to…",
+     "err": {
+      "is": "З I — <b>am</b>.",
+      "are": "З I — <b>am</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They are going ___ a new house.",
+     "o": [
+      "to buy",
+      "buy",
+      "buying"
+     ],
+     "a": "to buy",
+     "h": [
+      "going…",
+      "…to + перша форма."
+     ],
+     "e": "going <b>to buy</b>.",
+     "err": {
+      "buy": "Не забудь to: going <b>to buy</b>.",
+      "buying": "going to + перша форма: <b>to buy</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Look at the clouds! It's going ___.",
+     "o": [
+      "to rain",
+      "rain"
+     ],
+     "a": "to rain",
+     "h": [
+      "going…",
+      "…to + перша форма."
+     ],
+     "e": "going <b>to rain</b>.",
+     "err": {
+      "rain": "Не забудь to: going <b>to rain</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am / is / are going to + дієслово",
+     "p": "We ___ a film tonight. (watch)",
+     "a": [
+      "are going to watch",
+      "'re going to watch"
+     ],
+     "h": [
+      "we → are.",
+      "are going to + watch."
+     ],
+     "e": "<b>are going to watch</b>.",
+     "err": {
+      "is going to watch": "we → <b>are</b>.",
+      "going to watch": "Не забудь are: <b>are</b> going to watch.",
+      "are going watch": "Не забудь to: are going <b>to</b> watch."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am / is / are going to + дієслово",
+     "p": "She ___ a doctor. (be)",
+     "a": [
+      "is going to be",
+      "'s going to be"
+     ],
+     "h": [
+      "she → is.",
+      "is going to + be."
+     ],
+     "e": "<b>is going to be</b>.",
+     "err": {
+      "are going to be": "she → <b>is</b>.",
+      "going to be": "Не забудь is: <b>is</b> going to be."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am / is / are going to + дієслово",
+     "p": "I ___ my room this evening. (clean)",
+     "a": [
+      "am going to clean",
+      "'m going to clean"
+     ],
+     "h": [
+      "I → am.",
+      "am going to + clean."
+     ],
+     "e": "<b>am going to clean</b>.",
+     "err": {
+      "is going to clean": "З I — <b>am</b>.",
+      "going to clean": "Не забудь am: <b>am</b> going to clean."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши am / is / are going to + дієслово",
+     "p": "Tom ___ football tomorrow. (not play)",
+     "a": [
+      "isn't going to play",
+      "is not going to play",
+      "'s not going to play"
+     ],
+     "h": [
+      "Tom = he → isn't.",
+      "isn't going to + play."
+     ],
+     "e": "<b>isn't going to play</b>.",
+     "err": {
+      "doesn't going to play": "Тут помічник is: <b>isn't</b> going to play.",
+      "aren't going to play": "Tom = he → <b>isn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Is або Are",
+     "p": "___ you going to come to the party?",
+     "a": [
+      "Are"
+     ],
+     "h": [
+      "you → are.",
+      "Питання → Are на початок."
+     ],
+     "e": "<b>Are</b> you going to…?",
+     "err": {
+      "Do": "Тут помічник are: <b>Are</b> you going to…?",
+      "Is": "you → <b>Are</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She are going to sing.",
+     "bad": 1,
+     "a": "She is going to sing.",
+     "h": [
+      "she → ?",
+      "is."
+     ],
+     "e": "she → <b>is</b> going to."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We are going to visited Lviv.",
+     "bad": 4,
+     "a": "We are going to visit Lviv.",
+     "h": [
+      "Після going to…",
+      "…перша форма."
+     ],
+     "e": "going to <b>visit</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I am going to buy a new bike.",
+     "a": [
+      "I am going to buy a new bike."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "am going to + buy."
+     ],
+     "e": "<b>am going to buy</b>.",
+     "err": {
+      "I going to buy a new bike.": "Не забувай am: I <b>am</b> going to buy."
+     }
+    }
+   ]
+  },
+  {
+   "id": "fut.choice",
+   "title": "will чи going to?",
+   "rule": "going to — план заздалегідь або видимі ознаки; will — рішення зараз, думка (I think, maybe), обіцянка.",
+   "worked": {
+    "p": "We have the tickets. We ___ Lviv next week.",
+    "steps": [
+     "Квитки вже є — план готовий <b>заздалегідь</b>.",
+     "План → <b>going to</b>.",
+     "Відповідь: We <b>are going to visit</b> Lviv next week."
+    ]
+   },
+   "alt": "<p>Спитай себе: <b>«Це вирішено раніше чи прямо зараз?»</b></p>\n        <p>Раніше (купили квитки, домовились) → going to.<br>Прямо зараз («О, я допоможу!») або просто думка (I think, maybe) → will.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "We have the tickets. We ___ Lviv next week.",
+     "o": [
+      "are going to visit",
+      "will visit"
+     ],
+     "a": "are going to visit",
+     "h": [
+      "Квитки вже є.",
+      "План → going to."
+     ],
+     "e": "План → <b>are going to visit</b>.",
+     "err": {
+      "will visit": "План уже є (квитки куплено) — <b>going to</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "The phone is ringing. — I ___ answer it!",
+     "o": [
+      "will",
+      "am going to"
+     ],
+     "a": "will",
+     "h": [
+      "Вирішила щойно.",
+      "Рішення зараз → will."
+     ],
+     "e": "Рішення в цю мить → <b>will</b>.",
+     "err": {
+      "am going to": "Рішення прийняте щойно — <b>will</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I think robots ___ do all the housework one day.",
+     "o": [
+      "will",
+      "are going to"
+     ],
+     "a": "will",
+     "h": [
+      "I think — думка.",
+      "Думка, прогноз → will."
+     ],
+     "e": "I think → <b>will</b>.",
+     "err": {
+      "are going to": "Після I think — зазвичай <b>will</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Look at that black sky! It ___ rain.",
+     "o": [
+      "is going to",
+      "will"
+     ],
+     "a": "is going to",
+     "h": [
+      "Бачимо ознаки зараз.",
+      "Ознаки → going to."
+     ],
+     "e": "Чорне небо → <b>is going to</b> rain.",
+     "err": {
+      "will": "Ми бачимо ознаки зараз — <b>is going to</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Maybe I ___ go to the cinema tonight.",
+     "o": [
+      "will",
+      "am going to"
+     ],
+     "a": "will",
+     "h": [
+      "Maybe — ще не вирішено.",
+      "→ will."
+     ],
+     "e": "Maybe → <b>will</b>.",
+     "err": {
+      "am going to": "maybe — ще не план: <b>will</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши will або going to з дієсловом",
+     "p": "I'm hungry! — Wait, I ___ you a sandwich! (make)",
+     "a": [
+      "will make",
+      "'ll make"
+     ],
+     "h": [
+      "Вирішила щойно.",
+      "will + make."
+     ],
+     "e": "Рішення зараз → <b>will make</b>.",
+     "err": {
+      "am going to make": "Рішення в цю мить — <b>will make</b>.",
+      "make": "Це про майбутнє: <b>will make</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши will або going to з дієсловом",
+     "p": "She has bought some paint. She ___ her room. (paint)",
+     "a": [
+      "is going to paint",
+      "'s going to paint"
+     ],
+     "h": [
+      "Вже купила фарбу — план.",
+      "is going to + paint."
+     ],
+     "e": "План → <b>is going to paint</b>.",
+     "err": {
+      "will paint": "Уже є план (купила фарбу) — <b>is going to paint</b>.",
+      "going to paint": "Не забудь is: <b>is</b> going to paint."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I think it will be sunny tomorrow.",
+     "a": [
+      "I think it will be sunny tomorrow."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "I think → will."
+     ],
+     "e": "I think → <b>will be</b>.",
+     "err": {
+      "I think it will sunny tomorrow.": "Не забудь be: will <b>be</b> sunny."
+     }
+    }
+   ]
+  }
+ ]
+}

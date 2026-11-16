@@ -1,0 +1,115 @@
+{
+ "id": "l12",
+ "title": "Past Continuous",
+ "skillFiles": [
+  "skills/pastc.json"
+ ],
+ "skills": [
+  "pastc.form",
+  "pastc.negq",
+  "pastc.when"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "pastc.form": 3,
+   "pastc.negq": 2,
+   "pastc.when": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🎬",
+   "h": "Що відбувалось у той момент",
+   "html": "<p>Past Continuous — «кадр з відео» в минулому: дія <b>тривала</b> в певний момент.</p>\n        <div class=\"rule-box\"><b>was / were</b> + дієслово з <b>-ing</b></div>\n        <table class=\"t\"><tr><td>I / he / she / it</td><td><b>was</b> reading</td></tr><tr><td>you / we / they</td><td><b>were</b> reading</td></tr></table>\n        <div class=\"ex\"><div><div class=\"en\">At 8 o'clock yesterday I <b>was having</b> breakfast.</div><div class=\"ua\">Учора о восьмій я снідала.</div></div><button class=\"say round\" data-say=\"At 8 o'clock yesterday I was having breakfast.\">🔊</button></div>\n        <div class=\"tip\">🔎 Підказки: at 5 o'clock yesterday, at this time yesterday, at that moment, when, while.</div>"
+  },
+  {
+   "e": "❓",
+   "h": "Заперечення і питання",
+   "html": "<div class=\"ex\"><div><div class=\"en\">I <b>wasn't</b> sleeping.</div><div class=\"ua\">Я не спала.</div></div><button class=\"say round\" data-say=\"I wasn't sleeping.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\"><b>Were</b> you watching TV at 8? — Yes, I <b>was</b>.</div><div class=\"ua\">Ти дивилась телевізор о восьмій? — Так.</div></div><button class=\"say round\" data-say=\"Were you watching TV at 8? Yes, I was.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">What <b>were</b> you <b>doing</b>?</div><div class=\"ua\">Що ти робила?</div></div><button class=\"say round\" data-say=\"What were you doing?\">🔊</button></div>\n        <div class=\"tip\">⚠️ Без did: <s>Did you sleeping?</s> → <b>Were</b> you sleeping?</div>"
+  },
+  {
+   "e": "⚡",
+   "h": "Довга дія + коротка дія",
+   "html": "<p>Довга дія (тло) — Past Continuous. Коротка, яка її перервала — Past Simple.</p>\n        <div class=\"ex\"><div><div class=\"en\">I <b>was having</b> a shower when the phone <b>rang</b>.</div><div class=\"ua\">Я була в душі, коли задзвонив телефон.</div></div><button class=\"say round\" data-say=\"I was having a shower when the phone rang.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">While Mum <b>was cooking</b>, Dad <b>was reading</b>.</div><div class=\"ua\">Поки мама готувала, тато читав.</div></div><button class=\"say round\" data-say=\"While Mum was cooking, Dad was reading.\">🔊</button></div>\n        <p class=\"muted\">while — «поки» (дві довгі дії разом); when — «коли» (часто перед короткою дією).</p>"
+  }
+ ],
+ "examples": {
+  "title": "Гроза",
+  "question": {
+   "q": "чому «we <b>were walking</b>», але «it <b>started</b>»?",
+   "a": "Ми йшли довго (тло) — Past Continuous. Дощ почався раптом — коротка дія, Past Simple."
+  },
+  "items": [
+   [
+    "Yesterday at five o'clock we <b>were walking</b> in the park.",
+    "Учора о п'ятій ми гуляли в парку."
+   ],
+   [
+    "The sun <b>was shining</b> and the birds <b>were singing</b>.",
+    "Світило сонце, співали птахи."
+   ],
+   [
+    "Suddenly it <b>started</b> to rain.",
+    "Раптом почався дощ."
+   ],
+   [
+    "While we <b>were running</b> home, we <b>saw</b> a rainbow!",
+    "Поки ми бігли додому, побачили веселку!"
+   ],
+   [
+    "When we <b>got</b> home, Mum <b>was making</b> hot tea.",
+    "Коли ми прийшли, мама заварювала гарячий чай."
+   ],
+   [
+    "<b>Were</b> you <b>sleeping</b> during the storm? — No, I <b>wasn't</b>!",
+    "Ти спала під час грози? — Ні!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "when",
+   "коли"
+  ],
+  [
+   "while",
+   "поки"
+  ],
+  [
+   "suddenly",
+   "раптом"
+  ],
+  [
+   "at that moment",
+   "у той момент"
+  ],
+  [
+   "storm",
+   "гроза, буря"
+  ],
+  [
+   "rainbow",
+   "веселка"
+  ],
+  [
+   "shine",
+   "світити"
+  ],
+  [
+   "noise",
+   "шум"
+  ],
+  [
+   "scared",
+   "наляканий"
+  ],
+  [
+   "fall",
+   "падати"
+  ]
+ ]
+}

@@ -1,0 +1,591 @@
+{
+ "topic": "art",
+ "title": "Артиклі",
+ "skills": [
+  {
+   "id": "art.aan",
+   "title": "a чи an",
+   "rule": "a — перед приголосним звуком (a book, a university), an — перед голосним (an apple, an hour).",
+   "worked": {
+    "p": "We waited for ___ hour.",
+    "steps": [
+     "Слово: <b>hour</b>. Як воно звучить?",
+     "h не читається: [ауе] — починається з голосного звука.",
+     "Голосний звук → <b>an</b>.",
+     "Відповідь: We waited for <b>an</b> hour."
+    ]
+   },
+   "alt": "<p>Скажи вголос «a apple» — між двома голосними язик спотикається. Тому додаємо n: <b>an</b> apple.</p>\n        <p>Слухай початок слова: a <b>d</b>og, a <b>c</b>at, але <b>an</b> <b>e</b>gg, <b>an</b> <b>o</b>ld house.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I have ___ apple.",
+     "o": [
+      "a",
+      "an"
+     ],
+     "a": "an",
+     "h": [
+      "apple починається з голосного звука.",
+      "Голосний звук → an."
+     ],
+     "e": "<b>an</b> apple.",
+     "err": {
+      "a": "apple починається з голосного звука: <b>an</b> apple."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She is ___ teacher.",
+     "o": [
+      "a",
+      "an"
+     ],
+     "a": "a",
+     "h": [
+      "teacher починається з [т].",
+      "Приголосний звук → a."
+     ],
+     "e": "<b>a</b> teacher.",
+     "err": {
+      "an": "teacher починається з приголосного: <b>a</b> teacher."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "It's ___ old house.",
+     "o": [
+      "an",
+      "a"
+     ],
+     "a": "an",
+     "h": [
+      "Дивись на слово після артикля: old.",
+      "old — голосний звук → an."
+     ],
+     "e": "<b>an</b> old house: важить наступне слово.",
+     "err": {
+      "a": "Наступне слово old починається з голосного: <b>an</b> old house."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We waited for ___ hour.",
+     "o": [
+      "an",
+      "a"
+     ],
+     "a": "an",
+     "h": [
+      "Як звучить hour?",
+      "h не читається."
+     ],
+     "e": "<b>an</b> hour: h не читається.",
+     "err": {
+      "a": "h у hour не читається [ауе], тому <b>an</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "He is ___ university student.",
+     "o": [
+      "a",
+      "an"
+     ],
+     "a": "a",
+     "h": [
+      "Як звучить university?",
+      "[ю] — це як приголосний звук."
+     ],
+     "e": "<b>a</b> university: звучить [ю].",
+     "err": {
+      "an": "university звучить «ю…», як приголосний: <b>a</b> university."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a або an",
+     "p": "There is ___ elephant in the zoo.",
+     "a": [
+      "an"
+     ],
+     "h": [
+      "elephant — перший звук?",
+      "Голосний → an."
+     ],
+     "e": "<b>an</b> elephant.",
+     "err": {
+      "a": "elephant починається з голосного: <b>an</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a або an",
+     "p": "My mum has ___ new car.",
+     "a": [
+      "a"
+     ],
+     "h": [
+      "Дивись на слово після артикля: new.",
+      "Приголосний → a."
+     ],
+     "e": "<b>a</b> new car.",
+     "err": {
+      "an": "new починається з приголосного: <b>a</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a або an",
+     "p": "I'd like ___ ice cream, please.",
+     "a": [
+      "an"
+     ],
+     "h": [
+      "ice — перший звук?",
+      "Голосний → an."
+     ],
+     "e": "<b>an</b> ice cream.",
+     "err": {
+      "a": "ice починається з голосного: <b>an</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a або an",
+     "p": "This is ___ easy exercise.",
+     "a": [
+      "an"
+     ],
+     "h": [
+      "Дивись на easy.",
+      "Голосний → an."
+     ],
+     "e": "<b>an</b> easy exercise.",
+     "err": {
+      "a": "easy починається з голосного: <b>an</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I saw a owl in the forest.",
+     "bad": 2,
+     "a": "I saw an owl in the forest.",
+     "h": [
+      "owl починається з голосного звука.",
+      "a → an."
+     ],
+     "e": "<b>an</b> owl."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She ate an banana.",
+     "bad": 2,
+     "a": "She ate a banana.",
+     "h": [
+      "banana починається з приголосного.",
+      "an → a."
+     ],
+     "e": "<b>a</b> banana."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 It's an interesting book.",
+     "a": [
+      "It's an interesting book."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "interesting — голосний звук → an."
+     ],
+     "e": "<b>an</b> interesting book.",
+     "err": {
+      "It's a interesting book.": "interesting починається з голосного: <b>an</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "art.the",
+   "title": "the — «той самий», «єдиний»",
+   "rule": "the — коли вже згадували, коли воно одне таке (the sun), з найкращим / першим (the best, the first) і коли зрозуміло, яке саме.",
+   "worked": {
+    "p": "I bought a cake. ___ cake was delicious.",
+    "steps": [
+     "Торт уже згадували: «I bought <b>a</b> cake».",
+     "Тепер мова про <b>той самий</b> торт.",
+     "Той самий → <b>The</b>.",
+     "Відповідь: <b>The</b> cake was delicious."
+    ]
+   },
+   "alt": "<p>Уяви, що <b>the</b> — це вказівний палець 👉: «ось цей, саме той».</p>\n        <p>Якщо можеш показати пальцем, про що мова (той торт, що купила; сонце, яке одне; двері в цій кімнаті) — <b>the</b>. Якщо «якийсь один із багатьох» — a / an.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I have a dog. ___ dog is very funny.",
+     "o": [
+      "The",
+      "A"
+     ],
+     "a": "The",
+     "h": [
+      "Собаку вже згадували?",
+      "Той самий → The."
+     ],
+     "e": "Той самий собака → <b>The</b>.",
+     "err": {
+      "A": "Про цього собаку вже говорили: <b>The</b> dog."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ sun is very hot today.",
+     "o": [
+      "The",
+      "A"
+     ],
+     "a": "The",
+     "h": [
+      "Скільки в нас сонць?",
+      "Одне таке → the."
+     ],
+     "e": "Сонце одне → <b>The</b> sun.",
+     "err": {
+      "A": "Сонце одне: <b>The</b> sun."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Can you close ___ door, please?",
+     "o": [
+      "the",
+      "a"
+     ],
+     "a": "the",
+     "h": [
+      "Які двері — якісь чи ось ці?",
+      "Зрозуміло, які саме → the."
+     ],
+     "e": "Зрозуміло, які двері → <b>the</b> door.",
+     "err": {
+      "a": "Мова про конкретні двері в кімнаті: <b>the</b> door."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Look at ___ moon!",
+     "o": [
+      "the",
+      "a"
+     ],
+     "a": "the",
+     "h": [
+      "Скільки місяців на небі?",
+      "Одне таке → the."
+     ],
+     "e": "<b>the</b> moon.",
+     "err": {
+      "a": "Місяць один: <b>the</b> moon."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a, an або the",
+     "p": "I bought a cake. ___ cake was delicious.",
+     "a": [
+      "The"
+     ],
+     "h": [
+      "Торт уже згадували.",
+      "Той самий → The."
+     ],
+     "e": "Той самий торт → <b>The</b>.",
+     "err": {
+      "A": "Торт уже згадували: <b>The</b> cake."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a, an або the",
+     "p": "There's ___ cat in our garden.",
+     "a": [
+      "a"
+     ],
+     "h": [
+      "Кіт згадується вперше.",
+      "Якийсь кіт → a."
+     ],
+     "e": "Уперше → <b>a</b> cat.",
+     "err": {
+      "the": "Кіт згадується вперше: <b>a</b> cat."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a, an або the",
+     "p": "We live on ___ third floor.",
+     "a": [
+      "the"
+     ],
+     "h": [
+      "third — третій.",
+      "Перший, другий, третій… → the."
+     ],
+     "e": "<b>the</b> third floor.",
+     "err": {
+      "a": "З порядковими (first, third) — <b>the</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши a, an або the",
+     "p": "He is ___ best student in our class.",
+     "a": [
+      "the"
+     ],
+     "h": [
+      "best — найкращий.",
+      "Найкращий — один такий → the."
+     ],
+     "e": "<b>the</b> best.",
+     "err": {
+      "a": "Найкращий — один такий: <b>the</b> best."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "A sky is blue today.",
+     "bad": 0,
+     "a": "The sky is blue today.",
+     "h": [
+      "Скільки в нас неб?",
+      "Одне → the."
+     ],
+     "e": "<b>The</b> sky."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I have the brother and a sister.",
+     "bad": 2,
+     "a": "I have a brother and a sister.",
+     "h": [
+      "Брат згадується вперше.",
+      "Уперше → a."
+     ],
+     "e": "Уперше → <b>a</b> brother."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 The moon is very bright tonight.",
+     "a": [
+      "The moon is very bright tonight."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Місяць один → the."
+     ],
+     "e": "<b>The</b> moon.",
+     "err": {
+      "A moon is very bright tonight.": "Місяць один: <b>The</b> moon."
+     }
+    }
+   ]
+  },
+  {
+   "id": "art.zero",
+   "title": "Коли артикль не потрібен",
+   "rule": "Без артикля: загалом у множині (Cats like milk), breakfast / lunch / dinner, спорт, мови, країни, go to school / bed.",
+   "worked": {
+    "p": "She plays ___ tennis on Fridays.",
+    "steps": [
+     "tennis — це вид спорту.",
+     "Перед видами спорту й іграми артикль не ставимо.",
+     "Відповідь: She plays tennis on Fridays."
+    ]
+   },
+   "alt": "<p>Запам'ятай «список без артикля»:</p>\n        <p>🍳 breakfast, lunch, dinner · ⚽ football, chess · 🗣️ English · 🇺🇦 Ukraine · 🏫 go to school, go to bed, at home</p>\n        <p class=\"muted\">Але коли мова про конкретне: «<b>The</b> children in the garden» — конкретні діти, яких ми бачимо, тому the.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "___ cats like milk.",
+     "o": [
+      "— (нічого)",
+      "The",
+      "A"
+     ],
+     "a": "— (нічого)",
+     "h": [
+      "Мова про котів узагалі чи про конкретних?",
+      "Загалом → без артикля."
+     ],
+     "e": "Загалом: <b>Cats</b> like milk.",
+     "err": {
+      "The": "Говоримо про котів загалом — без артикля.",
+      "A": "cats — множина, a не буває."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We have ___ breakfast at eight.",
+     "o": [
+      "— (нічого)",
+      "a",
+      "the"
+     ],
+     "a": "— (нічого)",
+     "h": [
+      "breakfast — сніданок.",
+      "Перед breakfast, lunch, dinner — без артикля."
+     ],
+     "e": "have <b>breakfast</b> — без артикля.",
+     "err": {
+      "a": "Перед breakfast артикль не ставимо.",
+      "the": "Перед breakfast артикль не ставимо."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She plays ___ tennis on Fridays.",
+     "o": [
+      "— (нічого)",
+      "the",
+      "a"
+     ],
+     "a": "— (нічого)",
+     "h": [
+      "tennis — спорт.",
+      "Спорт → без артикля."
+     ],
+     "e": "play <b>tennis</b> — без артикля.",
+     "err": {
+      "the": "Перед видами спорту — без артикля.",
+      "a": "Перед видами спорту — без артикля."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "My brother goes to ___ school by bus.",
+     "o": [
+      "— (нічого)",
+      "the",
+      "a"
+     ],
+     "a": "— (нічого)",
+     "h": [
+      "go to school — звичне місце.",
+      "Без артикля."
+     ],
+     "e": "go to <b>school</b> — без артикля.",
+     "err": {
+      "the": "go to school — без артикля.",
+      "a": "go to school — без артикля."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They speak ___ English.",
+     "o": [
+      "— (нічого)",
+      "the",
+      "an"
+     ],
+     "a": "— (нічого)",
+     "h": [
+      "English — мова.",
+      "Мови → без артикля."
+     ],
+     "e": "speak <b>English</b> — без артикля.",
+     "err": {
+      "the": "Перед назвою мови — без артикля.",
+      "an": "Перед назвою мови — без артикля."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I live in ___ Ukraine.",
+     "o": [
+      "— (нічого)",
+      "the",
+      "a"
+     ],
+     "a": "— (нічого)",
+     "h": [
+      "Ukraine — країна.",
+      "Країни → без артикля."
+     ],
+     "e": "in <b>Ukraine</b> — без артикля.",
+     "err": {
+      "the": "Перед назвою країни Ukraine артикль не ставимо.",
+      "a": "Перед назвою країни — без артикля."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Look! ___ children in the garden are playing.",
+     "o": [
+      "The",
+      "— (нічого)",
+      "A"
+     ],
+     "a": "The",
+     "h": [
+      "Це діти загалом чи конкретні, яких бачимо?",
+      "Конкретні → the."
+     ],
+     "e": "Конкретні діти → <b>The</b>.",
+     "err": {
+      "— (нічого)": "Мова про конкретних дітей, яких ми бачимо: <b>The</b> children.",
+      "A": "children — множина, a не буває."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I go to the bed at ten.",
+     "bad": 3,
+     "a": "I go to bed at ten.",
+     "h": [
+      "go to bed — звичний вираз.",
+      "Тут артикль зайвий."
+     ],
+     "e": "go to <b>bed</b> — без артикля."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We play the football after school.",
+     "bad": 2,
+     "a": "We play football after school.",
+     "h": [
+      "Спорт.",
+      "Тут артикль зайвий."
+     ],
+     "e": "play <b>football</b> — без артикля."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We have lunch at school.",
+     "a": [
+      "We have lunch at school."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "have lunch — без артикля."
+     ],
+     "e": "have <b>lunch</b> — без артикля.",
+     "err": {
+      "We have a lunch at school.": "Перед lunch артикль не ставимо.",
+      "We have the lunch at school.": "Перед lunch артикль не ставимо."
+     }
+    }
+   ]
+  }
+ ]
+}

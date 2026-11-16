@@ -1,0 +1,120 @@
+{
+ "id": "l13",
+ "title": "Present Perfect",
+ "skillFiles": [
+  "skills/pp.json"
+ ],
+ "skills": [
+  "pp.form",
+  "pp.ever",
+  "pp.just"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "pp.form": 3,
+   "pp.ever": 3,
+   "pp.just": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "✅",
+   "h": "Вже зробила — і результат зараз",
+   "html": "<p>Present Perfect — про минулу дію, важливу <b>зараз</b>: результат видно, а коли саме — не важливо.</p>\n        <div class=\"rule-box\"><b>have / has</b> + третя форма дієслова</div>\n        <div class=\"ex\"><div><div class=\"en\">I <b>have finished</b> my homework.</div><div class=\"ua\">Я зробила домашнє (і тепер вільна).</div></div><button class=\"say round\" data-say=\"I have finished my homework.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">She <b>has lost</b> her keys.</div><div class=\"ua\">Вона загубила ключі (і зараз їх немає).</div></div><button class=\"say round\" data-say=\"She has lost her keys.\">🔊</button></div>\n        <table class=\"t\"><tr><td>I / you / we / they</td><td><b>have</b> (I've)</td></tr><tr><td>he / she / it</td><td><b>has</b> (she's)</td></tr></table>"
+  },
+  {
+   "e": "3️⃣",
+   "h": "Третя форма",
+   "html": "<p>Правильні дієслова: третя форма = -ed (played, cleaned, finished). Неправильні — своя:</p>\n        <table class=\"t\"><tr><td>be</td><td><b>been</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"be, been\">🔊</button></td></tr><tr><td>go</td><td><b>gone</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"go, gone\">🔊</button></td></tr><tr><td>see</td><td><b>seen</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"see, seen\">🔊</button></td></tr><tr><td>do</td><td><b>done</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"do, done\">🔊</button></td></tr><tr><td>eat</td><td><b>eaten</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"eat, eaten\">🔊</button></td></tr><tr><td>write</td><td><b>written</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"write, written\">🔊</button></td></tr><tr><td>take</td><td><b>taken</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"take, taken\">🔊</button></td></tr><tr><td>give</td><td><b>given</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"give, given\">🔊</button></td></tr><tr><td>break</td><td><b>broken</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"break, broken\">🔊</button></td></tr><tr><td>buy</td><td><b>bought</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"buy, bought\">🔊</button></td></tr><tr><td>make</td><td><b>made</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"make, made\">🔊</button></td></tr><tr><td>have</td><td><b>had</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"have, had\">🔊</button></td></tr><tr><td>come</td><td><b>come</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"come, come\">🔊</button></td></tr><tr><td>swim</td><td><b>swum</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"swim, swum\">🔊</button></td></tr><tr><td>drink</td><td><b>drunk</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"drink, drunk\">🔊</button></td></tr><tr><td>sing</td><td><b>sung</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"sing, sung\">🔊</button></td></tr><tr><td>find</td><td><b>found</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"find, found\">🔊</button></td></tr><tr><td>lose</td><td><b>lost</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"lose, lost\">🔊</button></td></tr><tr><td>read</td><td><b>read</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"read, read\">🔊</button></td></tr><tr><td>meet</td><td><b>met</b></td><td style=\"padding:4px 0;width:44px\"><button class=\"say round\" data-say=\"meet, met\">🔊</button></td></tr></table>"
+  },
+  {
+   "e": "🌍",
+   "h": "ever / never — досвід",
+   "html": "<div class=\"ex\"><div><div class=\"en\"><b>Have</b> you <b>ever been</b> to London? — No, I <b>haven't</b>.</div><div class=\"ua\">Ти колись була в Лондоні? — Ні.</div></div><button class=\"say round\" data-say=\"Have you ever been to London? No, I haven't.\">🔊</button></div>\n        <div class=\"ex\"><div><div class=\"en\">I have <b>never</b> eaten sushi.</div><div class=\"ua\">Я ніколи не їла суші.</div></div><button class=\"say round\" data-say=\"I have never eaten sushi.\">🔊</button></div>\n        <p class=\"muted\">ever — «колись» (у питаннях), never — «ніколи». Стоять між have і третьою формою.</p>"
+  },
+  {
+   "e": "⏱️",
+   "h": "just / already / yet",
+   "html": "<table class=\"t\"><tr><td><b>just</b></td><td>щойно</td><td>I have <b>just</b> finished.</td></tr>\n        <tr><td><b>already</b></td><td>вже</td><td>She has <b>already</b> left.</td></tr>\n        <tr><td><b>yet</b></td><td>ще не / вже? (в кінці)</td><td>I haven't finished <b>yet</b>. Have you finished <b>yet</b>?</td></tr></table>"
+  }
+ ],
+ "examples": {
+  "title": "Перед поїздкою",
+  "question": {
+   "q": "чому «Have you packed <b>yet</b>?», а «I've <b>already</b> packed»?",
+   "a": "yet — у питаннях і запереченнях, у кінці речення. already — у ствердженні, між have і третьою формою."
+  },
+  "items": [
+   [
+    "Mum: <b>Have</b> you <b>packed</b> your suitcase <b>yet</b>?",
+    "Мама: Ти вже спакувала валізу?"
+   ],
+   [
+    "Yes, I<b>'ve already packed</b> it!",
+    "Так, уже спакувала!"
+   ],
+   [
+    "Dad <b>has just bought</b> the tickets.",
+    "Тато щойно купив квитки."
+   ],
+   [
+    "We <b>have never been</b> to the sea in winter.",
+    "Ми ніколи не були на морі взимку."
+   ],
+   [
+    "<b>Have</b> you <b>ever seen</b> the sea in winter?",
+    "Ти колись бачила зимове море?"
+   ],
+   [
+    "Oh no! I<b>'ve lost</b> my phone! — No, you <b>haven't</b>. It's in your hand!",
+    "Ой ні! Я загубила телефон! — Ні. Він у тебе в руці!"
+   ]
+  ]
+ },
+ "words": [
+  [
+   "ever",
+   "коли-небудь"
+  ],
+  [
+   "never",
+   "ніколи"
+  ],
+  [
+   "just",
+   "щойно"
+  ],
+  [
+   "already",
+   "вже"
+  ],
+  [
+   "yet",
+   "ще (не); вже (у питанні)"
+  ],
+  [
+   "recently",
+   "нещодавно"
+  ],
+  [
+   "famous",
+   "відомий"
+  ],
+  [
+   "pack",
+   "пакувати"
+  ],
+  [
+   "lose",
+   "губити"
+  ],
+  [
+   "finish",
+   "закінчувати"
+  ]
+ ]
+}

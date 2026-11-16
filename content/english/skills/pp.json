@@ -1,0 +1,557 @@
+{
+ "topic": "pp",
+ "title": "Present Perfect",
+ "skills": [
+  {
+   "id": "pp.form",
+   "title": "have / has + третя форма",
+   "rule": "I / you / we / they → have; he / she / it → has; + третя форма (cleaned, seen, done, written).",
+   "worked": {
+    "p": "She ___ a letter to her friend. (write)",
+    "steps": [
+     "she → <b>has</b>.",
+     "write — неправильне: write – wrote – <b>written</b>.",
+     "Відповідь: She <b>has written</b> a letter."
+    ]
+   },
+   "alt": "<p>Дві цеглинки: <b>have / has</b> + <b>третя форма</b>.</p>\n        <p>Правильні — як минуле (-ed): has clean<b>ed</b>. Неправильні — з таблиці: seen, done, eaten, written, broken.</p>\n        <p class=\"muted\">Не плутай другу і третю: I <b>saw</b> (вчора) ↔ I have <b>seen</b>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ finished my homework.",
+     "o": [
+      "have",
+      "has",
+      "am"
+     ],
+     "a": "have",
+     "h": [
+      "I → have.",
+      "+ третя форма."
+     ],
+     "e": "I <b>have</b> finished.",
+     "err": {
+      "has": "З I — <b>have</b>.",
+      "am": "Present Perfect — з have: I <b>have</b> finished."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She ___ lost her keys.",
+     "o": [
+      "has",
+      "have"
+     ],
+     "a": "has",
+     "h": [
+      "she → has.",
+      "+ третя форма."
+     ],
+     "e": "she <b>has</b> lost.",
+     "err": {
+      "have": "she → <b>has</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "We have ___ this film.",
+     "o": [
+      "seen",
+      "saw",
+      "see"
+     ],
+     "a": "seen",
+     "h": [
+      "Після have — третя форма.",
+      "see – saw – seen."
+     ],
+     "e": "have <b>seen</b>.",
+     "err": {
+      "saw": "Після have — третя форма: <b>seen</b>.",
+      "see": "Після have — третя форма: <b>seen</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has + третю форму",
+     "p": "Tom ___ his room. (clean)",
+     "a": [
+      "has cleaned",
+      "'s cleaned"
+     ],
+     "h": [
+      "Tom → has.",
+      "clean — правильне: + ed."
+     ],
+     "e": "<b>has cleaned</b>.",
+     "err": {
+      "have cleaned": "Tom = he → <b>has</b>.",
+      "cleaned": "Потрібно has: <b>has cleaned</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has + третю форму",
+     "p": "Oh no! I ___ my leg! (break)",
+     "a": [
+      "have broken",
+      "'ve broken"
+     ],
+     "h": [
+      "I → have.",
+      "break – broke – broken."
+     ],
+     "e": "<b>have broken</b>.",
+     "err": {
+      "have broke": "Третя форма: <b>broken</b>.",
+      "has broken": "З I — <b>have</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has + третю форму",
+     "p": "They ___ a new car. (buy)",
+     "a": [
+      "have bought",
+      "'ve bought"
+     ],
+     "h": [
+      "they → have.",
+      "buy – bought – bought."
+     ],
+     "e": "<b>have bought</b>.",
+     "err": {
+      "has bought": "they → <b>have</b>.",
+      "have buyed": "buy — неправильне: <b>bought</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has + третю форму",
+     "p": "She ___ a letter to her friend. (write)",
+     "a": [
+      "has written",
+      "'s written"
+     ],
+     "h": [
+      "she → has.",
+      "write – wrote – written."
+     ],
+     "e": "<b>has written</b>.",
+     "err": {
+      "has wrote": "Третя форма: <b>written</b>.",
+      "have written": "she → <b>has</b>.",
+      "has writen": "Подвоюємо t: <b>written</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has + третю форму",
+     "p": "We ___ dinner. We aren't hungry. (eat)",
+     "a": [
+      "have eaten",
+      "'ve eaten"
+     ],
+     "h": [
+      "we → have.",
+      "eat – ate – eaten."
+     ],
+     "e": "<b>have eaten</b>.",
+     "err": {
+      "have ate": "Третя форма: <b>eaten</b>.",
+      "has eaten": "we → <b>have</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "input",
+     "task": "Впиши have / has + третю форму",
+     "p": "Dad ___ home. (come)",
+     "a": [
+      "has come",
+      "'s come"
+     ],
+     "h": [
+      "Dad → has.",
+      "come – came – come."
+     ],
+     "e": "<b>has come</b>.",
+     "err": {
+      "has came": "Третя форма — така сама, як перша: <b>come</b>.",
+      "have come": "Dad = he → <b>has</b>."
+     },
+     "strict": true
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She have done her homework.",
+     "bad": 1,
+     "a": "She has done her homework.",
+     "h": [
+      "she → ?",
+      "has."
+     ],
+     "e": "she <b>has</b> done."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I have saw this film.",
+     "bad": 2,
+     "a": "I have seen this film.",
+     "h": [
+      "Після have — третя форма.",
+      "see – saw – seen."
+     ],
+     "e": "have <b>seen</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I have lost my phone.",
+     "a": [
+      "I have lost my phone."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "I → have + lost."
+     ],
+     "e": "I <b>have lost</b>.",
+     "err": {
+      "I has lost my phone.": "З I — <b>have</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pp.ever",
+   "title": "ever / never — досвід",
+   "rule": "Have you ever + третя форма? — Yes, I have. / No, I haven't. I have never + третя форма.",
+   "worked": {
+    "p": "Have you ever ___ to Paris? (be)",
+    "steps": [
+     "Питання про досвід: <b>Have you ever</b>…",
+     "be — неправильне: be – was – <b>been</b>.",
+     "Відповідь: Have you ever <b>been</b> to Paris?"
+    ]
+   },
+   "alt": "<p>ever і never стоять <b>між</b> have і третьою формою, як у сендвічі:</p>\n        <p>Have you <b>ever</b> seen…? · I have <b>never</b> seen…</p>\n        <p class=\"muted\">never вже означає «не», тому друге not не потрібне: <s>I haven't never</s>.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "Have you ever ___ to Paris?",
+     "o": [
+      "been",
+      "was",
+      "be"
+     ],
+     "a": "been",
+     "h": [
+      "Після have — третя форма.",
+      "be – was – been."
+     ],
+     "e": "<b>been</b>.",
+     "err": {
+      "was": "Після have — третя форма: <b>been</b>.",
+      "be": "Після have — третя форма: <b>been</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "I have ___ eaten sushi. I want to try it!",
+     "o": [
+      "never",
+      "ever"
+     ],
+     "a": "never",
+     "h": [
+      "«Ніколи не їла».",
+      "never."
+     ],
+     "e": "<b>never</b> eaten.",
+     "err": {
+      "ever": "«Ніколи» — <b>never</b>; ever — «колись» у питаннях."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ you ever seen a whale?",
+     "o": [
+      "Have",
+      "Did",
+      "Are"
+     ],
+     "a": "Have",
+     "h": [
+      "ever + третя форма seen.",
+      "Have на початок."
+     ],
+     "e": "<b>Have</b> you ever seen…?",
+     "err": {
+      "Did": "seen — третя форма, тож <b>Have</b> you…?",
+      "Are": "Present Perfect — з <b>Have</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Has she ever met a famous person? — No, she ___.",
+     "o": [
+      "hasn't",
+      "haven't",
+      "didn't"
+     ],
+     "a": "hasn't",
+     "h": [
+      "Питали з Has.",
+      "she → hasn't."
+     ],
+     "e": "No, she <b>hasn't</b>.",
+     "err": {
+      "haven't": "she → <b>hasn't</b>.",
+      "didn't": "Питали з Has: No, she <b>hasn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши ever або never",
+     "p": "I have ___ ridden a horse. It's my dream!",
+     "a": [
+      "never"
+     ],
+     "h": [
+      "Мрія — значить, ще не каталась.",
+      "never."
+     ],
+     "e": "<b>never</b> ridden.",
+     "err": {
+      "ever": "«Ніколи не каталась» — <b>never</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши ever або never",
+     "p": "Have you ___ tried Chinese food?",
+     "a": [
+      "ever"
+     ],
+     "h": [
+      "Питання «колись?».",
+      "ever."
+     ],
+     "e": "Have you <b>ever</b>…?",
+     "err": {
+      "never": "У питанні «колись» — <b>ever</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Have you ever been to the sea? — Yes, I ___.",
+     "a": [
+      "have"
+     ],
+     "h": [
+      "Питали з Have.",
+      "Yes, I have."
+     ],
+     "e": "Yes, I <b>have</b>.",
+     "err": {
+      "did": "Питали з Have: Yes, I <b>have</b>.",
+      "was": "Питали з Have: Yes, I <b>have</b>.",
+      "has": "З I — <b>have</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Have you ever saw a tiger?",
+     "bad": 3,
+     "a": "Have you ever seen a tiger?",
+     "h": [
+      "Після have…ever — третя форма.",
+      "see – saw – seen."
+     ],
+     "e": "ever <b>seen</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I have never been to London.",
+     "a": [
+      "I have never been to London."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "be → been."
+     ],
+     "e": "never <b>been</b>.",
+     "err": {
+      "I have never was to London.": "Після have — третя форма: <b>been</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pp.just",
+   "title": "just / already / yet",
+   "rule": "just — щойно, already — вже (між have і третьою формою); yet — у питаннях і запереченнях, у кінці.",
+   "worked": {
+    "p": "I haven't seen this film ___.",
+    "steps": [
+     "Речення із запереченням: <b>haven't</b>.",
+     "У запереченнях «ще не» — <b>yet</b>, у кінці.",
+     "Відповідь: I haven't seen this film <b>yet</b>."
+    ]
+   },
+   "alt": "<p>Запам'ятай місця:</p>\n        <p>have <b>just</b> / <b>already</b> + третя форма (посередині)<br>… <b>yet</b>. / … <b>yet</b>? (у самому кінці, тільки з not або в питанні)</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I have ___ finished. Look!",
+     "o": [
+      "just",
+      "yet"
+     ],
+     "a": "just",
+     "h": [
+      "Щойно закінчила.",
+      "just."
+     ],
+     "e": "<b>just</b> finished.",
+     "err": {
+      "yet": "yet — тільки в запереченнях і питаннях. «Щойно» — <b>just</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Have you done your homework ___?",
+     "o": [
+      "yet",
+      "already"
+     ],
+     "a": "yet",
+     "h": [
+      "Питання, в кінці.",
+      "yet."
+     ],
+     "e": "…<b>yet</b>?",
+     "err": {
+      "already": "У питанні в кінці — <b>yet</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "She has ___ read this book. She knows the end.",
+     "o": [
+      "already",
+      "yet"
+     ],
+     "a": "already",
+     "h": [
+      "Вже прочитала (ствердження).",
+      "already."
+     ],
+     "e": "<b>already</b> read.",
+     "err": {
+      "yet": "У ствердженні — <b>already</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши just, already або yet",
+     "p": "I haven't seen this film ___.",
+     "a": [
+      "yet"
+     ],
+     "h": [
+      "Заперечення.",
+      "yet у кінці."
+     ],
+     "e": "…<b>yet</b>.",
+     "err": {
+      "already": "У запереченні — <b>yet</b>.",
+      "just": "У запереченні — <b>yet</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши just, already або yet",
+     "p": "We have ___ eaten, thanks. We aren't hungry.",
+     "a": [
+      "already",
+      "just"
+     ],
+     "h": [
+      "Ствердження: вже поїли.",
+      "already або just."
+     ],
+     "e": "<b>already</b> / <b>just</b> eaten.",
+     "err": {
+      "yet": "yet — у запереченнях і питаннях. Тут <b>already</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши just, already або yet",
+     "p": "The bus has ___ left! We're late!",
+     "a": [
+      "just",
+      "already"
+     ],
+     "h": [
+      "Щойно поїхав.",
+      "just."
+     ],
+     "e": "<b>just</b> left.",
+     "err": {
+      "yet": "yet — у запереченнях і питаннях. Тут <b>just</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I have yet finished my project.",
+     "bad": 2,
+     "a": "I have already finished my project.",
+     "h": [
+      "Це ствердження.",
+      "yet → already."
+     ],
+     "e": "<b>already</b> finished."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Have you finished yet your homework?",
+     "bad": 3,
+     "a": "Have you finished your homework yet?",
+     "h": [
+      "yet стоїть у самому кінці.",
+      "Перенеси yet у кінець."
+     ],
+     "e": "…your homework <b>yet</b>?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She hasn't come home yet.",
+     "a": [
+      "She hasn't come home yet."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Заперечення → yet."
+     ],
+     "e": "…<b>yet</b>.",
+     "err": {
+      "She hasn't come home already.": "У запереченні — <b>yet</b>."
+     }
+    }
+   ]
+  }
+ ]
+}

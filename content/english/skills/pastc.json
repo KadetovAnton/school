@@ -1,0 +1,550 @@
+{
+ "topic": "pastc",
+ "title": "Past Continuous",
+ "skills": [
+  {
+   "id": "pastc.form",
+   "title": "was / were + -ing",
+   "rule": "I / he / she / it → was + -ing; you / we / they → were + -ing.",
+   "worked": {
+    "p": "At 5 pm yesterday she ___ TV. (watch)",
+    "steps": [
+     "О 5-й учора — дія була <b>в процесі</b>.",
+     "she → <b>was</b>.",
+     "+ дієслово з -ing: <b>watching</b>.",
+     "Відповідь: she <b>was watching</b> TV."
+    ]
+   },
+   "alt": "<p>Це Present Continuous, «перенесений у минуле»: am / is → <b>was</b>, are → <b>were</b>.</p>\n        <p>I am reading → I <b>was</b> reading. They are playing → they <b>were</b> playing.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "At 8 o'clock yesterday I ___ breakfast.",
+     "o": [
+      "was having",
+      "had",
+      "am having"
+     ],
+     "a": "was having",
+     "h": [
+      "О 8-й — у процесі.",
+      "was + -ing."
+     ],
+     "e": "<b>was having</b>.",
+     "err": {
+      "had": "О 8-й дія тривала: <b>was having</b>.",
+      "am having": "yesterday — минуле: <b>was having</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "They ___ football when it started to rain.",
+     "o": [
+      "were playing",
+      "was playing",
+      "played"
+     ],
+     "a": "were playing",
+     "h": [
+      "Тривала дія, яку перервав дощ.",
+      "they → were + -ing."
+     ],
+     "e": "<b>were playing</b>.",
+     "err": {
+      "was playing": "they → <b>were</b>.",
+      "played": "Гра тривала, коли почався дощ: <b>were playing</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was / were + дієслово з -ing",
+     "p": "At 5 pm yesterday she ___ TV. (watch)",
+     "a": [
+      "was watching"
+     ],
+     "h": [
+      "she → was.",
+      "+ watching."
+     ],
+     "e": "<b>was watching</b>.",
+     "err": {
+      "watched": "О 5-й дія була в процесі: <b>was watching</b>.",
+      "were watching": "she → <b>was</b>.",
+      "is watching": "yesterday — минуле: <b>was watching</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was / were + дієслово з -ing",
+     "p": "We ___ dinner at 7 o'clock last night. (cook)",
+     "a": [
+      "were cooking"
+     ],
+     "h": [
+      "we → were.",
+      "+ cooking."
+     ],
+     "e": "<b>were cooking</b>.",
+     "err": {
+      "was cooking": "we → <b>were</b>.",
+      "cooked": "О 7-й дія була в процесі: <b>were cooking</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was / were + дієслово з -ing",
+     "p": "What were you doing at 10 pm? — I ___. (sleep)",
+     "a": [
+      "was sleeping"
+     ],
+     "h": [
+      "I → was.",
+      "+ sleeping."
+     ],
+     "e": "<b>was sleeping</b>.",
+     "err": {
+      "slept": "Питали «що робила о 10-й» — <b>was sleeping</b>.",
+      "were sleeping": "I → <b>was</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was / were + дієслово з -ing",
+     "p": "When I woke up, it ___. (snow)",
+     "a": [
+      "was snowing"
+     ],
+     "h": [
+      "Сніг уже йшов, коли я прокинулась.",
+      "it → was + snowing."
+     ],
+     "e": "<b>was snowing</b>.",
+     "err": {
+      "snowed": "Сніг тривав, коли я прокинулась: <b>was snowing</b>.",
+      "were snowing": "it → <b>was</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши was / were + дієслово з -ing",
+     "p": "At this time yesterday my parents ___. (work)",
+     "a": [
+      "were working"
+     ],
+     "h": [
+      "parents → were.",
+      "+ working."
+     ],
+     "e": "<b>were working</b>.",
+     "err": {
+      "was working": "my parents — вони: <b>were</b>.",
+      "worked": "«У цей час учора» — у процесі: <b>were working</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I were reading a book at 9 o'clock.",
+     "bad": 1,
+     "a": "I was reading a book at 9 o'clock.",
+     "h": [
+      "I → ?",
+      "was."
+     ],
+     "e": "I → <b>was</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "They was swimming when I saw them.",
+     "bad": 1,
+     "a": "They were swimming when I saw them.",
+     "h": [
+      "They → ?",
+      "were."
+     ],
+     "e": "they → <b>were</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She was listening to music.",
+     "a": [
+      "She was listening to music."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "she → was + -ing."
+     ],
+     "e": "<b>was listening</b>.",
+     "err": {
+      "She were listening to music.": "she → <b>was</b>."
+     }
+    },
+    {
+     "type": "order",
+     "task": "Склади речення",
+     "p": "«О шостій я робила уроки».",
+     "words": [
+      "was",
+      "At",
+      "six",
+      "I",
+      "doing",
+      "my",
+      "homework"
+     ],
+     "a": [
+      "at six i was doing my homework",
+      "i was doing my homework at six"
+     ],
+     "h": [
+      "Коли → хто → was → -ing → що.",
+      "At six → I → was → doing → …"
+     ],
+     "e": "<b>At six I was doing my homework.</b>"
+    }
+   ]
+  },
+  {
+   "id": "pastc.negq",
+   "title": "wasn't / weren't, Was / Were…?",
+   "rule": "wasn't / weren't + -ing; питання: Was / Were + хто + -ing? Відповідь: Yes, I was. / No, they weren't.",
+   "worked": {
+    "p": "Tom ___ his homework at 7. (not do)",
+    "steps": [
+     "Tom = he → was → <b>wasn't</b>.",
+     "+ дієслово з -ing: <b>doing</b>.",
+     "Відповідь: Tom <b>wasn't doing</b> his homework at 7."
+    ]
+   },
+   "alt": "<p>Усе як з was / were: «не» — wasn't / weren't, питання — Was / Were наперед. did тут не потрібен.</p>\n        <p>She was sleeping → She <b>wasn't</b> sleeping → <b>Was</b> she sleeping?</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ sleeping when you called.",
+     "o": [
+      "wasn't",
+      "weren't",
+      "didn't"
+     ],
+     "a": "wasn't",
+     "h": [
+      "I → was.",
+      "Заперечення → wasn't."
+     ],
+     "e": "<b>wasn't</b> sleeping.",
+     "err": {
+      "weren't": "З I — <b>wasn't</b>.",
+      "didn't": "Тут помічник was: <b>wasn't</b> sleeping."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "___ you watching TV at 8 pm?",
+     "o": [
+      "Were",
+      "Was",
+      "Did"
+     ],
+     "a": "Were",
+     "h": [
+      "you → were.",
+      "Питання → Were на початок."
+     ],
+     "e": "<b>Were</b> you watching…?",
+     "err": {
+      "Was": "you → <b>Were</b>.",
+      "Did": "Тут помічник were: <b>Were</b> you watching?"
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Was she cooking? — Yes, she ___.",
+     "o": [
+      "was",
+      "did",
+      "were"
+     ],
+     "a": "was",
+     "h": [
+      "Питали з Was.",
+      "Відповідь тим самим словом."
+     ],
+     "e": "Yes, she <b>was</b>.",
+     "err": {
+      "did": "Питали з Was: Yes, she <b>was</b>.",
+      "were": "she → <b>was</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши заперечення з дієсловом",
+     "p": "We ___ at that moment. (not listen)",
+     "a": [
+      "weren't listening",
+      "were not listening"
+     ],
+     "h": [
+      "we → were → weren't.",
+      "+ listening."
+     ],
+     "e": "<b>weren't listening</b>.",
+     "err": {
+      "didn't listening": "Тут помічник were: <b>weren't</b> listening.",
+      "wasn't listening": "we → <b>weren't</b>.",
+      "weren't listen": "Не забудь -ing: <b>listening</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши заперечення з дієсловом",
+     "p": "Tom ___ his homework at 7. (not do)",
+     "a": [
+      "wasn't doing",
+      "was not doing"
+     ],
+     "h": [
+      "Tom → was → wasn't.",
+      "+ doing."
+     ],
+     "e": "<b>wasn't doing</b>.",
+     "err": {
+      "didn't doing": "Тут помічник was: <b>wasn't</b> doing.",
+      "weren't doing": "Tom = he → <b>wasn't</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши Was або Were",
+     "p": "___ it raining when you left?",
+     "a": [
+      "Was"
+     ],
+     "h": [
+      "it → was.",
+      "Was на початок."
+     ],
+     "e": "<b>Was</b> it raining?",
+     "err": {
+      "Were": "it → <b>Was</b>.",
+      "Did": "Тут помічник was: <b>Was</b> it raining?"
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши коротку відповідь",
+     "p": "Were they playing chess? — No, they ___.",
+     "a": [
+      "weren't",
+      "were not"
+     ],
+     "h": [
+      "Питали з Were, «ні».",
+      "weren't."
+     ],
+     "e": "No, they <b>weren't</b>.",
+     "err": {
+      "didn't": "Питали з Were: No, they <b>weren't</b>.",
+      "wasn't": "they → <b>weren't</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Did you sleeping at 11 o'clock?",
+     "bad": 0,
+     "a": "Were you sleeping at 11 o'clock?",
+     "h": [
+      "Питання з -ing…",
+      "…з Were, без Did."
+     ],
+     "e": "<b>Were</b> you sleeping?"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 What were you doing at six?",
+     "a": [
+      "What were you doing at six?"
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "you → were."
+     ],
+     "e": "What <b>were</b> you doing?",
+     "err": {
+      "What was you doing at six?": "you → <b>were</b>."
+     }
+    }
+   ]
+  },
+  {
+   "id": "pastc.when",
+   "title": "Довга дія + коротка: when / while",
+   "rule": "Довга дія (тло) — was / were + -ing; коротка дія, що її перервала — Past Simple.",
+   "worked": {
+    "p": "We were watching a film when the lights ___ off. (go)",
+    "steps": [
+     "Довга дія: <b>were watching</b> (тло).",
+     "Світло вимкнулось раптом — коротка дія → Past Simple.",
+     "go → <b>went</b>.",
+     "Відповідь: when the lights <b>went</b> off."
+    ]
+   },
+   "alt": "<p>Уяви кіно: <b>довга сцена</b> (ми дивились фільм — was / were + -ing), і раптом <b>спалах</b> (вимкнулось світло — Past Simple).</p>\n        <p>Довге — Continuous, коротке-раптове — Simple.</p>",
+   "items": [
+    {
+     "type": "choice",
+     "p": "I ___ a shower when the phone rang.",
+     "o": [
+      "was having",
+      "had"
+     ],
+     "a": "was having",
+     "h": [
+      "Душ — довга дія.",
+      "Тло → was + -ing."
+     ],
+     "e": "<b>was having</b> (тло).",
+     "err": {
+      "had": "Душ тривав, коли задзвонив телефон: <b>was having</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "When I was walking home, I ___ my friend.",
+     "o": [
+      "met",
+      "was meeting"
+     ],
+     "a": "met",
+     "h": [
+      "Зустріч — коротка дія.",
+      "Past Simple."
+     ],
+     "e": "Коротка дія → <b>met</b>.",
+     "err": {
+      "was meeting": "Зустріч — коротка дія: <b>met</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "While Mum ___ dinner, Dad was reading.",
+     "o": [
+      "was cooking",
+      "cooked"
+     ],
+     "a": "was cooking",
+     "h": [
+      "While — дві довгі дії одночасно.",
+      "was + -ing."
+     ],
+     "e": "<b>was cooking</b>.",
+     "err": {
+      "cooked": "While — обидві дії тривали: <b>was cooking</b>."
+     }
+    },
+    {
+     "type": "choice",
+     "p": "Яке речення правильне?",
+     "o": [
+      "I was sleeping when you called.",
+      "I slept when you were calling."
+     ],
+     "a": "I was sleeping when you called.",
+     "h": [
+      "Що тривало, а що сталося раптом?",
+      "Сон — довгий, дзвінок — короткий."
+     ],
+     "e": "Сон — тло (<b>was sleeping</b>), дзвінок — коротка дія (<b>called</b>).",
+     "err": {
+      "I slept when you were calling.": "Сон — довга дія (was sleeping), дзвінок — коротка (called)."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple або Past Continuous",
+     "p": "We were watching a film when the lights ___ off. (go)",
+     "a": [
+      "went"
+     ],
+     "h": [
+      "Світло вимкнулось раптом.",
+      "Коротка дія → went."
+     ],
+     "e": "<b>went</b> off.",
+     "err": {
+      "were going": "Світло вимкнулось раптом — коротка дія: <b>went</b>.",
+      "goed": "go — неправильне: <b>went</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple або Past Continuous",
+     "p": "She ___ when she fell. (run)",
+     "a": [
+      "was running"
+     ],
+     "h": [
+      "Біг тривав.",
+      "Тло → was + -ing."
+     ],
+     "e": "<b>was running</b>.",
+     "err": {
+      "ran": "Біг тривав, коли вона впала: <b>was running</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple або Past Continuous",
+     "p": "When you called, I ___ a bath. (take)",
+     "a": [
+      "was taking"
+     ],
+     "h": [
+      "Ванна тривала.",
+      "was + -ing."
+     ],
+     "e": "<b>was taking</b>.",
+     "err": {
+      "took": "Ванна тривала, коли ти подзвонила: <b>was taking</b>.",
+      "was takeing": "Німа -e відпадає: <b>taking</b>."
+     }
+    },
+    {
+     "type": "input",
+     "task": "Впиши дієслово в Past Simple або Past Continuous",
+     "p": "While I was doing my homework, my brother ___ games. (play)",
+     "a": [
+      "was playing"
+     ],
+     "h": [
+      "While — обидві тривали.",
+      "was + -ing."
+     ],
+     "e": "<b>was playing</b>.",
+     "err": {
+      "played": "While — обидві дії тривали одночасно: <b>was playing</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 It was raining when we left school.",
+     "a": [
+      "It was raining when we left school."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Дощ — тло, вийшли — коротка дія."
+     ],
+     "e": "<b>was raining</b> … <b>left</b>.",
+     "err": {
+      "It rained when we left school.": "Дощ тривав — <b>was raining</b>."
+     }
+    }
+   ]
+  }
+ ]
+}
