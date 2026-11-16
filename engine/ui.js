@@ -14,12 +14,10 @@
   function strip(s) { return String(s).replace(/<[^>]+>/g, ""); }
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function $(id) { return document.getElementById(id); }
-  var canSpeak = (function () { try { return "speechSynthesis" in window; } catch (e) { return false; } })();
+  var canSpeak = window.SAY ? SAY.can : false;
   E.noAudio = !canSpeak;
-  function say(text, rate) {
-    try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = rate || 0.9; speechSynthesis.speak(u); } catch (e) {}
-  }
-  function stopSay() { try { speechSynthesis.cancel(); } catch (e) {} }
+  function say(text, rate) { if (window.SAY) SAY.say(text, rate); }
+  function stopSay() { if (window.SAY) SAY.stop(); }
   function bindSay(root) {
     var bs = root.querySelectorAll("[data-say]");
     for (var i = 0; i < bs.length; i++) (function (b) {
@@ -522,7 +520,7 @@
       }
       var typoUsed = false;
       root.innerHTML = '<div class="card">' + chip +
-        (mode === "listen" ? '<div class="prompt">🎧 Послухай і напиши слово</div><div class="row" style="margin-top:0"><button class="btn ghost" id="pl">🔊 Послухати</button><button class="btn ghost" id="sl">🐢 Повільно</button></div><div style="height:12px"></div>'
+        (mode === "listen" ? '<div class="prompt">🎧 Послухай і напиши слово</div><div class="row" style="margin-top:0"><button class="btn ghost" id="pl">🔊 Послухати</button><button class="btn ghost" id="sl">🐢 Повільно</button></div><p class="muted small" style="margin:6px 0 10px">Не чути? Вимкни беззвучний режим 🔕 і додай гучність.</p>'
                            : '<div class="task">Напиши англійською:</div><div class="prompt">' + esc(ua) + '</div>') +
         '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="англійською"><div id="almost"></div>' +
         '<div class="row" id="chk"><button class="btn full" id="check" disabled>Перевірити</button></div><div class="row" id="aux"><button class="btn plain" id="idk">🤷 Не пам\'ятаю</button></div><div id="fb"></div></div>';
@@ -619,7 +617,7 @@
     bindSay(root);
     if ($("showAns")) $("showAns").onclick = function (e) { $("ans").style.display = "inline"; e.target.parentNode.removeChild(e.target); };
     if ($("all")) $("all").onclick = function () {
-      try { speechSynthesis.cancel(); ex.items.forEach(function (x) { var u = new SpeechSynthesisUtterance(strip(x[0])); u.lang = "en-GB"; u.rate = 0.9; speechSynthesis.speak(u); }); } catch (e) {}
+      SAY.list(ex.items.map(function (x) { return strip(x[0]); }));
     };
     $("nx").onclick = function () { completeStep("examples"); nextStep(idx); };
   }
@@ -658,7 +656,7 @@
     window.UI_CUR = it; // для автоматичних перевірок
     var body = "";
     if (it.type === "choice") body = '<div class="opts">' + it.o.map(function (o, k) { return '<button class="opt" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>';
-    if (it.type === "dict") body = '<div class="row" style="margin-top:0"><button class="btn ghost" id="play">🔊 Послухати</button><button class="btn ghost" id="slow">🐢 Повільно</button></div><div style="height:12px"></div>';
+    if (it.type === "dict") body = '<div class="row" style="margin-top:0"><button class="btn ghost" id="play">🔊 Послухати</button><button class="btn ghost" id="slow">🐢 Повільно</button></div><p class="muted small" style="margin:6px 0 10px">Не чути? Вимкни беззвучний режим 🔕 (перемикач збоку на iPhone) і додай гучність.</p>';
     if (it.type === "fix") body = '<div class="pool fixw">' + it.p.split(" ").map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div>';
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';

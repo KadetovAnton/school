@@ -97,7 +97,8 @@ label.lbl{display:block;font-weight:700;margin:6px 0 6px}
 <div class="wrap"><div id="app" class="card"></div></div>
 <div id="toast" class="toast"></div>
 
-<script src="engine/engine.js?v=2.9.0"></script>
+<script src="engine/engine.js?v=2.9.1"></script>
+<script src="engine/speech.js?v=2.9.1"></script>
 <script>
 const TOPICS = {
   be:    "Дієслово to be (5 клас)",
@@ -246,10 +247,8 @@ function fresh(){ return {name:E.P().name||"", i:0, started:false, done:false, a
 function load(){ try{ const s = JSON.parse(localStorage.getItem(KEY)); return s && Array.isArray(s.ans) ? s : null; }catch(e){ return null; } }
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(S)); }catch(e){} }
 
-const canSpeak = (()=>{ try{ return "speechSynthesis" in window; }catch(e){ return false; } })();
-function say(text){
-  try{ speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = .9; speechSynthesis.speak(u); }catch(e){}
-}
+const canSpeak = window.SAY ? SAY.can : false;
+function say(text){ if (window.SAY) SAY.say(text); }
 const norm = s => String(s).toLowerCase().replace(/[’'`]/g,"").replace(/[.!?,«»"]/g,"").replace(/\s+/g," ").trim();
 const esc = s => String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;");
 const $app = document.getElementById("app");
