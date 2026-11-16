@@ -129,3 +129,7 @@ table.t td:first-child{font-weight:800}
 .who-s{font-size:13px;color:var(--muted);font-weight:700}
 .today{margin-top:14px;background:#FBF6EC;border-radius:14px;padding:10px 14px}
 .today-t{font-weight:800;font-size:15px}
+.fixw{margin:6px 0 18px}
+.fixw .w{font-size:20px}
+.fixw .w.bad{border-color:var(--ok);background:var(--ok-soft)}
+.fixw .w.miss{border-color:var(--bad);background:var(--bad-soft)}

@@ -15,8 +15,9 @@
   function cap(s) { return s.charAt(0).toUpperCase() + s.slice(1); }
   function $(id) { return document.getElementById(id); }
   var canSpeak = (function () { try { return "speechSynthesis" in window; } catch (e) { return false; } })();
-  function say(text) {
-    try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = 0.9; speechSynthesis.speak(u); } catch (e) {}
+  E.noAudio = !canSpeak;
+  function say(text, rate) {
+    try { speechSynthesis.cancel(); var u = new SpeechSynthesisUtterance(text); u.lang = "en-GB"; u.rate = rate || 0.9; speechSynthesis.speak(u); } catch (e) {}
   }
   function stopSay() { try { speechSynthesis.cancel(); } catch (e) {} }
   function bindSay(root) {
@@ -278,6 +279,7 @@
   }
   function fullSentence(it, right) {
     if (it.type === "order") return cap(right) + ".";
+    if (it.type === "fix" || it.type === "dict") return right;
     if (it.p.indexOf("___") >= 0) return it.p.replace("___", right).replace(/\s*\(.*?\)\s*$/, "");
     return right;
   }
@@ -286,15 +288,18 @@
     var pre = Math.min(cfg.pre || 0, hints.length);
     var sk = E.SK[it.skill];
     E.markSeen(it);
+    window.UI_CUR = it; // для автоматичних перевірок
     var body = "";
     if (it.type === "choice") body = '<div class="opts">' + it.o.map(function (o, k) { return '<button class="opt" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>';
-    if (it.type === "input") body = '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
+    if (it.type === "dict") body = '<div class="row" style="margin-top:0"><button class="btn ghost" id="play">🔊 Послухати</button><button class="btn ghost" id="slow">🐢 Повільно</button></div><div style="height:12px"></div>';
+    if (it.type === "fix") body = '<div class="pool fixw">' + it.p.split(" ").map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div>';
+    if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     root.innerHTML = '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
       (sk ? '<span class="skillTag">' + lvl(it.skill).e + ' ' + esc(sk.title) + '</span>' : "") +
       '<div class="prog"><i style="width:' + Math.round((cfg.prog || 0) * 100) + '%"></i></div>' +
       (it.task ? '<div class="task">' + it.task + ':</div>' : "") +
-      '<div class="prompt">' + esc(it.p).replace("___", '<span class="blank"></span>') + '</div>' + body +
+      (it.type === "dict" ? '<div class="prompt">🎧 Що ти чуєш?</div>' : it.type === "fix" ? "" : '<div class="prompt">' + esc(it.p).replace("___", '<span class="blank"></span>') + '</div>') + body +
       '<div id="hints"></div><div class="row" id="aux"><button class="btn ghost" id="hintBtn">💡 Підказка</button><button class="btn plain" id="idk">🤷 Не знаю</button></div>' +
       '<div id="fb"></div></div>';
 
@@ -315,7 +320,13 @@
         var inp0 = $("inp"); try { inp0.focus(); } catch (e) {}
         return;
       }
-      if (c.st === "typo") spellNote = true; // друга описка: граматика правильна, бал як з підказкою
+      if (c.st === "typo") spellNote = true;
+      if (it.type === "fix" && given != null) {
+        var fw = root.querySelectorAll(".fixw .w");
+        for (var f = 0; f < fw.length; f++) { fw[f].disabled = true; if (f === it.bad) fw[f].classList.add("bad"); }
+        if (btn && String(given) !== String(it.bad)) btn.classList.add("miss");
+        given = it.p.split(" ")[+given];
+      } // друга описка: граматика правильна, бал як з підказкою
       answered = true;
       var ok = c.st === "ok" || spellNote;
       var clean = ok && !spellNote && used === 0;
@@ -332,7 +343,8 @@
       var full = fullSentence(it, c.right), h;
       if (ok) {
         h = '<div class="fb ok"><h3>' + (spellNote ? "Правильно! Лише перевір написання ✏️" : used ? "Правильно! 👍" : ["Правильно! 🎉", "Так тримати! ⭐", "Чудово! 💪", "Супер! 🚀"][Math.floor(Math.random() * 4)]) + '</h3>' +
-          (spellNote ? '<div>Пишеться так: <b>' + esc(c.right) + '</b></div>' : "") + '<div>' + it.e + '</div>';
+          (spellNote ? '<div>Пишеться так: <b>' + esc(c.right) + '</b></div>' : "") +
+          (it.type === "fix" ? '<div>Правильно: <b>' + esc(c.right) + '</b></div>' : "") + '<div>' + it.e + '</div>';
       } else {
         h = '<div class="fb bad"><h3>' + (given == null ? "Нічого страшного, розберімо 🙂" : "Майже! Розберімо 🙂") + '</h3>' +
           (c.msg ? '<div>' + c.msg + '</div>' : given != null ? '<div>Твоя відповідь: <b>' + esc(given) + '</b></div>' : "") +
@@ -354,7 +366,16 @@
       var os = root.querySelectorAll(".opt");
       for (var i = 0; i < os.length; i++) (function (b) { b.onclick = function () { finish(it.o[+b.getAttribute("data-k")], b); }; })(os[i]);
     }
-    if (it.type === "input") {
+    if (it.type === "fix") {
+      var fws = root.querySelectorAll(".fixw .w");
+      for (var fi = 0; fi < fws.length; fi++) (function (b) { b.onclick = function () { finish(b.getAttribute("data-k"), b); }; })(fws[fi]);
+    }
+    if (it.type === "dict") {
+      $("play").onclick = function () { say(it.a[0]); };
+      $("slow").onclick = function () { say(it.a[0], 0.55); };
+      say(it.a[0]);
+    }
+    if (it.type === "input" || it.type === "dict") {
       var inp = $("inp"), ch = $("check");
       inp.oninput = function () { ch.disabled = !inp.value.trim(); if (typoUsed) $("almost").innerHTML = ""; };
       inp.onkeydown = function (e) { if (e.key === "Enter" && inp.value.trim()) finish(inp.value); };

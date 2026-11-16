@@ -122,7 +122,7 @@
       s.topic = json.topic;
       (s.items || []).forEach(function (it) {
         it.skill = s.id;
-        it.key = s.id + "|" + it.p;
+        it.key = s.id + "|" + it.p + (it.type === "choice" ? "|" + it.a : "");
       });
       E.SK[s.id] = s;
     });
@@ -206,7 +206,7 @@
     var sk = E.SK[id];
     if (!sk) return [];
     var seen = E.P().seen;
-    var all = sk.items.slice().map(function (it) { return { it: it, r: Math.random() }; });
+    var all = sk.items.filter(function (it) { return !(E.noAudio && it.type === "dict"); }).map(function (it) { return { it: it, r: Math.random() }; });
     all.sort(function (a, b) {
       var ua = used && used[a.it.key] ? 1 : 0, ub = used && used[b.it.key] ? 1 : 0;
       if (ua !== ub) return ua - ub;
@@ -231,7 +231,7 @@
       .trim();
   };
   function answersOf(it) {
-    if (it.type === "choice") return [it.a];
+    if (it.type === "choice" || it.type === "fix") return [it.a];
     return Array.isArray(it.a) ? it.a : [it.a];
   }
   E.answersOf = answersOf;
@@ -253,27 +253,45 @@
   }
   /* Описка: різниця в одну літеру, і вона НЕ в закінченні слова
      (останні 2 літери — там живуть граматичні помилки: watchs, gos, drink→drinks). */
-  function isTypo(right, given) {
+  /* guard — слова, де закінчення важливе (граматика); null = усі слова */
+  function isTypo(right, given, guard) {
     if (right.length < 4 || dist(right, given) !== 1) return false;
     var p = 0;
     while (p < right.length && p < given.length && right.charAt(p) === given.charAt(p)) p++;
     var end = right.indexOf(" ", p);
     if (end < 0) end = right.length;
+    var start = right.lastIndexOf(" ", p - 1) + 1;
+    if (guard && !guard[right.slice(start, end)]) return true; // звичайне слово — описка будь-де
     return end - p > 2;
+  }
+  /* у диктанті «граматичні» слова — ті, що змінюються в типових помилках */
+  function guardOf(it, right) {
+    if (it.type !== "dict") return null;
+    var g = {}, rw = right.split(" ");
+    Object.keys(it.err || {}).forEach(function (k) {
+      var kw = E.norm(k).split(" ");
+      rw.forEach(function (w, i) { if (kw[i] !== w) g[w] = 1; });
+    });
+    return g;
   }
 
   /* Результат: {st:"ok"|"typo"|"wrong"|"idk", msg?, right} */
   E.check = function (it, given) {
     var ans = answersOf(it), right = ans[0];
     if (given == null) return { st: "idk", right: right };
+    if (it.type === "fix") { // «Знайди помилку»: given — номер слова
+      if (String(given) === String(it.bad)) return { st: "ok", right: right };
+      var w = it.p.split(" ");
+      return { st: "wrong", right: right, msg: "Слово «" + w[+given].replace(/[.,!?]/g, "") + "» тут правильне 🙂 Помилка в слові «<b>" + w[it.bad].replace(/[.,!?]/g, "") + "</b>»." };
+    }
     var g = E.norm(given), i;
     for (i = 0; i < ans.length; i++) if (E.norm(ans[i]) === g) return { st: "ok", right: ans[i] };
     if (it.err) {
       var ks = Object.keys(it.err);
       for (i = 0; i < ks.length; i++) if (E.norm(ks[i]) === g) return { st: "wrong", msg: it.err[ks[i]], right: right };
     }
-    if (it.type === "input") {
-      for (i = 0; i < ans.length; i++) if (isTypo(E.norm(ans[i]), g)) return { st: "typo", right: ans[i] };
+    if (it.type === "input" || it.type === "dict") {
+      for (i = 0; i < ans.length; i++) { var rn = E.norm(ans[i]); if (isTypo(rn, g, guardOf(it, rn))) return { st: "typo", right: ans[i] }; }
     }
     return { st: "wrong", right: right };
   };

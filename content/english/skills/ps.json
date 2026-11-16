@@ -149,6 +149,62 @@
      "err": {
       "has": "has — тільки для he / she / it. З we: <b>have</b>."
      }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My friends plays football after school.",
+     "bad": 2,
+     "a": "My friends play football after school.",
+     "h": [
+      "My friends — їх кілька. Це they.",
+      "З they дієслово без -s."
+     ],
+     "e": "My friends = they → <b>play</b>, без -s."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "I goes to the park on Sundays.",
+     "bad": 1,
+     "a": "I go to the park on Sundays.",
+     "h": [
+      "Хто? I — я.",
+      "З I дієслово не змінюється."
+     ],
+     "e": "I → <b>go</b>. -es буває тільки з he / she / it."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We live in a small village.",
+     "a": [
+      "We live in a small village."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "We — «ми»: дієслово без змін."
+     ],
+     "e": "we → <b>live</b>.",
+     "err": {
+      "We lives in a small village.": "we — «ми», закінчення не потрібне: we <b>live</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 They play tennis on Fridays.",
+     "a": [
+      "They play tennis on Fridays."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "They — «вони»: дієслово без змін."
+     ],
+     "e": "they → <b>play</b>.",
+     "err": {
+      "They plays tennis on Fridays.": "they — «вони», закінчення не потрібне: they <b>play</b>."
+     }
     }
    ]
   },
@@ -263,6 +319,62 @@
      "e": "it → rain<b>s</b>.",
      "err": {
       "rain": "З it потрібна -s: rain<b>s</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My sister like ice cream.",
+     "bad": 2,
+     "a": "My sister likes ice cream.",
+     "h": [
+      "My sister = she.",
+      "she → дієслово + s."
+     ],
+     "e": "My sister = she → <b>likes</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "The dog sleep in the garden.",
+     "bad": 2,
+     "a": "The dog sleeps in the garden.",
+     "h": [
+      "The dog = it.",
+      "it → дієслово + s."
+     ],
+     "e": "The dog = it → <b>sleeps</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 He reads a lot of books.",
+     "a": [
+      "He reads a lot of books."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "he → дієслово + s."
+     ],
+     "e": "he → read<b>s</b>.",
+     "err": {
+      "He read a lot of books.": "he → потрібна -s: read<b>s</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Our cat sleeps all day.",
+     "a": [
+      "Our cat sleeps all day."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Our cat = it → дієслово + s."
+     ],
+     "e": "Our cat = it → sleep<b>s</b>.",
+     "err": {
+      "Our cat sleep all day.": "Our cat = it → потрібна -s: sleep<b>s</b>."
      }
     }
    ]
@@ -417,6 +529,64 @@
       "brushs": "Після -sh додаємо -es: brush<b>es</b>.",
       "brush": "she → brush<b>es</b>."
      }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "He watchs cartoons every evening.",
+     "bad": 1,
+     "a": "He watches cartoons every evening.",
+     "h": [
+      "Подивись на дієслово: на що закінчується watch?",
+      "-ch → + es."
+     ],
+     "e": "watch закінчується на -ch → <b>watches</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My dad gos to work by car.",
+     "bad": 2,
+     "a": "My dad goes to work by car.",
+     "h": [
+      "Подивись на дієслово: go закінчується на -o.",
+      "-o → + es."
+     ],
+     "e": "go → <b>goes</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She goes to school at eight.",
+     "a": [
+      "She goes to school at eight."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "go з she → ?"
+     ],
+     "e": "she → <b>goes</b>.",
+     "err": {
+      "She go to school at eight.": "she → потрібне закінчення: go<b>es</b>.",
+      "She gos to school at eight.": "go закінчується на -o: go<b>es</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Tom watches TV in the evening.",
+     "a": [
+      "Tom watches TV in the evening."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "watch з he → ?"
+     ],
+     "e": "Tom = he, watch на -ch → <b>watches</b>.",
+     "err": {
+      "Tom watch TV in the evening.": "Tom = he → watch<b>es</b>.",
+      "Tom watchs TV in the evening.": "Після -ch додаємо -es: watch<b>es</b>."
+     }
     }
    ]
   },
@@ -555,6 +725,64 @@
       "frys": "Перед y приголосна (r), тому fr<b>ies</b>.",
       "fry": "Mum = she → fr<b>ies</b>."
      }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My brother studys maths every day.",
+     "bad": 2,
+     "a": "My brother studies maths every day.",
+     "h": [
+      "Подивись на study: що стоїть перед y?",
+      "Приголосна + y → ies."
+     ],
+     "e": "Перед y приголосна d → <b>studies</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She plaies the piano.",
+     "bad": 1,
+     "a": "She plays the piano.",
+     "h": [
+      "Подивись на play: що стоїть перед y?",
+      "Голосна + y → просто + s."
+     ],
+     "e": "Перед y голосна a → <b>plays</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 Anna studies French.",
+     "a": [
+      "Anna studies French."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "study: перед y приголосна → ies."
+     ],
+     "e": "Anna = she, study → <b>studies</b>.",
+     "err": {
+      "Anna studys French.": "Перед y приголосна (d): stud<b>ies</b>.",
+      "Anna study French.": "Anna = she → stud<b>ies</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 He enjoys his English lessons.",
+     "a": [
+      "He enjoys his English lessons."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "enjoy: перед y голосна o → просто + s."
+     ],
+     "e": "Перед y голосна o → enjoy<b>s</b>.",
+     "err": {
+      "He enjoies his English lessons.": "Перед y голосна (o), тому просто + s: enjoy<b>s</b>.",
+      "He enjoy his English lessons.": "he → потрібна -s: enjoy<b>s</b>."
+     }
     }
    ]
   },
@@ -673,6 +901,63 @@
      "e": "they → <b>have</b>.",
      "err": {
       "has": "has — тільки для he / she / it. З they: <b>have</b>."
+     }
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "My mum have a red car.",
+     "bad": 2,
+     "a": "My mum has a red car.",
+     "h": [
+      "My mum = she.",
+      "have з she → ?"
+     ],
+     "e": "My mum = she → <b>has</b>."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "We has a lot of friends.",
+     "bad": 1,
+     "a": "We have a lot of friends.",
+     "h": [
+      "We — «ми».",
+      "has — тільки для he / she / it."
+     ],
+     "e": "we → <b>have</b>."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 She has a little brother.",
+     "a": [
+      "She has a little brother."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "she → has."
+     ],
+     "e": "she → <b>has</b>.",
+     "err": {
+      "She have a little brother.": "she → <b>has</b>.",
+      "She haves a little brother.": "have — виняток: <b>has</b>."
+     }
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 They have a big garden.",
+     "a": [
+      "They have a big garden."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "they → have."
+     ],
+     "e": "they → <b>have</b>.",
+     "err": {
+      "They has a big garden.": "has — тільки для he / she / it. З they: <b>have</b>."
      }
     }
    ]
@@ -835,6 +1120,56 @@
       "She → never → eats → …"
      ],
      "e": "<b>She never eats meat.</b> never стоїть перед дієсловом."
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "She goes always to school by bus.",
+     "bad": 2,
+     "a": "She always goes to school by bus.",
+     "h": [
+      "Слова «як часто» мають своє місце.",
+      "always стоїть перед дієсловом."
+     ],
+     "e": "always — перед дієсловом: She <b>always goes</b>…"
+    },
+    {
+     "type": "fix",
+     "task": "Знайди і натисни слово з помилкою",
+     "p": "Tom plays often computer games.",
+     "bad": 2,
+     "a": "Tom often plays computer games.",
+     "h": [
+      "Слова «як часто» мають своє місце.",
+      "often стоїть перед дієсловом."
+     ],
+     "e": "often — перед дієсловом: Tom <b>often plays</b>…"
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 I usually get up at seven.",
+     "a": [
+      "I usually get up at seven."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Хто → як часто → що робить."
+     ],
+     "e": "<b>I usually get up</b> at seven."
+    },
+    {
+     "type": "dict",
+     "task": "Послухай і напиши речення",
+     "p": "🎧 We never watch TV in the morning.",
+     "a": [
+      "We never watch TV in the morning."
+     ],
+     "h": [
+      "Послухай ще раз — можна повільно 🐢",
+      "Хто → як часто → що робить."
+     ],
+     "e": "<b>We never watch</b> TV in the morning."
     }
    ]
   }
