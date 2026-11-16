@@ -32,7 +32,20 @@
   E.noAudio = !canSpeak;
   function say(text, rate) { if (window.SAY) SAY.say(text, rate); }
   function stopSay() { if (window.SAY) SAY.stop(); }
+  /* текст для озвучки українською: без розмітки, знаки — словами */
+  function ukText(t) {
+    return String(t).replace(/<[^>]+>/g, " ").replace(/&nbsp;/g, " ").replace(/___/g, " пропуск ")
+      .replace(/(\d)\s*·\s*(\d)/g, "$1 помножити на $2").replace(/(\d)\s*:\s*(\d)/g, "$1 поділити на $2")
+      .replace(/\s−\s|\s-\s/g, " мінус ").replace(/\s\+\s/g, " плюс ").replace(/\s=\s/g, " дорівнює ")
+      .replace(/\s>\s/g, " більше ніж ").replace(/\s<\s/g, " менше ніж ").replace(/[→•✓✅❌⚠️💡🔍]/g, " ").replace(/\s+/g, " ").trim();
+  }
+  function ukBtn(t) { return canSpeak && SUB.kid ? '<button class="say" data-uk="' + esc(ukText(t)) + '">🔊 Послухати</button>' : ""; }
   function bindSay(root) {
+    var us = root.querySelectorAll("[data-uk]");
+    for (var u = 0; u < us.length; u++) (function (b) {
+      if (!canSpeak) { b.parentNode.removeChild(b); return; }
+      b.onclick = function (e) { e.stopPropagation(); SAY.uk(b.getAttribute("data-uk")); };
+    })(us[u]);
     var bs = root.querySelectorAll("[data-say]");
     for (var i = 0; i < bs.length; i++) (function (b) {
       if (!canSpeak) { b.parentNode.removeChild(b); return; }
@@ -114,10 +127,11 @@
       b.onclick = function () { var a = b.getAttribute("data-act"); if (a === "dad") renderDad(back); if (a === "badges") renderBadges(back); toTop(); };
     })(bs[i]);
   }
+  function myBadges() { var c = child(), subs = c ? c.subjects.filter(function (x) { return x.open; }).map(function (x) { return x.id; }) : []; return E.BADGES.filter(function (b) { return !b.sub || subs.indexOf(b.sub) >= 0; }); }
   function badgesRow() {
-    var got = E.P().badges || {}, n = 0; for (var k in got) n++;
-    var last = E.BADGES.filter(function (b) { return got[b.id]; }).slice(-5).map(function (b) { return b.e; }).join(" ");
-    return '<button class="lesson" data-act="badges"><span class="ic">🏅</span><span><div class="lt">Мої значки та оформлення</div><div class="ls">' + n + ' з ' + E.BADGES.length + (last ? " · " + last : " · перший уже близько!") + '</div></span></button>';
+    var got = E.P().badges || {}, list = myBadges(), n = list.filter(function (b) { return got[b.id]; }).length;
+    var last = list.filter(function (b) { return got[b.id]; }).slice(-5).map(function (b) { return b.e; }).join(" ");
+    return '<button class="lesson" data-act="badges"><span class="ic">🏅</span><span><div class="lt">Мої значки та оформлення</div><div class="ls">' + n + ' з ' + list.length + (last ? " · " + last : " · перший уже близько!") + '</div></span></button>';
   }
 
   /* ================== ДЛЯ ТАТА ================== */
@@ -154,7 +168,7 @@
     var P = E.P(), got = P.badges || {}, tot = E.starsTotal();
     var html = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">🏅 Значки</span></div>' +
       '<div class="card"><h1>Мої значки</h1><p class="muted">Значки — за старанність, а не лише за ідеальність. Усього зірок: ⭐ ' + tot + '</p><div class="badges">' +
-      E.BADGES.map(function (b) {
+      myBadges().map(function (b) {
         return '<div class="badge ' + (got[b.id] ? "got" : "") + '"><div class="be">' + (got[b.id] ? b.e : "🔒") + '</div><div class="bt">' + esc(b.t) + '</div><div class="bs">' + esc(got[b.id] ? got[b.id].split("-").reverse().join(".") : b.s) + '</div></div>';
       }).join("") + '</div></div>' +
       '<div class="card"><h2>🎨 Оформлення</h2><p class="muted small">Нові кольори відкриваються за зібрані зірки.</p><div class="themes">' +
@@ -186,7 +200,7 @@
   }
 
   /* заголовок вкладки браузера */
-  function setTitle(t) { try { document.title = t ? t + " — Домашня школа" : "Домашня школа"; } catch (e) {} }
+  function setTitle(t) { document.body.classList.remove("insession"); try { document.title = t ? t + " — Домашня школа" : "Домашня школа"; } catch (e) {} }
 
   /* ================== ХТО ВЧИТЬСЯ ================== */
   function renderWho() {
@@ -288,6 +302,7 @@
 
   /* ================== ГОЛОС ОЗВУЧКИ ================== */
   function renderVoices() {
+    SAY.onvoices = function () { if ($("auto")) renderVoices(); };
     var vs = SAY.voices(), cur = SAY.current();
     var sample = "Hello! My name is Anna. I usually walk to school, but yesterday I went by bus.";
     $app.innerHTML = '<div class="topbar"><button class="back" id="back">← Назад</button></div>' +
@@ -357,15 +372,16 @@
     var pendingDiag = SUB.diag && !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
     var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && (plan.words || !SUB.words) && plan.mist && (!plan.reviewPart || plan.review);
 
-    var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">' + SUB.ic + ' ' + SUB.title + '</span></div>' +
+    var diagCard = dg ? "" : '<div class="card" style="border:2px solid var(--pri)"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>';
+    var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">' + SUB.ic + ' ' + SUB.title + '</span></div>' + diagCard +
       '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
       '<p class="muted" style="margin:0">' + (cont ? (next ? "Зараз: урок " + next.n + " «" + esc(cont.title) + "»" : "Усі готові уроки пройдено! Нові вже готуються.") : "") + '</p></div></div>' +
       '<div class="stats">' + freezeChip() + '<span class="stat">⭐ ' + E.starsWeek() + ' за тиждень</span>' +
       '<span class="stat">📚 ' + doneCount + ' з ' + allLessons + ' уроків</span></div>' +
       goalBar(E.todayCount(SUB.id), SUBJ.dailyGoal) +
-      '<div class="row"><button class="btn full ' + (dayDone ? "okb" : "") + '" id="daily">' + (dayDone ? "✅ Заняття на сьогодні виконано" : "▶️ Заняття на сьогодні · ~15 хв") + '</button></div>' +
-      (cont ? '<div class="row" style="margin-top:8px"><button class="btn ghost full" id="cont">' + T.label + '</button></div>' : "") + '</div>' +
-      (dg ? "" : '<div class="card"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>');
+      ('<div class="row"><button class="btn full ' + (dayDone ? "okb" : "") + '" id="daily">' + (dayDone ? "✅ Заняття на сьогодні виконано" : "▶️ Заняття на сьогодні · ~" + (SUB.kid ? 10 : 15) + " хв") + '</button></div>' +
+      (cont ? '<div class="row" style="margin-top:8px"><button class="btn ghost full' + (SUB.kid && !dayDone ? " small" : "") + '" id="cont">' + T.label + '</button></div>' : "")) + '</div>' +
+      "";
 
     html += rewardCard();
     var wDue = E.wordsDue().length, wL = E.wordsLearned();
@@ -378,7 +394,7 @@
       '<button class="lesson" id="mist"><span class="ic">📝</span><span><div class="lt">Мої помилки</div><div class="ls">' +
       (nMist ? nMist + " " + (nMist === 1 ? "завдання чекає" : nMist < 5 ? "завдання чекають" : "завдань чекають") + " на виправлення" : "Усі виправлено 🎉") + '</div></span></button></div>';
     num = 0;
-    var prevOk = true, prevN = 0, early = {};
+    var prevOk = true, prevN = 0, early = {}, nLocked = 0;
     PATH.stages.forEach(function (stage, si) {
       var anyOpen = stage.lessons.some(function (l) { return !!l.file; });
       html += '<div class="card stage ' + (anyOpen ? "" : "locked") + '"><div class="stage-h"><div class="stage-n">' + stage.n + '</div>' +
@@ -394,7 +410,7 @@
           if (L.stars > 0) { cls = "done"; ic = "✅"; sub = '<span class="stars">' + starsStr(L.stars) + '</span> · можна повторити'; }
           else if (L.skip) { cls = "done"; ic = "⏭️"; sub = "Знаєш за перевіркою рівня · можна пройти"; }
           else if (unlocked) { cls = "open"; ic = ls.ic; sub = nDone ? "Пройдено " + nDone + " з " + stepsOf(cget(ls.file)).length + " кроків" : "Почати · ~" + (SUB.kid ? 10 : 20) + " хв"; }
-          else { cls = "lock soon"; ic = "🔒"; sub = "Відкриється після тесту уроку " + prevN + " · можна раніше"; early[ls.file] = { l: ls, after: prevN }; }
+          else { cls = "lock soon"; ic = "🔒"; sub = "Після уроку " + prevN + " · можна відкрити раніше"; early[ls.file] = { l: ls, after: prevN }; nLocked++; if (nLocked > 2) cls += " hid"; }
           if (lv && unlocked) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
           prevOk = L.stars > 0 || !!L.skip; prevN = num;
         } else if (next && next.n + 1 === num) { ic = "⏳"; sub = "Готується — скоро з'явиться"; }
@@ -403,6 +419,7 @@
       });
       html += '</div>';
     });
+    if (nLocked > 2) html += '<div class="card" style="padding:10px 16px"><button class="btn plain full" id="showAll">🔒 Показати всі уроки (ще ' + (nLocked - 2) + ')</button></div>';
     var diagHtml = '<a class="lesson' + (dg ? "" : " open") + '" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
       (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : pendingDiag ? "✅ Ти вже пройшла тест! Натисни — і план підлаштується під результат" : "Тест на 29 завдань: що вже знаю, а що підтягнути") + '</div></span></a>';
     html = !SUB.diag ? html : dg ? html + diagHtml : html.replace("@DIAG@", diagHtml);
@@ -410,8 +427,9 @@
     $("subj").onclick = function () { renderSubjects(); toTop(); };
     bindActs(renderHome);
     if ($("cont")) $("cont").onclick = function () { DAILY = false; openLesson(cont.file, T.step); };
-    $("daily").onclick = function () { renderDaily(); toTop(); };
+    if ($("daily")) $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
+    if ($("showAll")) $("showAll").onclick = function () { var hs = $app.querySelectorAll(".lesson.hid"); for (var q = 0; q < hs.length; q++) hs[q].classList.remove("hid"); this.parentNode.parentNode.removeChild(this.parentNode); };
     if ($("wordsBtn")) $("wordsBtn").onclick = function () { renderWords(); toTop(); };
     if ($("voiceBtn")) $("voiceBtn").onclick = function () { renderVoices(); toTop(); };
     $("reviewBtn").onclick = function () { if (rvN >= 2) { DAILY = false; runReview(renderHome); } };
@@ -510,7 +528,7 @@
         { id: "lesson", ic: "📘", t: plan.lesson || !T ? "Крок уроку" : "Урок " + T.n + ": " + T.stepT.toLowerCase(), s: plan.lesson ? "Зроблено" : T ? T.l.title : "", done: plan.lesson },
         withReview ? { id: "review", ic: "🔁", t: "Повторення тижня", s: plan.review ? "Зроблено" : "По завданню з кожної пройденої теми · ~10 хв", done: plan.review } : null,
         !SUB.words ? null : { id: "words", ic: "🃏", t: "Слова", s: plan.words ? "Зроблено" : wl.length + " " + (wl.length === 1 ? "слово" : wl.length < 5 ? "слова" : "слів") + ": повторення і нові", done: plan.words },
-        { id: "mist", ic: "📝", t: "Мої помилки", s: mist.length ? Math.min(mist.length, 5) + (Math.min(mist.length, 5) === 1 ? " речення" : Math.min(mist.length, 5) < 5 ? " речення" : " речень") + " виправити" : (E.P().mistakes.length ? "Усі помилки виправлено 🎉" : "Помилок поки немає 🙂"), done: plan.mist }
+        { id: "mist", ic: "📝", t: "Мої помилки", s: mist.length ? Math.min(mist.length, 5) + (SUB.kid ? (Math.min(mist.length, 5) === 1 ? " завдання" : " завдання") : (Math.min(mist.length, 5) < 5 ? " речення" : " речень")) + " виправити" : (E.P().mistakes.length ? "Усі помилки виправлено 🎉" : "Помилок поки немає 🙂"), done: plan.mist }
       ];
       parts = parts.filter(Boolean);
       var cur = null; parts.forEach(function (x) { if (!cur && !x.done) cur = x; });
@@ -574,7 +592,7 @@
       var ms = E.openMistakes(), fixedN = 0, seenK = {};
       E.P().mistakes.forEach(function (m) { if (m.fixed && !seenK[m.key]) { seenK[m.key] = 1; fixedN++; } });
       var html = '<div class="topbar"><button class="back" id="back">← Кабінет</button><span class="muted small" style="font-weight:700">📝 Мої помилки</span></div>' +
-        '<div class="card"><h1>Мої помилки</h1><p class="muted">Помилка — не біда, а підказка, що закріпити. Правильна відповідь прибирає речення зі списку.</p>' +
+        '<div class="card"><h1>Мої помилки</h1><p class="muted">Помилка — не біда, а підказка, що закріпити. Правильна відповідь прибирає ' + (SUB.kid ? "завдання" : "речення") + ' зі списку.</p>' +
         (fixedN ? '<div class="tip">Уже виправлено: <b>' + fixedN + '</b> 💪</div>' : "") +
         (ms.length ? '<div class="row"><button class="btn full" id="go2">Виправити ' + Math.min(ms.length, 5) + ' →</button></div>' : '<p style="font-weight:800">Невиправлених помилок немає 🎉</p>') + '</div>';
       if (ms.length) {
@@ -615,7 +633,7 @@
         var name = function (id) { return E.SK[id] ? E.SK[id].title : id; };
         $("stage").innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🔁</div><h2>Повторення тижня — готово!</h2><p class="muted">' + fmt(s.score) + ' з ' + s.max + ' балів</p>' +
           (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>Тримається 💪</b><br>' + good.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : "") +
-          (weak.length ? '<div class="tip" style="text-align:left"><b>Варто освіжити</b> (ці речення вже в «Моїх помилках»)<br>' + weak.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : '<p>Усе пам\'ятаєш — супер! 🔥</p>') +
+          (weak.length ? '<div class="tip" style="text-align:left"><b>Варто освіжити</b> (ці ' + (SUB.kid ? "завдання" : "речення") + ' вже в «Моїх помилках»)<br>' + weak.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : '<p>Усе пам\'ятаєш — супер! 🔥</p>') +
           '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати батькам у Telegram</button><button class="btn full" id="go">Далі →</button></div></div>';
         $("copy").onclick = function () {
           var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
@@ -683,9 +701,10 @@
         if (!ok && !again[en]) { again[en] = 1; q.push(en); } // ще раз наприкінці
       };
       if (mode === "card") {
-        root.innerHTML = '<div class="card">' + chip + '<p class="muted" style="margin:6px 0 4px">Згадай переклад і переверни картку.</p>' +
+        var isNew = !(E.P().words || {})[en] || !(E.P().words[en].n);
+        root.innerHTML = '<div class="card">' + chip + '<p class="muted" style="margin:6px 0 4px">' + (isNew ? "🆕 Нове слово! Послухай, переверни картку й запам'ятай." : "Згадай переклад і переверни картку.") + '</p>' +
           '<div class="flash" id="fl"><div class="flash-in"><div class="face front"><div class="word">' + esc(en) + '</div>' + (canSpeak ? '<button class="say" data-say="' + esc(en) + '">🔊 Послухати</button>' : "") + '<div class="sub">натисни, щоб перевернути</div></div>' +
-          '<div class="face back"><div class="word" style="color:var(--pri-ink)">' + esc(ua) + '</div><div class="sub" style="color:var(--muted)">' + esc(en) + '</div></div></div></div>' +
+          '<div class="face back"><div class="word" style="color:var(--pri-ink)">' + esc(ua) + '</div><div class="sub" style="color:var(--muted)">' + esc(en) + '</div>' + (canSpeak ? '<button class="say" data-say="' + esc(en) + '">🔊</button>' : "") + '</div></div></div>' +
           '<div class="row" id="btns" style="visibility:hidden"><button class="btn ghost" id="no">↺ Ще вчу</button><button class="btn okb" id="yes">✓ Знаю</button></div></div>';
         bindSay(root);
         $("fl").onclick = function () { $("fl").classList.toggle("flipped"); $("btns").style.visibility = "visible"; };
@@ -774,7 +793,7 @@
     function draw() {
       var c = X[k];
       root.innerHTML = '<div class="card"><span class="chip">Правило · ' + (k + 1) + ' з ' + X.length + '</span>' +
-        '<div class="big-emoji">' + c.e + '</div><h2>' + c.h + '</h2>' + c.html +
+        '<div class="big-emoji">' + c.e + '</div><h2>' + c.h + '</h2>' + ukBtn(c.h + ". " + c.html) + c.html +
         '<div class="dots">' + X.map(function (_, i) { return '<i class="' + (i === k ? "on" : "") + '"></i>'; }).join("") + '</div>' +
         '<div class="row">' + (k > 0 ? '<button class="btn ghost" id="prev">←</button>' : "") +
         '<button class="btn" id="nx" style="flex:3">' + (k < X.length - 1 ? "Далі →" : "Зрозуміло! " + ({ examples: "До прикладів", practice: "До вправ", test: "До тесту" }[(stepsOf(LES)[idx + 1] || {}).id] || "Далі") + " →") + '</button></div></div>';
@@ -789,7 +808,7 @@
   function stepExamples(root, idx) {
     var ex = LES.examples;
     root.innerHTML = '<div class="card"><span class="chip">Приклади</span><h2>🎧 ' + esc(ex.title) + '</h2>' +
-      '<p class="muted">Натисни 🔊 і повтори вголос. Подивись на виділені дієслова: де є -s, а де нема, і чому?</p>' +
+      '<p class="muted">' + (ex.tip || "Натисни 🔊, послухай і повтори вголос. Зверни увагу на виділені слова.") + '</p>' +
       (canSpeak ? '<button class="btn ghost full" id="all" style="margin-bottom:8px">▶️ Послухати все</button>' : "") +
       ex.items.map(function (x) { return '<div class="ex"><div><div class="en">' + x[0] + '</div><div class="ua">' + x[1] + '</div></div><button class="say round" data-say="' + esc(strip(x[0])) + '">🔊</button></div>'; }).join("") +
       (ex.question ? '<div class="tip">🤔 <b>Питання на кмітливість:</b> ' + ex.question.q + ' <span id="ans" style="display:none">' + ex.question.a + '</span> <button class="say" id="showAns">Відповідь</button></div>' : "") +
@@ -835,14 +854,15 @@
     E.markSeen(it);
     window.UI_CUR = it; // для автоматичних перевірок
     var body = "";
-    if (it.type === "choice") body = '<div class="opts">' + it.o.map(function (o, k) { return '<button class="opt' + (String(o).length > 14 ? " sm" : "") + '" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>';
+    if (it.type === "choice") body = '<div class="opts">' + it.o.map(function (o, k) { return '<button class="opt' + (it.o.some(function (x) { return String(x).length > 14; }) ? " sm" : "") + '" data-k="' + k + '">' + esc(o) + '</button>'; }).join("") + '</div>';
     if (it.type === "dict") body = '<div class="row" style="margin-top:0"><button class="btn ghost" id="play">🔊 Послухати</button><button class="btn ghost" id="slow">🐢 Повільно</button></div><p class="muted small" style="margin:6px 0 10px">Не чути? Вимкни беззвучний режим 🔕 (перемикач збоку на iPhone) і додай гучність.</p>';
     if (it.type === "fix") body = '<div class="pool fixw">' + it.p.split(" ").map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div>';
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "num") body = (it.steps ? '<div class="stps">' + it.steps.map(function (st, k) { return '<div class="stp' + (k ? "" : " cur") + '" id="stp' + k + '"><span class="sq">' + (k + 1) + ') ' + esc(st.q) + '</span> <b class="sv" id="sv' + k + '">' + (k ? "" : "?") + '</b></div>'; }).join("") + '</div>' : "") +
-      '<div class="numbox" id="numbox"></div><div class="keypad" id="keypad">' +
-      [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"].map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
+      '<div class="numbox" id="numbox"></div><div class="keypad' + (SUB.kid ? " k5" : "") + '" id="keypad">' +
+      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
+    document.body.classList.add("insession");
     root.innerHTML = '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
       (sk ? '<span class="skillTag">' + lvl(it.skill).e + ' ' + esc(sk.title) + '</span>' : "") +
       '<div class="prog"><i style="width:' + Math.round((cfg.prog || 0) * 100) + '%"></i></div>' +
@@ -854,7 +874,8 @@
 
     function addHint() {
       if (answered || used >= hints.length) return;
-      $("hints").insertAdjacentHTML("beforeend", '<div class="hint"><b>Підказка ' + (used + 1) + ':</b> ' + hints[used] + '</div>');
+      $("hints").insertAdjacentHTML("beforeend", '<div class="hint"><b>Підказка ' + (used + 1) + ':</b> ' + hints[used] + (SUB.kid ? " " + ukBtn(hints[used]) : "") + '</div>');
+      bindSay($("hints"));
       used++;
       if (used >= hints.length) { var b = $("hintBtn"); b.disabled = true; b.textContent = "💡 Більше немає"; }
     }
@@ -904,7 +925,8 @@
           '<div style="margin-top:6px">Правильно: <b>' + esc(it.type === "order" ? full : c.right) + '</b></div>' +
           '<div class="rule"><b>Правило:</b> ' + it.e + '</div>';
       }
-      h += (canSpeak && /[a-z]/i.test(full) ? '<div style="margin-top:12px"><button class="say" data-say="' + esc(full) + '">🔊 Послухати</button></div>' : "") + '</div>' +
+      h += (canSpeak && /[a-z]/i.test(full) && !SUB.kid ? '<div style="margin-top:12px"><button class="say" data-say="' + esc(full) + '">🔊 Послухати</button></div>' : "") +
+        (SUB.kid ? '<div style="margin-top:10px">' + ukBtn((ok ? "Правильно! " : "Правильна відповідь: " + c.right + ". ") + (c.msg && !ok ? c.msg + ". " : "") + it.e) + '</div>' : "") + '</div>' +
         '<div class="row"><button class="btn full" id="next">' + cfg.nextLabel(ok) + '</button></div>' +
         '<button class="report" id="rep">🚩 Тут, здається, помилка</button>';
       $("fb").innerHTML = h; bindSay(root);
@@ -916,7 +938,7 @@
     $("hintBtn").onclick = addHint;
     if ($("readIt")) $("readIt").onclick = function () { SAY.uk(it.read); };
     if (it.type === "num") {
-      var val = "", box = $("numbox"), blank = $("blank"), si = 0, NS = it.steps ? it.steps.length : 0;
+      var val = "", box = $("numbox"), blank = $("blank"), si = 0, NS = it.steps ? it.steps.length : 0, retried = {};
       if (NS) blank = $("sv0"); // задача «крок за кроком»: кожна дія — свій рядок
       else if (!blank) box.classList.add("show"); // у задачах нема пропуску ___ — показуємо окреме поле відповіді
       var show = function () { box.innerHTML = '<span class="nl">Відповідь:</span> <b>' + (val || "?") + "</b>"; box.classList.toggle("empty", !val); if (blank) { blank.textContent = val || (NS ? "?" : ""); blank.classList.toggle("filled", !!val); } };
@@ -928,10 +950,16 @@
           if (NS && si < NS - 1) {
             var st = it.steps[si], row = $("stp" + si);
             if (E.norm(val) !== E.norm(st.a)) {
+              if (!retried[si]) { // перша помилка в дії — ще одна спроба з підказкою, не завершуємо задачу
+                retried[si] = 1; used = Math.max(used, 1); val = "";
+                row.classList.add("try");
+                $("hints").insertAdjacentHTML("beforeend", '<div class="hint"><b>Перевір ' + (si + 1) + '-шу дію:</b> ' + esc(st.q) + ' Подумай, яку дію тут зробити — додати, відняти, помножити чи поділити.' + (SUB.kid ? " " + ukBtn("Перевір " + (si + 1) + "-шу дію. " + st.q + " Подумай, яку дію тут зробити.") : "") + '</div>');
+                bindSay($("hints")); show(); return;
+              }
               row.classList.add("bad");
               return finish(val, null, { st: "wrong", right: E.answersOf(it)[0], msg: "У " + (si + 1) + "-й дії (" + esc((st.q.charAt(0).toLowerCase() + st.q.slice(1)).replace(/\?$/, "")) + ") має вийти <b>" + st.a + "</b>" + (st.how ? ": " + st.how : "") + "." });
             }
-            row.classList.remove("cur"); row.classList.add("ok");
+            row.classList.remove("cur"); row.classList.remove("try"); row.classList.add("ok");
             si++; val = ""; blank = $("sv" + si); $("stp" + si).classList.add("cur"); show();
             return;
           }
@@ -1002,8 +1030,9 @@
     var k = 1;
     function draw() {
       root.innerHTML = '<div class="card"><span class="chip">🧠 Дивись, як я думаю</span><div class="prompt" style="font-size:20px">' + esc(w.p).replace("___", '<span class="blank"></span>') + '</div>' +
-        w.steps.slice(0, k).map(function (s, i) { return '<div class="wstep' + (i === k - 1 ? ' new' : '') + '"><span class="n">' + (i + 1) + '</span>' + s + '</div>'; }).join("") +
+        w.steps.slice(0, k).map(function (s, i) { return '<div class="wstep' + (i === k - 1 ? ' new' : '') + '"><span class="n">' + (i + 1) + '</span>' + s + '</div>'; }).join("") + ukBtn(w.steps[k - 1]) +
         '<div class="row"><button class="btn full" id="go">' + (k < w.steps.length ? "Далі крок →" : G("Тепер сама 💪 →", "Тепер сам 💪 →")) + '</button></div></div>';
+      bindSay(root);
       $("go").onclick = function () { if (k < w.steps.length) { k++; draw(); } else { cb(); toTop(); } };
     }
     draw();
@@ -1045,13 +1074,16 @@
         }
       });
     }
+    var shownW = {};
     function cycle(it, cont) {
       var sk = E.SK[it.skill];
+      if (shownW[it.skill]) return series(it, 1, cont); // розбір уже бачили в цій сесії — не повторюємо
+      shownW[it.skill] = 1;
       showWorked(root, sk, function () { series(it, 1, cont); });
     }
     function series(failed, attempt, cont) {
       var sk = E.SK[failed.skill];
-      var items = E.pick(failed.skill, 3, used, failed.key);
+      var items = E.pick(failed.skill, 3, used, failed.key, failed); // задачі тієї ж будови, що й та, де була помилка
       items.forEach(function (x) { used[x.key] = 1; });
       var k = 0, okc = 0, bad = 0, PRE = [2, 1, 0];
       function step() {
@@ -1117,16 +1149,17 @@
     LES.skills.forEach(function (id) { E.pick(id, n, used).forEach(function (it) { used[it.key] = 1; out.push(it); }); });
     return out;
   }
+  function nextLabel(idx) { var n = stepsOf(LES)[idx + 1]; return n ? ({ examples: "До прикладів", practice: "До вправ", words: "До слів", test: "До тесту" }[n.id] || "Далі") + " →" : "До кабінету →"; }
   function stepPractice(root, idx) {
     runSession(root, { items: practiceItems(), mode: "practice", onDone: function (s) {
       completeStep("practice");
       var good = s.max ? s.score / s.max : 1;
       root.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (good >= 0.8 ? "🎉" : "💪") + '</div><h2>Вправи зроблено!</h2>' +
-        '<p class="muted">' + fmt(s.score) + ' з ' + s.max + ' балів</p>' +
         (s.fixed ? '<div class="tip">Ти ' + G("виправила", "виправив") + ' ' + s.fixed + ' ' + (s.fixed === 1 ? "помилку" : s.fixed < 5 ? "помилки" : "помилок") + ' — це і є навчання! 🌟</div>' : s.errSkills.length ? "" : '<p>Без жодної помилки! 🔥</p>') +
+        '<p class="muted small">Бали: ' + fmt(s.score) + ' з ' + s.max + '</p>' +
         '<h3 style="text-align:left;margin-top:14px">Мої навички</h3>' + skillList(LES.skills) +
         '<p class="muted small" style="text-align:left">🌱 Вчу → 🌿 Знаю (3 правильно поспіль без підказок) → 🌳 Засвоєно (правильно при повторенні в інший день)</p>' +
-        '<div class="row"><button class="btn ghost" id="again">↺ Ще раз</button><button class="btn" id="nx" style="flex:2">До слів →</button></div></div>';
+        '<div class="row"><button class="btn ghost" id="again">↺ Ще раз</button><button class="btn" id="nx" style="flex:2">' + nextLabel(idx) + '</button></div></div>';
       $("again").onclick = function () { stepPractice(root, idx); toTop(); };
       $("nx").onclick = function () { nextStep(idx); };
     } });

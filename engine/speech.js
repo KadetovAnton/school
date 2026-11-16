@@ -52,7 +52,8 @@
       for (i = 0; i < vs.length; i++) if (/^uk/i.test(vs[i].lang)) { voiceUk = vs[i]; if (/enhanced|premium/i.test(vs[i].name)) break; }
     } catch (e) {}
   }
-  if (S.can) { pick(); try { synth.addEventListener ? synth.addEventListener("voiceschanged", pick) : (synth.onvoiceschanged = pick); } catch (e) {} }
+  function changed() { voice = null; pick(); if (S.onvoices) try { S.onvoices(); } catch (e) {} }
+  if (S.can) { pick(); try { synth.addEventListener ? synth.addEventListener("voiceschanged", changed) : (synth.onvoiceschanged = changed); } catch (e) {} }
 
   var unlocked = false, base = (function () { var s = document.currentScript && document.currentScript.src; return s ? s.replace(/[^\/]*$/, "") : "engine/"; })();
   function unlock() {

@@ -76,7 +76,7 @@ table.t td:first-child{font-weight:800}
 .blank{display:inline-block;min-width:70px;border-bottom:3px solid var(--pri);margin:0 4px;transform:translateY(-3px)}
 .opts{display:grid;gap:10px}
 .opt{font:inherit;font-size:19px;font-weight:700;text-align:left;padding:15px 16px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
-.opt:hover:not(:disabled){border-color:var(--pri)} .opt:disabled{cursor:default}
+@media (hover:hover){.opt:hover:not(:disabled){border-color:var(--pri)}} .opt:disabled{cursor:default}
 .opt.right{border-color:var(--ok);background:var(--ok-soft)} .opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
 .hint{background:var(--warn-soft);border-radius:14px;padding:12px 14px;margin-top:8px;font-size:16px}
 .hint b{color:#8a5a00}
@@ -103,7 +103,7 @@ table.t td:first-child{font-weight:800}
 /* results */
 .score-big{font-size:54px;font-weight:900;line-height:1;margin:6px 0}
 .celebrate{font-size:52px;line-height:1}
-.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast{position:fixed;left:50%;top:14px;pointer-events:none;z-index:50;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
 .toast.show{opacity:1}
 /* --- рушій v2 --- */
 .skillTag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted);margin:0 0 10px 6px}
@@ -203,3 +203,22 @@ body.kid .task{font-size:17px}
 .stp .sv{font-size:24px;min-width:44px;text-align:right;color:#3b3fd8}
 .stp.ok .sv{color:#15803d}.stp.bad .sv{color:#c0392b}
 .opt.sm,body.kid .opt.sm{font-size:18px;line-height:1.3;padding:12px 14px}
+
+/* компактніша клавіатура, щоб ✓ влазила в екран iPhone */
+.keypad{gap:7px}
+.key{min-height:50px;padding:6px 0;font-size:28px;border-radius:14px}
+body.kid.insession .steps{display:none}
+body.kid.insession .skillTag{display:none}
+body.kid .prompt.big.long{font-size:19px;margin:4px 0 10px}
+body.kid .stp{padding:7px 12px;margin:5px 0}
+.lesson.hid{display:none}
+.ex .en{word-break:break-word}
+.stp.try{background:#fff4d6;outline-color:#e0a000}
+body.kid.insession .key{min-height:47px;padding:5px 0}
+body.kid.insession .keypad{gap:6px}
+body.kid.insession .task{margin-bottom:2px}
+body.kid.insession .card{padding-top:12px}
+/* для молодших — клавіатура 5×2 + ряд ⌫ / ✓: нижча, ✓ завжди видно */
+.keypad.k5{grid-template-columns:repeat(5,1fr)}
+.keypad.k5 .key.del{grid-column:span 2}
+.keypad.k5 .key.ok{grid-column:span 3}

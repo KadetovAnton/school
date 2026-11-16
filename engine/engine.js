@@ -240,12 +240,16 @@
     { id: "back", e: "🤗", t: "З поверненням!", s: "Повернутися до занять після перерви", ok: function (p) { return (p.cnt && p.cnt.back) >= 1; } },
     { id: "know5", e: "🌿", t: "5 навичок «Знаю»", s: "Довести 5 навичок до 🌿", ok: function (p) { return lvlCount(p, 2) >= 5; } },
     { id: "master1", e: "🌳", t: "Перша засвоєна", s: "Перша навичка 🌳 — правильно і через день", ok: function (p) { return lvlCount(p, 3) >= 1; } },
-    { id: "es", e: "🔤", t: "Майстер -es", s: "Засвоїти -s, -sh, -ch, -x, -o → + es", ok: function (p) { return p.skills["ps.es"] && p.skills["ps.es"].lvl >= 3; } },
+    { id: "es", sub: "english", e: "🔤", t: "Майстер -es", s: "Засвоїти -s, -sh, -ch, -x, -o → + es", ok: function (p) { return p.skills["ps.es"] && p.skills["ps.es"].lvl >= 3; } },
     { id: "t100", e: "💯", t: "100 завдань", s: "Виконати 100 завдань", ok: function (p) { return totalTasks(p) >= 100; } },
     { id: "t500", e: "⭐", t: "500 завдань", s: "Виконати 500 завдань", ok: function (p) { return totalTasks(p) >= 500; } },
-    { id: "w50", e: "🃏", t: "50 слів", s: "Вивчити 50 слів (коробка 4+)", ok: function (p) { return E.wordsLearned(p) >= 50; } },
-    { id: "w100", e: "📚", t: "100 слів", s: "Вивчити 100 слів", ok: function (p) { return E.wordsLearned(p) >= 100; } },
-    { id: "reward1", e: "🎁", t: "Перша нагорода", s: "Зібрати зірки на тижневу нагороду", ok: function (p) { return (p.cnt && p.cnt.rewards) >= 1; } }
+    { id: "w50", sub: "english", e: "🃏", t: "50 слів", s: "Вивчити 50 слів (коробка 4+)", ok: function (p) { return E.wordsLearned(p) >= 50; } },
+    { id: "w100", sub: "english", e: "📚", t: "100 слів", s: "Вивчити 100 слів", ok: function (p) { return E.wordsLearned(p) >= 100; } },
+    { id: "reward1", e: "🎁", t: "Перша нагорода", s: "Зібрати зірки на тижневу нагороду", ok: function (p) { return (p.cnt && p.cnt.rewards) >= 1; } },
+    { id: "mtab", sub: "math2", e: "✖️", t: "Знавець таблиці", s: "Скласти тест «Таблиця на 2–5: усе разом»", ok: function (p) { return (p.lessons.m13 && p.lessons.m13.stars > 0); } },
+    { id: "mtask", sub: "math2", e: "🧩", t: "Майстер задач", s: "Скласти тест «Задачі у 2 дії — крок за кроком»", ok: function (p) { return (p.lessons.m26 && p.lessons.m26.stars > 0) || (p.lessons.m17 && p.lessons.m17.stars > 0); } },
+    { id: "mclock", sub: "math2", e: "⏰", t: "Знаю годинник", s: "Скласти тест «Годинник і час»", ok: function (p) { return (p.lessons.m20 && p.lessons.m20.stars > 0); } },
+    { id: "myear", sub: "math2", e: "🏅", t: "Другий клас — пройдено!", s: "Скласти фінальне повторення року", ok: function (p) { return (p.lessons.m24 && p.lessons.m24.stars > 0); } }
   ];
   E.cnt = function (k, n) { var p = E.P(); if (!p.cnt) p.cnt = {}; p.cnt[k] = (p.cnt[k] || 0) + (n || 1); E.save(); E.checkBadges(); };
   var checking = false;
@@ -506,22 +510,23 @@
   E.markSeen = function (it) { if (!it.gen) E.P().seen[it.key] = today(); };
   /* Навички-генератори (математика): завдання створюються на льоту функцією E.GEN[sk.gen] */
   E.GEN = E.GEN || {};
-  E.makeGen = function (sk) {
-    var it = E.GEN[sk.gen](sk.args || {});
+  E.makeGen = function (sk, extra) {
+    var a = {}, k; for (k in sk.args || {}) a[k] = sk.args[k]; for (k in extra || {}) a[k] = extra[k];
+    var it = E.GEN[sk.gen](a);
     it.skill = sk.id; it.key = sk.id + "|" + it.p + (it.uid ? "|" + it.uid : ""); it.gen = true;
     E.ITEM[it.key] = it;
     return it;
   };
   /* n завдань навички: спершу ті, що ще не траплялись у цій сесії (used),
      серед них — давно не бачені; при нестачі — повтор найдавніших. */
-  E.pick = function (id, n, used, avoid) {
+  E.pick = function (id, n, used, avoid, like) {
     var sk = E.SK[id];
     if (!sk) return [];
     if (sk.gen) {
       var g = [], tries = 0;
       while (g.length < n && tries < 80) {
         tries++;
-        var it = E.makeGen(sk);
+        var it = E.makeGen(sk, like && like.tt ? { tt: like.tt } : null);
         if ((used && used[it.key]) || (avoid && it.key === avoid) || g.some(function (o) { return o.key === it.key; })) continue;
         g.push(it);
       }
