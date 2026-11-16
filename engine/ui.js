@@ -271,6 +271,16 @@
     SY.report(E.cur(), text).then(function (ok) { if (ok) { if (okCb) okCb(); toast("✅ Надіслано татові в Telegram"); } else copy(); });
   }
 
+  /* як показати завдання в списках (помилки, результати тесту, звіт): у «Знайди помилку» речення навмисно з помилкою */
+  function pText(it, html, strike) {
+    if (it.type === "dict") return "🎧 Диктант";
+    if (it.type === "fix") {
+      var w = it.p.split(" ");
+      return html ? "🔍 Знайди помилку: «" + w.map(function (x, i) { return strike && i === it.bad ? "<s>" + esc(x) + "</s>" : esc(x); }).join(" ") + "»" : "Знайди помилку: «" + it.p + "»";
+    }
+    return html ? esc(it.p) : it.p;
+  }
+
   /* ================== ГОЛОС ОЗВУЧКИ ================== */
   function renderVoices() {
     var vs = SAY.voices(), cur = SAY.current();
@@ -563,7 +573,7 @@
       if (ms.length) {
         html += '<div class="card"><div class="sklist">' + ms.map(function (m) {
           var it = E.ITEM[m.key], sk = E.SK[it.skill];
-          return '<div style="display:block"><div style="font-weight:700">' + (it.type === "dict" ? "🎧 Диктант" : esc(it.p)) + '</div>' +
+          return '<div style="display:block"><div style="font-weight:700">' + pText(it, true) + '</div>' +
             '<div class="muted small">' + (m.given == null ? "«не знаю»" : "твоя відповідь: " + esc(m.given)) + ' · ' + esc(sk ? sk.title : "") + '</div></div>';
         }).join("") + '</div></div>';
       }
@@ -1163,7 +1173,7 @@
         root.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (ok ? "🏆" : "🌱") + '</div><h2>' + (ok ? "Урок пройдено!" : "Майже! Ще трішки") + '</h2>' +
           '<div class="score-big">' + pct + '%</div>' +
           (ok ? '<div class="stars" style="font-size:30px">' + starsStr(stars) + '</div>' : '<p class="muted">Потрібно ' + pass + '%. Зроби ще раз вправи — там помилки розбираються крок за кроком. У тебе вийде!</p>') +
-          (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { return "• " + esc(r.it.p) + " → <b>" + esc(E.answersOf(r.it)[0]) + "</b>"; }).join("<br>") + '</div>' : "") +
+          (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { return "• " + pText(r.it, true, true) + " → <b>" + esc(E.answersOf(r.it)[0]) + "</b>"; }).join("<br>") + '</div>' : "") +
           skillList(LES.skills) +
           '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати результат татові</button>' +
           (ok ? "" : '<button class="btn ghost" id="pr">✍️ До вправ</button><button class="btn" id="retry">↺ Ще раз</button>') +
@@ -1180,7 +1190,7 @@
   function copyReport(pct, stars, wrong) {
     var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
     var lines = [P.name + " — «" + LES.title + "», " + d, "Тест: " + pct + "% " + "★".repeat(stars)];
-    lines.push(wrong.length ? "Помилки:\n" + wrong.map(function (r) { return "• " + r.it.p + " → " + (r.given == null ? "не знаю" : r.given) + " (правильно: " + E.answersOf(r.it)[0] + ")"; }).join("\n") : "Без помилок!");
+    lines.push(wrong.length ? "Помилки:\n" + wrong.map(function (r) { return "• " + pText(r.it) + " → " + (r.given == null ? "не знаю" : r.given) + " (правильно: " + E.answersOf(r.it)[0] + ")"; }).join("\n") : "Без помилок!");
     lines.push("Навички:\n" + LES.skills.map(function (id) { var l = lvl(id), s = P.skills[id]; return "• " + l.e + " " + (E.SK[id] ? E.SK[id].title : id) + (s && s.flag ? " — розібрати з татом 🤝" : ""); }).join("\n"));
     var rep = P.reports.filter(function (r) { return !r.sent; });
     if (rep.length) lines.push("Позначено «тут помилка»:\n" + rep.map(function (r) { return "• " + r.key.split("|")[1] + (r.given != null ? " (відповідь: " + r.given + ")" : ""); }).join("\n"));
