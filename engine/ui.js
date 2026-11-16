@@ -271,6 +271,28 @@
     SY.report(E.cur(), text).then(function (ok) { if (ok) { if (okCb) okCb(); toast("✅ Надіслано татові в Telegram"); } else copy(); });
   }
 
+  /* ================== ГОЛОС ОЗВУЧКИ ================== */
+  function renderVoices() {
+    var vs = SAY.voices(), cur = SAY.current();
+    var sample = "Hello! My name is Anna. I usually walk to school, but yesterday I went by bus.";
+    $app.innerHTML = '<div class="topbar"><button class="back" id="back">← Назад</button></div>' +
+      '<div class="card"><h2>🔊 Голос озвучки</h2><p class="muted">Натисни ▶️, послухай і обери голос, який найчіткіше вимовляє. Найкращі позначені ⭐.</p>' +
+      (vs.length ? vs.filter(function (v) { return !v.bad; }).slice(0, 12).map(function (v, i) {
+        return '<div class="ex"><div><div class="en">' + (v.good ? "⭐ " : "") + esc(v.name) + (v.name === cur ? " ✅" : "") + '</div><div class="ua">' + esc(v.lang) + '</div></div>' +
+          '<div class="row" style="margin:0;gap:6px"><button class="say round" data-v="' + i + '">▶️</button><button class="btn' + (v.name === cur ? "" : " ghost") + '" data-pick="' + i + '" style="padding:8px 12px">' + (v.name === cur ? "Обрано" : "Обрати") + '</button></div></div>';
+      }).join("") : '<p>Голосів не знайдено.</p>') +
+      '<div class="tip">💡 <b>Найчіткіший голос на iPhone</b> (меню російською, як у тата): Настройки → Универсальный доступ → Устный контент → Голоса → Английский → напр., <b>Daniel</b> або <b>Serena</b> → завантажити <b>«Улучшенный»</b>. На Mac: Системные настройки → Универсальный доступ → Устный контент → Системный голос → Управлять голосами. Потім перезавантаж сторінку — голос з\'явиться тут.</div>' +
+      '<div class="tip">🔕 Не чути? Вимкни беззвучний режим на iPhone.</div>' +
+      '<button class="btn plain full" id="auto">Обирати автоматично</button></div>';
+    var list = vs.filter(function (v) { return !v.bad; }).slice(0, 12);
+    $("back").onclick = function () { stopSay(); renderHome(); toTop(); };
+    $("auto").onclick = function () { SAY.setVoice(""); toast("Голос — автоматично"); renderVoices(); };
+    var bs = $app.querySelectorAll("[data-v]");
+    for (var i = 0; i < bs.length; i++) (function (b) { b.onclick = function () { SAY.preview(list[+b.getAttribute("data-v")].name, sample); }; })(bs[i]);
+    var ps = $app.querySelectorAll("[data-pick]");
+    for (var j = 0; j < ps.length; j++) (function (b) { b.onclick = function () { SAY.setVoice(list[+b.getAttribute("data-pick")].name); toast("Голос обрано 👍"); renderVoices(); }; })(ps[j]);
+  }
+
   /* ================== МОЇ ПРЕДМЕТИ ================== */
   function renderSubjects() {
     withSubjects(function () {
@@ -334,6 +356,7 @@
     html += '<div class="card" style="padding:12px 16px">' +
       '<button class="lesson ' + (rv.done ? "done" : rvN >= 2 ? "open" : "lock") + '" id="reviewBtn"><span class="ic">' + (rv.done ? "✅" : "🔁") + '</span><span><div class="lt">Повторення тижня</div><div class="ls">' +
       (rv.done ? "Зроблено цього тижня: " + fmt(rv.score) + " з " + rv.max + " · можна ще раз" : rvN >= 2 ? "По завданню з кожної пройденої теми · ~10 хв · +5 ⭐" : "З'явиться після перших уроків") + '</div></span></button>' + badgesRow() +
+      (SUB.words && canSpeak ? '<button class="lesson" id="voiceBtn"><span class="ic">🔊</span><span><div class="lt">Голос озвучки</div><div class="ls">' + esc(SAY.current() || "автоматично") + ' · обрати чіткіший</div></span></button>' : "") +
       (SUB.words ? '<button class="lesson" id="wordsBtn"><span class="ic">🃏</span><span><div class="lt">Мої слова</div><div class="ls">вивчено ' + wL + (wDue ? " · на сьогодні " + wDue : "") + ' · 11 тем</div></span></button>' : "") +
       '<button class="lesson" id="mist"><span class="ic">📝</span><span><div class="lt">Мої помилки</div><div class="ls">' +
       (nMist ? nMist + " " + (nMist === 1 ? "завдання чекає" : nMist < 5 ? "завдання чекають" : "завдань чекають") + " на виправлення" : "Усі виправлено 🎉") + '</div></span></button></div>';
@@ -373,6 +396,7 @@
     $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
     if ($("wordsBtn")) $("wordsBtn").onclick = function () { renderWords(); toTop(); };
+    if ($("voiceBtn")) $("voiceBtn").onclick = function () { renderVoices(); toTop(); };
     $("reviewBtn").onclick = function () { if (rvN >= 2) { DAILY = false; runReview(renderHome); } };
     var bs = $app.querySelectorAll(".lesson[data-file]");
     for (var j = 0; j < bs.length; j++) (function (b) {

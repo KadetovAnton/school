@@ -490,7 +490,14 @@
   };
 
   /* ---------- перевірка відповідей ---------- */
-  E.norm = function (s) {
+  /* Американське і британське написання обидва правильні: зводимо до одного */
+  var VAR = { color: "colour", colors: "colours", favorite: "favourite", favorites: "favourites", neighbor: "neighbour", neighbors: "neighbours",
+    math: "maths", practice: "practise", practiced: "practised", center: "centre", theater: "theatre", gray: "grey", traveling: "travelling",
+    traveled: "travelled", traveler: "traveller", realize: "realise", organize: "organise", mom: "mum", honor: "honour", behavior: "behaviour",
+    learnt: "learned", dreamt: "dreamed", spelt: "spelled", burnt: "burned", smelt: "smelled", leant: "leaned", spoilt: "spoiled" };
+  function variants(s) { return s.replace(/[a-z]+/g, function (w) { return VAR[w] || w; }); }
+  E.norm = function (s) { return variants(norm0(s)); };
+  function norm0(s) {
     return String(s).toLowerCase()
       .replace(/[’'`ʼ]/g, "")
       .replace(/[.!?,;:«»"“”]/g, "")
@@ -499,11 +506,11 @@
   };
   /* для завдань, де апостроф важливий (Tom's): лишаємо його, лише вирівнюємо ’ → ' */
   E.normA = function (s) {
-    return String(s).toLowerCase()
+    return variants(String(s).toLowerCase()
       .replace(/[’`ʼ]/g, "'")
       .replace(/[.!?,;:«»"“”]/g, "")
       .replace(/\s+/g, " ")
-      .trim();
+      .trim());
   };
   function answersOf(it) {
     if (it.type === "choice" || it.type === "fix") return [it.a];
