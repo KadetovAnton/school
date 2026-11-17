@@ -138,6 +138,12 @@
     (o.wrHist || []).forEach(function (x) { if (!hk[x.w + "|" + (x.sub || "")]) into.wrHist.push(x); });
     if (o.diag && (!into.diag || (o.diag.d || "") > (into.diag.d || ""))) into.diag = o.diag;
     if (o.reward && (!into.reward || !into.reward.text)) into.reward = o.reward;
+    if (o.dino) {
+      a = obj(into.dino); b = o.dino;
+      var nd = (b.u || 0) > (a.u || 0) ? JSON.parse(JSON.stringify(b)) : a;
+      nd.form = Math.max(a.form || 0, b.form || 0); nd.items = Math.max(a.items || 0, b.items || 0);
+      into.dino = nd;
+    }
     if (o.blitz) {
       a = into.blitz = obj(into.blitz); b = o.blitz;
       if ((b.best || 0) > (a.best || 0)) { a.best = b.best; a.bestD = b.bestD; }

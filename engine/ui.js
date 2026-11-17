@@ -383,6 +383,7 @@
       (cont ? '<div class="row" style="margin-top:8px"><button class="btn ghost full' + (SUB.kid && !dayDone ? " small" : "") + '" id="cont">' + T.label + '</button></div>' : "")) + '</div>' +
       "";
 
+    if (SUB.id === "math2" && window.DINO) html += dinoCard();
     html += rewardCard();
     var wDue = E.wordsDue().length, wL = E.wordsLearned();
     var rv = E.review(), rvN = E.reviewSkills().length;
@@ -430,6 +431,8 @@
     if ($("cont")) $("cont").onclick = function () { DAILY = false; openLesson(cont.file, T.step); };
     if ($("daily")) $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
+    if ($("dinoCard")) $("dinoCard").onclick = function () { renderDino(); toTop(); };
+    if (SUB.id === "math2" && window.DINO) dinoNews();
     if ($("blitzBtn")) $("blitzBtn").onclick = function () { renderBlitz(); toTop(); };
     if ($("showAll")) $("showAll").onclick = function () { var hs = $app.querySelectorAll(".lesson.hid"); for (var q = 0; q < hs.length; q++) hs[q].classList.remove("hid"); this.parentNode.parentNode.removeChild(this.parentNode); };
     if ($("wordsBtn")) $("wordsBtn").onclick = function () { renderWords(); toTop(); };
@@ -589,6 +592,86 @@
   }
 
   /* ================== МОЇ ПОМИЛКИ ================== */
+  /* 🦖 Герой-маскот: росте за уроки, вдягається за зірки (зірки не витрачаються) */
+  function dinoState() {
+    var P = E.P(), d = P.dino || (P.dino = { name: "", color: "green", wear: {}, form: 0, items: 0, u: 0 }), n = 0;
+    if (!d.wear) d.wear = {};
+    if (PATH) PATH.stages.forEach(function (s) { s.lessons.forEach(function (l) { var L = P.lessons[l.id]; if (L && (L.stars > 0 || L.skip)) n++; }); });
+    var stars = E.starsTotal();
+    return { d: d, lessons: n, stars: stars, form: DINO.form(n), items: DINO.unlocked(stars) };
+  }
+  function dinoName(d) { return d.name || "Дино"; }
+  function dinoSave(d) { d.u = Date.now(); E.save(); }
+  /* новини: підріс / нова річ — тост і сама вдягається */
+  function dinoNews() {
+    var st = dinoState(), d = st.d, ch = false;
+    if (st.form > (d.form || 0)) {
+      toast(st.form === 1 ? "🐣 Вилупився динозаврик! Натисни на нього й дай ім'я" : "🎉 " + dinoName(d) + " підріс: " + DINO.FORMS[st.form].t + "!");
+      d.form = st.form; ch = true;
+    }
+    if (st.items.length > (d.items || 0)) {
+      var nw = st.items.slice(d.items || 0);
+      nw.forEach(function (x) { d.wear[x.slot] = x.id; });
+      if (st.form > 0) toast("🎁 Нова річ для " + dinoName(d) + ": " + nw[nw.length - 1].e + " " + nw[nw.length - 1].t + "!");
+      d.items = st.items.length; ch = true;
+    }
+    if (ch) { dinoSave(d); if ($("dinoCard")) $("dinoCard").innerHTML = dinoInner(dinoState()); }
+  }
+  function dinoSay(st) {
+    var d = st.d, nf = DINO.nextForm(st.lessons), ni = DINO.nextItem(st.stars), opts = [];
+    if (st.form === 0) return "Я ще в яйці! Пройди перший урок — і я вилуплюся 🥚";
+    if (nf) { var k = nf.at - st.lessons; opts.push("Ще " + k + " " + (k === 1 ? "урок" : k < 5 ? "уроки" : "уроків") + " — і я підросту!"); }
+    if (ni) opts.push("Ще " + (ni.at - st.stars) + " ⭐ — і в мене буде " + ni.t.toLowerCase() + "!");
+    opts.push(G("Ти молодчина", "Ти молодець") + ", " + esc(E.P().name) + "! Порахуємо щось? 🦖");
+    if (!d.name) opts.unshift("Привіт! Як мене звати? Натисни на мене 🙂");
+    return opts[Math.floor(Math.random() * opts.length)];
+  }
+  function dinoInner(st) {
+    return '<div class="dino-row">' + DINO.svg({ form: st.form, color: st.d.color, wear: st.d.wear, size: 104 }) +
+      '<div class="dino-say"><b>' + esc(dinoName(st.d)) + '</b><div>' + dinoSay(st) + '</div></div></div>';
+  }
+  function dinoCard() { return '<div class="card dino-card" id="dinoCard" role="button">' + dinoInner(dinoState()) + '</div>'; }
+  function renderDino() {
+    var st = dinoState(), d = st.d, nf = DINO.nextForm(st.lessons), worn = {};
+    for (var sl in d.wear) worn[d.wear[sl]] = 1;
+    setTitle("Мій динозавр · " + child().name);
+    var fp = nf ? Math.round((st.lessons - DINO.FORMS[st.form].at) / (nf.at - DINO.FORMS[st.form].at) * 100) : 100;
+    $app.innerHTML = '<div class="topbar"><button class="back" id="back">← Назад</button></div>' +
+      '<div class="card" style="text-align:center">' + DINO.svg({ form: st.form, color: d.color, wear: d.wear, size: 220 }) +
+      '<h2 style="margin:4px 0">' + esc(dinoName(d)) + ' <button class="btn plain small" id="ren">✏️</button></h2>' +
+      '<div id="renBox"></div>' +
+      '<p class="muted" style="margin:2px 0 8px">' + DINO.FORMS[st.form].t + ' · пройдено уроків: ' + st.lessons + '</p>' +
+      (nf ? '<div class="prog"><i style="width:' + fp + '%"></i></div><p class="small muted">Наступне: «' + nf.t + '» — після ' + nf.at + '-го уроку</p>' : '<p>👑 Найбільший і найсильніший!</p>') +
+      '</div>' +
+      '<div class="card"><h3 style="margin:0 0 4px">Гардероб</h3><p class="muted small" style="margin:0 0 10px">Речі відкриваються за зірки (у тебе ⭐ ' + st.stars + ' за весь час). Зірки не витрачаються — натискай, щоб вдягнути чи зняти.</p><div class="dino-items">' +
+      DINO.ITEMS.map(function (x) {
+        var open = st.stars >= x.at;
+        return '<button class="dino-it' + (worn[x.id] ? " on" : "") + (open ? "" : " lock") + '" data-it="' + x.id + '"><span class="e">' + (open ? x.e : "🔒") + '</span><span>' + x.t + '</span><span class="small muted">' + (open ? (worn[x.id] ? "вдягнено" : "вдягнути") : x.at + " ⭐") + '</span></button>';
+      }).join("") + '</div></div>' +
+      '<div class="card"><h3 style="margin:0 0 8px">Колір</h3><div class="dino-cols">' +
+      Object.keys(DINO.COLORS).map(function (k) { var c = DINO.COLORS[k]; return '<button class="dino-col' + (d.color === k ? " on" : "") + '" data-c="' + k + '" title="' + c.t + '" style="background:' + c.body + ';border-color:' + c.dark + '"></button>'; }).join("") + '</div></div>';
+    $("back").onclick = function () { renderHome(); toTop(); };
+    $("ren").onclick = function () {
+      $("renBox").innerHTML = '<input id="nm" maxlength="14" placeholder="Ім\'я динозавра" value="' + esc(d.name || "") + '" style="max-width:220px"><div class="row" style="justify-content:center"><button class="btn" id="nmOk">Зберегти</button></div>';
+      $("nm").focus();
+      var ok = function () { var v = $("nm").value.replace(/\s+/g, " ").trim().slice(0, 14); d.name = v; dinoSave(d); toast(v ? "Привіт, " + v + "! 🦖" : "Ім'я прибрано"); renderDino(); };
+      $("nmOk").onclick = ok; $("nm").onkeydown = function (e) { if (e.key === "Enter") ok(); };
+    };
+    var its = $app.querySelectorAll(".dino-it");
+    for (var i = 0; i < its.length; i++) (function (b) {
+      b.onclick = function () {
+        var x = null; DINO.ITEMS.forEach(function (y) { if (y.id === b.getAttribute("data-it")) x = y; });
+        if (st.stars < x.at) { toast("Ще " + (x.at - st.stars) + " ⭐ — і " + x.t.toLowerCase() + " твоя!"); return; }
+        if (st.form === 0) { toast("Спершу динозаврик має вилупитися 🥚"); return; }
+        if (d.wear[x.slot] === x.id) delete d.wear[x.slot]; else d.wear[x.slot] = x.id;
+        dinoSave(d); renderDino();
+      };
+    })(its[i]);
+    var cs = $app.querySelectorAll(".dino-col");
+    for (var j = 0; j < cs.length; j++) (function (b) { b.onclick = function () { d.color = b.getAttribute("data-c"); dinoSave(d); renderDino(); }; })(cs[j]);
+  }
+  window.UI_DINO = renderDino; // для автоматичних перевірок
+
   /* ⚡ Блискавка: 60 секунд, приклади з пройдених тем, без підказок; помилки — в «Мої помилки» */
   function renderBlitz() {
     loadAll(function () {

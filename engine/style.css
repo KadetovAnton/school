@@ -237,3 +237,20 @@ body.kid.insession .card{padding-top:12px}
 .bl-big{font-size:72px;font-weight:900;color:var(--pri);line-height:1}
 .bl-rec{font-weight:800;font-size:18px}
 .bl-p.badv .bl-v{color:#15803d}
+
+/* 🦖 Маскот */
+.dino-card{cursor:pointer;padding:10px 14px}
+.dino-row{display:flex;align-items:center;gap:10px}
+.dino-row svg{flex:0 0 auto}
+.dino-say{position:relative;flex:1;background:#fff;border:2px solid var(--line);border-radius:16px;padding:8px 12px;font-size:15px;line-height:1.35}
+.dino-say:before{content:"";position:absolute;left:-9px;top:50%;margin-top:-8px;border:8px solid transparent;border-right-color:var(--line);border-left:0}
+.dino-say b{display:block;font-size:13px;color:var(--pri)}
+.dino-items{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
+.dino-it{font:inherit;font-size:13px;display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 2px;border-radius:14px;border:2px solid var(--line);background:#fff;color:var(--ink);cursor:pointer}
+.dino-it .e{font-size:28px}
+.dino-it.on{border-color:var(--pri);background:#eef0ff}
+.dino-it.lock{opacity:.55}
+.dino-cols{display:flex;gap:12px}
+.dino-col{width:44px;height:44px;border-radius:50%;border:3px solid;cursor:pointer}
+.dino-col.on{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--pri)}
+@media(max-width:360px){.dino-items{grid-template-columns:repeat(3,1fr)}}
