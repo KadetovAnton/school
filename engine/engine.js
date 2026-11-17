@@ -141,7 +141,8 @@
     if (o.dino) {
       a = obj(into.dino); b = o.dino;
       var nd = (b.u || 0) > (a.u || 0) ? JSON.parse(JSON.stringify(b)) : a;
-      nd.form = Math.max(a.form || 0, b.form || 0); nd.items = Math.max(a.items || 0, b.items || 0);
+      if ((a.v || 1) !== (b.v || 1)) nd = JSON.parse(JSON.stringify((a.v || 1) > (b.v || 1) ? a : b)); // старі правила росту не змішуємо з новими
+      else { nd.form = Math.max(a.form || 0, b.form || 0); nd.items = Math.max(a.items || 0, b.items || 0); }
       into.dino = nd;
     }
     if (o.blitz) {

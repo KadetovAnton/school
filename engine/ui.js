@@ -594,11 +594,18 @@
   /* ================== МОЇ ПОМИЛКИ ================== */
   /* 🦖 Герой-маскот: росте за уроки, вдягається за зірки (зірки не витрачаються) */
   function dinoState() {
-    var P = E.P(), d = P.dino || (P.dino = { name: "", color: "green", wear: {}, form: 0, items: 0, u: 0 }), n = 0;
+    var P = E.P(), d = P.dino || (P.dino = { name: "", color: "green", wear: {}, form: 0, items: 0, u: 0, v: 2 }), n = 0, tr = 0;
     if (!d.wear) d.wear = {};
     if (PATH) PATH.stages.forEach(function (s) { s.lessons.forEach(function (l) { var L = P.lessons[l.id]; if (L && (L.stars > 0 || L.skip)) n++; }); });
-    var stars = E.starsTotal();
-    return { d: d, lessons: n, stars: stars, form: DINO.form(n), items: DINO.unlocked(stars) };
+    for (var id in P.skills) if (E.ofSub(id) && P.skills[id].lvl >= 3) tr++;
+    var stars = E.starsTotal(), items = DINO.unlocked(stars), f = DINO.form({ lessons: n, trees: tr });
+    if (d.v !== 2) { // 17.11.2026: нові, складніші правила — перерахувати без тостів, зняти ще не відкриті речі
+      d.form = f; d.items = items.length; d.v = 2;
+      for (var sl in d.wear) if (!items.some(function (x) { return x.id === d.wear[sl]; })) delete d.wear[sl];
+      dinoSave(d);
+    }
+    // 🌳 може знову стати 🌿 після помилки — але динозавр назад не зменшується
+    return { d: d, lessons: n, trees: tr, stars: stars, form: Math.max(f, d.form || 0), items: items };
   }
   function dinoName(d) { return d.name || "Дино"; }
   function dinoSave(d) { d.u = Date.now(); E.save(); }
@@ -618,9 +625,9 @@
     if (ch) { dinoSave(d); if ($("dinoCard")) $("dinoCard").innerHTML = dinoInner(dinoState()); }
   }
   function dinoSay(st) {
-    var d = st.d, nf = DINO.nextForm(st.lessons), ni = DINO.nextItem(st.stars), opts = [];
+    var d = st.d, nf = DINO.nextForm(st.form), ni = DINO.nextItem(st.stars), opts = [];
     if (st.form === 0) return "Я ще в яйці! Пройди перший урок — і я вилуплюся 🥚";
-    if (nf) { var k = nf.at - st.lessons; opts.push("Ще " + k + " " + (k === 1 ? "урок" : k < 5 ? "уроки" : "уроків") + " — і я підросту!"); }
+    if (nf && nf.trees) { var k = Math.max(1, nf.trees - st.trees); opts.push("Закріпи ще " + k + " " + (k === 1 ? "тему" : k < 5 ? "теми" : "тем") + " до 🌳 — і я підросту!"); }
     if (ni) opts.push("Ще " + (ni.at - st.stars) + " ⭐ — і в мене буде " + ni.t.toLowerCase() + "!");
     opts.push(G("Ти молодчина", "Ти молодець") + ", " + esc(E.P().name) + "! Порахуємо щось? 🦖");
     if (!d.name) opts.unshift("Привіт! Як мене звати? Натисни на мене 🙂");
@@ -632,16 +639,17 @@
   }
   function dinoCard() { return '<div class="card dino-card" id="dinoCard" role="button">' + dinoInner(dinoState()) + '</div>'; }
   function renderDino() {
-    var st = dinoState(), d = st.d, nf = DINO.nextForm(st.lessons), worn = {};
+    var st = dinoState(), d = st.d, nf = DINO.nextForm(st.form), worn = {};
     for (var sl in d.wear) worn[d.wear[sl]] = 1;
     setTitle("Мій динозавр · " + child().name);
-    var fp = nf ? Math.round((st.lessons - DINO.FORMS[st.form].at) / (nf.at - DINO.FORMS[st.form].at) * 100) : 100;
+    var cf = DINO.FORMS[st.form], from = cf.trees || 0, fp = nf ? Math.max(0, Math.min(100, Math.round((st.trees - from) / (nf.trees - from) * 100))) : 100;
     $app.innerHTML = '<div class="topbar"><button class="back" id="back">← Назад</button></div>' +
       '<div class="card" style="text-align:center">' + DINO.svg({ form: st.form, color: d.color, wear: d.wear, size: 220 }) +
       '<h2 style="margin:4px 0">' + esc(dinoName(d)) + ' <button class="btn plain small" id="ren">✏️</button></h2>' +
       '<div id="renBox"></div>' +
-      '<p class="muted" style="margin:2px 0 8px">' + DINO.FORMS[st.form].t + ' · пройдено уроків: ' + st.lessons + '</p>' +
-      (nf ? '<div class="prog"><i style="width:' + fp + '%"></i></div><p class="small muted">Наступне: «' + nf.t + '» — після ' + nf.at + '-го уроку</p>' : '<p>👑 Найбільший і найсильніший!</p>') +
+      '<p class="muted" style="margin:2px 0 8px">' + cf.t + ' · закріплено тем 🌳: ' + st.trees + '</p>' +
+      (st.form === 0 ? '<p class="small muted">Пройди перший урок — і динозаврик вилупиться.</p>' :
+        nf ? '<div class="prog"><i style="width:' + fp + '%"></i></div><p class="small muted">Наступне: «' + nf.t + '» — коли буде ' + nf.trees + ' тем 🌳.<br>🌳 — тема, яку ти ' + G("розв\'язала", "розв\'язав") + ' правильно, а потім ще раз — іншого дня. Динозавр росте, коли знання тримаються!</p>' : '<p>👑 Найбільший і найсильніший!</p>') +
       '</div>' +
       '<div class="card"><h3 style="margin:0 0 4px">Гардероб</h3><p class="muted small" style="margin:0 0 10px">Речі відкриваються за зірки (у тебе ⭐ ' + st.stars + ' за весь час). Зірки не витрачаються — натискай, щоб вдягнути чи зняти.</p><div class="dino-items">' +
       DINO.ITEMS.map(function (x) {

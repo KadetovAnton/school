@@ -3,25 +3,26 @@
 (function () {
   var D = window.DINO = {};
 
-  /* форми росту: скільки уроків пройдено (зірки > 0 або ⏭️) */
+  /* форми росту: вилуплюється після 1-го уроку, далі росте за ЗАКРІПЛЕНІ навички 🌳
+     (правильно і наступного дня теж) — тобто коли знання тримаються, а не просто пройдено */
   D.FORMS = [
-    { at: 0, t: "Яйце", s: 0 },
-    { at: 1, t: "Щойно вилупився", s: 0.55 },
-    { at: 4, t: "Малюк", s: 0.7 },
-    { at: 10, t: "Підліток", s: 0.85 },
-    { at: 17, t: "Дорослий динозавр", s: 1 },
-    { at: 26, t: "Король динозаврів", s: 1 }
+    { t: "Яйце", s: 0 },
+    { t: "Щойно вилупився", s: 0.55, lessons: 1 },
+    { t: "Малюк", s: 0.7, trees: 4 },
+    { t: "Підліток", s: 0.85, trees: 12 },
+    { t: "Дорослий динозавр", s: 1, trees: 25 },
+    { t: "Король динозаврів", s: 1, trees: 40 }
   ];
   /* речі: відкриваються, коли зібрано стільки зірок за весь час (зірки не витрачаються) */
   D.ITEMS = [
-    { id: "cap", slot: "head", e: "🧢", t: "Кепка", at: 5 },
-    { id: "bow", slot: "neck", e: "🎀", t: "Метелик", at: 15 },
-    { id: "scarf", slot: "neck", e: "🧣", t: "Шарф", at: 30 },
-    { id: "glasses", slot: "eyes", e: "🕶️", t: "Окуляри", at: 50 },
-    { id: "bag", slot: "back", e: "🎒", t: "Рюкзак", at: 80 },
-    { id: "cape", slot: "back", e: "🦸", t: "Плащ героя", at: 120 },
-    { id: "ball", slot: "hand", e: "⚽", t: "М'яч", at: 170 },
-    { id: "crown", slot: "head", e: "👑", t: "Корона", at: 230 }
+    { id: "cap", slot: "head", e: "🧢", t: "Кепка", at: 300 },
+    { id: "bow", slot: "neck", e: "🎀", t: "Метелик", at: 450 },
+    { id: "scarf", slot: "neck", e: "🧣", t: "Шарф", at: 650 },
+    { id: "glasses", slot: "eyes", e: "🕶️", t: "Окуляри", at: 900 },
+    { id: "bag", slot: "back", e: "🎒", t: "Рюкзак", at: 1200 },
+    { id: "cape", slot: "back", e: "🦸", t: "Плащ героя", at: 1600 },
+    { id: "ball", slot: "hand", e: "⚽", t: "М'яч", at: 2100 },
+    { id: "crown", slot: "head", e: "👑", t: "Корона", at: 2700 }
   ];
   D.COLORS = {
     green: { t: "Зелений", body: "#5cc97b", dark: "#2f8f4e", belly: "#fdf0c4", spike: "#f59e42" },
@@ -30,8 +31,10 @@
     purple: { t: "Фіолетовий", body: "#a98bf5", dark: "#6d4fd1", belly: "#fdf0c4", spike: "#34d399" }
   };
 
-  D.form = function (lessons) { var f = 0; for (var i = 0; i < D.FORMS.length; i++) if (lessons >= D.FORMS[i].at) f = i; return f; };
-  D.nextForm = function (lessons) { var f = D.form(lessons); return f + 1 < D.FORMS.length ? D.FORMS[f + 1] : null; };
+  /* st: {lessons, trees} */
+  function ok(f, st) { return (!f.lessons || st.lessons >= f.lessons) && (!f.trees || st.trees >= f.trees); }
+  D.form = function (st) { var f = 0; for (var i = 1; i < D.FORMS.length; i++) if (ok(D.FORMS[i], st)) f = i; else break; return f; };
+  D.nextForm = function (f) { return f + 1 < D.FORMS.length ? D.FORMS[f + 1] : null; };
   D.unlocked = function (stars) { return D.ITEMS.filter(function (x) { return stars >= x.at; }); };
   D.nextItem = function (stars) { for (var i = 0; i < D.ITEMS.length; i++) if (stars < D.ITEMS[i].at) return D.ITEMS[i]; return null; };
 
