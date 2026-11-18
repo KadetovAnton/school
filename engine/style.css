@@ -254,3 +254,6 @@ body.kid.insession .card{padding-top:12px}
 .dino-col{width:44px;height:44px;border-radius:50%;border:3px solid;cursor:pointer}
 .dino-col.on{box-shadow:0 0 0 3px #fff,0 0 0 6px var(--pri)}
 @media(max-width:360px){.dino-items{grid-template-columns:repeat(3,1fr)}}
+
+.rs-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
+.rs-row .btn{flex:0 0 auto;margin:0}

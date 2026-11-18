@@ -98,6 +98,11 @@
     var k, a, b;
     into.days = (into.days || []).concat((o.days || []).filter(function (d) { return (into.days || []).indexOf(d) < 0; })).sort();
     into.daily = obj(into.daily); for (k in obj(o.daily)) { a = into.daily[k] = obj(into.daily[k]); for (var sb in obj(o.daily[k])) a[sb] = Math.max(a[sb] || 0, o.daily[k][sb] || 0); }
+    // скидання етапу батьками: записи, старші за позначку скидання, відкидаються з обох боків
+    into.resets = obj(into.resets); for (k in obj(o.resets)) into.resets[k] = Math.max(into.resets[k] || 0, o.resets[k] || 0);
+    var RS = into.resets, stale = function (id, x) { return x && (x.g || 0) < (RS[id] || 0); };
+    ["skills", "lessons"].forEach(function (f) { var m = into[f] = obj(into[f]); for (var q in m) if (stale(q, m[q])) delete m[q]; });
+    o = JSON.parse(JSON.stringify(o)); ["skills", "lessons"].forEach(function (f) { var m = obj(o[f]); for (var q in m) if (stale(q, m[q])) delete m[q]; });
     into.skills = obj(into.skills); for (k in obj(o.skills)) { a = into.skills[k]; b = o.skills[k]; if (!a || (b.n || 0) > (a.n || 0) || ((b.n || 0) === (a.n || 0) && (b.last || "") > (a.last || ""))) into.skills[k] = b; }
     into.lessons = obj(into.lessons); for (k in obj(o.lessons)) {
       a = into.lessons[k]; b = o.lessons[k];
@@ -207,7 +212,7 @@
   E.streakInfo = function (prof) { return streakInfo(prof || E.P()); };
   E.lesson = function (id) {
     var p = E.P();
-    return p.lessons[id] || (p.lessons[id] = { steps: {}, stars: 0, best: 0 });
+    return p.lessons[id] || (p.lessons[id] = { steps: {}, stars: 0, best: 0, g: (p.resets || {})[id] || 0 });
   };
 
   /* ---------- зірки ⭐ ----------
@@ -371,7 +376,7 @@
 
   E.sk = function (id) {
     var p = E.P();
-    return p.skills[id] || (p.skills[id] = { lvl: 0, run: 0, n: 0, ok: 0, bad: 0, iv: 0, due: "", knownAt: "", last: "", flag: false });
+    return p.skills[id] || (p.skills[id] = { lvl: 0, run: 0, n: 0, ok: 0, bad: 0, iv: 0, due: "", knownAt: "", last: "", flag: false, g: (p.resets || {})[id] || 0 });
   };
   E.level = function (id) { var s = E.P().skills[id]; return s ? s.lvl : 0; };
 
@@ -513,6 +518,16 @@
     p.wrHist = p.wrHist.filter(function (x) { return !(x.w === r.w && (x.sub || "english") === E.curSub); }).concat([{ w: r.w, sub: E.curSub, score: score, max: max }]).slice(-60);
     E.save();
     if (first) E.addStars(5, "review");
+  };
+
+  /* батьки скидають етап: уроки й навички — як непройдені (зірки, що вже були, лишаються) */
+  E.resetIds = function (lessonIds, skillIds) {
+    var p = E.P(), ts = Date.now(), set = {};
+    p.resets = p.resets || {};
+    lessonIds.forEach(function (id) { p.resets[id] = ts; delete p.lessons[id]; });
+    skillIds.forEach(function (id) { p.resets[id] = ts; delete p.skills[id]; set[id] = 1; });
+    (p.mistakes || []).forEach(function (m) { if (set[m.skill] && !m.fixed) m.fixed = today(); });
+    E.save();
   };
 
   /* ⚡ Блискавка: 60 секунд прикладів з уже початих тем; рекорд — лише проти себе */

@@ -144,8 +144,25 @@
         '<label class="lbl">Скільки ⭐ треба за тиждень</label><input id="rg" type="text" inputmode="numeric" value="' + r.goal + '">' +
         '<p class="muted small">Орієнтир: повне заняття за день дає приблизно 6–10 ⭐. 30 ⭐ — це 4–5 днів занять.</p>' +
         '<label class="lbl">PIN батьків (4 цифри, щоб діти не змінили ціль)</label><input id="rp" type="text" inputmode="numeric" maxlength="4" placeholder="' + (r.pin ? "лишити як є" : "придумай PIN") + '">' +
-        '<div class="row"><button class="btn full" id="sv">Зберегти</button></div></div>';
+        '<div class="row"><button class="btn full" id="sv">Зберегти</button></div></div>' +
+        (PATH ? '<div class="card"><h2>↺ Почати етап заново</h2><p class="muted small">Якщо етап «пройдено» нечесно (з калькулятором, підглядаючи) — уроки й навички етапу стануть непройденими на всіх пристроях. Зірки, що вже нараховані, лишаються.</p>' +
+          PATH.stages.map(function (st, i) { return '<div class="rs-row"><span>' + esc(st.title) + '</span><button class="btn ghost small" data-rs="' + i + '">↺ Заново</button></div>'; }).join("") + '</div>' : "");
       $("bk").onclick = function () { back(); toTop(); };
+      var rb = $app.querySelectorAll("[data-rs]");
+      for (var ri = 0; ri < rb.length; ri++) (function (b) {
+        b.onclick = function () {
+          var st = PATH.stages[+b.getAttribute("data-rs")];
+          if (!window.confirm("Почати етап «" + st.title + "» заново для " + E.P().name + "? Уроки й навички етапу стануть непройденими.")) return;
+          b.disabled = true;
+          var files = st.lessons.map(function (l) { return l.file; }).filter(Boolean);
+          Promise.all(files.map(getJSON)).then(function (arr) {
+            var sk = {};
+            arr.forEach(function (L) { (JSON.stringify(L).match(/"[^"]+"/g) || []).forEach(function (x) { x = x.slice(1, -1); if (E.SK[x]) sk[x] = 1; }); });
+            E.resetIds(st.lessons.map(function (l) { return l.id; }), Object.keys(sk));
+            toast("Етап «" + st.title + "» почато заново ↺"); b.textContent = "✓ Скинуто";
+          }, function () { b.disabled = false; toast("Не вдалося завантажити етап — перевір інтернет"); });
+        };
+      })(rb[ri]);
       $("sv").onclick = function () {
         var t = $("rt").value.trim(), g = parseInt($("rg").value, 10), pin = $("rp").value.trim();
         if (!(g > 0)) { toast("Вкажи кількість зірок числом"); return; }
