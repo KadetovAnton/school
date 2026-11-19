@@ -1,0 +1,31 @@
+{
+ "id": "a13",
+ "title": "§8. Одночлен і його стандартний вигляд",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.mstd"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.mstd": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "👜",
+   "h": "Одночлен",
+   "html": "<p>Одночлен — добуток чисел і змінних (3a²b, −x, 7). <b>Стандартний вигляд</b>: коефіцієнт на початку, кожна буква один раз.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">−2a²b · 3ab³ = −6a³b⁴</div><p>Коефіцієнт: −6. Степінь: 3 + 4 = 7.</p>"
+  }
+ ]
+}

@@ -257,3 +257,7 @@ body.kid.insession .card{padding-top:12px}
 
 .rs-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
 .rs-row .btn{flex:0 0 auto;margin:0}
+.keypad.alg .key{min-height:46px;padding:4px 0;font-size:24px}
+.keypad.alg .key.ok,.keypad.alg .key.del{font-size:22px}
+.prompt.big.alg{font-size:26px}
+.prompt.big.alg.long{font-size:19px}

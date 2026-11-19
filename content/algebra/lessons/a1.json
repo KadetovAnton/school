@@ -1,0 +1,45 @@
+{
+ "id": "a1",
+ "title": "Звичайні дроби",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fred",
+  "a.fadd",
+  "a.fmul"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "a.fred": 2,
+   "a.fadd": 3,
+   "a.fmul": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍕",
+   "h": "Скорочення",
+   "html": "<p>Дріб не зміниться, якщо чисельник і знаменник поділити на одне число.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">18/24 = 3/4 &nbsp; (: 6)</div><div class=\"tip\">⌨️ Відповідь набирай на клавіатурі: <b>−</b> — мінус, <b>,</b> — кома, <b>/</b> — дробова риска (3/4). Мішане число пиши неправильним дробом: 1 3/4 → 7/4.</div>"
+  },
+  {
+   "e": "➕",
+   "h": "Додавання і віднімання",
+   "html": "<p>Спершу — <b>спільний знаменник</b>, потім дії з чисельниками.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2/3 + 1/4 = 8/12 + 3/12 = 11/12</div><div class=\"tip\">⚠️ Знаменники не додаються: 1/2 + 1/3 ≠ 2/5.</div>"
+  },
+  {
+   "e": "✖️",
+   "h": "Множення і ділення",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2/3 · 3/5 = 6/15 = 2/5</div><p>Ділення — множення на <b>перевернутий</b> дріб:</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3/4 : 9/8 = 3/4 · 8/9 = 2/3</div><p class=\"muted\">Відповідь завжди скорочуй до кінця.</p>"
+  }
+ ]
+}

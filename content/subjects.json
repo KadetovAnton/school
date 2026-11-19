@@ -17,7 +17,8 @@
     {
      "id": "algebra",
      "title": "Алгебра",
-     "ic": "🔢"
+     "ic": "🔢",
+     "open": true
     },
     {
      "id": "geometry",

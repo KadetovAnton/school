@@ -436,7 +436,7 @@ fs.writeFileSync(OUT + "/../subjects.json", JSON.stringify({
   children: [
     { id: "anya", name: "Аня", emoji: "👧", grade: 7, g: "f", subjects: [
       { id: "english", title: "Англійська", ic: "🇬🇧", open: true },
-      { id: "algebra", title: "Алгебра", ic: "🔢" },
+      { id: "algebra", title: "Алгебра", ic: "🔢", open: true },
       { id: "geometry", title: "Геометрія", ic: "📐" },
       { id: "ukrainian", title: "Українська мова", ic: "✍️" },
       { id: "physics", title: "Фізика", ic: "⚡" },

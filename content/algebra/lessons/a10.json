@@ -1,0 +1,38 @@
+{
+ "id": "a10",
+ "title": "§5. Тотожні перетворення",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.xlike",
+  "a.xdist"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.xlike": 4,
+   "a.xdist": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🍎",
+   "h": "Подібні доданки",
+   "html": "<p>Однакова буквена частина — додаємо коефіцієнти.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">5a − 3b − 2a + 7b = 3a + 4b</div>"
+  },
+  {
+   "e": "📮",
+   "h": "Розкриття дужок",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">−3(2x − 5) = −6x + 15</div><p>Множимо на <b>кожен</b> доданок і стежимо за знаками. Такі перетворення — <b>тотожні</b>: вираз виглядає інакше, але його значення при будь-яких x те саме.</p>"
+  }
+ ]
+}

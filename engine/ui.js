@@ -9,7 +9,8 @@
   /* Предмети: кожен має свою теку змісту і свої можливості */
   var SUBS = {
     english: { id: "english", base: "content/english/", title: "Англійська", ic: "🇬🇧", words: true, diag: true },
-    math2: { id: "math2", base: "content/math2/", title: "Математика", ic: "🔢", words: false, diag: false, kid: true }
+    math2: { id: "math2", base: "content/math2/", title: "Математика", ic: "🔢", words: false, diag: false, kid: true },
+    algebra: { id: "algebra", base: "content/algebra/", title: "Алгебра", ic: "🔢", words: false, diag: "inline" }
   };
   var SUB = SUBS.english, CTX = {};
   function setSub(id) {
@@ -385,8 +386,9 @@
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
     PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
     var T = lessonTarget(), next = T && T.next ? T : null, cont = T ? T.l : null;
-    var dg = !SUB.diag ? true : P.diag && P.diag.v === 2 ? P.diag : null;
-    var pendingDiag = SUB.diag && !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
+    var IN = SUB.diag === "inline";
+    var dg = !SUB.diag ? true : IN ? (P.diagS || {})[SUB.id] || null : P.diag && P.diag.v === 2 ? P.diag : null;
+    var pendingDiag = SUB.diag && !IN && !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
     var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && (plan.words || !SUB.words) && plan.mist && (!plan.reviewPart || plan.review);
 
     var diagCard = dg ? "" : '<div class="card" style="border:2px solid var(--pri)"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>';
@@ -433,18 +435,22 @@
           if (lv && unlocked) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
           prevOk = L.stars > 0 || !!L.skip; prevN = num;
         } else if (next && next.n + 1 === num) { ic = "⏳"; sub = "Готується — скоро з'явиться"; }
+        else { ic = "⏳"; sub = "Готується"; nLocked++; if (nLocked > 2) cls += " hid"; }
         html += '<button class="lesson ' + cls + '" data-file="' + (ls.file || "") + '"><span class="ic">' + ic + '</span>' +
           '<span><div class="lt">' + num + '. ' + esc(ls.title) + '</div><div class="ls">' + sub + '</div></span></button>';
       });
       html += '</div>';
     });
     if (nLocked > 2) html += '<div class="card" style="padding:10px 16px"><button class="btn plain full" id="showAll">🔒 Показати всі уроки (ще ' + (nLocked - 2) + ')</button></div>';
-    var diagHtml = '<a class="lesson' + (dg ? "" : " open") + '" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
+    var diagHtml = IN ? '<button class="lesson' + (dg ? "" : " open") + '" id="diagGo"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
+      (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : diagRunning() ? "Почато — продовжити з того місця" : "~25 завдань: дроби, від'ємні числа, рівняння, степені") + '</div></span></button>' :
+      '<a class="lesson' + (dg ? "" : " open") + '" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
       (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : pendingDiag ? "✅ Ти вже пройшла тест! Натисни — і план підлаштується під результат" : "Тест на 29 завдань: що вже знаю, а що підтягнути") + '</div></span></a>';
     html = !SUB.diag ? html : dg ? html + diagHtml : html.replace("@DIAG@", diagHtml);
     $app.innerHTML = html;
     $("subj").onclick = function () { renderSubjects(); toTop(); };
     bindActs(renderHome);
+    if ($("diagGo")) $("diagGo").onclick = function () { renderDiag(); toTop(); };
     if ($("cont")) $("cont").onclick = function () { DAILY = false; openLesson(cont.file, T.step); };
     if ($("daily")) $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
@@ -480,7 +486,7 @@
   /* Після перевірки рівня: навички уроків, які Аня вже знає, ставимо в 🌿 «Знаю»
      з повторенням завтра — так вони з'являтимуться в розминці. */
   function applyPlacement() {
-    var P = E.P(), d = P.diag;
+    var P = E.P(), d = SUB.diag === "inline" ? (P.diagS || {})[SUB.id] : P.diag;
     if (!d || !d.skip || d.applied) return;
     d.skip.forEach(function (id) {
       var L = cget("lessons/" + id + ".json");
@@ -490,6 +496,73 @@
       });
     });
     d.applied = true; E.save();
+  }
+  /* ================== ПЕРЕВІРКА РІВНЯ В РУШІЇ (алгебра) ==================
+     diag.json: {items:[{skill, t}]} — по завданню на навичку. Без зірок і рівнів; хід зберігається на пристрої.
+     Урок позначається ⏭️, якщо всі його навички в перевірці розв'язані правильно без підказки. */
+  function diagKey() { return "school-diag:" + E.cur() + ":" + SUB.id; }
+  function diagRunning() { try { var r = JSON.parse(localStorage.getItem(diagKey()) || "null"); return !!(r && r.items && r.i > 0); } catch (e) { return false; } }
+  function renderDiag() {
+    loadAll(function () {
+      getJSON("diag.json").then(function (D) {
+        var run = null;
+        try { run = JSON.parse(localStorage.getItem(diagKey()) || "null"); } catch (e) {}
+        var start = function (r) {
+          var save = function () { try { localStorage.setItem(diagKey(), JSON.stringify(r)); } catch (e) {} };
+          var step = function () {
+            if (r.i >= r.items.length) { try { localStorage.removeItem(diagKey()); } catch (e) {} return diagResult(D, r); }
+            var it = r.items[r.i];
+            E.ITEM[it.key] = it;
+            showTask($app, it, {
+              chip: "🧭 Перевірка рівня · " + (r.i + 1) + " з " + r.items.length, prog: r.i / r.items.length,
+              nextLabel: function () { return r.i + 1 < r.items.length ? "Далі →" : "Результат"; },
+              done: function (x) { r.res.push({ s: it.skill, ok: !!x.ok, clean: !!x.clean }); r.i++; save(); E.tick(SUB.id); step(); }
+            });
+          };
+          save(); step();
+        };
+        if (run && run.items && run.i > 0 && run.i < run.items.length) return start(run);
+        var items = [];
+        D.items.forEach(function (d) { var x = E.SK[d.skill] && E.pick(d.skill, 1)[0]; if (x) items.push(x); });
+        $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🧭</div><h2>' + esc(D.title) + '</h2>' +
+          '<p>' + items.length + ' завдань — по одному на кожну тему: дроби, від\'ємні числа, рівняння, вирази, степені.</p>' +
+          '<p class="muted">Це не контрольна і не оцінка! Тест покаже, що вже знаєш, а що підтягнути. Не знаєш — сміливо тисни «🤷 Не знаю». Можна перерватись: прогрес збережеться.</p>' +
+          '<div class="row"><button class="btn ghost" id="bk">← Назад</button><button class="btn full" id="go">Почати</button></div></div>';
+        $("bk").onclick = function () { renderHome(); toTop(); };
+        $("go").onclick = function () { start({ items: items, i: 0, res: [] }); };
+      }, function () { failView(renderDiag); });
+    });
+  }
+  function diagResult(D, r) {
+    var P = E.P(), by = {}, order = [], ok = 0, T = {};
+    D.items.forEach(function (d) { T[d.skill] = d.t; });
+    r.res.forEach(function (x) { var t = T[x.s] || "Інше"; if (!by[t]) { by[t] = [0, 0]; order.push(t); } by[t][1]++; if (x.clean) { by[t][0]++; ok++; } });
+    var pct = Math.round(ok / Math.max(1, r.res.length) * 100), good = {};
+    r.res.forEach(function (x) { if (x.clean) good[x.s] = 1; });
+    var skip = [], skipT = [];
+    PATH.stages.forEach(function (st) { st.lessons.forEach(function (l) {
+      var L = l.file && cget(l.file);
+      if (L && L.skills && L.skills.length && L.skills.every(function (s) { return good[s]; })) { skip.push(l.id); skipT.push(l.title); var LL = E.lesson(l.id); if (!(LL.stars > 0)) LL.skip = true; }
+    }); });
+    var now = new Date(), date = ("0" + now.getDate()).slice(-2) + "." + ("0" + (now.getMonth() + 1)).slice(-2) + "." + now.getFullYear();
+    P.diagS = P.diagS || {};
+    P.diagS[SUB.id] = { v: 1, t: Date.now(), d: E.today(), date: date, pct: pct, skip: skip, by: by, bad: r.res.filter(function (x) { return !x.clean; }).map(function (x) { return x.s; }) };
+    E.save(); applyPlacement();
+    var rows = order.map(function (t) { var b = by[t], e = b[0] === b[1] ? "✅" : b[0] * 2 >= b[1] ? "🟡" : "🔴"; return '<tr><td>' + e + '</td><td>' + esc(t) + '</td><td style="text-align:right">' + b[0] + ' з ' + b[1] + '</td></tr>'; }).join("");
+    var weak = order.filter(function (t) { return by[t][0] * 2 < by[t][1]; });
+    var text = "🧭 " + child().name + " — " + D.title + " (" + date + "): " + pct + "% (" + ok + " з " + r.res.length + ")\n" +
+      order.map(function (t) { var b = by[t]; return (b[0] === b[1] ? "✅ " : b[0] * 2 >= b[1] ? "🟡 " : "🔴 ") + t + ": " + b[0] + "/" + b[1]; }).join("\n") +
+      (skipT.length ? "\n⏭️ Знає (уроки пропущено): " + skipT.join("; ") : "") +
+      (r.res.some(function (x) { return !x.clean; }) ? "\nНе вийшло: " + r.res.filter(function (x) { return !x.clean; }).map(function (x) { return E.SK[x.s] ? E.SK[x.s].title : x.s; }).join("; ") : "");
+    $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (pct >= 80 ? "🏆" : pct >= 50 ? "💪" : "🌱") + '</div><h2>Готово! ' + pct + '%</h2>' +
+      '<p class="muted">' + ok + ' з ' + r.res.length + ' правильно без підказки. ' + (weak.length ? "Тепер зрозуміло, з чого почати — план уже підлаштований." : "Чудова база!") + '</p></div>' +
+      '<div class="card"><h3 style="margin-top:0">Теми</h3><table class="t" style="width:100%">' + rows + '</table>' +
+      (skipT.length ? '<p style="margin-top:12px">⏭️ <b>Уже знаєш</b> (уроки можна пропустити):<br>' + skipT.map(esc).join("<br>") + '</p>' : "") +
+      '<div class="row"><button class="btn ghost full" id="send">📨 Надіслати батькам</button></div>' +
+      '<div class="row"><button class="btn full" id="home">До уроків →</button></div></div>';
+    $("send").onclick = function () { sendDad(text); };
+    $("home").onclick = function () { renderHome(); toTop(); };
+    toTop();
   }
   /* чи є в пам'яті пройдений тест (для поточної дитини або старий, до появи профілів — для Ані) */
   function testDone() {
@@ -1059,8 +1132,8 @@
     if (it.type === "fix") body = '<div class="pool fixw">' + it.p.split(" ").map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div>';
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "num") body = (it.steps ? '<div class="stps">' + it.steps.map(function (st, k) { return '<div class="stp' + (k ? "" : " cur") + '" id="stp' + k + '"><span class="sq">' + (k + 1) + ') ' + esc(st.q) + '</span> <b class="sv" id="sv' + k + '">' + (k ? "" : "?") + '</b></div>'; }).join("") + '</div>' : "") +
-      '<div class="numbox" id="numbox"></div><div class="keypad' + (SUB.kid ? " k5" : "") + '" id="keypad">' +
-      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
+      '<div class="numbox" id="numbox"></div><div id="almost"></div><div class="keypad' + (SUB.kid ? " k5" : it.kb ? " alg" : "") + '" id="keypad">' +
+      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb ? [1, 2, 3, 4, 5, 6, 7, 8, 9, "−", 0, ",", "/", "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     document.body.classList.add("insession");
     root.innerHTML = '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
@@ -1068,7 +1141,7 @@
       '<div class="prog"><i style="width:' + Math.round((cfg.prog || 0) * 100) + '%"></i></div>' +
       (it.task ? '<div class="task">' + it.task + ':' + (it.read ? ' <button class="say" id="readIt">🔊 Прочитай</button>' : "") + '</div>' : "") +
       (it.pic ? '<div class="pic">' + it.pic + '</div>' : "") +
-      (it.type === "dict" ? '<div class="prompt">🎧 Що ти чуєш?</div>' : it.type === "fix" ? "" : '<div class="prompt' + (it.type === "num" || SUB.kid ? " big" : "") + (it.long ? " long" : "") + '">' + esc(it.p).replace("___", '<span class="blank" id="blank"></span>') + '</div>') + body +
+      (it.type === "dict" ? '<div class="prompt">🎧 Що ти чуєш?</div>' : it.type === "fix" ? "" : '<div class="prompt' + (it.type === "num" || SUB.kid ? " big" : "") + (it.kb ? " alg" : "") + (it.long ? " long" : "") + '">' + esc(it.p).replace("___", '<span class="blank" id="blank"></span>') + '</div>') + body +
       '<div id="hints"></div><div class="row" id="aux"><button class="btn ghost" id="hintBtn">💡 Підказка</button><button class="btn plain" id="idk">🤷 Не знаю</button></div>' +
       '<div id="fb"></div></div>';
 
@@ -1086,7 +1159,7 @@
       var c = forced || E.check(it, given), spellNote = false;
       if (c.st === "typo" && !typoUsed) {
         typoUsed = true;
-        $("almost").innerHTML = '<div class="almost">✏️ Майже! Перевір написання і спробуй ще раз 🙂</div>';
+        $("almost").innerHTML = '<div class="almost">' + (c.msg || "✏️ Майже! Перевір написання і спробуй ще раз 🙂") + '</div>';
         var inp0 = $("inp"); try { inp0.focus(); } catch (e) {}
         return;
       }
@@ -1125,7 +1198,7 @@
           '<div style="margin-top:6px">Правильно: <b>' + esc(it.type === "order" ? full : c.right) + '</b></div>' +
           '<div class="rule"><b>Правило:</b> ' + it.e + '</div>';
       }
-      h += (canSpeak && /[a-z]/i.test(full) && !SUB.kid ? '<div style="margin-top:12px"><button class="say" data-say="' + esc(full) + '">🔊 Послухати</button></div>' : "") +
+      h += (canSpeak && /[a-z]/i.test(full) && SUB.words ? '<div style="margin-top:12px"><button class="say" data-say="' + esc(full) + '">🔊 Послухати</button></div>' : "") +
         (SUB.kid ? '<div style="margin-top:10px">' + ukBtn((ok ? "Правильно! " : "Правильна відповідь: " + c.right + ". ") + (c.msg && !ok ? c.msg + ". " : "") + it.e) + '</div>' : "") + '</div>' +
         '<div class="row"><button class="btn full" id="next">' + cfg.nextLabel(ok) + '</button></div>' +
         '<button class="report" id="rep">🚩 Тут, здається, помилка</button>';
@@ -1165,7 +1238,15 @@
           }
           finish(val); return;
         }
+        else if (it.kb) { // алгебра: мінус лише на початку (або після /), одна кома, одна риска
+          if (val.length >= 9) return;
+          if (k === "−") { if (val === "") val = "−"; else if (val === "−") val = ""; else return; }
+          else if (k === ",") { if (!/\d$/.test(val) || /,|\//.test(val)) return; val += ","; }
+          else if (k === "/") { if (!/\d$/.test(val) || /[,/]/.test(val)) return; val += "/"; }
+          else val = (val === "0" ? "" : val === "−0" ? "−" : val) + k;
+        }
         else if (val.length < 4) val = (val === "0" ? "" : val) + k;
+        if (typoUsed && $("almost")) $("almost").innerHTML = "";
         show();
       };
       var ks = root.querySelectorAll(".key");
@@ -1174,6 +1255,7 @@
       document.onkeydown = function (e) {
         if (!$("keypad") || answered) return;
         if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); else if (e.key === "Enter") press("✓");
+        else if (it.kb && (e.key === "-" || e.key === "−")) press("−"); else if (it.kb && (e.key === "," || e.key === ".")) press(","); else if (it.kb && e.key === "/") press("/");
       };
       show();
     }

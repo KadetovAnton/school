@@ -1,0 +1,38 @@
+{
+ "id": "a4",
+ "title": "Порядок дій і розкриття дужок",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.ord",
+  "a.br"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.ord": 4,
+   "a.br": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🪜",
+   "h": "Порядок дій",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">( ) → aⁿ → · і : → + і −</div><p>5 − 3 · (−2) = 5 − (−6) = 11.</p>"
+  },
+  {
+   "e": "🎁",
+   "h": "Розкриття дужок",
+   "html": "<p><b>+( )</b> — знаки не змінюються. <b>−( )</b> — знак <b>кожного</b> доданка змінюється.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">7x − (2x − 5) = 7x − 2x + 5 = 5x + 5</div>"
+  }
+ ]
+}

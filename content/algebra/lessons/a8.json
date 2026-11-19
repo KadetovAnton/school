@@ -1,0 +1,38 @@
+{
+ "id": "a8",
+ "title": "§3. Задачі за допомогою рівнянь",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.emodel",
+  "a.eword"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.emodel": 3,
+   "a.eword": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🌐",
+   "h": "Переклад на мову математики",
+   "html": "<table class=\"t\"><tr><td>в 3 рази більше</td><td>3x</td></tr><tr><td>на 5 більше</td><td>x + 5</td></tr><tr><td>на 5 менше</td><td>x − 5</td></tr><tr><td>три послідовні числа</td><td>x, x + 1, x + 2</td></tr></table>"
+  },
+  {
+   "e": "🧭",
+   "h": "План",
+   "html": "<p>1) Нехай x — … (зазвичай менша величина). 2) Інші величини — через x. 3) Рівняння з умови. 4) Розв'язати. 5) Відповісти саме на питання задачі.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">x + (x + 26) = 50 → x = 12</div>"
+  }
+ ]
+}

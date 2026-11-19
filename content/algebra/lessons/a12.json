@@ -1,0 +1,38 @@
+{
+ "id": "a12",
+ "title": "§7. Властивості степеня",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.pwprop",
+  "a.pwcalc"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.pwprop": 5,
+   "a.pwcalc": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🧩",
+   "h": "Три правила",
+   "html": "<table class=\"t\"><tr><td>aᵐ · aⁿ</td><td>aᵐ⁺ⁿ</td><td>a³ · a⁴ = a⁷</td></tr><tr><td>aᵐ : aⁿ</td><td>aᵐ⁻ⁿ</td><td>a⁹ : a⁴ = a⁵</td></tr><tr><td>(aᵐ)ⁿ</td><td>aᵐ·ⁿ</td><td>(a³)⁴ = a¹²</td></tr></table><div class=\"tip\">⚠️ При множенні показники <b>додаються</b>, а не множаться.</div>"
+  },
+  {
+   "e": "✂️",
+   "h": "Рахуємо зручно",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2⁷ · 2³ : 2⁸ = 2¹⁰ : 2⁸ = 2² = 4</div><p>Спершу правила, потім обчислення.</p>"
+  }
+ ]
+}

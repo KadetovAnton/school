@@ -1,0 +1,45 @@
+{
+ "id": "a2",
+ "title": "Десяткові дроби, пропорції, відсотки",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.dops",
+  "a.prop",
+  "a.pct"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "a.dops": 3,
+   "a.prop": 2,
+   "a.pct": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🔢",
+   "h": "Десяткові дроби",
+   "html": "<p>+ і −: <b>кома під комою</b>. ×: множимо без ком, а знаків після коми — скільки в обох множниках разом.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">0,3 · 0,2 = 0,06 &nbsp;&nbsp; 1,2 · 0,5 = 0,6</div><p>Ділення: переносимо кому в обох числах, щоб дільник став цілим:</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">4,8 : 0,6 = 48 : 6 = 8</div>"
+  },
+  {
+   "e": "⚖️",
+   "h": "Пропорції",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">a : b = c : d &nbsp;⇔&nbsp; a · d = b · c</div><p>x : 6 = 10 : 15 → 15x = 60 → x = 4.</p>"
+  },
+  {
+   "e": "💯",
+   "h": "Відсотки",
+   "html": "<table class=\"t\"><tr><td>P% від N</td><td>N · P : 100</td></tr><tr><td>число, P% якого = A</td><td>A : P · 100</td></tr><tr><td>скільки % A від N</td><td>A : N · 100</td></tr></table><p class=\"muted\">20% = 1/5, 25% = 1/4, 50% = 1/2, 75% = 3/4 — це можна рахувати в голові.</p>"
+  }
+ ]
+}

@@ -142,6 +142,7 @@
     into.wrHist.forEach(function (x) { hk[x.w + "|" + (x.sub || "")] = 1; });
     (o.wrHist || []).forEach(function (x) { if (!hk[x.w + "|" + (x.sub || "")]) into.wrHist.push(x); });
     if (o.diag && (!into.diag || (o.diag.d || "") > (into.diag.d || ""))) into.diag = o.diag;
+    into.diagS = obj(into.diagS); for (k in obj(o.diagS)) if (!into.diagS[k] || (o.diagS[k].t || 0) > (into.diagS[k].t || 0)) into.diagS[k] = o.diagS[k];
     if (o.reward && (!into.reward || !into.reward.text)) into.reward = o.reward;
     if (o.dino) {
       a = obj(into.dino); b = o.dino;
@@ -665,9 +666,30 @@
   }
 
   /* Результат: {st:"ok"|"typo"|"wrong"|"idk", msg?, right} */
+  /* алгебра: число, десятковий чи звичайний дріб → {n, d} (точно, без похибок) */
+  function gcdN(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = a % b; a = b; b = t; } return a; }
+  function ratOf(s) {
+    s = String(s).replace(/[−–—]/g, "-").replace(/\./g, ",").replace(/\s+/g, "");
+    var m = s.match(/^(-?)(\d+)(?:,(\d+))?$/);
+    if (m) { var f = m[3] || "", d = Math.pow(10, f.length); return { n: (m[1] ? -1 : 1) * (+m[2] * d + (+f || 0)), d: d, frac: false }; }
+    m = s.match(/^(-?)(\d+)\/(-?)(\d+)$/);
+    if (m && +m[4]) return { n: ((m[1] ? -1 : 1) * (m[3] ? -1 : 1)) * +m[2], d: +m[4], frac: true, red: gcdN(+m[2], +m[4]) === 1 && +m[4] !== 1 };
+    return null;
+  }
+  E.ratOf = ratOf;
   E.check = function (it, given) {
     var ans = answersOf(it), right = ans[0];
     if (given == null) return { st: "idk", right: right };
+    if (it.type === "num" && it.kb === "alg") {
+      var gv = ratOf(given), rv = ratOf(right);
+      if (gv && rv && gv.n * rv.d === rv.n * gv.d) {
+        if (gv.frac && !gv.red) return { st: "typo", right: right, msg: gv.d === 1 || gcdN(gv.n, gv.d) === gv.d ? "✏️ Значення правильне! Але дріб, що ділиться націло, запиши цілим числом." : "✏️ Значення правильне! Але дріб треба <b>скоротити</b> до кінця. Спробуй ще раз 🙂" };
+        return { st: "ok", right: right };
+      }
+      var ek = Object.keys(it.err || {});
+      for (var q = 0; q < ek.length; q++) { var ev = ratOf(ek[q]); if (gv && ev && gv.n * ev.d === ev.n * gv.d) return { st: "wrong", msg: it.err[ek[q]], right: right }; }
+      return { st: "wrong", right: right };
+    }
     if (it.type === "fix") { // «Знайди помилку»: given — номер слова
       if (String(given) === String(it.bad)) return { st: "ok", right: right };
       var w = it.p.split(" ");

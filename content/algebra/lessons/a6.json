@@ -1,0 +1,38 @@
+{
+ "id": "a6",
+ "title": "§2. Лінійне рівняння з однією змінною",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.elin1",
+  "a.elin2"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.elin1": 4,
+   "a.elin2": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📏",
+   "h": "Лінійне рівняння",
+   "html": "<p>Рівняння вигляду <b>ax = b</b> — лінійне. До нього зводяться рівняння, де x лише в першому степені.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3x − 5 = 16 → 3x = 21 → x = 7</div>"
+  },
+  {
+   "e": "📦",
+   "h": "x — вліво, числа — вправо",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">5x + 3 = 2x − 9</div><p>5x − 2x = −9 − 3 → 3x = −12 → x = −4.</p><div class=\"tip\">💡 Перевірка: 5·(−4) + 3 = −17 і 2·(−4) − 9 = −17 ✓</div>"
+  }
+ ]
+}

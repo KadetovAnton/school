@@ -1,0 +1,31 @@
+{
+ "id": "a9",
+ "title": "§4. Вирази зі змінними",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.xval"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.xval": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📦",
+   "h": "Значення виразу",
+   "html": "<p>Підставляємо число замість букви. <b>Від'ємні — у дужках!</b></p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">x² − 3x при x = −2: (−2)² − 3·(−2) = 4 + 6 = 10</div><div class=\"tip\">⚠️ (−2)² = 4, а не −4.</div>"
+  }
+ ]
+}
