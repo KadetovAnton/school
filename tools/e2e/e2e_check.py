@@ -16,7 +16,13 @@ with sync_playwright() as p:
     pg.goto(U); pg.evaluate("localStorage.clear()"); pg.reload()
     pg.click(".who-b[data-id=anya]"); pg.click(".lesson[data-s=algebra]"); pg.wait_for_selector("#diagGo")
     t=pg.inner_text("[data-chk='1']"); assert "Відкриється" in t, t
-    pg.evaluate("['a5','a6','a7'].forEach(function(id){E.lesson(id).stars=3});E.lesson('a8').skip=true;E.save()")
+    # строгий порядок: урок 6 закритий, без «відкрити раніше»
+    pg.evaluate("E.lesson('a5').skip=true;E.save()"); pg.evaluate("location.hash='algebra'"); pg.reload(); pg.wait_for_selector("#diagGo")
+    assert pg.evaluate("E.lesson('a5').skip")==False
+    t=pg.inner_text("#app"); assert "відкрити раніше" not in t and "Відкриється після уроку 1" in t, t
+    pg.locator(".lesson[data-file='lessons/a2.json']").click(); pg.wait_for_timeout(200)
+    assert pg.locator("#diagGo").count() and "Спершу пройди урок 1" in pg.inner_text("body")
+    pg.evaluate("['a5','a6','a7','a8'].forEach(function(id){E.lesson(id).stars=3});E.save()")
     pg.evaluate("location.hash='algebra'"); pg.reload(); pg.wait_for_selector("#diagGo")
     t=pg.inner_text("[data-chk='1']"); assert "12 завдань" in t, t
     pg.screenshot(path="/home/claude/shots/chk_home.png")

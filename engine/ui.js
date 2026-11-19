@@ -10,7 +10,7 @@
   var SUBS = {
     english: { id: "english", base: "content/english/", title: "Англійська", ic: "🇬🇧", words: true, diag: true },
     math2: { id: "math2", base: "content/math2/", title: "Математика", ic: "🔢", words: false, diag: false, kid: true },
-    algebra: { id: "algebra", base: "content/algebra/", title: "Алгебра", ic: "🔢", words: false, diag: "inline", check: true }
+    algebra: { id: "algebra", base: "content/algebra/", title: "Алгебра", ic: "🔢", words: false, diag: "inline", check: true, strict: true } // strict: усе по черзі — без «відкрити раніше» і без ⏭️ пропуску за перевіркою рівня
   };
   var SUB = SUBS.english, CTX = {};
   function setSub(id) {
@@ -382,6 +382,7 @@
     var P = E.P();
     if (!ALL) return loadAll(function () { ALL = true; renderHome(); });
     if (SUB.diag) applyPlacement();
+    if (SUB.strict) { var clr = false; PATH.stages.forEach(function (s0) { s0.lessons.forEach(function (l0) { var L0 = P.lessons[l0.id]; if (L0 && L0.skip) { L0.skip = false; L0.skipU = Date.now(); clr = true; } }); }); if (clr) E.save(); }
     setTitle(SUB.title + " · " + child().name);
     var st = E.streak(), doneCount = 0, allLessons = 0, num = 0;
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
@@ -392,7 +393,7 @@
     var pendingDiag = SUB.diag && !IN && !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
     var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && (plan.words || !SUB.words) && plan.mist && (!plan.reviewPart || plan.review);
 
-    var diagCard = dg ? "" : '<div class="card" style="border:2px solid var(--pri)"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : IN ? "Це не оцінка: перевірка покаже, що вже вмієш, і уроки підлаштуються під тебе. Можна частинами." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>';
+    var diagCard = dg ? "" : '<div class="card" style="border:2px solid var(--pri)"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : IN ? (SUB.strict ? "Це не оцінка: перевірка покаже, що вже вмієш, а що підтягнути. Можна частинами." : "Це не оцінка: перевірка покаже, що вже вмієш, і уроки підлаштуються під тебе. Можна частинами.") : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>';
     var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">' + SUB.ic + ' ' + SUB.title + '</span></div>' + diagCard +
       '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
       '<p class="muted" style="margin:0">' + (cont ? (next ? "Зараз: урок " + next.n + " «" + esc(cont.title) + "»" : "Усі готові уроки пройдено! Нові вже готуються.") : "") + '</p></div></div>' +
@@ -434,6 +435,7 @@
           if (L.stars > 0) { cls = "done"; ic = "✅"; sub = '<span class="stars">' + starsStr(L.stars) + '</span> · можна повторити'; }
           else if (L.skip) { cls = "done"; ic = "⏭️"; sub = "Знаєш за перевіркою рівня · можна пройти"; }
           else if (unlocked) { cls = "open"; ic = ls.ic; sub = nDone ? "Пройдено " + nDone + " з " + stepsOf(cget(ls.file)).length + " кроків" : "Почати · ~" + (SUB.kid ? 10 : 20) + " хв"; }
+          else if (SUB.strict) { cls = "lock"; ic = "🔒"; sub = "Відкриється після уроку " + prevN; early[ls.file] = { l: ls, after: prevN, no: true }; nLocked++; if (nLocked > 2) cls += " hid"; }
           else { cls = "lock soon"; ic = "🔒"; sub = "Після уроку " + prevN + " · можна відкрити раніше"; early[ls.file] = { l: ls, after: prevN }; nLocked++; if (nLocked > 2) cls += " hid"; }
           if (lv && unlocked) sub += '<div class="lvls" title="Навички уроку">' + lv + '</div>';
           prevOk = L.stars > 0 || !!L.skip; prevN = num;
@@ -471,7 +473,7 @@
     var bs = $app.querySelectorAll(".lesson[data-file]");
     for (var j = 0; j < bs.length; j++) (function (b) {
       var f = b.getAttribute("data-file");
-      if (f) b.onclick = function () { if (early[f]) askEarly(early[f]); else openLesson(f); };
+      if (f) b.onclick = function () { if (early[f] && early[f].no) toast("🔒 Спершу пройди урок " + early[f].after); else if (early[f]) askEarly(early[f]); else openLesson(f); };
     })(bs[j]);
   }
   /* рядок значків рівнів навичок уроку */
@@ -676,7 +678,7 @@
         $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🧭</div><h2>' + esc(D.title) + '</h2>' +
           (resume ? '<p>Продовжимо з того місця, де зупинилась: частина ' + (run.parts[run.i] + 1) + ' з ' + parts.length + '.</p>' :
           '<p>' + parts.length + ' короткі частини, ~10 хвилин кожна: ' + parts.map(function (x) { return "«" + esc(x) + "»"; }).join(", ") + '.</p>') +
-          '<p class="muted">Це не контрольна і не оцінка! Перевірка покаже, що вже вмієш, — і уроки підлаштуються. Не знаєш — тисни «🤷 Не знаю», це теж корисна відповідь.</p>' + KB +
+          '<p class="muted">Це не контрольна і не оцінка! Перевірка покаже, що вже вмієш' + (SUB.strict ? ", а що підтягнути." : ", — і уроки підлаштуються.") + ' Не знаєш — тисни «🤷 Не знаю», це теж корисна відповідь.</p>' + KB +
           '<div class="row"><button class="btn ghost" id="bk">← Назад</button><button class="btn full" id="go">' + (resume ? "Продовжити" : "Почати") + '</button></div></div>';
         $("bk").onclick = function () { renderHome(); toTop(); };
         $("go").onclick = function () {
@@ -699,7 +701,7 @@
       var L = l.file && cget(l.file); if (!L || !L.skills || !L.skills.length) return;
       var n = 0, all = L.skills.every(function (s) { n += cnt[s] || 0; return cnt[s] && !bad[s]; });
       var LL = E.lesson(l.id);
-      if (all && n >= 2) { skip.push(l.id); skipT.push(l.title); if (!(LL.stars > 0) && !LL.skip) { LL.skip = true; LL.skipU = Date.now(); } }
+      if (all && n >= 2 && !SUB.strict) { skip.push(l.id); skipT.push(l.title); if (!(LL.stars > 0) && !LL.skip) { LL.skip = true; LL.skipU = Date.now(); } }
       else if (LL.skip) { LL.skip = false; LL.skipU = Date.now(); }
     }); });
     var now = new Date(), date = ("0" + now.getDate()).slice(-2) + "." + ("0" + (now.getMonth() + 1)).slice(-2) + "." + now.getFullYear();
@@ -718,7 +720,7 @@
       (Object.keys(bad).length ? "\nНе вийшло: " + Object.keys(bad).map(function (s) { return E.SK[s] ? E.SK[s].title : s; }).join("; ") : "");
     $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🎉</div><h2>Перевірку пройдено!</h2>' +
       '<p>' + (grp[0].length ? "Ти вже вмієш: <b>" + grp[0].length + " " + (grp[0].length === 1 ? "тему" : grp[0].length < 5 ? "теми" : "тем") + "</b> ✅" : "Тепер зрозуміло, з чого почати") + '</p>' +
-      '<p class="muted">План уроків уже підлаштований під тебе.' + (first ? " +5 ⭐ за перевірку!" : "") + '</p></div>' +
+      '<p class="muted">' + (SUB.strict ? "Уроки йдуть по черзі: знайомі теми пройдеш швидко, а на складних зупинимось довше." : "План уроків уже підлаштований під тебе.") + (first ? " +5 ⭐ за перевірку!" : "") + '</p></div>' +
       '<div class="card">' + rows +
       (skipT.length ? '<p style="margin-top:12px">⏭️ <b>Ці уроки можна пропустити</b> (або пройти для певності):<br>' + skipT.map(esc).join("<br>") + '</p>' : "") +
       '<div class="row"><button class="btn ghost full" id="send">📨 Надіслати батькам</button></div>' +
