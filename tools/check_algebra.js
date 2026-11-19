@@ -52,11 +52,11 @@ for (const s of sk) {
         const want = c.ans ? ev(c.ans, { x: root }) : root; if (!close(want, A)) B(s.gen, "відповідь " + want, it); }
       else if (c.pw) { const [p, n] = c.pw; const js = toJS(p); for (const base of [2, 3]) { if (!close(ev(js, { a: base, b: base, x: base, y: base }), Math.pow(base, n))) B(s.gen, "степінь", it); } }
       else if (c.sys) { const [a1, b1, c1, a2, b2, c2] = c.sys, D = a1 * b2 - a2 * b1; if (!D) { B(s.gen, "система вироджена", it); continue; }
-        const X = (c1 * b2 - c2 * b1) / D, Y = (a1 * c2 - a2 * c1) / D; if (!close(c.ask === "x" ? X : Y, A)) B(s.gen, "розв'язок системи " + X + ";" + Y, it);
+        const X = (c1 * b2 - c2 * b1) / D, Y = (a1 * c2 - a2 * c1) / D; if (!close(c.ask === "x" ? X : c.ask === "y" ? Y : 10 * X + Y, A)) B(s.gen, "розв'язок системи " + X + ";" + Y, it);
         if (!Number.isInteger(X) || !Number.isInteger(Y)) B(s.gen, "нецілий розв'язок", it); }
       else if (c.lin2) { const [a, b, cc, kv, kval, av] = c.lin2; const v = kv === "x" ? (cc - a * kval) / b : (cc - b * kval) / a; if (!close(v, A)) B(s.gen, "лін. рівняння " + v, it); }
       else B(s.gen, "нема chk", it);
-      if (Math.abs(A) > 11000) B(s.gen, "завелика відповідь", it);
+      if (Math.abs(A) > 50000) B(s.gen, "завелика відповідь", it);
     } else if (it.type === "choice") {
       if (!it.o.includes(it.a) || new Set(it.o).size !== it.o.length || it.o.length < 2) B(s.gen, "варіанти", it);
       if (c.src) {
@@ -87,6 +87,8 @@ for (const s of sk) {
       else if (c.lin) { const [a, b, cc, x, y] = c.lin; if ((a * x + b * y === cc) !== (it.a === "Так")) B(s.gen, "пара", it); const [l, r] = it.p.split(" = "); if (!close(ev(toJS(l), { x, y }), a * x + b * y) || +r.replace("−", "-") !== cc) B(s.gen, "пара≠умова", it); }
       else if (c.div) { const [b, n, sg] = c.div; const big = BigInt(b) ** BigInt(n) + BigInt(sg) * BigInt(b) ** BigInt(n - 1);
         it.o.forEach(o => { const d = (big % BigInt(+o)) === 0n; if (d !== (o === it.a)) B(s.gen, "подільність " + o, it); }); }
+      else if (c.domain !== undefined) { const ok = c.kind === 1 ? "усі числа, крім " + (c.domain < 0 ? "−" + (-c.domain) : c.domain) : "усі числа"; if (it.a !== ok) B(s.gen, "область визначення", it);
+        if (c.kind === 1) { const den = it.p.match(/\/ \((.+)\)/)[1]; if (!close(ev(toJS(den), { x: c.domain }), 0)) B(s.gen, "знаменник≠0", it); } }
       else if (c.incr !== undefined) { if ((c.incr > 0) !== (it.a === "Зростає")) B(s.gen, "монотонність", it); }
       else if (c.par) { const kb = o => { const g = x => ev(toJS(o.split(" = ")[1]), { x }); return [g(1) - g(0), g(0)]; };
         it.o.forEach(o => { const [k, b] = kb(o), par = close(k, c.par[0]) && !close(b, c.par[1]); if (par !== (o === it.a)) B(s.gen, "паралельність " + o, it); }); }

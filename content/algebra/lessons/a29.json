@@ -12,16 +12,18 @@
  "skills": [
   "a.fnkb",
   "a.fnaxis",
-  "a.fnpar"
+  "a.fnpar",
+  "a.fnk"
  ],
  "practice": {
-  "perSkill": 3
+  "perSkill": 2
  },
  "test": {
   "plan": {
-   "a.fnkb": 3,
-   "a.fnaxis": 3,
-   "a.fnpar": 2
+   "a.fnkb": 2,
+   "a.fnaxis": 2,
+   "a.fnpar": 2,
+   "a.fnk": 2
   },
   "pass": 80
  },
@@ -35,6 +37,11 @@
    "e": "📈",
    "h": "Властивості",
    "html": "<table class=\"t\"><tr><td>k > 0</td><td>зростає</td></tr><tr><td>k < 0</td><td>спадає</td></tr><tr><td>k₁ = k₂, b₁ ≠ b₂</td><td>паралельні</td></tr><tr><td>перетин з Ox</td><td>kx + b = 0</td></tr></table>"
+  },
+  {
+   "e": "📍",
+   "h": "Задачі з точками",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">y = kx + 3 через A(2; 9): 9 = 2k + 3 → k = 3</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">y = 2x − 1 і y = −x + 5: 2x − 1 = −x + 5 → x = 2, y = 3</div>"
   }
  ]
 }

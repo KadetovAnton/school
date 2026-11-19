@@ -11,15 +11,17 @@
  ],
  "skills": [
   "a.scount",
-  "a.ssyspair"
+  "a.ssyspair",
+  "a.sgraph"
  ],
  "practice": {
-  "perSkill": 4
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "a.scount": 3,
-   "a.ssyspair": 4
+   "a.scount": 2,
+   "a.ssyspair": 3,
+   "a.sgraph": 3
   },
   "pass": 80
  },

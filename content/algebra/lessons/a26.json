@@ -10,14 +10,16 @@
   "skills/algebra.json"
  ],
  "skills": [
-  "a.fmulti"
+  "a.fmulti",
+  "a.fsimp"
  ],
  "practice": {
-  "perSkill": 7
+  "perSkill": 4
  },
  "test": {
   "plan": {
-   "a.fmulti": 7
+   "a.fmulti": 4,
+   "a.fsimp": 4
   },
   "pass": 80
  },
@@ -26,6 +28,11 @@
    "e": "🛠️",
    "h": "План",
    "html": "<p>1) Спільний множник за дужки. 2) Формули. 3) Групування. Розкладай <b>до кінця</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3x³ − 12x = 3x(x² − 4) = 3x(x − 2)(x + 2)</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2x² − 12x + 18 = 2(x² − 6x + 9) = 2(x − 3)²</div>"
+  },
+  {
+   "e": "🧹",
+   "h": "Спрости і розв'яжи",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x + 3)² − (x − 2)(x + 2) = x² + 6x + 9 − x² + 4 = 6x + 13</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x + 4)² − x² = 40 → 8x + 16 = 40 → x = 3</div>"
   }
  ]
 }
