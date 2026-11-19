@@ -1,0 +1,31 @@
+{
+ "id": "a20",
+ "title": "§15. Розкладання способом групування",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.pgrp"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.pgrp": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🧲",
+   "h": "Двічі за дужки",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">ax + ay + 3x + 3y = a(x + y) + 3(x + y) = (x + y)(a + 3)</div><p>1) Групуємо члени. 2) У кожній групі виносимо спільний множник. 3) Однакову дужку виносимо ще раз.</p><div class=\"tip\">💡 Мінус перед групою: ax − ay − 3x + 3y = a(x − y) − 3(x − y) = (x − y)(a − 3).</div>"
+  }
+ ]
+}

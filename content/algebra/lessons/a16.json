@@ -1,0 +1,31 @@
+{
+ "id": "a16",
+ "title": "§11. Додавання і віднімання многочленів",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.padd"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.padd": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "➕",
+   "h": "Розкрий дужки — зведи подібні",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(3x² − 2x + 1) + (x² + 4x − 5) = 4x² + 2x − 4</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(3x² − 2x + 1) − (x² + 4x − 5) = 2x² − 6x + 6</div><div class=\"tip\">⚠️ Мінус перед дужками змінює знак <b>кожного</b> члена: −(x² + 4x − 5) = −x² − 4x + 5.</div>"
+  }
+ ]
+}

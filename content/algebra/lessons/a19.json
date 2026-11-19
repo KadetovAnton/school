@@ -1,0 +1,33 @@
+{
+ "id": "a19",
+ "title": "§14. Множення многочлена на многочлен",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.pmul",
+  "a.pmuleq"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.pmul": 5,
+   "a.pmuleq": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🟦",
+   "h": "Кожен на кожен",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a + b)(c + d) = ac + ad + bc + bd</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x + 3)(x − 5) = x² − 5x + 3x − 15 = x² − 2x − 15</div><div class=\"tip\">⚠️ Спершу виходить 4 добутки. Не загуби «середні» — це найчастіша помилка.</div>"
+  }
+ ]
+}

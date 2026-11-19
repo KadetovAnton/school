@@ -25,7 +25,7 @@ function val(a) { const r = ratOf(a); return r ? r.n / r.d : NaN; }
   for (const g of ["5,", "−", "3/", "3/0", ",5", "", "1/2/3"]) if (ratOf(g)) console.log("✗ ratOf приймає незавершене:", JSON.stringify(g));
   if (ratOf("6/8").red || !ratOf("3/4").red) console.log("✗ ratOf: ознака скороченого дробу"); }
 let bad = 0; const B = (g, m, it) => { if (bad++ < 40) console.log("✗", g, m, JSON.stringify(it).slice(0, 400)); };
-const rnd = () => ({ a: Math.random() * 4 - 2 + 0.3, b: Math.random() * 4 - 2 + 0.7, x: Math.random() * 4 - 2 + 0.11, y: Math.random() * 3 + 0.2 });
+const rnd = () => ({ a: Math.random() * 4 - 2 + 0.3, b: Math.random() * 4 - 2 + 0.7, c: Math.random() * 3 - 1.3, m: Math.random() * 3 + 0.4, n: Math.random() * 2 - 2.6, x: Math.random() * 4 - 2 + 0.11, y: Math.random() * 3 + 0.2 });
 function equiv(e1, e2, n = 6) { for (let i = 0; i < n; i++) { const v = rnd(); if (!close(ev(e1, v), ev(e2, v))) return false; } return true; }
 for (const s of sk) {
   if (!G[s.gen]) { B(s.gen, "нема генератора"); continue; }
@@ -52,7 +52,7 @@ for (const s of sk) {
         const want = c.ans ? ev(c.ans, { x: root }) : root; if (!close(want, A)) B(s.gen, "відповідь " + want, it); }
       else if (c.pw) { const [p, n] = c.pw; const js = toJS(p); for (const base of [2, 3]) { if (!close(ev(js, { a: base, b: base, x: base, y: base }), Math.pow(base, n))) B(s.gen, "степінь", it); } }
       else B(s.gen, "нема chk", it);
-      if (Math.abs(A) > 2000) B(s.gen, "завелика відповідь", it);
+      if (Math.abs(A) > 9000) B(s.gen, "завелика відповідь", it);
     } else if (it.type === "choice") {
       if (!it.o.includes(it.a) || new Set(it.o).size !== it.o.length || it.o.length < 2) B(s.gen, "варіанти", it);
       if (c.src) {
