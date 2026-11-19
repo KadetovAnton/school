@@ -47,5 +47,20 @@ with sync_playwright() as p:
     print(pg.evaluate("JSON.stringify(E.P().checks)"), "open mistakes:", pg.evaluate("E.openMistakes().length"))
     pg.locator("button:has-text('До уроків')").click(); pg.wait_for_selector("#diagGo")
     print(pg.inner_text("[data-chk='1']"))
+    # повторна перевірка через 2 тижні
+    pg.evaluate("E.P().checks.algebra['2'].due=E.addDays(E.today(),-1);E.save()")
+    pg.evaluate("location.hash='algebra'"); pg.reload(); pg.wait_for_selector("#diagGo")
+    assert "Пора освіжити" in pg.inner_text("#app")
+    pg.screenshot(path="/home/claude/shots/chk_due.png")
+    pg.locator("[data-re='1']").first.click(); pg.click("#go"); m=0
+    while pg.locator("#idk").count():
+        assert not pg.locator("#hintBtn").is_visible()
+        answer(pg); m+=1; pg.click("#next"); pg.wait_for_timeout(30)
+    t=pg.inner_text("#app"); assert m==6 and "6 з 6" in t and "Не забулось" in t, t
+    c=pg.evaluate("JSON.stringify([E.P().checks.algebra['2'], E.addDays(E.today(),30)])"); print(c)
+    assert '"rn":1' in c and c.count(pg.evaluate("E.addDays(E.today(),30)"))==2
+    pg.click("#home"); pg.wait_for_selector("#diagGo")
+    assert "Пора освіжити" not in pg.inner_text("#app")
+    print(pg.inner_text("[data-chk='1']"))
     b.close()
 print("JS:",errors[:3] or "немає")

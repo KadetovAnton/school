@@ -403,6 +403,8 @@
       (cont ? '<div class="row" style="margin-top:8px"><button class="btn ghost full' + (SUB.kid && !dayDone ? " small" : "") + '" id="cont">' + T.label + '</button></div>' : "")) + '</div>' +
       "";
 
+    if (SUB.check) { var dueSt = null; PATH.stages.forEach(function (stg, q) { if (!dueSt && stageReady(stg) && checkDue(stg)) dueSt = q; });
+      if (dueSt !== null) html += '<div class="card" style="padding:12px 16px"><button class="lesson open" data-chk="' + dueSt + '" data-re="1"><span class="ic">🔁</span><span><div class="lt">Пора освіжити: ' + esc(PATH.stages[dueSt].title) + '</div><div class="ls">6 завдань · ~7 хв · щоб не забулось · +3 ⭐</div></span></button></div>'; }
     if (SUB.id === "math2" && window.DINO) html += dinoCard();
     html += rewardCard();
     var wDue = E.wordsDue().length, wL = E.wordsLearned();
@@ -455,7 +457,7 @@
     bindActs(renderHome);
     if ($("diagGo")) $("diagGo").onclick = function () { renderDiag(); toTop(); };
     var cbs = $app.querySelectorAll("[data-chk]");
-    for (var q = 0; q < cbs.length; q++) (function (b) { b.onclick = function () { var si = +b.getAttribute("data-chk"); if (stageReady(PATH.stages[si])) { renderCheck(si); toTop(); } else toast("Спершу пройди всі уроки розділу 🙂"); }; })(cbs[q]);
+    for (var q = 0; q < cbs.length; q++) (function (b) { b.onclick = function () { var si = +b.getAttribute("data-chk"); if (stageReady(PATH.stages[si])) { renderCheck(si, b.getAttribute("data-re") === "1"); toTop(); } else toast("Спершу пройди всі уроки розділу 🙂"); }; })(cbs[q]);
     if ($("cont")) $("cont").onclick = function () { DAILY = false; openLesson(cont.file, T.step); };
     if ($("daily")) $("daily").onclick = function () { renderDaily(); toTop(); };
     if ($("mist")) $("mist").onclick = function () { renderMistakes(); toTop(); };
@@ -513,12 +515,16 @@
      Результат: profile.checks[sub][stage.n] = {t, date, score, max, weak:[skill], best}. */
   function stageReady(st) { var any = false; return st.lessons.every(function (l) { if (!l.file) return true; any = true; var L = E.lesson(l.id); return L.stars > 0 || !!L.skip; }) && any; }
   function checkRes(st) { return ((E.P().checks || {})[SUB.id] || {})[st.n] || null; }
-  function checkKey(st) { return "school-check:" + E.cur() + ":" + SUB.id + ":" + st.n; }
+  function checkKey(st, re) { return "school-check:" + E.cur() + ":" + SUB.id + ":" + st.n + (re ? ":re" : ""); }
+  var RE_DAYS = [14, 30, 60]; // повторна перевірка: через 2 тижні, потім через місяць, далі — раз на 2 місяці
+  function checkDue(st) { var r = checkRes(st); if (r && !r.due && r.d) r.due = E.addDays(r.d, RE_DAYS[0]); return r && r.due && r.due <= E.today() ? r : null; }
   function checkBtn(st, si) {
     var ready = stageReady(st), r = checkRes(st), run = null;
     try { run = JSON.parse(localStorage.getItem(checkKey(st)) || "null"); } catch (e) {}
+    var due = checkDue(st);
+    if (ready && due) return '<button class="lesson open" data-chk="' + si + '" data-re="1"><span class="ic">🔁</span><span><div class="lt">Пора освіжити розділ</div><div class="ls">Повторна перевірка · 6 завдань · ~7 хв · +3 ⭐<br>Минулого разу: ' + fmt(due.score) + ' з ' + due.max + '</div></span></button>';
     var sub = !ready ? "Відкриється, коли пройдеш усі уроки розділу" :
-      r ? "Пройдено " + r.date + ": " + fmt(r.score) + " з " + r.max + (r.weak && r.weak.length ? " · закріпити: " + r.weak.length : r.score < r.max ? " · помилки закріплено ✅" : " · без жодної помилки 🔥") :
+      r ? (r.rt ? "Повторна " + r.rt.date + ": " + r.rt.score + " з " + r.rt.max : "Пройдено " + r.date + ": " + fmt(r.score) + " з " + r.max) + (r.weak && r.weak.length ? " · закріпити: " + r.weak.length : (r.rt ? r.rt.score < r.rt.max : r.score < r.max) ? " · помилки закріплено ✅" : " · без жодної помилки 🔥") + (r.due ? "<br>Наступне повторення — " + r.due.slice(8, 10) + "." + r.due.slice(5, 7) : "") :
       run && run.i > 0 ? "Почато — продовжити з " + (run.i + 1) + "-го завдання" : "12 завдань упереміш · ~15 хв · без підказок · +5 ⭐";
     return '<button class="lesson ' + (!ready ? "lock" : r ? "done" : "open") + '" data-chk="' + si + '"><span class="ic">' + (!ready ? "🔒" : "🏁") + '</span><span><div class="lt">Підсумкова перевірка</div><div class="ls">' + sub + '</div></span></button>';
   }
@@ -538,22 +544,22 @@
     }
     return shuffle(out);
   }
-  function renderCheck(si) {
+  function renderCheck(si, re) {
     loadAll(function () {
-      var st = PATH.stages[si], run = null;
-      try { run = JSON.parse(localStorage.getItem(checkKey(st)) || "null"); } catch (e) {}
+      var st = PATH.stages[si], run = null, N = re ? 6 : 12;
+      try { run = JSON.parse(localStorage.getItem(checkKey(st, re)) || "null"); } catch (e) {}
       if (run && (!run.items || !run.t || Date.now() - run.t > 3 * 864e5)) run = null;
       var resume = run && run.i > 0 && run.i < run.items.length;
-      var save = function (r) { try { localStorage.setItem(checkKey(st), JSON.stringify(r)); } catch (e) {} };
+      var save = function (r) { try { localStorage.setItem(checkKey(st, re), JSON.stringify(r)); } catch (e) {} };
       var start = function (r) {
         var step = function () {
-          if (r.i >= r.items.length) { try { localStorage.removeItem(checkKey(st)); } catch (e) {} return checkResult(si, r); }
+          if (r.i >= r.items.length) { try { localStorage.removeItem(checkKey(st, re)); } catch (e) {} return checkResult(si, r, re); }
           var it = r.items[r.i];
           E.ITEM[it.key] = it;
           showTask($app, it, {
             quiet: true, noHint: true, calm: "Розв'язок — нижче. Цю тему одразу після перевірки закріпимо.",
             onBack: function () { renderHome(); toTop(); },
-            chip: "🏁 Підсумкова · " + (r.i + 1) + " з " + r.items.length, prog: r.i / r.items.length,
+            chip: (re ? "🔁 Повторна · " : "🏁 Підсумкова · ") + (r.i + 1) + " з " + r.items.length, prog: r.i / r.items.length,
             nextLabel: function () { return r.i + 1 < r.items.length ? "Далі →" : "Результат"; },
             done: function (x) {
               E.tick(SUB.id); E.record(it.skill, !!x.ok, !!x.clean);
@@ -565,17 +571,17 @@
         save(r); step();
       };
       var KB = SUB.id === "algebra" ? '<div class="tip" style="text-align:left">⌨️ <b>−</b> мінус, <b>,</b> кома, <b>/</b> дріб, <b>␣</b> мішане число (1 3/4).</div>' : "";
-      $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🏁</div><h2>Підсумкова перевірка</h2><p class="muted" style="margin-top:0">' + esc(st.title) + '</p>' +
+      $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (re ? "🔁" : "🏁") + '</div><h2>' + (re ? "Освіжимо розділ" : "Підсумкова перевірка") + '</h2><p class="muted" style="margin-top:0">' + esc(st.title) + '</p>' +
         (resume ? '<p>Продовжимо з ' + (run.i + 1) + '-го завдання з ' + run.items.length + '.</p>' :
-        '<p>12 завдань з усього розділу впереміш — як у шкільній контрольній, але без оцінки. Підказок немає: так видно, що справді запам\'яталось.</p>') +
+        (re ? '<p>Ти ' + G("пройшла", "пройшов") + ' цей розділ ' + esc(checkRes(st).date) + '. 6 завдань упереміш — перевіримо, що не забулось. Без підказок.</p>' : '<p>12 завдань з усього розділу впереміш — як у шкільній контрольній, але без оцінки. Підказок немає: так видно, що справді запам\'яталось.</p>')) +
         '<p class="muted">Помилилась — не біда: розв\'язок покажу одразу, а наприкінці закріпимо саме ці теми. Можна перервати й продовжити пізніше.</p>' + KB +
         '<div class="row"><button class="btn ghost" id="bk">← Назад</button><button class="btn full" id="go">' + (resume ? "Продовжити" : "Почати") + '</button></div></div>';
       $("bk").onclick = function () { renderHome(); toTop(); };
-      $("go").onclick = function () { if (resume) return start(run); start({ items: checkItems(st, 12), i: 0, res: [], t: Date.now() }); };
+      $("go").onclick = function () { if (resume) return start(run); start({ items: checkItems(st, N), i: 0, res: [], t: Date.now() }); };
       toTop();
     });
   }
-  function checkResult(si, r) {
+  function checkResult(si, r, re) {
     var st = PATH.stages[si], P = E.P(), by = {}, order = [], ok = 0;
     r.res.forEach(function (x) { if (!by[x.s]) { by[x.s] = [0, 0]; order.push(x.s); } by[x.s][1]++; if (x.ok) { by[x.s][0]++; ok++; } });
     var good = order.filter(function (s) { return by[s][0] === by[s][1]; }), weak = order.filter(function (s) { return by[s][0] < by[s][1]; });
@@ -583,17 +589,23 @@
     var now = new Date(), date = ("0" + now.getDate()).slice(-2) + "." + ("0" + (now.getMonth() + 1)).slice(-2) + "." + now.getFullYear();
     P.checks = P.checks || {}; P.checks[SUB.id] = P.checks[SUB.id] || {};
     var prev = P.checks[SUB.id][st.n], first = !prev;
-    P.checks[SUB.id][st.n] = { t: Date.now(), d: E.today(), date: date, score: ok, max: r.res.length, weak: weak, best: Math.max(ok, prev && prev.best || 0) };
-    E.save();
-    if (first) E.addStars(5, "check");
+    if (re && prev) { // повторна: основний результат лишається, інтервал росте (якщо все тримається; багато помилок — знову через 2 тижні)
+      var rn = ok * 3 >= r.res.length * 2 ? Math.min((prev.rn || 0) + 1, RE_DAYS.length - 1) : 0;
+      prev.rn = rn; prev.due = E.addDays(E.today(), RE_DAYS[rn]); prev.rt = { date: date, score: ok, max: r.res.length }; prev.weak = weak; prev.t = Date.now();
+      E.save(); E.addStars(3, "recheck");
+    } else {
+      P.checks[SUB.id][st.n] = { t: Date.now(), d: E.today(), date: date, score: ok, max: r.res.length, weak: weak, best: Math.max(ok, prev && prev.best || 0), rn: 0, due: E.addDays(E.today(), RE_DAYS[0]) };
+      E.save();
+      if (first) E.addStars(5, "check");
+    }
     var name = function (id) { return E.SK[id] ? E.SK[id].title : id; };
     var pct = ok / Math.max(1, r.res.length);
-    var text = "🏁 " + child().name + " — підсумкова перевірка «" + st.title + "» (" + date + "): " + ok + " з " + r.res.length +
+    var text = (re ? "🔁 " : "🏁 ") + child().name + " — " + (re ? "повторна" : "підсумкова") + " перевірка «" + st.title + "» (" + date + "): " + ok + " з " + r.res.length +
       (good.length ? "\n✅ Тримається:\n" + good.map(function (s) { return "• " + name(s); }).join("\n") : "") +
       (weak.length ? "\n🌱 Закріпити:\n" + weak.map(function (s) { return "• " + name(s); }).join("\n") : "\nУсе тримається!");
     $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (pct >= 0.8 ? "🎉" : "💪") + '</div><h2>Перевірку пройдено!</h2>' +
       '<p style="font-size:1.3em;font-weight:800;margin:4px 0">' + ok + ' з ' + r.res.length + '</p>' +
-      '<p class="muted">' + (pct >= 0.9 ? "Розділ засвоєно — чудова робота!" : pct >= 0.6 ? "Більшість тримається. Кілька тем трохи підтягнемо." : "Тепер видно, що повторити, — для цього перевірка й потрібна.") + (first ? " +5 ⭐" : "") + '</p></div>' +
+      '<p class="muted">' + (re ? (pct >= 0.9 ? "Не забулось — тримається міцно! 🔥" : pct >= 0.6 ? "Більшість пам\'ятаєш. Кілька тем освіжимо." : "Дещо призабулось — це нормально, для цього й повторюємо.") + " +3 ⭐" : pct >= 0.9 ? "Розділ засвоєно — чудова робота!" : pct >= 0.6 ? "Більшість тримається. Кілька тем трохи підтягнемо." : "Тепер видно, що повторити, — для цього перевірка й потрібна.") + (first && !re ? " +5 ⭐" : "") + '</p></div>' +
       '<div class="card">' +
       (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>✅ Тримається</b><br>' + good.map(function (s) { return "• " + esc(name(s)); }).join("<br>") + '</div>' : "") +
       (weak.length ? '<div class="tip" style="text-align:left"><b>🌱 Варто закріпити</b> (уже в «Моїх помилках»)<br>' + weak.map(function (s) { return "• " + esc(name(s)); }).join("<br>") + '</div>' : "") +
