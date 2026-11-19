@@ -37,30 +37,31 @@
   X.list.sq = {
     title: "Звідки береться (a + b)²",
     svg: svgSq,
+    audio: { base: "content/audio/sq/", steps: ["01", "02", "03", "04", "05", "06", "07", "08", "12"], quiz: ["09", "10", "11"] }, // озвучка ElevenLabs (голос Maksym); немає файла — голос пристрою
     steps: [
       { on: base, t: "Візьмемо квадрат зі стороною <b>a + b</b>. Його площа — <b>(a + b)²</b>.",
-        say: "Візьмемо квадрат, у якого сторона — a плюс b. Його площа — a плюс b у квадраті.", f: "(a + b)² = ?" },
+        say: "Візьмемо квадрат, у якого сторона — а плюс бе. Його площа — а плюс бе у квадраті.", f: "(a + b)² = ?" },
       { on: cut, t: "Розріжемо його двома лініями — вийде <b>чотири частини</b>.",
         say: "Розріжемо його двома лініями. Вийде чотири частини." , f: "(a + b)² = ?" },
       { on: cut.concat(["rA", "tA"]), hl: ["rA"], t: "Великий квадрат: a&nbsp;·&nbsp;a = " + c(C1, "a²") + ".",
-        say: "Великий квадрат: a помножити на a — це a квадрат.", f: "(a + b)² = " + c(C1, "a²") + " + …" },
+        say: "Великий квадрат: а помножити на а — це а квадрат.", f: "(a + b)² = " + c(C1, "a²") + " + …" },
       { on: cut.concat(["rA", "tA", "rB", "tB"]), hl: ["rB"], t: "Маленький квадрат: b&nbsp;·&nbsp;b = " + c(C3, "b²") + ".",
-        say: "Маленький квадрат: b помножити на b — це b квадрат.", f: "(a + b)² = " + c(C1, "a²") + " + … + " + c(C3, "b²") },
+        say: "Маленький квадрат: бе помножити на бе — це бе квадрат.", f: "(a + b)² = " + c(C1, "a²") + " + … + " + c(C3, "b²") },
       { on: all, hl: ["rAB1", "rAB2"], t: "І ще <b>два однакові прямокутники</b>: a&nbsp;·&nbsp;b і ще раз a&nbsp;·&nbsp;b — разом " + c(C2, "2ab") + ".",
-        say: "І ще два однакові прямокутники: a на b, і ще раз a на b. Разом — два a b.", f: "(a + b)² = " + c(C1, "a²") + " + " + c(C2, "2ab") + " + " + c(C3, "b²") },
+        say: "І ще два однакові прямокутники: а на бе, і ще раз а на бе. Разом — два а бе.", f: "(a + b)² = " + c(C1, "a²") + " + " + c(C2, "2ab") + " + " + c(C3, "b²") },
       { on: all, hl: ALLR, t: "Площа всього квадрата = сума площ частин. Ось і вся формула!",
-        say: "Площа всього квадрата дорівнює сумі площ чотирьох частин. Ось і вся формула: a плюс b у квадраті дорівнює a квадрат плюс два a b плюс b квадрат.", f: "(a + b)² = " + c(C1, "a²") + " + " + c(C2, "2ab") + " + " + c(C3, "b²"), big: 1 },
+        say: "Площа всього квадрата дорівнює сумі площ чотирьох частин. Ось і вся формула: а плюс бе у квадраті дорівнює а квадрат плюс два а бе плюс бе квадрат.", f: "(a + b)² = " + c(C1, "a²") + " + " + c(C2, "2ab") + " + " + c(C3, "b²"), big: 1 },
       { on: all, lab: NUM, t: "Перевіримо на числах: a = 3, b = 2.<br>(3 + 2)² = 5² = <b>25</b>, а 9 + 6 + 6 + 4 = <b>25</b> ✓",
-        say: "Перевіримо на числах. Нехай a — три, b — два. Три плюс два — п'ять, п'ять у квадраті — двадцять п'ять. А частини: дев'ять, шість, шість і чотири — теж двадцять п'ять. Збігається!", f: "(3 + 2)² = " + c(C1, "9") + " + " + c(C2, "12") + " + " + c(C3, "4") + " = 25" },
+        say: "Перевіримо на числах. Нехай а — три, бе — два. Три плюс два — п'ять, а п'ять у квадраті — двадцять п'ять. А тепер частини: дев'ять, шість, шість і чотири. Разом — теж двадцять п'ять. Збігається!", f: "(3 + 2)² = " + c(C1, "9") + " + " + c(C2, "12") + " + " + c(C3, "4") + " = 25" },
       { on: cut, lab: XL, t: "Тепер ти! Квадрат зі стороною <b>x + 3</b>. Чому дорівнює <b>(x + 3)²</b>?",
-        say: "Тепер ти! Квадрат зі стороною x плюс три. Чому дорівнює x плюс три у квадраті?", f: "(x + 3)² = ?",
+        say: "Тепер ти! Квадрат зі стороною ікс плюс три. Чому дорівнює ікс плюс три у квадраті? Вибери відповідь.", f: "(x + 3)² = ?",
         quiz: [
-          { t: "x² + 9", fb: "Майже! Ти " + "забула два прямокутники — " + c(C2, "3x") + " і " + c(C2, "3x") + ". Правильно: x² + 6x + 9.", say: "Майже! Забула два прямокутники: три x і ще три x. Правильно: x квадрат плюс шість x плюс дев'ять.", on: all, hl: ["rAB1", "rAB2"] },
-          { t: "x² + 3x + 9", fb: "Прямокутників <b>два</b>: 3x + 3x = " + c(C2, "6x") + ". Правильно: x² + 6x + 9.", say: "Прямокутників два: три x плюс три x — шість x. Правильно: x квадрат плюс шість x плюс дев'ять.", on: all, hl: ["rAB1", "rAB2"] },
-          { t: "x² + 6x + 9", ok: 1, fb: "Так! " + c(C1, "x²") + " + " + c(C2, "6x") + " + " + c(C3, "9") + " 🎉", say: "Так! x квадрат плюс шість x плюс дев'ять. Молодець!", on: all, hl: ALLR }
+          { t: "x² + 9", fb: "Майже! Ти загубила два прямокутники — " + c(C2, "3x") + " і " + c(C2, "3x") + ". Правильно: x² + 6x + 9.", say: "Майже! Ти загубила два прямокутники: три ікс і ще три ікс. Правильно: ікс квадрат плюс шість ікс плюс дев'ять.", on: all, hl: ["rAB1", "rAB2"] },
+          { t: "x² + 3x + 9", fb: "Майже! Прямокутників <b>два</b>: 3x + 3x = " + c(C2, "6x") + ". Правильно: x² + 6x + 9.", say: "Майже! Прямокутників два: три ікс плюс три ікс — це шість ікс. Правильно: ікс квадрат плюс шість ікс плюс дев'ять.", on: all, hl: ["rAB1", "rAB2"] },
+          { t: "x² + 6x + 9", ok: 1, fb: "Так! " + c(C1, "x²") + " + " + c(C2, "6x") + " + " + c(C3, "9") + " 🎉", say: "Так! Ікс квадрат плюс шість ікс плюс дев'ять. Молодець!", on: all, hl: ALLR }
         ] },
       { on: all, t: "Головне: <b>(a + b)² ≠ a² + b²</b>. Не загуби два прямокутники — подвоєний добуток " + c(C2, "2ab") + "!",
-        say: "Головне: a плюс b у квадраті — це не a квадрат плюс b квадрат. Не загуби два прямокутники — подвоєний добуток, два a b!", f: "(a + b)² = " + c(C1, "a²") + " + " + c(C2, "2ab") + " + " + c(C3, "b²"), big: 1 }
+        say: "Головне: а плюс бе у квадраті — це не а квадрат плюс бе квадрат. Не загуби два прямокутники — подвоєний добуток, два а бе!", f: "(a + b)² = " + c(C1, "a²") + " + " + c(C2, "2ab") + " + " + c(C3, "b²"), big: 1 }
     ]
   };
 
@@ -69,12 +70,21 @@
   function setVoice(v) { try { localStorage.setItem("school-exvoice", v ? "1" : "0"); } catch (e) {} }
   var audioEl = null;
   function stop() { try { if (audioEl) { audioEl.pause(); audioEl = null; } if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} }
-  function speak(id, k, text) {
+  function speak(id, k, text, qi) {
     stop();
     if (!voiceOn() || !text) return;
-    var url = X.audio ? X.audio(id, k, text) : null;
-    if (url) { try { audioEl = new Audio(url); var p = audioEl.play(); if (p && p.catch) p.catch(function () { if (window.SAY) SAY.uk(text); }); return; } catch (e) {} }
-    if (window.SAY && SAY.uk) SAY.uk(text);
+    var D = X.list[id], A = D && D.audio, f = A ? (qi != null ? A.quiz[qi] : A.steps[k]) : null;
+    var fallback = function () { if (window.SAY && SAY.uk) SAY.uk(text); };
+    if (f) {
+      try {
+        var a = audioEl = new Audio(A.base + f + ".mp3"), failed = false;
+        var fail = function () { if (failed || audioEl !== a) return; failed = true; audioEl = null; fallback(); };
+        a.onerror = fail;
+        var p = a.play(); if (p && p.catch) p.catch(fail);
+        return;
+      } catch (e) {}
+    }
+    fallback();
   }
   X.stop = stop;
 
@@ -105,8 +115,8 @@
       apply(k > 0 ? D.steps[k - 1] : { on: [] });
       setTimeout(function () { apply(st); }, 60);
       speak(id, k, st.say);
-      el("exVo").onclick = function () { var v = !voiceOn(); setVoice(v); this.textContent = v ? "🔊" : "🔇"; if (v) speak(id, k, picked ? picked.say : st.say); else stop(); };
-      el("exRep").onclick = function () { apply(k > 0 ? D.steps[k - 1] : { on: [] }); setTimeout(function () { apply(st, picked); }, 60); speak(id, k, picked ? picked.say : st.say); };
+      el("exVo").onclick = function () { var v = !voiceOn(); setVoice(v); this.textContent = v ? "🔊" : "🔇"; if (v) speak(id, k, picked ? picked.say : st.say, picked ? st.quiz.indexOf(picked) : null); else stop(); };
+      el("exRep").onclick = function () { apply(k > 0 ? D.steps[k - 1] : { on: [] }); setTimeout(function () { apply(st, picked); }, 60); speak(id, k, picked ? picked.say : st.say, picked ? st.quiz.indexOf(picked) : null); };
       if (el("exPrev")) el("exPrev").onclick = function () { k--; draw(); };
       el("exNx").onclick = function () { stop(); if (!last) { k++; draw(); } else if (onDone) onDone(); };
       if (st.quiz) {
@@ -117,8 +127,9 @@
             for (var j = 0; j < bs.length; j++) bs[j].className = "opt" + (st.quiz[j].ok ? (o.ok || j === +b.getAttribute("data-i") ? " right" : "") : j === +b.getAttribute("data-i") ? " wrong" : "");
             if (!o.ok) { for (var q = 0; q < bs.length; q++) if (st.quiz[q].ok) bs[q].className = "opt right"; }
             el("exFb").innerHTML = '<div class="fb ' + (o.ok ? "ok" : "calm") + '" style="margin-top:10px"><div>' + o.fb + '</div></div>';
-            apply(st, o); speak(id, k, o.say);
+            apply(st, o); speak(id, k, o.say, +b.getAttribute("data-i"));
             el("exNx").disabled = false;
+            setTimeout(function () { try { el("exNx").scrollIntoView({ behavior: "smooth", block: "end" }); } catch (e) {} }, 80);
             for (var z = 0; z < bs.length; z++) bs[z].disabled = true;
           };
         })(bs[i]);
