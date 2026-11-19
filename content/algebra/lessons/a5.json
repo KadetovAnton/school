@@ -11,15 +11,17 @@
  ],
  "skills": [
   "a.eroot",
-  "a.esimple"
+  "a.esimple",
+  "a.eequiv"
  ],
  "practice": {
-  "perSkill": 4
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "a.eroot": 3,
-   "a.esimple": 5
+   "a.eroot": 2,
+   "a.esimple": 4,
+   "a.eequiv": 2
   },
   "pass": 80
  },
@@ -32,7 +34,7 @@
   {
    "e": "🔄",
    "h": "Властивості рівнянь",
-   "html": "<p>Корені не зміняться, якщо:</p><p>1) перенести доданок в іншу частину, <b>змінивши знак</b>;</p><p>2) поділити (помножити) обидві частини на одне число, не 0.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">x + 7 = 3 → x = 3 − 7 = −4</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">−4x = 28 → x = 28 : (−4) = −7</div>"
+   "html": "<p>Корені не зміняться, якщо:</p><p>1) перенести доданок в іншу частину, <b>змінивши знак</b>;</p><p>2) поділити (помножити) обидві частини на одне число, не 0.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">x + 7 = 3 → x = 3 − 7 = −4</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">−4x = 28 → x = 28 : (−4) = −7</div><p>Рівняння з однаковими коренями називають <b>рівносильними</b>: 2x − 1 = 5 і 3x = 9 (обидва мають корінь 3).</p>"
   }
  ]
 }

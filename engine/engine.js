@@ -143,6 +143,7 @@
     into.wrHist.forEach(function (x) { hk[x.w + "|" + (x.sub || "")] = 1; });
     (o.wrHist || []).forEach(function (x) { if (!hk[x.w + "|" + (x.sub || "")]) into.wrHist.push(x); });
     if (o.diag && (!into.diag || (o.diag.d || "") > (into.diag.d || ""))) into.diag = o.diag;
+    into.diagRun = obj(into.diagRun); for (k in obj(o.diagRun)) if (!into.diagRun[k] || (o.diagRun[k].u || 0) > (into.diagRun[k].u || 0)) into.diagRun[k] = o.diagRun[k];
     into.diagS = obj(into.diagS); for (k in obj(o.diagS)) if (!into.diagS[k] || (o.diagS[k].t || 0) > (into.diagS[k].t || 0)) into.diagS[k] = o.diagS[k];
     if (o.reward && (!into.reward || !into.reward.text)) into.reward = o.reward;
     if (o.dino) {
@@ -670,9 +671,14 @@
   /* алгебра: число, десятковий чи звичайний дріб → {n, d} (точно, без похибок) */
   function gcdN(a, b) { a = Math.abs(a); b = Math.abs(b); while (b) { var t = a % b; a = b; b = t; } return a; }
   function ratOf(s) {
+    var s0 = s;
+    if (/\d\s+\d/.test(String(s0)) && !/^\s*[-−–—]?\d+\s+\d+\/\d+\s*$/.test(String(s0))) return null; // пробіл — лише в мішаному числі
     s = String(s).replace(/[−–—]/g, "-").replace(/\./g, ",").replace(/\s+/g, "");
     var m = s.match(/^(-?)(\d+)(?:,(\d+))?$/);
     if (m) { var f = m[3] || "", d = Math.pow(10, f.length); return { n: (m[1] ? -1 : 1) * (+m[2] * d + (+f || 0)), d: d, frac: false }; }
+    var mx = String(s0).replace(/[−–—]/g, "-").trim().match(/^(-?)(\d+)\s+(\d+)\/(\d+)$/); // мішане число: 1 3/4
+    if (mx && !(+mx[4] && +mx[3] < +mx[4])) return null;
+    if (mx) { var den = +mx[4], nu = +mx[2] * den + +mx[3]; return { n: (mx[1] ? -1 : 1) * nu, d: den, frac: true, red: gcdN(+mx[3], den) === 1 }; }
     m = s.match(/^(-?)(\d+)\/(-?)(\d+)$/);
     if (m && +m[4]) return { n: ((m[1] ? -1 : 1) * (m[3] ? -1 : 1)) * +m[2], d: +m[4], frac: true, red: gcdN(+m[2], +m[4]) === 1 && +m[4] !== 1 };
     return null;

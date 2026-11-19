@@ -35,7 +35,7 @@ for (const s of sk) {
     if (/undefined|NaN|null|Infinity/.test(txt)) B(s.gen, "undefined/NaN", it);
     const shown = [it.p, it.e, ...(it.h || []), ...(it.o || []), ...Object.keys(it.err || {}), ...Object.values(it.err || {})].join(" ").replace(/<[^>]+>/g, "");
     if (/-\d|\d-|\s-\s/.test(shown)) B(s.gen, "дефіс замість мінуса", it);
-    if (/[+−] 0(?![,\d])|NaN|undefined/.test(shown.replace(/=\s*0\b/g, ""))) B(s.gen, "«+ 0» або NaN у тексті", it);
+    if (/[+−] 0(?![,\d]| ·)|NaN|undefined/.test(shown.replace(/=\s*0\b/g, ""))) B(s.gen, "«+ 0» або NaN у тексті", it);
     if (!it.long && !it.p.includes("___")) B(s.gen, "нема ___", it);
     if (!it.h || it.h.length < 2 || !it.e) B(s.gen, "нема підказок/пояснення", it);
     seen.add(it.p);
@@ -53,7 +53,8 @@ for (const s of sk) {
       else if (c.pw) { const [p, n] = c.pw; const js = toJS(p); for (const base of [2, 3]) { if (!close(ev(js, { a: base, b: base, x: base, y: base }), Math.pow(base, n))) B(s.gen, "степінь", it); } }
       else if (c.sys) { const [a1, b1, c1, a2, b2, c2] = c.sys, D = a1 * b2 - a2 * b1; if (!D) { B(s.gen, "система вироджена", it); continue; }
         const X = (c1 * b2 - c2 * b1) / D, Y = (a1 * c2 - a2 * c1) / D; if (!close(c.ask === "x" ? X : c.ask === "y" ? Y : 10 * X + Y, A)) B(s.gen, "розв'язок системи " + X + ";" + Y, it);
-        if (!Number.isInteger(X) || !Number.isInteger(Y)) B(s.gen, "нецілий розв'язок", it); }
+        if (!Number.isInteger(X) || !Number.isInteger(Y)) B(s.gen, "нецілий розв'язок", it);
+        if (it.steps && (!close(val(it.steps[0].a), X) || it.steps[it.steps.length - 1].a !== it.a)) B(s.gen, "кроки системи", it); }
       else if (c.lin2) { const [a, b, cc, kv, kval, av] = c.lin2; const v = kv === "x" ? (cc - a * kval) / b : (cc - b * kval) / a; if (!close(v, A)) B(s.gen, "лін. рівняння " + v, it); }
       else B(s.gen, "нема chk", it);
       if (Math.abs(A) > 50000) B(s.gen, "завелика відповідь", it);
@@ -75,6 +76,24 @@ for (const s of sk) {
       } else if (c.mono) {
         const isMono = e => !/[+:(]/.test(e.replace(/^−/, "")) && !/ − /.test(e);
         if (!isMono(it.a) || it.o.filter(isMono).length !== 1) B(s.gen, "одночлен", it);
+      } else if (c.expr) {
+        if (!equiv(c.expr, toJS(it.a.replace(/ : /g, " / ")))) B(s.gen, "вираз не той", it);
+        it.o.forEach(o => { if (o !== it.a && equiv(c.expr, toJS(o.replace(/ : /g, " / ")))) B(s.gen, "хибний вираз тотожний: " + o, it); });
+      } else if (c.eqv) {
+        if (c.eqv === "sq") { if (it.a !== "Ні") B(s.gen, "рівносильність x²", it); }
+        else { const root = (l, r) => { const f = x => ev(l, { x }) - ev(r, { x }); return -f(0) / (f(1) - f(0)); };
+          const same = close(root(c.eqv[0], c.eqv[1]), root(c.eqv[2], c.eqv[3])); if (same !== (it.a === "Так")) B(s.gen, "рівносильність", it);
+          const [A, Bq] = it.p.split("   і   "); const [l1, r1] = A.split(" = "), [l2, r2] = Bq.split(" = ");
+          if (!close(root(toJS(l1), toJS(r1)), root(c.eqv[0], c.eqv[1])) || !close(root(toJS(l2), toJS(r2)), root(c.eqv[2], c.eqv[3]))) B(s.gen, "рівносильність≠умова", it); }
+      } else if (c.rng) {
+        const [t, cc] = c.rng, f = x => ev(toJS(it.p.split(" = ")[1]), { x }); const ys = []; for (let x = -5; x <= 5; x += 0.25) ys.push(f(x));
+        const mn = Math.min(...ys), mx = Math.max(...ys), want = t === 1 ? "одне число: " : t === 2 ? "усі числа" : t === 3 ? "y ≥ 0" : t === 4 ? "y ≥ " : "y ≤ ";
+        if (!it.a.startsWith(want)) B(s.gen, "область значень", it);
+        if (t === 1 && mn !== mx) B(s.gen, "не стала", it); if (t === 2 && mn === mx) B(s.gen, "стала", it); if ((t === 3 || t === 4) && !close(mn, cc)) B(s.gen, "мінімум", it); if (t === 5 && !close(mx, cc)) B(s.gen, "максимум", it);
+      } else if (c.line) {
+        const want = ["", "пряма, паралельна осі x", "пряма, паралельна осі y", "пряма через початок координат"][c.line]; if (it.a !== want) B(s.gen, "пряма", it);
+        const p = it.p; if (c.line === 1 && /[1-9]x|^x/.test(p.replace("0 · x", ""))) B(s.gen, "є x", it); if (c.line === 2 && /[1-9]y|^y/.test(p.replace("0 · y", ""))) B(s.gen, "є y", it);
+        if (c.line === 3) { const f = toJS(p.split(" = ")[1]); if (!close(ev(f, { x: 0 }), 0)) B(s.gen, "не через 0", it); }
       } else if (c.sys && c.pairs) {
         const [a1, b1, c1, a2, b2, c2] = c.sys, ok = o => { const [x, y] = o.replace(/[()]/g, "").split("; ").map(val); return a1 * x + b1 * y === c1 && a2 * x + b2 * y === c2; };
         if (it.o.filter(ok).length !== 1 || !ok(it.a)) B(s.gen, "пара системи", it);

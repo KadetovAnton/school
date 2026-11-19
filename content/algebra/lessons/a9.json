@@ -10,14 +10,16 @@
   "skills/algebra.json"
  ],
  "skills": [
-  "a.xval"
+  "a.xval",
+  "a.xmake"
  ],
  "practice": {
-  "perSkill": 6
+  "perSkill": 4
  },
  "test": {
   "plan": {
-   "a.xval": 6
+   "a.xval": 5,
+   "a.xmake": 3
   },
   "pass": 80
  },
@@ -26,6 +28,11 @@
    "e": "📦",
    "h": "Значення виразу",
    "html": "<p>Підставляємо число замість букви. <b>Від'ємні — у дужках!</b></p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">x² − 3x при x = −2: (−2)² − 3·(−2) = 4 + 6 = 10</div><div class=\"tip\">⚠️ (−2)² = 4, а не −4.</div>"
+  },
+  {
+   "e": "✍️",
+   "h": "Складаємо вираз",
+   "html": "<p>«Сума a і потроєного b» → a + 3b. «Потроєна сума a і b» → 3(a + b). «Квадрат різниці» → (a − b)², «різниця квадратів» → a² − b².</p>"
   }
  ]
 }

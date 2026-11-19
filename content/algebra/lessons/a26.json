@@ -11,15 +11,17 @@
  ],
  "skills": [
   "a.fmulti",
-  "a.fsimp"
+  "a.fsimp",
+  "a.fid"
  ],
  "practice": {
-  "perSkill": 4
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "a.fmulti": 4,
-   "a.fsimp": 4
+   "a.fmulti": 3,
+   "a.fsimp": 3,
+   "a.fid": 2
   },
   "pass": 80
  },

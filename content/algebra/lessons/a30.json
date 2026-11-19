@@ -11,15 +11,17 @@
  ],
  "skills": [
   "a.spair",
-  "a.sexpr"
+  "a.sexpr",
+  "a.sline"
  ],
  "practice": {
-  "perSkill": 4
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "a.spair": 3,
-   "a.sexpr": 4
+   "a.spair": 2,
+   "a.sexpr": 3,
+   "a.sline": 2
   },
   "pass": 80
  },
@@ -28,6 +30,11 @@
    "e": "✳️",
    "h": "Рівняння з двома змінними",
    "html": "<p>ax + by = c. Розв'язок — пара чисел (x; y), що перетворює рівняння на правильну рівність. Розв'язків безліч, а графік лінійного рівняння — <b>пряма</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3x + 2y = 4: (2; −1) — розв'язок</div><p>Щоб знайти розв'язки, вирази одну змінну через іншу: y = (4 − 3x) : 2.</p>"
+  },
+  {
+   "e": "📐",
+   "h": "Особливі прямі",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">0 · x + 2y = 6 → y = 3 — паралельна осі x</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3x + 0 · y = 12 → x = 4 — паралельна осі y</div><p>y = kx — пряма через початок координат.</p>"
   }
  ]
 }

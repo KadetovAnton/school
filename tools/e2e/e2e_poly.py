@@ -20,6 +20,8 @@ with sync_playwright() as p:
             if pg.locator("#idk").count() and pg.locator("#next").count()==0:
                 it=pg.evaluate("window.UI_CUR")
                 if it["type"]=="choice": pg.click(".opt[data-k='%d']"%it["o"].index(it["a"]))
+                elif it.get("steps"):
+                    for st in it["steps"]: typ(pg, st["a"])
                 else: typ(pg,it["a"])
                 n+=1
                 if n==2: pg.screenshot(path="/home/claude/shots/p_%s.png"%lid)

@@ -503,23 +503,24 @@
      diag.json: {items:[{skill, t}]} — по завданню на навичку. Без зірок і рівнів; хід зберігається на пристрої.
      Урок позначається ⏭️, якщо всі його навички в перевірці розв'язані правильно без підказки. */
   function diagKey() { return "school-diag:" + E.cur() + ":" + SUB.id; }
-  function diagRunning() { try { var r = JSON.parse(localStorage.getItem(diagKey()) || "null"); return !!(r && r.items && r.i > 0); } catch (e) { return false; } }
+  function diagRunning() { var pr = (E.P().diagRun || {})[SUB.id]; if (pr && pr.items && pr.i > 0) return true; try { var r = JSON.parse(localStorage.getItem(diagKey()) || "null"); return !!(r && r.items && r.i > 0); } catch (e) { return false; } }
   function renderDiag() {
     loadAll(function () {
       getJSON("diag.json").then(function (D) {
         var run = null, parts = D.parts || [D.title];
         try { run = JSON.parse(localStorage.getItem(diagKey()) || "null"); } catch (e) {}
+        var pr = (E.P().diagRun || {})[SUB.id]; if (pr && pr.items && (!run || (pr.u || 0) > (run.u || 0))) run = pr; // хід з іншого пристрою
         if (run && (!run.items || run.n !== D.items.length || !run.t || Date.now() - run.t > 7 * 864e5)) run = null; // змінилась перевірка або хід старий — заново
-        var KB = '<div class="tip" style="text-align:left">⌨️ Відповідь набирай кнопками: <b>−</b> мінус, <b>,</b> кома, <b>/</b> дріб (3/4). Мішане число — неправильним дробом: 1 3/4 → 7/4.</div>';
+        var KB = '<div class="tip" style="text-align:left">⌨️ Відповідь набирай кнопками: <b>−</b> мінус, <b>,</b> кома, <b>/</b> дріб (3/4). Мішане число — через <b>␣</b>: 1 3/4.</div>';
         var start = function (r) {
-          var save = function () { try { localStorage.setItem(diagKey(), JSON.stringify(r)); } catch (e) {} };
+          var save = function () { r.u = Date.now(); try { localStorage.setItem(diagKey(), JSON.stringify(r)); } catch (e) {} var P0 = E.P(); P0.diagRun = P0.diagRun || {}; P0.diagRun[SUB.id] = r; E.save(); };
           var step = function () {
-            if (r.i >= r.items.length) { try { localStorage.removeItem(diagKey()); } catch (e) {} return diagResult(D, r); }
+            if (r.i >= r.items.length) { try { localStorage.removeItem(diagKey()); } catch (e) {} var P1 = E.P(); P1.diagRun = P1.diagRun || {}; P1.diagRun[SUB.id] = { u: Date.now(), done: 1 }; E.save(); return diagResult(D, r); }
             var it = r.items[r.i], pi = r.parts[r.i];
             if (r.i > 0 && r.parts[r.i - 1] !== pi && !r.go) { // кінець частини
               save();
               $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🎉</div><h2>Частину ' + (r.parts[r.i - 1] + 1) + ' з ' + parts.length + ' пройдено!</h2>' +
-                '<p class="muted">Далі: «' + esc(parts[pi]) + '». Можна зараз, а можна завтра — прогрес збережеться на цьому пристрої.</p>' +
+                '<p class="muted">Далі: «' + esc(parts[pi]) + '». Можна зараз, а можна завтра — прогрес збережеться (і на іншому пристрої теж).</p>' +
                 '<div class="row"><button class="btn ghost" id="later">Завтра</button><button class="btn full" id="more">Продовжити</button></div></div>';
               $("later").onclick = function () { renderHome(); toTop(); };
               $("more").onclick = function () { r.go = 1; step(); toTop(); };
@@ -1161,7 +1162,7 @@
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "num") body = (it.steps ? '<div class="stps">' + it.steps.map(function (st, k) { return '<div class="stp' + (k ? "" : " cur") + '" id="stp' + k + '"><span class="sq">' + (k + 1) + ') ' + esc(st.q) + '</span> <b class="sv" id="sv' + k + '">' + (k ? "" : "?") + '</b></div>'; }).join("") + '</div>' : "") +
       '<div class="numbox" id="numbox"></div><div id="almost"></div><div class="keypad' + (SUB.kid ? " k5" : it.kb ? " alg" : "") + '" id="keypad">' +
-      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb ? [1, 2, 3, "⌫", 4, 5, 6, "−", 7, 8, 9, "/", ",", 0, "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { var al = { "⌫": "Стерти", "✓": "Перевірити", "−": "Мінус", "/": "Дробова риска", ",": "Кома" }[k]; return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '"' + (al ? ' aria-label="' + al + '"' : "") + '>' + k + '</button>'; }).join("") + '</div>';
+      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb ? [1, 2, 3, "⌫", 4, 5, 6, "−", 7, 8, 9, "/", ",", 0, "␣", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { var al = { "⌫": "Стерти", "✓": "Перевірити", "−": "Мінус", "/": "Дробова риска", ",": "Кома", "␣": "Пробіл для мішаного числа" }[k]; return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '"' + (al ? ' aria-label="' + al + '"' : "") + '>' + k + '</button>'; }).join("") + '</div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     document.body.classList.add("insession");
     root.innerHTML = (cfg.onBack ? '<div class="topbar"><button class="back" id="qback">← Перервати</button><span class="muted small">прогрес збережено</span></div>' : "") + '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
@@ -1256,15 +1257,16 @@
           if (!val || (it.kb && !E.ratOf(val))) return;
           if (NS && si < NS - 1) {
             var st = it.steps[si], row = $("stp" + si);
-            if (E.norm(val) !== E.norm(st.a)) {
+            var stOk = it.kb ? (function () { var g = E.ratOf(val), r = E.ratOf(st.a); return g && r && g.n * r.d === r.n * g.d; })() : E.norm(val) === E.norm(st.a);
+            if (!stOk) {
               if (!retried[si]) { // перша помилка в дії — ще одна спроба з підказкою, не завершуємо задачу
                 retried[si] = 1; used = Math.max(used, 1); val = "";
                 row.classList.add("try");
-                $("hints").insertAdjacentHTML("beforeend", '<div class="hint"><b>Перевір ' + (si + 1) + '-шу дію:</b> ' + esc(st.q) + ' Подумай, яку дію тут зробити — додати, відняти, помножити чи поділити.' + (SUB.kid ? " " + ukBtn("Перевір " + (si + 1) + "-шу дію. " + st.q + " Подумай, яку дію тут зробити.") : "") + '</div>');
+                $("hints").insertAdjacentHTML("beforeend", '<div class="hint"><b>Перевір ' + (si + 1) + '-' + (it.kb ? "й крок" : "шу дію") + ':</b> ' + esc(st.q) + ' ' + (st.tip || "Подумай, яку дію тут зробити — додати, відняти, помножити чи поділити.") + (SUB.kid ? " " + ukBtn("Перевір " + (si + 1) + "-шу дію. " + st.q + " Подумай, яку дію тут зробити.") : "") + '</div>');
                 bindSay($("hints")); show(); return;
               }
               row.classList.add("bad");
-              return finish(val, null, { st: "wrong", right: E.answersOf(it)[0], msg: "У " + (si + 1) + "-й дії (" + esc((st.q.charAt(0).toLowerCase() + st.q.slice(1)).replace(/\?$/, "")) + ") має вийти <b>" + st.a + "</b>" + (st.how ? ": " + st.how : "") + "." });
+              return finish(val, null, { st: "wrong", right: E.answersOf(it)[0], msg: "У " + (si + 1) + (it.kb ? "-му кроці (" : "-й дії (") + esc((st.q.charAt(0).toLowerCase() + st.q.slice(1)).replace(/\?$/, "")) + ") має вийти <b>" + st.a + "</b>" + (st.how ? ": " + st.how : "") + "." });
             }
             row.classList.remove("cur"); row.classList.remove("try"); row.classList.add("ok");
             si++; val = ""; blank = $("sv" + si); $("stp" + si).classList.add("cur"); show();
@@ -1277,6 +1279,7 @@
           if (k === "−") val = val.charAt(0) === "−" ? val.slice(1) : "−" + val;
           else if (k === ",") { if (!/\d$/.test(val) || /,|\//.test(val)) return; val += ","; }
           else if (k === "/") { if (!/\d$/.test(val) || /[,/]/.test(val)) return; val += "/"; }
+          else if (k === "␣") { if (!/\d$/.test(val) || /[ ,/]/.test(val)) return; val += " "; }
           else { if (k === "0" && /\/$/.test(val)) return; val = (val === "0" ? "" : val === "−0" ? "−" : val) + k; }
         }
         else if (val.length < 4) val = (val === "0" ? "" : val) + k;
@@ -1288,14 +1291,15 @@
       // з клавіатури комп'ютера теж можна
       document.onkeydown = function (e) {
         if (!$("keypad") || answered) return;
-        if (/^[0-9]$/.test(e.key) || e.key === "Backspace" || e.key === "Enter" || (it.kb && /^[-−,./]$/.test(e.key))) { try { e.preventDefault(); } catch (er) {} }
+        if (/^[0-9]$/.test(e.key) || e.key === "Backspace" || e.key === "Enter" || (it.kb && /^[-−,./ ]$/.test(e.key))) { try { e.preventDefault(); } catch (er) {} }
         if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); else if (e.key === "Enter") press("✓");
-        else if (it.kb && (e.key === "-" || e.key === "−")) press("−"); else if (it.kb && (e.key === "," || e.key === ".")) press(","); else if (it.kb && e.key === "/") press("/");
+        else if (it.kb && (e.key === "-" || e.key === "−")) press("−"); else if (it.kb && (e.key === "," || e.key === ".")) press(","); else if (it.kb && e.key === "/") press("/"); else if (it.kb && e.key === " ") press("␣");
       };
       show();
     }
     $("idk").onclick = function () { finish(null); };
     if (it.type === "choice") {
+      document.onkeydown = function (e) { if (answered) return; var n = +e.key; if (n >= 1 && n <= it.o.length && !e.metaKey && !e.ctrlKey) { var b = root.querySelector('.opt[data-k="' + (n - 1) + '"]'); if (b) b.click(); } };
       var os = root.querySelectorAll(".opt");
       for (var i = 0; i < os.length; i++) (function (b) { b.onclick = function () { finish(it.o[+b.getAttribute("data-k")], b); }; })(os[i]);
     }
@@ -1463,7 +1467,11 @@
   /* --- 3. Вправи --- */
   function practiceItems() {
     var used = {}, out = [], n = (LES.practice && LES.practice.perSkill) || 2;
-    LES.skills.forEach(function (id) { E.pick(id, n, used).forEach(function (it) { used[it.key] = 1; out.push(it); }); });
+    LES.skills.forEach(function (id) {
+      var got = E.pick(id, n, used), sk = E.SK[id];
+      if (SUB.id === "algebra" && sk && sk.gen && got.length) { var ez = E.makeGen(sk, { easy: 1 }); if (!used[ez.key]) got[0] = ez; } // перше завдання навички — легше
+      got.forEach(function (it) { used[it.key] = 1; out.push(it); });
+    });
     return out;
   }
   function nextLabel(idx) { var n = stepsOf(LES)[idx + 1]; return n ? ({ examples: "До прикладів", practice: "До вправ", words: "До слів", test: "До тесту" }[n.id] || "Далі") + " →" : "До кабінету →"; }
