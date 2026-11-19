@@ -19,6 +19,7 @@
     SUB = SUBS[id]; E.curSub = id;
     var c = CTX[id] || {}; PATH = c.PATH || null; ALL = !!c.ALL;
     document.body.classList.toggle("kid", !!SUB.kid);
+    document.body.classList.toggle("alg", id === "algebra");
   }
   /* звертання з урахуванням статі дитини: G("Зрозуміла", "Зрозумів") */
   function G(f, m) { var c = SUBJ && child(); return c && c.g === "m" ? m : f; }
@@ -384,14 +385,14 @@
     setTitle(SUB.title + " · " + child().name);
     var st = E.streak(), doneCount = 0, allLessons = 0, num = 0;
     Object.keys(P.lessons).forEach(function (k) { if (P.lessons[k].stars > 0) doneCount++; });
-    PATH.stages.forEach(function (s) { allLessons += s.lessons.length; });
+    PATH.stages.forEach(function (s) { s.lessons.forEach(function (l) { if (l.file) allLessons++; }); });
     var T = lessonTarget(), next = T && T.next ? T : null, cont = T ? T.l : null;
     var IN = SUB.diag === "inline";
     var dg = !SUB.diag ? true : IN ? (P.diagS || {})[SUB.id] || null : P.diag && P.diag.v === 2 ? P.diag : null;
     var pendingDiag = SUB.diag && !IN && !dg && testDone(); // тест пройдено раніше, план ще не підлаштований
     var nMist = E.openMistakes().length, plan = E.plan(), dayDone = plan.warm && plan.lesson && (plan.words || !SUB.words) && plan.mist && (!plan.reviewPart || plan.review);
 
-    var diagCard = dg ? "" : '<div class="card" style="border:2px solid var(--pri)"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>';
+    var diagCard = dg ? "" : '<div class="card" style="border:2px solid var(--pri)"><h2>🧭 ' + (pendingDiag ? "Підлаштуймо план" : "Спершу — перевірка рівня") + '</h2><p class="muted" style="margin:0 0 4px">' + (pendingDiag ? "Перевірку рівня ти вже пройшла. Відкрий її ще раз — побачиш свій результат, а уроки, які вже знаєш, позначаться ⏭️." : IN ? "Це не оцінка: перевірка покаже, що вже вмієш, і уроки підлаштуються під тебе. Можна частинами." : "15–20 хвилин. Це не оцінка: тест покаже, що вже знаєш, а що підтягнути, і план підлаштується під тебе.") + '</p>@DIAG@</div>';
     var html = '<div class="topbar"><button class="back" id="subj">← Мої предмети</button><span class="muted small" style="font-weight:700">' + SUB.ic + ' ' + SUB.title + '</span></div>' + diagCard +
       '<div class="card"><div class="hello"><div><h1>Привіт, ' + esc(P.name) + '! 👋</h1>' +
       '<p class="muted" style="margin:0">' + (cont ? (next ? "Зараз: урок " + next.n + " «" + esc(cont.title) + "»" : "Усі готові уроки пройдено! Нові вже готуються.") : "") + '</p></div></div>' +
@@ -443,11 +444,12 @@
     });
     if (nLocked > 2) html += '<div class="card" style="padding:10px 16px"><button class="btn plain full" id="showAll">🔒 Показати всі уроки (ще ' + (nLocked - 2) + ')</button></div>';
     var diagHtml = IN ? '<button class="lesson' + (dg ? "" : " open") + '" id="diagGo"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
-      (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : diagRunning() ? "Почато — продовжити з того місця" : "~25 завдань: дроби, від'ємні числа, рівняння, степені") + '</div></span></button>' :
+      (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : diagRunning() ? "Почато — продовжити з того місця" : "3 частини по ~10 хв: дроби, рівняння, степені") + '</div></span></button>' :
       '<a class="lesson' + (dg ? "" : " open") + '" href="test.html" style="text-decoration:none"><span class="ic">🧭</span><span><div class="lt">Перевірка рівня</div><div class="ls">' +
       (dg ? "Пройдено " + dg.date + ": " + dg.pct + "% · можна пройти ще раз" : pendingDiag ? "✅ Ти вже пройшла тест! Натисни — і план підлаштується під результат" : "Тест на 29 завдань: що вже знаю, а що підтягнути") + '</div></span></a>';
     html = !SUB.diag ? html : dg ? html + diagHtml : html.replace("@DIAG@", diagHtml);
     $app.innerHTML = html;
+    if (IN && !dg) { ["daily", "cont"].forEach(function (id) { if ($(id)) $(id).classList.add("dim"); }); }
     $("subj").onclick = function () { renderSubjects(); toTop(); };
     bindActs(renderHome);
     if ($("diagGo")) $("diagGo").onclick = function () { renderDiag(); toTop(); };
@@ -505,59 +507,85 @@
   function renderDiag() {
     loadAll(function () {
       getJSON("diag.json").then(function (D) {
-        var run = null;
+        var run = null, parts = D.parts || [D.title];
         try { run = JSON.parse(localStorage.getItem(diagKey()) || "null"); } catch (e) {}
+        if (run && (!run.items || run.n !== D.items.length || !run.t || Date.now() - run.t > 7 * 864e5)) run = null; // змінилась перевірка або хід старий — заново
+        var KB = '<div class="tip" style="text-align:left">⌨️ Відповідь набирай кнопками: <b>−</b> мінус, <b>,</b> кома, <b>/</b> дріб (3/4). Мішане число — неправильним дробом: 1 3/4 → 7/4.</div>';
         var start = function (r) {
           var save = function () { try { localStorage.setItem(diagKey(), JSON.stringify(r)); } catch (e) {} };
           var step = function () {
             if (r.i >= r.items.length) { try { localStorage.removeItem(diagKey()); } catch (e) {} return diagResult(D, r); }
-            var it = r.items[r.i];
+            var it = r.items[r.i], pi = r.parts[r.i];
+            if (r.i > 0 && r.parts[r.i - 1] !== pi && !r.go) { // кінець частини
+              save();
+              $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🎉</div><h2>Частину ' + (r.parts[r.i - 1] + 1) + ' з ' + parts.length + ' пройдено!</h2>' +
+                '<p class="muted">Далі: «' + esc(parts[pi]) + '». Можна зараз, а можна завтра — прогрес збережеться на цьому пристрої.</p>' +
+                '<div class="row"><button class="btn ghost" id="later">Завтра</button><button class="btn full" id="more">Продовжити</button></div></div>';
+              $("later").onclick = function () { renderHome(); toTop(); };
+              $("more").onclick = function () { r.go = 1; step(); toTop(); };
+              return;
+            }
+            r.go = 0;
+            var inPart = 0, pos = 0; r.parts.forEach(function (x, q) { if (x === pi) { inPart++; if (q <= r.i) pos++; } });
             E.ITEM[it.key] = it;
             showTask($app, it, {
-              chip: "🧭 Перевірка рівня · " + (r.i + 1) + " з " + r.items.length, prog: r.i / r.items.length,
+              quiet: true, onBack: function () { renderHome(); toTop(); },
+              chip: "🧭 Частина " + (pi + 1) + " з " + parts.length + " · " + pos + " з " + inPart, prog: pos / inPart,
               nextLabel: function () { return r.i + 1 < r.items.length ? "Далі →" : "Результат"; },
-              done: function (x) { r.res.push({ s: it.skill, ok: !!x.ok, clean: !!x.clean }); r.i++; save(); E.tick(SUB.id); step(); }
+              done: function (x) { r.res.push({ s: it.skill, ok: !!x.ok, clean: !!x.clean }); r.i++; save(); step(); }
             });
           };
           save(); step();
         };
-        if (run && run.items && run.i > 0 && run.i < run.items.length) return start(run);
-        var items = [];
-        D.items.forEach(function (d) { var x = E.SK[d.skill] && E.pick(d.skill, 1)[0]; if (x) items.push(x); });
+        var resume = run && run.i > 0 && run.i < run.items.length;
         $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🧭</div><h2>' + esc(D.title) + '</h2>' +
-          '<p>' + items.length + ' завдань — по одному на кожну тему: дроби, від\'ємні числа, рівняння, вирази, степені.</p>' +
-          '<p class="muted">Це не контрольна і не оцінка! Тест покаже, що вже знаєш, а що підтягнути. Не знаєш — сміливо тисни «🤷 Не знаю». Можна перерватись: прогрес збережеться.</p>' +
-          '<div class="row"><button class="btn ghost" id="bk">← Назад</button><button class="btn full" id="go">Почати</button></div></div>';
+          (resume ? '<p>Продовжимо з того місця, де зупинилась: частина ' + (run.parts[run.i] + 1) + ' з ' + parts.length + '.</p>' :
+          '<p>' + parts.length + ' короткі частини, ~10 хвилин кожна: ' + parts.map(function (x) { return "«" + esc(x) + "»"; }).join(", ") + '.</p>') +
+          '<p class="muted">Це не контрольна і не оцінка! Перевірка покаже, що вже вмієш, — і уроки підлаштуються. Не знаєш — тисни «🤷 Не знаю», це теж корисна відповідь.</p>' + KB +
+          '<div class="row"><button class="btn ghost" id="bk">← Назад</button><button class="btn full" id="go">' + (resume ? "Продовжити" : "Почати") + '</button></div></div>';
         $("bk").onclick = function () { renderHome(); toTop(); };
-        $("go").onclick = function () { start({ items: items, i: 0, res: [] }); };
+        $("go").onclick = function () {
+          if (resume) return start(run);
+          var items = [], pa = [];
+          D.items.forEach(function (d) { var sk = E.SK[d.skill]; if (!sk) return; var x = d.args ? E.makeGen(sk, d.args) : E.pick(d.skill, 1)[0]; if (x) { items.push(x); pa.push(d.part || 0); } });
+          start({ items: items, parts: pa, i: 0, res: [], n: D.items.length, t: Date.now() });
+        };
       }, function () { failView(renderDiag); });
     });
   }
   function diagResult(D, r) {
-    var P = E.P(), by = {}, order = [], ok = 0, T = {};
+    var P = E.P(), by = {}, order = [], ok = 0, T = {}, cnt = {}, bad = {};
     D.items.forEach(function (d) { T[d.skill] = d.t; });
-    r.res.forEach(function (x) { var t = T[x.s] || "Інше"; if (!by[t]) { by[t] = [0, 0]; order.push(t); } by[t][1]++; if (x.clean) { by[t][0]++; ok++; } });
-    var pct = Math.round(ok / Math.max(1, r.res.length) * 100), good = {};
-    r.res.forEach(function (x) { if (x.clean) good[x.s] = 1; });
+    r.res.forEach(function (x) { var t = T[x.s] || "Інше"; if (!by[t]) { by[t] = [0, 0]; order.push(t); } by[t][1]++; if (x.clean) { by[t][0]++; ok++; } cnt[x.s] = (cnt[x.s] || 0) + 1; if (!x.clean) bad[x.s] = 1; });
+    var pct = Math.round(ok / Math.max(1, r.res.length) * 100);
+    /* урок ⏭️: усі його навички були в перевірці, усі відповіді — правильно без підказки, і завдань на урок щонайменше 2 */
     var skip = [], skipT = [];
     PATH.stages.forEach(function (st) { st.lessons.forEach(function (l) {
-      var L = l.file && cget(l.file);
-      if (L && L.skills && L.skills.length && L.skills.every(function (s) { return good[s]; })) { skip.push(l.id); skipT.push(l.title); var LL = E.lesson(l.id); if (!(LL.stars > 0)) LL.skip = true; }
+      var L = l.file && cget(l.file); if (!L || !L.skills || !L.skills.length) return;
+      var n = 0, all = L.skills.every(function (s) { n += cnt[s] || 0; return cnt[s] && !bad[s]; });
+      var LL = E.lesson(l.id);
+      if (all && n >= 2) { skip.push(l.id); skipT.push(l.title); if (!(LL.stars > 0) && !LL.skip) { LL.skip = true; LL.skipU = Date.now(); } }
+      else if (LL.skip) { LL.skip = false; LL.skipU = Date.now(); }
     }); });
     var now = new Date(), date = ("0" + now.getDate()).slice(-2) + "." + ("0" + (now.getMonth() + 1)).slice(-2) + "." + now.getFullYear();
+    var first = !(P.diagS && P.diagS[SUB.id]);
     P.diagS = P.diagS || {};
-    P.diagS[SUB.id] = { v: 1, t: Date.now(), d: E.today(), date: date, pct: pct, skip: skip, by: by, bad: r.res.filter(function (x) { return !x.clean; }).map(function (x) { return x.s; }) };
+    P.diagS[SUB.id] = { v: 2, t: Date.now(), d: E.today(), date: date, pct: pct, skip: skip, by: by, bad: Object.keys(bad) };
     E.save(); applyPlacement();
-    var rows = order.map(function (t) { var b = by[t], e = b[0] === b[1] ? "✅" : b[0] * 2 >= b[1] ? "🟡" : "🔴"; return '<tr><td>' + e + '</td><td>' + esc(t) + '</td><td style="text-align:right">' + b[0] + ' з ' + b[1] + '</td></tr>'; }).join("");
-    var weak = order.filter(function (t) { return by[t][0] * 2 < by[t][1]; });
-    var text = "🧭 " + child().name + " — " + D.title + " (" + date + "): " + pct + "% (" + ok + " з " + r.res.length + ")\n" +
-      order.map(function (t) { var b = by[t]; return (b[0] === b[1] ? "✅ " : b[0] * 2 >= b[1] ? "🟡 " : "🔴 ") + t + ": " + b[0] + "/" + b[1]; }).join("\n") +
-      (skipT.length ? "\n⏭️ Знає (уроки пропущено): " + skipT.join("; ") : "") +
-      (r.res.some(function (x) { return !x.clean; }) ? "\nНе вийшло: " + r.res.filter(function (x) { return !x.clean; }).map(function (x) { return E.SK[x.s] ? E.SK[x.s].title : x.s; }).join("; ") : "");
-    $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (pct >= 80 ? "🏆" : pct >= 50 ? "💪" : "🌱") + '</div><h2>Готово! ' + pct + '%</h2>' +
-      '<p class="muted">' + ok + ' з ' + r.res.length + ' правильно без підказки. ' + (weak.length ? "Тепер зрозуміло, з чого почати — план уже підлаштований." : "Чудова база!") + '</p></div>' +
-      '<div class="card"><h3 style="margin-top:0">Теми</h3><table class="t" style="width:100%">' + rows + '</table>' +
-      (skipT.length ? '<p style="margin-top:12px">⏭️ <b>Уже знаєш</b> (уроки можна пропустити):<br>' + skipT.map(esc).join("<br>") + '</p>' : "") +
+    if (first) E.addStars(5, "diag");
+    var lev = function (b) { return b[0] === b[1] ? 0 : b[0] * 2 >= b[1] ? 1 : 2; };
+    var grp = [[], [], []]; order.forEach(function (t) { grp[lev(by[t])].push(t); });
+    var G3 = [["✅", "Уже вмієш"], ["🌿", "Трохи підтягнемо"], ["🌱", "Почнемо звідси"]];
+    var rows = G3.map(function (g, k) { return grp[k].length ? '<p style="margin:10px 0 2px"><b>' + g[0] + ' ' + g[1] + ':</b></p><p class="muted" style="margin:0">' + grp[k].map(esc).join(", ") + '</p>' : ""; }).join("");
+    var text = "🧭 " + child().name + " — " + D.title + " (" + date + "): " + pct + "% (" + ok + " з " + r.res.length + " без підказки)\n" +
+      order.map(function (t) { var b = by[t]; return G3[lev(b)][0] + " " + t + ": " + b[0] + "/" + b[1]; }).join("\n") +
+      (skipT.length ? "\n⏭️ Знає (уроки можна пропустити): " + skipT.join("; ") : "") +
+      (Object.keys(bad).length ? "\nНе вийшло: " + Object.keys(bad).map(function (s) { return E.SK[s] ? E.SK[s].title : s; }).join("; ") : "");
+    $app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🎉</div><h2>Перевірку пройдено!</h2>' +
+      '<p>' + (grp[0].length ? "Ти вже вмієш: <b>" + grp[0].length + " " + (grp[0].length === 1 ? "тему" : grp[0].length < 5 ? "теми" : "тем") + "</b> ✅" : "Тепер зрозуміло, з чого почати") + '</p>' +
+      '<p class="muted">План уроків уже підлаштований під тебе.' + (first ? " +5 ⭐ за перевірку!" : "") + '</p></div>' +
+      '<div class="card">' + rows +
+      (skipT.length ? '<p style="margin-top:12px">⏭️ <b>Ці уроки можна пропустити</b> (або пройти для певності):<br>' + skipT.map(esc).join("<br>") + '</p>' : "") +
       '<div class="row"><button class="btn ghost full" id="send">📨 Надіслати батькам</button></div>' +
       '<div class="row"><button class="btn full" id="home">До уроків →</button></div></div>';
     $("send").onclick = function () { sendDad(text); };
@@ -1133,17 +1161,17 @@
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "num") body = (it.steps ? '<div class="stps">' + it.steps.map(function (st, k) { return '<div class="stp' + (k ? "" : " cur") + '" id="stp' + k + '"><span class="sq">' + (k + 1) + ') ' + esc(st.q) + '</span> <b class="sv" id="sv' + k + '">' + (k ? "" : "?") + '</b></div>'; }).join("") + '</div>' : "") +
       '<div class="numbox" id="numbox"></div><div id="almost"></div><div class="keypad' + (SUB.kid ? " k5" : it.kb ? " alg" : "") + '" id="keypad">' +
-      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb ? [1, 2, 3, 4, 5, 6, 7, 8, 9, "−", 0, ",", "/", "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
+      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb ? [1, 2, 3, "⌫", 4, 5, 6, "−", 7, 8, 9, "/", ",", 0, "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { var al = { "⌫": "Стерти", "✓": "Перевірити", "−": "Мінус", "/": "Дробова риска", ",": "Кома" }[k]; return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '"' + (al ? ' aria-label="' + al + '"' : "") + '>' + k + '</button>'; }).join("") + '</div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     document.body.classList.add("insession");
-    root.innerHTML = '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
-      (sk ? '<span class="skillTag">' + lvl(it.skill).e + ' ' + esc(sk.title) + '</span>' : "") +
+    root.innerHTML = (cfg.onBack ? '<div class="topbar"><button class="back" id="qback">← Перервати</button><span class="muted small">прогрес збережено</span></div>' : "") + '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
+      (sk && !cfg.quiet ? '<span class="skillTag">' + lvl(it.skill).e + ' ' + esc(sk.title) + '</span>' : "") +
       '<div class="prog"><i style="width:' + Math.round((cfg.prog || 0) * 100) + '%"></i></div>' +
       (it.task ? '<div class="task">' + it.task + ':' + (it.read ? ' <button class="say" id="readIt">🔊 Прочитай</button>' : "") + '</div>' : "") +
       (it.pic ? '<div class="pic">' + it.pic + '</div>' : "") +
-      (it.type === "dict" ? '<div class="prompt">🎧 Що ти чуєш?</div>' : it.type === "fix" ? "" : '<div class="prompt' + (it.type === "num" || SUB.kid ? " big" : "") + (it.kb ? " alg" : "") + (it.long ? " long" : "") + '">' + esc(it.p).replace("___", '<span class="blank" id="blank"></span>') + '</div>') + body +
-      '<div id="hints"></div><div class="row" id="aux"><button class="btn ghost" id="hintBtn">💡 Підказка</button><button class="btn plain" id="idk">🤷 Не знаю</button></div>' +
-      '<div id="fb"></div></div>';
+      (it.type === "dict" ? '<div class="prompt">🎧 Що ти чуєш?</div>' : it.type === "fix" ? "" : '<div class="prompt' + (it.type === "num" || SUB.kid ? " big" : "") + (it.kb ? " alg" : "") + (it.long ? " long" : "") + '">' + esc(it.p).replace("___", '<span class="blank" id="blank"></span>') + '</div>') + (it.kb ? '<div id="hints"></div>' : "") + body +
+      (it.kb ? "" : '<div id="hints"></div>') + '<div class="row" id="aux"><button class="btn ghost" id="hintBtn">💡 Підказка</button><button class="btn plain" id="idk">🤷 Не знаю</button></div>' +
+      '<div id="fb" aria-live="polite"></div></div>';
 
     function addHint() {
       if (answered || used >= hints.length) return;
@@ -1160,9 +1188,11 @@
       if (c.st === "typo" && !typoUsed) {
         typoUsed = true;
         $("almost").innerHTML = '<div class="almost">' + (c.msg || "✏️ Майже! Перевір написання і спробуй ще раз 🙂") + '</div>';
+        if (it.kb && typeof show === "function") { val = ""; show(); }
         var inp0 = $("inp"); try { inp0.focus(); } catch (e) {}
         return;
       }
+      if (c.st === "typo" && it.kb) c = { st: "wrong", right: c.right, msg: "Значення правильне, але дріб треба скоротити до кінця: <b>" + esc(c.right) + "</b>." };
       if (c.st === "typo") spellNote = true;
       if (it.type === "fix" && given != null) {
         var fw = root.querySelectorAll(".fixw .w");
@@ -1192,11 +1222,14 @@
         h = '<div class="fb ok"><h3>' + (spellNote ? "Правильно! Лише перевір написання ✏️" : used ? "Правильно! 👍" : ["Правильно! 🎉", "Так тримати! ⭐", "Чудово! 💪", "Супер! 🚀"][Math.floor(Math.random() * 4)]) + '</h3>' +
           (spellNote ? '<div>Пишеться так: <b>' + esc(c.right) + '</b></div>' : "") +
           (it.type === "fix" ? '<div>Правильно: <b>' + esc(c.right) + '</b></div>' : "") + '<div>' + it.e + '</div>';
+      } else if (cfg.quiet) {
+        h = '<div class="fb calm"><h3>' + (given == null ? "Добре, що чесно 👌" : "Записали 👌") + '</h3><div>Розберемо в уроках — для цього перевірка й потрібна.</div>' +
+          '<details style="margin-top:8px"><summary>Показати розв\'язок</summary><div style="margin-top:6px">Правильно: <b>' + esc(c.right) + '</b></div><div style="margin-top:4px">' + it.e + '</div></details>';
       } else {
-        h = '<div class="fb bad"><h3>' + (given == null ? "Нічого страшного, розберімо 🙂" : "Майже! Розберімо 🙂") + '</h3>' +
+        h = '<div class="fb bad"><h3>' + (given == null ? "Нічого страшного, розберімо 🙂" : c.msg || !SUB.words ? (c.msg ? "Майже! Розберімо 🙂" : "Не зовсім — розберімо 🙂") : "Майже! Розберімо 🙂") + '</h3>' +
           (c.msg ? '<div>' + c.msg + '</div>' : given != null ? '<div>Твоя відповідь: <b>' + esc(given) + '</b></div>' : "") +
           '<div style="margin-top:6px">Правильно: <b>' + esc(it.type === "order" ? full : c.right) + '</b></div>' +
-          '<div class="rule"><b>Правило:</b> ' + it.e + '</div>';
+          '<div class="rule"><b>' + (SUB.words ? "Правило" : "Розбір") + ':</b> ' + it.e + '</div>';
       }
       h += (canSpeak && /[a-z]/i.test(full) && SUB.words ? '<div style="margin-top:12px"><button class="say" data-say="' + esc(full) + '">🔊 Послухати</button></div>' : "") +
         (SUB.kid ? '<div style="margin-top:10px">' + ukBtn((ok ? "Правильно! " : "Правильна відповідь: " + c.right + ". ") + (c.msg && !ok ? c.msg + ". " : "") + it.e) + '</div>' : "") + '</div>' +
@@ -1209,6 +1242,7 @@
       setTimeout(function () { try { nx.scrollIntoView({ behavior: "smooth", block: "center" }); } catch (e) {} }, 80);
     }
     $("hintBtn").onclick = addHint;
+    if (cfg.onBack) $("qback").onclick = function () { stopSay(); cfg.onBack(); };
     if ($("readIt")) $("readIt").onclick = function () { SAY.uk(it.read); };
     if (it.type === "num") {
       var val = "", box = $("numbox"), blank = $("blank"), si = 0, NS = it.steps ? it.steps.length : 0, retried = {};
@@ -1219,7 +1253,7 @@
         if (answered) return;
         if (k === "⌫") val = val.slice(0, -1);
         else if (k === "✓") {
-          if (!val) return;
+          if (!val || (it.kb && !E.ratOf(val))) return;
           if (NS && si < NS - 1) {
             var st = it.steps[si], row = $("stp" + si);
             if (E.norm(val) !== E.norm(st.a)) {
@@ -1238,12 +1272,12 @@
           }
           finish(val); return;
         }
-        else if (it.kb) { // алгебра: мінус лише на початку (або після /), одна кома, одна риска
+        else if (it.kb) { // алгебра: «−» перемикає знак, одна кома, одна риска, без ділення на 0
           if (val.length >= 9) return;
-          if (k === "−") { if (val === "") val = "−"; else if (val === "−") val = ""; else return; }
+          if (k === "−") val = val.charAt(0) === "−" ? val.slice(1) : "−" + val;
           else if (k === ",") { if (!/\d$/.test(val) || /,|\//.test(val)) return; val += ","; }
           else if (k === "/") { if (!/\d$/.test(val) || /[,/]/.test(val)) return; val += "/"; }
-          else val = (val === "0" ? "" : val === "−0" ? "−" : val) + k;
+          else { if (k === "0" && /\/$/.test(val)) return; val = (val === "0" ? "" : val === "−0" ? "−" : val) + k; }
         }
         else if (val.length < 4) val = (val === "0" ? "" : val) + k;
         if (typoUsed && $("almost")) $("almost").innerHTML = "";
@@ -1254,6 +1288,7 @@
       // з клавіатури комп'ютера теж можна
       document.onkeydown = function (e) {
         if (!$("keypad") || answered) return;
+        if (/^[0-9]$/.test(e.key) || e.key === "Backspace" || e.key === "Enter" || (it.kb && /^[-−,./]$/.test(e.key))) { try { e.preventDefault(); } catch (er) {} }
         if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); else if (e.key === "Enter") press("✓");
         else if (it.kb && (e.key === "-" || e.key === "−")) press("−"); else if (it.kb && (e.key === "," || e.key === ".")) press(","); else if (it.kb && e.key === "/") press("/");
       };
@@ -1482,7 +1517,7 @@
   function stepTest(root, idx) {
     var pass = LES.test.pass || 80;
     root.innerHTML = '<div class="card"><div class="big-emoji">🏆</div><h2>Міні-тест</h2><p>Завдання на все, що вивчили в цьому уроці. Щоразу трохи інші.</p>' +
-      '<div class="tip">Набери <b>' + pass + '%</b> або більше, і урок зарахується. Підказки є, але кожна забирає пів бала.</div>' +
+      '<div class="tip">Урок зарахується від <b>' + pass + '%</b>. Підказки бери сміливо — просто зірок буде трохи менше.</div>' +
       '<p class="muted small">⭐ ' + pass + '%+ · ⭐⭐ 90%+ · ⭐⭐⭐ 100%</p><div class="row"><button class="btn full" id="go">Почати тест →</button></div></div>';
     $("go").onclick = function () {
       runSession(root, { items: testItems(), mode: "test", onDone: function (s) {
@@ -1496,7 +1531,7 @@
         root.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">' + (ok ? "🏆" : "🌱") + '</div><h2>' + (ok ? "Урок пройдено!" : "Майже! Ще трішки") + '</h2>' +
           '<div class="score-big">' + pct + '%</div>' +
           (ok ? '<div class="stars" style="font-size:30px">' + starsStr(stars) + '</div>' : '<p class="muted">Потрібно ' + pass + '%. Зроби ще раз вправи — там помилки розбираються крок за кроком. У тебе вийде!</p>') +
-          (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { return "• " + pText(r.it, true, true) + " → <b>" + esc(E.answersOf(r.it)[0]) + "</b>"; }).join("<br>") + '</div>' : "") +
+          (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { var an = esc(E.answersOf(r.it)[0]); return "• " + (r.it.type === "num" && String(r.it.p).indexOf("___") >= 0 && !r.it.long ? esc(r.it.p).replace(/\n/g, " ").replace("___", "<b>" + an + "</b>") : pText(r.it, true, true) + " → <b>" + an + "</b>"); }).join("<br>") + '</div>' : "") +
           skillList(LES.skills) +
           '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати батькам у Telegram</button>' +
           (ok ? "" : '<button class="btn ghost" id="pr">✍️ До вправ</button><button class="btn" id="retry">↺ Ще раз</button>') +

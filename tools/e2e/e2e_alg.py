@@ -24,6 +24,7 @@ with sync_playwright() as p:
     while True:
         pg.wait_for_timeout(40)
         if pg.locator("#send").count(): break
+        if pg.locator("#more").count(): pg.screenshot(path=SH+"a5b_part.png"); pg.click("#more"); continue
         it=pg.evaluate("window.UI_CUR")
         if n==0: pg.screenshot(path=SH+"a3_task.png")
         if it["type"]=="num" and "/" in it["a"] and not typo_tested:
@@ -34,7 +35,7 @@ with sync_playwright() as p:
             for _ in range(12): pg.click(".key[data-k='⌫']")
             typ(pg,a)
         else:
-            right = n < 14   # перші 14 правильно (дроби…рівняння), далі помилки
+            right = n < 15 or n in (20,21)   # частина 1 правильно, далі здебільшого помилки
             answer(pg,it,right)
         if n==20: pg.screenshot(path=SH+"a5_fb.png",full_page=True)
         pg.click("#next"); n+=1

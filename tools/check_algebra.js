@@ -19,6 +19,11 @@ function toJS(s) {
 function ev(js, vars) { const f = new Function(...Object.keys(vars), "return (" + js + ");"); return f(...Object.values(vars)); }
 const close = (a, b) => Math.abs(a - b) < 1e-9 * Math.max(1, Math.abs(a));
 function val(a) { const r = ratOf(a); return r ? r.n / r.d : NaN; }
+// краєві випадки перевірки відповіді (незалежно від генераторів)
+{ const T = [["1/2", "0,5", true], ["−3/−4", "3/4", true], ["6/3", "2", true], ["0,50", "1/2", true], ["−0", "0", true], ["2,450", "2,45", true], ["3/4", "0,7", false], ["−2", "2", false]];
+  for (const [g, r, eq] of T) { const a = ratOf(g), b = ratOf(r); if (!a || !b || (a.n * b.d === b.n * a.d) !== eq) console.log("✗ ratOf", g, r); }
+  for (const g of ["5,", "−", "3/", "3/0", ",5", "", "1/2/3"]) if (ratOf(g)) console.log("✗ ratOf приймає незавершене:", JSON.stringify(g));
+  if (ratOf("6/8").red || !ratOf("3/4").red) console.log("✗ ratOf: ознака скороченого дробу"); }
 let bad = 0; const B = (g, m, it) => { if (bad++ < 40) console.log("✗", g, m, JSON.stringify(it).slice(0, 400)); };
 const rnd = () => ({ a: Math.random() * 4 - 2 + 0.3, b: Math.random() * 4 - 2 + 0.7, x: Math.random() * 4 - 2 + 0.11, y: Math.random() * 3 + 0.2 });
 function equiv(e1, e2, n = 6) { for (let i = 0; i < n; i++) { const v = rnd(); if (!close(ev(e1, v), ev(e2, v))) return false; } return true; }
@@ -28,7 +33,9 @@ for (const s of sk) {
   for (let i = 0; i < 3000; i++) {
     const it = G[s.gen](s.args || {}); const txt = JSON.stringify(it);
     if (/undefined|NaN|null|Infinity/.test(txt)) B(s.gen, "undefined/NaN", it);
-    if (/-\d/.test(it.p) || /\d-/.test(it.p)) B(s.gen, "дефіс замість мінуса", it);
+    const shown = [it.p, it.e, ...(it.h || []), ...(it.o || []), ...Object.keys(it.err || {}), ...Object.values(it.err || {})].join(" ").replace(/<[^>]+>/g, "");
+    if (/-\d|\d-|\s-\s/.test(shown)) B(s.gen, "дефіс замість мінуса", it);
+    if (/[+−] 0(?![,\d])|NaN|undefined/.test(shown.replace(/=\s*0\b/g, ""))) B(s.gen, "«+ 0» або NaN у тексті", it);
     if (!it.long && !it.p.includes("___")) B(s.gen, "нема ___", it);
     if (!it.h || it.h.length < 2 || !it.e) B(s.gen, "нема підказок/пояснення", it);
     seen.add(it.p);
@@ -39,9 +46,10 @@ for (const s of sk) {
       for (const k in it.err || {}) { const e = ratOf(k); if (e && e.n * r.d === r.n * e.d) B(s.gen, "err=правильна", it); }
       const A = r.n / r.d;
       if (c.v !== undefined) { if (!close(eval(c.v), A)) B(s.gen, "обчислення " + eval(c.v), it); }
-      else if (c.eq) { if (!close(ev(c.eq, { x: A }), ev(c.r, { x: A }))) B(s.gen, "рівняння не виконується", it);
-        // корінь єдиний: лінійна функція не стала
-        const f = x => ev(c.eq, { x }) - ev(c.r, { x }); if (close(f(0), f(1))) B(s.gen, "не один корінь", it); }
+      else if (c.eq) { // розв'язуємо лінійне рівняння самі: f(x) = lhs − rhs
+        const f = x => ev(c.eq, { x }) - ev(c.r, { x }); if (close(f(0), f(1))) { B(s.gen, "не один корінь", it); continue; }
+        const root = -f(0) / (f(1) - f(0)); if (!close(f(root + 2), (f(1) - f(0)) * 2)) B(s.gen, "рівняння не лінійне", it);
+        const want = c.ans ? ev(c.ans, { x: root }) : root; if (!close(want, A)) B(s.gen, "відповідь " + want, it); }
       else if (c.pw) { const [p, n] = c.pw; const js = toJS(p); for (const base of [2, 3]) { if (!close(ev(js, { a: base, b: base, x: base, y: base }), Math.pow(base, n))) B(s.gen, "степінь", it); } }
       else B(s.gen, "нема chk", it);
       if (Math.abs(A) > 2000) B(s.gen, "завелика відповідь", it);
@@ -51,7 +59,17 @@ for (const s of sk) {
         if (!equiv(c.src, toJS(it.a))) B(s.gen, "правильний варіант не тотожний", it);
         it.o.forEach(o => { if (o !== it.a && equiv(c.src, toJS(o))) B(s.gen, "хибний варіант теж тотожний: " + o, it); });
         if (it.o.length < 3) B(s.gen, "замало варіантів", it);
-        if (!equiv(c.src, toJS(it.p.replace(" = ___", "")))) B(s.gen, "умова ≠ src", it);
+        if (!equiv(c.src, toJS(it.p.replace(/\s=\s___/, "")))) B(s.gen, "умова ≠ src", it);
+      } else if (c.eqo) {
+        const sat = it.o.filter(o => close(ev(c.eqo[0], { x: val(o) }), ev(c.eqo[1], { x: val(o) })));
+        if (sat.length !== 1 || sat[0] !== it.a) B(s.gen, "корінь серед варіантів", it);
+        const [l, rr] = it.p.split(" = "); if (!close(ev(toJS(l), { x: 1.7 }) - ev(toJS(rr), { x: 1.7 }), ev(c.eqo[0], { x: 1.7 }) - ev(c.eqo[1], { x: 1.7 }))) B(s.gen, "eqo≠умова", it);
+      } else if (c.idA) {
+        const same = equiv(c.idA, c.idB); if (same !== c.same || it.a !== (same ? "Так" : "Ні")) B(s.gen, "тотожність", it);
+        const parts = it.p.split("   і   ").map(x => toJS(x.replace(/[am]/g, "x"))); if (!equiv(parts[0], c.idA) || !equiv(parts[1], c.idB)) B(s.gen, "id≠умова", it);
+      } else if (c.mono) {
+        const isMono = e => !/[+:(]/.test(e.replace(/^−/, "")) && !/ − /.test(e);
+        if (!isMono(it.a) || it.o.filter(isMono).length !== 1) B(s.gen, "одночлен", it);
       } else if (c.tf !== undefined) {
         const m = it.task.match(/число (\S+) коренем/); const x = val(m[1]); const [l, rr] = it.p.split(" = ");
         const ok = close(ev(toJS(l), { x }), ev(toJS(rr), { x })); if (ok !== c.tf || it.a !== (ok ? "Так" : "Ні")) B(s.gen, "так/ні", it);
@@ -62,6 +80,7 @@ for (const s of sk) {
       } else if (c.model) {
         c.model.forEach((m, j) => { const ok = close(ev(m[0], { x: c.root }), ev(m[1], { x: c.root })); if (j === 0 && !ok) B(s.gen, "правильне рівняння не виконується", it); if (j > 0 && ok) B(s.gen, "хибне рівняння теж виконується", it); });
         if (!it.o.includes(it.a)) B(s.gen, "модель", it);
+        if (!/Познач через x/.test(it.p)) B(s.gen, "не сказано, що таке x", it);
       } else B(s.gen, "нема chk", it);
     }
   }

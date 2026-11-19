@@ -27,12 +27,12 @@
   {
    "e": "🧩",
    "h": "Три правила",
-   "html": "<table class=\"t\"><tr><td>aᵐ · aⁿ</td><td>aᵐ⁺ⁿ</td><td>a³ · a⁴ = a⁷</td></tr><tr><td>aᵐ : aⁿ</td><td>aᵐ⁻ⁿ</td><td>a⁹ : a⁴ = a⁵</td></tr><tr><td>(aᵐ)ⁿ</td><td>aᵐ·ⁿ</td><td>(a³)⁴ = a¹²</td></tr></table><div class=\"tip\">⚠️ При множенні показники <b>додаються</b>, а не множаться.</div>"
+   "html": "<table class=\"t\"><tr><td>aᵐ · aⁿ</td><td>aᵐ⁺ⁿ</td><td>a³ · a⁴ = a⁷</td></tr><tr><td>aᵐ : aⁿ</td><td>aᵐ⁻ⁿ</td><td>a⁹ : a⁴ = a⁵</td></tr><tr><td>(aᵐ)ⁿ</td><td>aᵐ·ⁿ</td><td>(a³)⁴ = a¹²</td></tr><tr><td>(ab)ⁿ</td><td>aⁿbⁿ</td><td>2⁵ · 5⁵ = 10⁵</td></tr></table><div class=\"tip\">⚠️ При множенні показники <b>додаються</b>, а не множаться.</div>"
   },
   {
    "e": "✂️",
    "h": "Рахуємо зручно",
-   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2⁷ · 2³ : 2⁸ = 2¹⁰ : 2⁸ = 2² = 4</div><p>Спершу правила, потім обчислення.</p>"
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2⁷ · 2³ : 2⁸ = 2¹⁰ : 2⁸ = 2² = 4</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">0,25⁷ · 4⁷ = (0,25 · 4)⁷ = 1⁷ = 1</div><p>Різні основи? Спробуй звести до однієї: 4 = 2², 27 = 3³.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">4³ : 2⁵ = 2⁶ : 2⁵ = 2</div>"
   }
  ]
 }

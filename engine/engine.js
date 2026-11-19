@@ -109,7 +109,8 @@
       if (!a) { into.lessons[k] = b; continue; }
       a.stars = Math.max(a.stars || 0, b.stars || 0); a.best = Math.max(a.best || 0, b.best || 0);
       a.steps = obj(a.steps); for (var st in obj(b.steps)) if (b.steps[st]) a.steps[st] = true;
-      if (b.skip) a.skip = true; if (b.early) a.early = true;
+      if ((b.skipU || 0) > (a.skipU || 0)) { a.skip = !!b.skip; a.skipU = b.skipU; } else if (!a.skipU && !b.skipU && b.skip) a.skip = true;
+      if (b.early) a.early = true;
     }
     into.seen = obj(into.seen); for (k in obj(o.seen)) if (!into.seen[k] || o.seen[k] > into.seen[k]) into.seen[k] = o.seen[k];
     into.mistakes = into.mistakes || []; var mk = {};

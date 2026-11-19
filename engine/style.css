@@ -103,7 +103,7 @@ table.t td:first-child{font-weight:800}
 /* results */
 .score-big{font-size:54px;font-weight:900;line-height:1;margin:6px 0}
 .celebrate{font-size:52px;line-height:1}
-.toast{position:fixed;left:50%;top:14px;pointer-events:none;z-index:50;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
+.toast{position:fixed;left:50%;top:auto;bottom:18px;pointer-events:none;z-index:50;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 16px;border-radius:12px;font-weight:700;font-size:15px;opacity:0;transition:opacity .2s;pointer-events:none;z-index:9}
 .toast.show{opacity:1}
 /* --- рушій v2 --- */
 .skillTag{display:inline-flex;align-items:center;gap:6px;font-size:13px;font-weight:700;color:var(--muted);margin:0 0 10px 6px}
@@ -257,7 +257,14 @@ body.kid.insession .card{padding-top:12px}
 
 .rs-row{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0;border-top:1px solid var(--line)}
 .rs-row .btn{flex:0 0 auto;margin:0}
-.keypad.alg .key{min-height:46px;padding:4px 0;font-size:24px}
-.keypad.alg .key.ok,.keypad.alg .key.del{font-size:22px}
-.prompt.big.alg{font-size:26px}
+.keypad.alg{grid-template-columns:repeat(4,1fr);gap:8px}
+.keypad.alg .key{min-height:48px;padding:4px 0;font-size:24px}
+.keypad.alg .key.ok{grid-column:span 2;font-size:22px}.keypad.alg .key.del{font-size:22px}
+@media (max-height:700px){.keypad.alg .key{min-height:42px}}
+.prompt.big.alg{font-size:26px;white-space:pre-line}
 .prompt.big.alg.long{font-size:19px}
+.key,.opt,.btn,.lesson{touch-action:manipulation;-webkit-user-select:none;user-select:none}
+.fb.calm{background:#F4F1EA}.fb.calm h3{color:var(--ink)}
+.fb.calm summary{cursor:pointer;color:var(--pri-ink);font-weight:700}
+body.alg .fb.bad{background:#FFF4E2}body.alg .fb.bad h3{color:var(--ink)}
+.btn.dim{opacity:.5}
