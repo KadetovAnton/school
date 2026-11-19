@@ -57,7 +57,8 @@ for (const s of sk) {
       if (!it.o.includes(it.a) || new Set(it.o).size !== it.o.length || it.o.length < 2) B(s.gen, "варіанти", it);
       if (c.src) {
         if (!equiv(c.src, toJS(it.a))) B(s.gen, "правильний варіант не тотожний", it);
-        it.o.forEach(o => { if (o !== it.a && equiv(c.src, toJS(o))) B(s.gen, "хибний варіант теж тотожний: " + o, it); });
+        it.o.forEach(o => { if (o !== it.a && o !== c.incomplete && equiv(c.src, toJS(o))) B(s.gen, "хибний варіант теж тотожний: " + o, it); });
+        if (c.incomplete && it.o.includes(c.incomplete) && !equiv(c.src, toJS(c.incomplete))) B(s.gen, "«не до кінця» не тотожний", it);
         if (it.o.length < 3) B(s.gen, "замало варіантів", it);
         if (!equiv(c.src, toJS(it.p.replace(/\s=\s___/, "")))) B(s.gen, "умова ≠ src", it);
       } else if (c.eqo) {

@@ -11,15 +11,19 @@
  ],
  "skills": [
   "a.pmul",
+  "a.pmul3",
+  "a.psimp",
   "a.pmuleq"
  ],
  "practice": {
-  "perSkill": 4
+  "perSkill": 2
  },
  "test": {
   "plan": {
-   "a.pmul": 5,
-   "a.pmuleq": 3
+   "a.pmul": 3,
+   "a.pmul3": 2,
+   "a.psimp": 2,
+   "a.pmuleq": 2
   },
   "pass": 80
  },
@@ -27,7 +31,17 @@
   {
    "e": "🟦",
    "h": "Кожен на кожен",
-   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a + b)(c + d) = ac + ad + bc + bd</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x + 3)(x − 5) = x² − 5x + 3x − 15 = x² − 2x − 15</div><div class=\"tip\">⚠️ Спершу виходить 4 добутки. Не загуби «середні» — це найчастіша помилка.</div>"
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a + b)(c + d) = ac + ad + bc + bd</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x + 3)(x − 5) = x² − 5x + 3x − 15 = x² − 2x − 15</div><div class=\"tip\">⚠️ Спершу виходить 4 добутки. Не загуби «середні» — це найчастіша помилка.</div><table class=\"t\"><tr><td></td><td>x</td><td>−5</td></tr><tr><td>x</td><td>x²</td><td>−5x</td></tr><tr><td>3</td><td>3x</td><td>−15</td></tr></table>"
+  },
+  {
+   "e": "🔢",
+   "h": "Двочлен на тричлен",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x − 2)(x² + 3x − 1) = x³ + 3x² − x − 2x² − 6x + 2 = x³ + x² − 7x + 2</div><p>2 члени × 3 члени = 6 добутків.</p>"
+  },
+  {
+   "e": "🧹",
+   "h": "Спрощення",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(x − 2)(x + 3) − x(x + 1) = (x² + x − 6) − (x² + x) = −6</div><p>Перед добутком мінус? Спершу результат у дужки — потім змінюй знаки.</p>"
   }
  ]
 }

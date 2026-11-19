@@ -10,14 +10,18 @@
   "skills/algebra.json"
  ],
  "skills": [
-  "a.pfac"
+  "a.pfac",
+  "a.pfaceq",
+  "a.pfacpoly"
  ],
  "practice": {
-  "perSkill": 7
+  "perSkill": 3
  },
  "test": {
   "plan": {
-   "a.pfac": 7
+   "a.pfac": 4,
+   "a.pfaceq": 2,
+   "a.pfacpoly": 2
   },
   "pass": 80
  },
@@ -31,6 +35,16 @@
    "e": "🧠",
    "h": "Рахуємо зручно",
    "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">37 · 64 + 37 · 36 = 37 · (64 + 36) = 3700</div>"
+  },
+  {
+   "e": "0️⃣",
+   "h": "Добуток дорівнює нулю",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">x² − 5x = 0 → x(x − 5) = 0 → x = 0 або x = 5</div><p>Добуток дорівнює нулю, коли хоча б один множник — нуль. Не загуби корінь 0!</p>"
+  },
+  {
+   "e": "🎁",
+   "h": "Дужка як множник",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">a(x − y) + 3(x − y) = (x − y)(a + 3)</div><p>Протилежні дужки: (b − a) = −(a − b).</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">5(a − b) − c(b − a) = 5(a − b) + c(a − b) = (a − b)(5 + c)</div>"
   }
  ]
 }
