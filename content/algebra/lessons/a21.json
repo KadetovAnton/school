@@ -27,6 +27,7 @@
   {
    "e": "🟥",
    "h": "Формули",
+   "anim": "sq",
    "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a + b)² = a² + 2ab + b²</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a − b)² = a² − 2ab + b²</div><p>(3x − 2)² = 9x² − 12x + 4.</p><div class=\"tip\">⚠️ (a + b)² ≠ a² + b² — не загуби подвоєний добуток 2ab!</div>"
   },
   {

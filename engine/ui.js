@@ -1231,11 +1231,13 @@
     function draw() {
       var c = X[k];
       root.innerHTML = '<div class="card"><span class="chip">Правило · ' + (k + 1) + ' з ' + X.length + '</span>' +
-        '<div class="big-emoji">' + c.e + '</div><h2>' + c.h + '</h2>' + ukBtn(c.h + ". " + c.html) + c.html +
+        '<div class="big-emoji">' + c.e + '</div><h2>' + c.h + '</h2>' + ukBtn(c.h + ". " + c.html) +
+        (c.anim && window.EXPLAIN && EXPLAIN.list[c.anim] ? '<button class="btn full ex-btn" id="anim">🎬 Подивитись, звідки це береться</button>' : "") + c.html +
         '<div class="dots">' + X.map(function (_, i) { return '<i class="' + (i === k ? "on" : "") + '"></i>'; }).join("") + '</div>' +
         '<div class="row">' + (k > 0 ? '<button class="btn ghost" id="prev">←</button>' : "") +
         '<button class="btn" id="nx" style="flex:3">' + (k < X.length - 1 ? "Далі →" : "Зрозуміло! " + ({ examples: "До прикладів", practice: "До вправ", test: "До тесту" }[(stepsOf(LES)[idx + 1] || {}).id] || "Далі") + " →") + '</button></div></div>';
       bindSay(root);
+      if ($("anim")) $("anim").onclick = function () { stopSay(); EXPLAIN.play(root, c.anim, function () { draw(); toTop(); }); toTop(); };
       if ($("prev")) $("prev").onclick = function () { k--; draw(); toTop(); };
       $("nx").onclick = function () { if (k < X.length - 1) { k++; draw(); toTop(); } else { completeStep("explain"); nextStep(idx); } };
     }

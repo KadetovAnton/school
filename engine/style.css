@@ -270,3 +270,24 @@ body.alg .fb.bad{background:#FFF4E2}body.alg .fb.bad h3{color:var(--ink)}
 .btn.dim{opacity:.5}
 body.alg .prompt{white-space:pre-line}
 .pic .sys,.sys{display:inline-block;text-align:left;border-left:3px solid var(--ink);border-radius:14px 0 0 14px;padding:4px 14px;font-size:22px;font-weight:800;line-height:1.5}
+
+/* ===== Анімовані пояснення (engine/explain.js) ===== */
+.ex-card { position: relative; }
+.ex-vo { position: absolute; top: 12px; right: 12px; border: 0; background: var(--soft, #f3f0ff); border-radius: 50%; width: 40px; height: 40px; font-size: 20px; cursor: pointer; touch-action: manipulation; }
+.ex-pic { margin: 10px auto 4px; max-width: 320px; }
+.ex-svg { width: 100%; height: auto; display: block; }
+.ex-svg #x-sq, .ex-svg #x-top, .ex-svg #x-left, .ex-svg .ex-in, .ex-svg rect[id^="x-r"] { opacity: 0; transition: opacity .7s ease; }
+.ex-svg rect[id^="x-r"].ex-on { opacity: .85; }
+.ex-svg .ex-on { opacity: 1 !important; }
+.ex-svg rect[id^="x-r"].ex-on { opacity: .85 !important; }
+.ex-svg .ex-cut { stroke: #2d3047; stroke-width: 3; stroke-dasharray: 8 6; opacity: 0; transition: opacity .6s ease; }
+.ex-svg .ex-cut.ex-on { opacity: 1; }
+.ex-svg .ex-hl { animation: exPulse 1.4s ease-in-out 2; }
+@keyframes exPulse { 0%, 100% { opacity: .85; } 50% { opacity: .35; } }
+.ex-svg .ex-in { font: 800 26px system-ui, -apple-system, sans-serif; fill: #fff; text-anchor: middle; }
+.ex-svg .ex-lab { font: 800 20px system-ui, -apple-system, sans-serif; fill: #2d3047; text-anchor: middle; }
+.ex-svg .ex-br { fill: none; stroke: #8a8fa8; stroke-width: 2; }
+.ex-f { text-align: center; font-size: 22px; font-weight: 800; min-height: 32px; margin: 6px 0; }
+.ex-f.big { font-size: 26px; }
+.ex-t { font-size: 18px; line-height: 1.45; text-align: center; }
+.ex-btn { margin: 8px 0 4px; }

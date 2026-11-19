@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Пояснення — Домашня школа</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="engine/style.css?v=2.32.0">
+</head>
+<body>
+<!-- Перегляд анімованого пояснення без входу: explain.html#sq -->
+<div class="wrap" id="app"></div>
+<script src="engine/speech.js?v=2.32.0"></script>
+<script src="engine/explain.js?v=2.32.0"></script>
+<script>
+(function () {
+  var id = (location.hash || "#sq").slice(1), app = document.getElementById("app");
+  function start() {
+    app.innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🎬</div><h2>' + (EXPLAIN.list[id] ? EXPLAIN.list[id].title : "Пояснення") + '</h2>' +
+      '<p class="muted">Увімкни звук 🔊 — пояснення озвучене. Далі гортай сама кнопкою «Далі».</p>' +
+      '<div class="row"><button class="btn full" id="go">▶️ Почати</button></div></div>';
+    document.getElementById("go").onclick = function () { EXPLAIN.play(app, id, start); };
+  }
+  start();
+})();
+</script>
+</body>
+</html>
