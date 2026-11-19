@@ -6,8 +6,8 @@
      fail:<дитина>  — лічильник невдалих спроб PIN (блок на 15 хв після 5)
      tts:<хеш>      — готова озвучка (mp3), робиться один раз
      ttsc:<РРРР-ММ> — скільки символів відправлено в Google за місяць
-   Секрети: TG_TOKEN (бот), TG_CHAT (чат тата), GOOGLE_TTS_KEY (озвучка Google).
-   Змінні (необов'язково): TTS_VOICE (назва голосу), TTS_CAP (ліміт символів на місяць, типово 300000). */
+   Секрети: TG_TOKEN (бот), TG_CHAT (чат тата), GEMINI_TTS_KEY (озвучка Gemini, ключ з Google AI Studio).
+   Змінні (необов'язково): TTS_VOICE (голос, типово Algieba), TTS_MODEL, TTS_STYLE (як читати), TTS_CAP (символів на місяць, типово 300000). */
 const KIDS = ["anya", "artem"];
 const ORIGINS = ["https://school.akdtv.pp.ua", "https://kadetovanton.github.io", "https://school-9ax.pages.dev"];
 
@@ -44,31 +44,39 @@ export async function onRequest({ request: req, env, params }) {
     try { body = JSON.parse(raw); } catch (e) {}
   }
 
-  if (path === "ping") return J(req, { ok: true, db: true, tg: !!env.TG_TOKEN, chat: !!env.TG_CHAT, tts: !!env.GOOGLE_TTS_KEY });
+  if (path === "ping") return J(req, { ok: true, db: true, tg: !!env.TG_TOKEN, chat: !!env.TG_CHAT, tts: !!env.GEMINI_TTS_KEY });
 
-  // озвучка Google: лише для дитини, що увійшла; кожен текст — один раз (далі з кешу); місячний ліміт символів
+  // озвучка Gemini TTS (Google AI Studio): лише для дитини, що увійшла; кожен текст — один раз (далі з кешу); місячний ліміт символів
   if (path === "tts" && req.method === "POST") {
     if (!(await who(req, env))) return J(req, { error: "потрібен вхід" }, 401);
     const text = String(body.text || "").trim();
     if (!text || text.length > 700) return J(req, { error: "текст порожній або задовгий" }, 400);
-    const voice = String(env.TTS_VOICE || "uk-UA-Chirp3-HD-Achernar").trim();
-    const key = "tts:" + await sha(voice + "|" + text);
-    const audioHeaders = { "Content-Type": "audio/mpeg", "Cache-Control": "private, max-age=31536000", ...cors(req) };
+    const voice = String(env.TTS_VOICE || "Algieba").trim(), model = String(env.TTS_MODEL || "gemini-3.1-flash-tts-preview").trim();
+    const style = String(env.TTS_STYLE || "Прочитай українською спокійно і з виразом, як добрий учитель пояснює семикласниці, з паузами на комах і тире").trim();
+    const key = "tts:" + await sha(model + "|" + voice + "|" + style + "|" + text);
+    const audioHeaders = { "Content-Type": "audio/wav", "Cache-Control": "private, max-age=31536000", ...cors(req) };
     const hit = await env.DB.get(key, "arrayBuffer");
     if (hit) return new Response(hit, { headers: audioHeaders });
-    if (!env.GOOGLE_TTS_KEY) return J(req, { error: "озвучку Google не налаштовано" }, 503);
+    if (!env.GEMINI_TTS_KEY) return J(req, { error: "озвучку не налаштовано" }, 503);
     const month = "ttsc:" + new Date().toISOString().slice(0, 7);
     const used = +(await env.DB.get(month) || 0), cap = +(env.TTS_CAP || 300000);
     if (used + text.length > cap) return J(req, { error: "місячний ліміт озвучки вичерпано" }, 429);
-    const r = await fetch("https://texttospeech.googleapis.com/v1/text:synthesize?key=" + encodeURIComponent(String(env.GOOGLE_TTS_KEY).trim()), {
-      method: "POST", headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ input: { text }, voice: { languageCode: voice.slice(0, 5), name: voice }, audioConfig: { audioEncoding: "MP3" } })
+    const r = await fetch("https://generativelanguage.googleapis.com/v1beta/models/" + encodeURIComponent(model) + ":generateContent", {
+      method: "POST", headers: { "Content-Type": "application/json", "x-goog-api-key": String(env.GEMINI_TTS_KEY).trim() },
+      body: JSON.stringify({ contents: [{ parts: [{ text: style + ": " + text }] }],
+        generationConfig: { responseModalities: ["AUDIO"], speechConfig: { voiceConfig: { prebuiltVoiceConfig: { voiceName: voice } } } } })
     }).then(x => x.json()).catch(e => ({ error: { message: String(e) } }));
-    if (!r.audioContent) return J(req, { error: "Google: " + ((r.error && r.error.message) || "немає звуку") }, 502);
+    const part = r && r.candidates && r.candidates[0] && r.candidates[0].content && (r.candidates[0].content.parts || []).find(p => p.inlineData && p.inlineData.data);
+    if (!part) return J(req, { error: "Gemini: " + ((r.error && r.error.message) || "немає звуку") }, 502);
     await env.DB.put(month, String(used + text.length), { expirationTtl: 60 * 60 * 24 * 70 });
-    const bin = Uint8Array.from(atob(r.audioContent), c => c.charCodeAt(0));
-    await env.DB.put(key, bin.buffer);
-    return new Response(bin, { headers: audioHeaders });
+    const pcm = Uint8Array.from(atob(part.inlineData.data), c => c.charCodeAt(0));
+    const rate = +((/rate=(\d+)/.exec(part.inlineData.mimeType || "") || [])[1] || 24000);
+    const wav = new Uint8Array(44 + pcm.length), dv = new DataView(wav.buffer), str = (o, t) => { for (let q = 0; q < t.length; q++) wav[o + q] = t.charCodeAt(q); };
+    str(0, "RIFF"); dv.setUint32(4, 36 + pcm.length, true); str(8, "WAVE"); str(12, "fmt "); dv.setUint32(16, 16, true); dv.setUint16(20, 1, true); dv.setUint16(22, 1, true);
+    dv.setUint32(24, rate, true); dv.setUint32(28, rate * 2, true); dv.setUint16(32, 2, true); dv.setUint16(34, 16, true); str(36, "data"); dv.setUint32(40, pcm.length, true);
+    wav.set(pcm, 44);
+    await env.DB.put(key, wav.buffer);
+    return new Response(wav, { headers: audioHeaders });
   }
 
   // чи задано PIN для дитини
