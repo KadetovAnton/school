@@ -145,6 +145,7 @@
     if (o.diag && (!into.diag || (o.diag.d || "") > (into.diag.d || ""))) into.diag = o.diag;
     into.diagRun = obj(into.diagRun); for (k in obj(o.diagRun)) if (!into.diagRun[k] || (o.diagRun[k].u || 0) > (into.diagRun[k].u || 0)) into.diagRun[k] = o.diagRun[k];
     into.diagS = obj(into.diagS); for (k in obj(o.diagS)) if (!into.diagS[k] || (o.diagS[k].t || 0) > (into.diagS[k].t || 0)) into.diagS[k] = o.diagS[k];
+    into.checks = obj(into.checks); for (k in obj(o.checks)) { var cA = into.checks[k] = obj(into.checks[k]), cB = obj(o.checks[k]); for (var n in cB) if (!cA[n] || (cB[n].t || 0) > (cA[n].t || 0)) cA[n] = cB[n]; }
     if (o.reward && (!into.reward || !into.reward.text)) into.reward = o.reward;
     if (o.dino) {
       a = obj(into.dino); b = o.dino;
