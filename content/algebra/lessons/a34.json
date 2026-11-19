@@ -1,0 +1,31 @@
+{
+ "id": "a34",
+ "title": "§30. Задачі за допомогою систем",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.sword"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.sword": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🧩",
+   "h": "План",
+   "html": "<p>1) x і y — дві невідомі. 2) Два рівняння з умови. 3) Розв'яжи систему. 4) Відповідай на питання задачі.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">Сума 50, різниця 12: x + y = 50, x − y = 12 → x = 31, y = 19</div>"
+  }
+ ]
+}

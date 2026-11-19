@@ -258,6 +258,8 @@
   /* підстановка у вираз для підказок: [[коеф, значення]] → «3 · (−2) − (−4) + 5», без «1 ·» */
   function substD(parts) {
     var s = "";
+    parts = parts.filter(function (t) { return !((t[1] === null && t[0] === 0) || t[1] === 0); });
+    if (!parts.length) return "0";
     parts.forEach(function (t, i) {
       var c = t[0], v = t[1], body, neg = c < 0, ac = Math.abs(c);
       if (v === null) body = String(ac); else body = (ac === 1 ? "" : ac + " " + X + " ") + pn(v);
@@ -928,5 +930,343 @@
       ["Згрупуй члени з «" + A + "» і без нього.", "З кожної групи винеси спільний множник — у дужках має вийти однаковий вираз."],
       "(" + polyD([[ka, A + P], [ka * s, A + Q]]) + ") + (" + polyD([[r, P], [r * s, Q]]) + ") = " + aD + f1 + " " + rD + f1 + " = <b>" + right + "</b>.",
       { err: g.err, chk: { src: polyJ(t.map(function (x) { return [x[0], x[1].length === 2 ? x[1].charAt(0) + "*" + x[1].charAt(1) : x[1]]; })), vars: [A, P, Q] } });
+  };
+  /* =================== Розділ 2: формули скороченого множення (§16–21) =================== */
+  /* член c·u, u ∈ {"x","y","a","b",""}; квадрат (c·u)² = c²·u² */
+  function sq(u) { return u ? u + "²" : ""; }
+  function cub(u) { return u ? u + "³" : ""; }
+  function mul2(u, v) { return u && v ? (u < v ? u + v : v + u) : u || v; }
+  function tD(c, u) { return polyD([[c, u]]); }
+  function tJ(u) { return u ? "*" + u.split("").map(function (ch) { return ch === "²" ? "**2" : ch === "³" ? "**3" : "*" + ch; }).join("").replace(/^\*/, "").replace(/\*\*\*/g, "**") : ""; }
+  function pJ(terms) { return terms.map(function (t) { var v = t[1].replace(/([a-z])²/g, "$1*$1").replace(/([a-z])³/g, "$1*$1*$1").replace(/([a-z])(?=[a-z])/g, "$1*"); return "(" + t[0] + ")" + (v ? "*" + v : ""); }).join("+") || "0"; }
+  function pair2() { // A = pa·U, B = pb·V
+    var U = pick(["x", "a", "y"]), V = Math.random() < 0.5 ? "" : (U === "y" ? "x" : pick(["y", "b"])), pa = pick([1, 1, 2, 3]), pb = R(1, 7);
+    if (!V && pb === 1) pb = R(2, 7);
+    return { U: U, V: V, pa: pa, pb: pb, A: tD(pa, U), B: tD(pb, V) };
+  }
+  G.fSq = function () {
+    var q = pair2(), s1 = pick([1, -1]), mid = 2 * s1 * q.pa * q.pb, UV = mul2(q.U, q.V);
+    var src = "(" + q.A + (s1 > 0 ? " + " : " " + M + " ") + q.B + ")²", srcJ = "(" + q.pa + "*" + q.U + (s1 > 0 ? "+" : "-") + q.pb + (q.V ? "*" + q.V : "") + ")**2";
+    var right = polyD([[q.pa * q.pa, sq(q.U)], [mid, UV], [q.pb * q.pb, sq(q.V)]]);
+    var list = [[polyD([[q.pa * q.pa, sq(q.U)], [q.pb * q.pb, sq(q.V)]]), "Загубився подвоєний добуток 2 " + X + " " + par(q.A) + " " + X + " " + q.B + ". (a " + (s1 > 0 ? "+" : M) + " b)² ≠ a² + b²!"],
+      [polyD([[q.pa * q.pa, sq(q.U)], [mid / 2, UV], [q.pb * q.pb, sq(q.V)]]), "Середній член — <b>подвоєний</b> добуток: 2 " + X + " " + q.A + " " + X + " " + q.B + " = " + tD(Math.abs(mid), UV) + "."],
+      [polyD([[q.pa * q.pa, sq(q.U)], [-mid, UV], [q.pb * q.pb, sq(q.V)]]), "Знак середнього члена — як у дужках: (a " + (s1 > 0 ? "+" : M) + " b)² = a² " + (s1 > 0 ? "+" : M) + " 2ab + b²."]];
+    if (q.pa > 1) list.unshift([polyD([[q.pa, sq(q.U)], [mid, UV], [q.pb * q.pb, sq(q.V)]]), "У квадрат підносимо і коефіцієнт: (" + q.A + ")² = " + tD(q.pa * q.pa, sq(q.U)) + ", а не " + tD(q.pa, sq(q.U)) + "."]);
+    var g = opts(right, list);
+    return choice("Піднеси до квадрата", src + " = ___", right, g.o,
+      ["Формула: (a " + (s1 > 0 ? "+" : M) + " b)² = a² " + (s1 > 0 ? "+" : M) + " 2ab + b². Тут a = " + q.A + ", b = " + q.B + ".", "a² = " + tD(q.pa * q.pa, sq(q.U)) + "; 2ab = " + tD(Math.abs(mid), UV) + "; b² = " + tD(q.pb * q.pb, sq(q.V)) + "."],
+      src + " = (" + q.A + ")² " + (s1 > 0 ? "+" : M) + " 2 " + X + " " + par(q.A) + " " + X + " " + q.B + " + " + q.B + "² = <b>" + right + "</b>.",
+      { err: g.err, chk: { src: srcJ, vars: ["a", "b", "x", "y"] } });
+  };
+  G.fSqCalc = function () {
+    var base = pick([10, 20, 30, 40, 50, 60, 70, 80, 90, 100]), d = pick([1, 2, 1, -1, -2, 3]), n = base + d;
+    var r = n * n;
+    return num(n + "² = ___", r,
+      ["Запиши " + n + " = " + base + (d < 0 ? " " + M + " " + (-d) : " + " + d) + " і скористайся формулою квадрата " + (d < 0 ? "різниці" : "суми") + ".", "(" + base + (d < 0 ? " " + M + " " : " + ") + Math.abs(d) + ")² = " + base * base + (d < 0 ? " " + M + " " : " + ") + 2 * base * Math.abs(d) + " + " + d * d + "."],
+      n + "² = (" + base + (d < 0 ? " " + M + " " : " + ") + Math.abs(d) + ")² = " + base * base + (d < 0 ? " " + M + " " : " + ") + 2 * base * Math.abs(d) + " + " + d * d + " = <b>" + r + "</b>.",
+      { task: "Обчисли за формулою", err: errs([[base * base + d * d, "Не загуби подвоєний добуток 2 " + X + " " + base + " " + X + " " + Math.abs(d) + " = " + 2 * base * Math.abs(d) + "."]], r), chk: { v: n + "*" + n } });
+  };
+  G.fSqFac = function () {
+    var q = pair2(), s1 = pick([1, -1]), mid = 2 * s1 * q.pa * q.pb, UV = mul2(q.U, q.V);
+    var src = polyD([[q.pa * q.pa, sq(q.U)], [mid, UV], [q.pb * q.pb, sq(q.V)]]), srcJ = pJ([[q.pa * q.pa, sq(q.U)], [mid, UV], [q.pb * q.pb, sq(q.V)]]);
+    var right = "(" + q.A + (s1 > 0 ? " + " : " " + M + " ") + q.B + ")²";
+    var g = opts(right, [["(" + q.A + (s1 > 0 ? " " + M + " " : " + ") + q.B + ")²", "Знак у дужках — як у середнього члена: " + tD(mid, UV) + "."],
+      ["(" + q.A + (s1 > 0 ? " + " : " " + M + " ") + tD(q.pb * q.pb, sq(q.V)) + ")²", "У дужках — не " + tD(q.pb * q.pb, sq(q.V)) + ", а число (вираз), квадрат якого дорівнює " + tD(q.pb * q.pb, sq(q.V)) + ": це " + q.B + "."],
+      ["(" + q.A + " " + M + " " + q.B + ")(" + q.A + " + " + q.B + ")", "Це різниця квадратів, вона дає " + q.A + "² " + M + " " + q.B + "² без середнього члена. Тут середній член є — це квадрат двочлена."]]);
+    return choice("Подай у вигляді квадрата двочлена", src + " = ___", right, g.o,
+      ["Шукай a² і b² серед крайніх членів: " + tD(q.pa * q.pa, sq(q.U)) + " = (" + q.A + ")², " + tD(q.pb * q.pb, sq(q.V)) + " = (" + q.B + ")².", "Перевір середній член: 2 " + X + " " + q.A + " " + X + " " + q.B + " = " + tD(Math.abs(mid), UV) + ". Знак " + (s1 > 0 ? "«+»" : "«" + M + "»") + " → (a " + (s1 > 0 ? "+" : M) + " b)²."],
+      src + " = (" + q.A + ")² " + (s1 > 0 ? "+" : M) + " 2 " + X + " " + par(q.A) + " " + X + " " + q.B + " + (" + q.B + ")² = <b>" + right + "</b>.",
+      { err: g.err, chk: { src: srcJ, vars: ["a", "b", "x", "y"] } });
+  };
+  G.fSqMiss = function () {
+    var pa = pick([1, 1, 2, 3]), pb = R(1, 9), s1 = pick([1, -1]), U = "x", which = Math.random() < 0.6 ? "mid" : "last";
+    if (pb === 1 && pa === 1) pb = 4;
+    var mid = 2 * s1 * pa * pb, A = tD(pa, U);
+    var p = which === "mid" ? tD(pa * pa, "x²") + (s1 > 0 ? " + " : " " + M + " ") + "___x + " + pb * pb + " = (" + A + (s1 > 0 ? " + " : " " + M + " ") + pb + ")²"
+                            : tD(pa * pa, "x²") + tailT(mid, "x") + " + ___ = (" + A + (s1 > 0 ? " + " : " " + M + " ") + pb + ")²";
+    var r = which === "mid" ? Math.abs(mid) : pb * pb;
+    return num(p, r,
+      ["(a " + (s1 > 0 ? "+" : M) + " b)² = a² " + (s1 > 0 ? "+" : M) + " 2ab + b², a = " + A + ", b = " + pb + ".", which === "mid" ? "Пропущено коефіцієнт подвоєного добутку: 2 " + X + " " + pa + " " + X + " " + pb + "." : "Пропущено b² = " + pb + "²."],
+      which === "mid" ? "2 " + X + " " + A + " " + X + " " + pb + " = " + tD(Math.abs(mid), "x") + ", тож пропущено <b>" + r + "</b>." : "b² = " + pb + "² = <b>" + r + "</b>.",
+      { task: "Встав пропущене число", err: errs(which === "mid" ? [[pa * pb, "Середній член — <b>подвоєний</b> добуток: 2 " + X + " " + pa + " " + X + " " + pb + " = " + 2 * pa * pb + "."]] : [[2 * pb, "b² = " + pb + " " + X + " " + pb + ", а не " + pb + " " + X + " 2."]], r), chk: { v: String(r) } });
+  };
+  G.fDsum = function () {
+    var q = pair2(), sw = Math.random() < 0.5;
+    var src = sw ? "(" + q.A + " + " + q.B + ")(" + q.A + " " + M + " " + q.B + ")" : "(" + q.A + " " + M + " " + q.B + ")(" + q.A + " + " + q.B + ")";
+    var srcJ = "(" + q.pa + "*" + q.U + "-" + q.pb + (q.V ? "*" + q.V : "") + ")*(" + q.pa + "*" + q.U + "+" + q.pb + (q.V ? "*" + q.V : "") + ")";
+    var right = polyD([[q.pa * q.pa, sq(q.U)], [-q.pb * q.pb, sq(q.V)]]), UV = mul2(q.U, q.V);
+    var list = [[polyD([[q.pa * q.pa, sq(q.U)], [q.pb * q.pb, sq(q.V)]]), "(a − b)(a + b) = a² <b>−</b> b²: між квадратами мінус."],
+      [polyD([[q.pa * q.pa, sq(q.U)], [-2 * q.pa * q.pb, UV], [-q.pb * q.pb, sq(q.V)]]), "Середні добутки " + M + "ab і +ab знищуються — середнього члена немає."],
+      [polyD([[q.pa * q.pa, sq(q.U)], [-q.pb, q.V ? q.V + "²" : ""]]), "У квадрат підносимо і " + q.B + ": (" + q.B + ")² = " + tD(q.pb * q.pb, sq(q.V)) + "."]];
+    if (q.pa > 1) list.unshift([polyD([[q.pa, sq(q.U)], [-q.pb * q.pb, sq(q.V)]]), "(" + q.A + ")² = " + tD(q.pa * q.pa, sq(q.U)) + " — коефіцієнт теж у квадрат."]);
+    var g = opts(right, list);
+    return choice("Виконай множення", src + " = ___", right, g.o,
+      ["Це різниця двох виразів на їхню суму: (a − b)(a + b) = a² − b².", "a = " + q.A + ", b = " + q.B + "."],
+      src + " = (" + q.A + ")² " + M + " (" + q.B + ")² = <b>" + right + "</b>.",
+      { err: g.err, chk: { src: srcJ, vars: ["a", "b", "x", "y"] } });
+  };
+  G.fDsumCalc = function () {
+    var base = pick([20, 30, 40, 50, 60, 70, 80, 100]), d = R(1, 4), a = base + d, b = base - d;
+    return num(a + " " + X + " " + b + " = ___", a * b,
+      ["Помітив? " + a + " = " + base + " + " + d + ", " + b + " = " + base + " " + M + " " + d + ".", "(" + base + " + " + d + ")(" + base + " " + M + " " + d + ") = " + base + "² " + M + " " + d + "²."],
+      a + " " + X + " " + b + " = " + base + "² " + M + " " + d + "² = " + base * base + " " + M + " " + d * d + " = <b>" + a * b + "</b>.",
+      { task: "Обчисли зручно", err: errs([[base * base + d * d, "(a + b)(a − b) = a² <b>−</b> b²."]], a * b), chk: { v: a + "*" + b } });
+  };
+  G.fDsqFac = function () {
+    if (Math.random() < 0.35) { // x² − 49 = 0 або 67² − 33²
+      if (Math.random() < 0.5) { var n = R(2, 12), k = pick([1, 1, 4, 9]), rt = n; var eq = (k === 1 ? "x²" : k + "x²") + " " + M + " " + k * n * n + " = 0";
+        return num(eq + "\nдодатний корінь: x = ___", rt, ["Розклади ліву частину: " + (k === 1 ? "x² " + M + " " + n * n + " = (x " + M + " " + n + ")(x + " + n + ")" : "спершу поділи на " + k + ": x² " + M + " " + n * n + " = 0") + ".", "Добуток дорівнює нулю, коли один із множників — нуль: x = " + n + " або x = " + M + n + "."],
+          eq + " → (x " + M + " " + n + ")(x + " + n + ") = 0 → x = <b>" + n + "</b> або x = " + M + n + ".", { task: "Розв'яжи рівняння", err: errs([[sn(-n), "Це теж корінь, але питають додатний."], [n * n, "x² = " + n * n + ", тож x = " + n + " (" + n + " " + X + " " + n + " = " + n * n + ")."]], rt), chk: { v: String(n) } }); }
+      var a = R(51, 99), b = 100 - a; if (a === b) a++, b--;
+      var plus = Math.random() < 0.5, B = plus ? 100 - a : a - pick([10, 20, 30]);
+      var r = a * a - B * B;
+      return num(a + "² " + M + " " + B + "² = ___", r, ["Різниця квадратів: a² − b² = (a − b)(a + b).", "(" + a + " " + M + " " + B + ")(" + a + " + " + B + ") = " + (a - B) + " " + X + " " + (a + B) + "."],
+        a + "² " + M + " " + B + "² = (" + a + " " + M + " " + B + ")(" + a + " + " + B + ") = " + (a - B) + " " + X + " " + (a + B) + " = <b>" + r + "</b>.", { task: "Обчисли зручно", err: errs([[(a - B) * (a - B), "a² − b² ≠ (a − b)². Різниця квадратів = (a − b)(a + b)."]], r), chk: { v: a + "**2-" + B + "**2" } });
+    }
+    var q = pair2();
+    var src = polyD([[q.pa * q.pa, sq(q.U)], [-q.pb * q.pb, sq(q.V)]]), srcJ = pJ([[q.pa * q.pa, sq(q.U)], [-q.pb * q.pb, sq(q.V)]]);
+    var right = "(" + q.A + " " + M + " " + q.B + ")(" + q.A + " + " + q.B + ")";
+    var g = opts(right, [["(" + q.A + " " + M + " " + q.B + ")²", "(a − b)² = a² − 2ab + b² — тут з'явився б середній член. Різниця квадратів = (a − b)(a + b)."],
+      ["(" + tD(q.pa * q.pa, sq(q.U)) + " " + M + " " + q.B + ")(" + tD(q.pa * q.pa, sq(q.U)) + " + " + q.B + ")", "У дужках — не " + tD(q.pa * q.pa, sq(q.U)) + ", а вираз, квадрат якого дорівнює " + tD(q.pa * q.pa, sq(q.U)) + ": " + q.A + "."],
+      ["(" + q.A + " " + M + " " + tD(q.pb * q.pb, sq(q.V)) + ")(" + q.A + " + " + tD(q.pb * q.pb, sq(q.V)) + ")", "У дужках — не " + tD(q.pb * q.pb, sq(q.V)) + ", а " + q.B + ", бо (" + q.B + ")² = " + tD(q.pb * q.pb, sq(q.V)) + "."]]);
+    if (g.o.length < 3) return G.fDsqFac();
+    return choice("Розклади на множники", src + " = ___", right, g.o,
+      ["Це різниця квадратів: a² − b² = (a − b)(a + b).", tD(q.pa * q.pa, sq(q.U)) + " = (" + q.A + ")², " + tD(q.pb * q.pb, sq(q.V)) + " = (" + q.B + ")²."],
+      src + " = (" + q.A + ")² " + M + " (" + q.B + ")² = <b>" + right + "</b>.",
+      { err: g.err, chk: { src: srcJ, vars: ["a", "b", "x", "y"] } });
+  };
+  G.fCubes = function () {
+    var U = pick(["x", "a", "y"]), pa = pick([1, 1, 1, 2]), pb = R(1, 4), plus = Math.random() < 0.5;
+    if (pa === 1 && pb === 1) pb = 2;
+    var A = tD(pa, U), B = String(pb), c3 = pa * pa * pa, b3 = pb * pb * pb;
+    var src = tD(c3, cub(U)) + (plus ? " + " : " " + M + " ") + b3, srcJ = c3 + "*" + U + "**3" + (plus ? "+" : "-") + b3;
+    var sq2 = tD(pa * pa, sq(U)), ab = pa * pb;
+    var right = "(" + A + (plus ? " + " : " " + M + " ") + B + ")(" + sq2 + (plus ? " " + M + " " : " + ") + tD(ab, U) + " + " + pb * pb + ")";
+    var g = opts(right, [["(" + A + (plus ? " + " : " " + M + " ") + B + ")(" + sq2 + (plus ? " + " : " " + M + " ") + tD(ab, U) + " + " + pb * pb + ")", "У другій дужці знак середнього члена <b>протилежний</b>: a³ " + (plus ? "+" : M) + " b³ = (a " + (plus ? "+" : M) + " b)(a² " + (plus ? M : "+") + " ab + b²)."],
+      ["(" + A + (plus ? " " + M + " " : " + ") + B + ")(" + sq2 + (plus ? " " + M + " " : " + ") + tD(ab, U) + " + " + pb * pb + ")", "Знак у першій дужці — як між кубами: " + (plus ? "сума" : "різниця") + " кубів → (a " + (plus ? "+" : M) + " b)."],
+      ["(" + A + (plus ? " + " : " " + M + " ") + B + ")(" + sq2 + (plus ? " " + M + " " : " + ") + tD(2 * ab, U) + " + " + pb * pb + ")", "У другій дужці — <b>неповний</b> квадрат: середній член ab, а не 2ab."]]);
+    return choice("Розклади на множники", src + " = ___", right, g.o,
+      ["a³ " + (plus ? "+" : M) + " b³ = (a " + (plus ? "+" : M) + " b)(a² " + (plus ? M : "+") + " ab + b²).", "a = " + A + " (бо (" + A + ")³ = " + tD(c3, cub(U)) + "), b = " + B + " (бо " + B + "³ = " + b3 + ")."],
+      src + " = (" + A + ")³ " + (plus ? "+" : M) + " " + B + "³ = <b>" + right + "</b>.",
+      { err: g.err, chk: { src: srcJ, vars: [U] } });
+  };
+  G.fMulti = function () {
+    var k = R(2, 5), a = R(1, 6), t = R(1, 3), src, srcJ, right, list, h, e;
+    if (t === 1) { // kx³ − ka²x = kx(x − a)(x + a)
+      src = tD(k, "x³") + " " + M + " " + tD(k * a * a, "x"); srcJ = k + "*x**3-" + k * a * a + "*x";
+      right = tD(k, "x") + "(x " + M + " " + a + ")(x + " + a + ")";
+      list = [[tD(k, "x") + "(" + polyD([[1, "x²"], [-a * a, ""]]) + ")", "Тотожно правильно, але <b>не до кінця</b>: x² " + M + " " + a * a + " ще розкладається як різниця квадратів."],
+        [tD(k, "x") + "(x " + M + " " + a + ")²", "x² " + M + " " + a * a + " — різниця квадратів: (x − " + a + ")(x + " + a + "), а не квадрат різниці."],
+        [tD(k, "x") + "(x " + M + " " + a * a + ")(x + " + a * a + ")", "x² " + M + " " + a * a + " = (x " + M + " " + a + ")(x + " + a + "), бо " + a + "² = " + a * a + "."]];
+      h = ["Спершу винеси спільний множник " + tD(k, "x") + ".", "У дужках лишиться x² " + M + " " + a * a + " — різниця квадратів."];
+      e = src + " = " + tD(k, "x") + "(x² " + M + " " + a * a + ") = <b>" + right + "</b>."; }
+    else if (t === 2) { // kx² ∓ 2kax + ka² = k(x ∓ a)²
+      var sg = pick([1, -1]); src = polyD([[k, "x²"], [-2 * sg * k * a, "x"], [k * a * a, ""]]); srcJ = pJ([[k, "x²"], [-2 * sg * k * a, "x"], [k * a * a, ""]]);
+      right = k + "(x " + (sg > 0 ? M : "+") + " " + a + ")²";
+      list = [[k + "(" + polyD([[1, "x²"], [-2 * sg * a, "x"], [a * a, ""]]) + ")", "Тотожно правильно, але <b>не до кінця</b>: у дужках — квадрат двочлена."],
+        [k + "(x " + (sg > 0 ? "+" : M) + " " + a + ")²", "Знак у дужках — як у середнього члена."],
+        [k + "(x " + M + " " + a + ")(x + " + a + ")", "Тут є середній член — це квадрат двочлена, а не різниця квадратів."]];
+      h = ["Спершу винеси спільний множник " + k + ".", "У дужках — x² " + (sg > 0 ? M : "+") + " " + 2 * a + "x + " + a * a + " = (x " + (sg > 0 ? M : "+") + " " + a + ")²."];
+      e = src + " = " + k + "(" + polyD([[1, "x²"], [-2 * sg * a, "x"], [a * a, ""]]) + ") = <b>" + right + "</b>."; }
+    else { // x³ − ax² − b²x + ab² = (x − a)(x − b)(x + b)
+      var b = R(1, 5); if (b === a) b = a + 1;
+      src = polyD([[1, "x³"], [-a, "x²"], [-b * b, "x"], [a * b * b, ""]]); srcJ = pJ([[1, "x³"], [-a, "x²"], [-b * b, "x"], [a * b * b, ""]]);
+      right = "(x " + M + " " + a + ")(x " + M + " " + b + ")(x + " + b + ")";
+      list = [["(x " + M + " " + a + ")(" + polyD([[1, "x²"], [-b * b, ""]]) + ")", "Тотожно правильно, але <b>не до кінця</b>: x² " + M + " " + b * b + " — різниця квадратів."],
+        ["(x + " + a + ")(x " + M + " " + b + ")(x + " + b + ")", "Перевір знак: " + polyD([[-b * b, "x"], [a * b * b, ""]]) + " = " + M + b * b + "(x " + M + " " + a + ")."],
+        ["(x " + M + " " + a + ")(x " + M + " " + b + ")²", "x² " + M + " " + b * b + " = (x − " + b + ")(x + " + b + "), а не (x − " + b + ")²."]];
+      h = ["Згрупуй: (x³ " + M + " " + tD(a, "x²") + ") + (" + polyD([[-b * b, "x"], [a * b * b, ""]]) + ").", "x²(x " + M + " " + a + ") " + M + " " + b * b + "(x " + M + " " + a + ") = (x " + M + " " + a + ")(x² " + M + " " + b * b + "), а далі — різниця квадратів."];
+      e = src + " = x²(x " + M + " " + a + ") " + M + " " + b * b + "(x " + M + " " + a + ") = (x " + M + " " + a + ")(x² " + M + " " + b * b + ") = <b>" + right + "</b>."; }
+    var g = opts(right, list);
+    return choice("Розклади на множники", src + " = ___", right, g.o, h, e, { err: g.err, chk: { src: srcJ, vars: ["x"], incomplete: list[0][0] } });
+  };
+
+  /* =================== Розділ 3: функції (§22–24) =================== */
+  function linD(k, b, y) { return (y || "y") + " = " + (k === 0 ? sn(b) : polyD([[k, "x"], [b, ""]])); }
+  function kD(k) { return Number.isInteger(k) ? k : fr(Math.round(k * 2), 2); }
+  /* SVG-графік прямої y = kx + b на клітинках −6…6 */
+  function graphSVG(k, b, mark) {
+    var S = 18, N = 6, W = S * (2 * N) + 1, o = '<svg viewBox="0 0 ' + W + ' ' + W + '" width="234" height="234" style="background:#fff;border-radius:10px;max-width:100%">';
+    for (var i = 0; i <= 2 * N; i++) { var c = i * S + 0.5; o += '<line x1="' + c + '" y1="0" x2="' + c + '" y2="' + W + '" stroke="#e6e1d6"/><line x1="0" y1="' + c + '" x2="' + W + '" y2="' + c + '" stroke="#e6e1d6"/>'; }
+    var C = N * S + 0.5; o += '<line x1="0" y1="' + C + '" x2="' + W + '" y2="' + C + '" stroke="#555" stroke-width="1.5"/><line x1="' + C + '" y1="0" x2="' + C + '" y2="' + W + '" stroke="#555" stroke-width="1.5"/>';
+    o += '<text x="' + (W - 9) + '" y="' + (C - 4) + '" font-size="11" fill="#555">x</text><text x="' + (C + 4) + '" y="10" font-size="11" fill="#555">y</text><text x="' + (C + S - 3) + '" y="' + (C + 12) + '" font-size="10" fill="#555">1</text><text x="' + (C - 9) + '" y="' + (C - S + 4) + '" font-size="10" fill="#555">1</text>';
+    var X1 = -N, X2 = N, P = function (x, y) { return [(x + N) * S + 0.5, (N - y) * S + 0.5]; };
+    var a = P(X1, k * X1 + b), z = P(X2, k * X2 + b);
+    o += '<line x1="' + a[0] + '" y1="' + a[1] + '" x2="' + z[0] + '" y2="' + z[1] + '" stroke="#4B44E6" stroke-width="2.5"/>';
+    if (mark) { var m = P(mark[0], mark[1]); o += '<circle cx="' + m[0] + '" cy="' + m[1] + '" r="3.5" fill="#4B44E6"/>'; }
+    return o + '</svg>';
+  }
+  G.fnVal = function () {
+    var t = R(1, 3);
+    if (t === 1) { var k = RNZ(-5, 5), b = R(-9, 9), x = RNZ(-6, 6), f = linD(k, b, "f(x)"), r = k * x + b;
+      return num(f + "\nf(" + sn(x) + ") = ___", sn(r), ["Підстав x = " + sn(x) + " у формулу.", substD([[k, x], [b, null]]) + " = ?"], "f(" + sn(x) + ") = " + substD([[k, x], [b, null]]) + " = <b>" + sn(r) + "</b>.",
+        { task: "Знайди значення функції", err: errs([[sn(-r), "Перевір знаки: від'ємне x бери в дужки."]], sn(r)), chk: { v: k + "*(" + x + ")+(" + b + ")" } }); }
+    if (t === 2) { var c = R(-9, 9), x2 = RNZ(-5, 5), r2 = x2 * x2 + c;
+      return num("f(x) = x²" + tailT(c, "") + "\nf(" + sn(x2) + ") = ___", sn(r2), ["Підстав x = " + sn(x2) + ": " + pn(x2) + "²" + tailT(c, "") + ".", pn(x2) + "² = " + x2 * x2 + " — квадрат завжди невід'ємний."], "f(" + sn(x2) + ") = " + pn(x2) + "²" + tailT(c, "") + " = " + x2 * x2 + tailT(c, "") + " = <b>" + sn(r2) + "</b>.",
+        { task: "Знайди значення функції", err: errs([[sn(-x2 * x2 + c), pn(x2) + "² = " + x2 * x2 + ", а не " + sn(-x2 * x2) + "."]], sn(r2)), chk: { v: "(" + x2 + ")**2+(" + c + ")" } }); }
+    var k3 = RNZ(-6, 6), b3 = R(-12, 12), x3 = RNZ(-8, 8), y3 = k3 * x3 + b3;
+    if (Math.abs(k3) === 1) k3 = k3 * 2, y3 = k3 * x3 + b3;
+    return num(linD(k3, b3) + "\nПри якому x значення функції дорівнює " + sn(y3) + "?  x = ___", sn(x3), ["Підстав y = " + sn(y3) + " і розв'яжи рівняння: " + polyD([[k3, "x"], [b3, ""]]) + " = " + sn(y3) + ".", polyD([[k3, "x"]]) + " = " + sn(y3 - b3) + "."],
+      polyD([[k3, "x"], [b3, ""]]) + " = " + sn(y3) + " → " + tail(k3, y3 - b3, sn(x3)) + ".", { task: "Знайди аргумент", long: true, err: errs([[sn(k3 * y3 + b3), "Це значення функції при x = " + sn(y3) + ". А тут відоме саме значення y — треба знайти x."]], sn(x3)), chk: { eq: k3 + "*x+(" + b3 + ")", r: String(y3) } });
+  };
+  G.fnDom = function () {
+    var a = RNZ(-9, 9), c = R(1, 4), k = RNZ(-9, 9), t = Math.random() < 0.5;
+    var den = t ? polyD([[1, "x"], [-a, ""]]) : polyD([[c, "x"], [-c * a, ""]]), num1 = t ? sn(k) : "x + " + R(1, 9);
+    return num("y = " + num1 + " / (" + den + ")\nне визначена при x = ___", sn(a),
+      ["На нуль ділити не можна: функція не визначена там, де знаменник дорівнює 0.", den + " = 0 → x = ?"],
+      den + " = 0 → x = <b>" + sn(a) + "</b>. Область визначення — усі числа, крім " + sn(a) + ".",
+      { task: "Знайди, при якому x функція не визначена", long: true, err: errs([[sn(-a), "Розв'яжи " + den + " = 0 уважно: переносимо число зі зміною знака."]], sn(a)), chk: { eq: t ? "x-(" + a + ")" : c + "*x-(" + c * a + ")", r: "0" } });
+  };
+  G.fnGraph = function () {
+    var k = pick([1, -1, 2, -2, 0.5, -0.5]), b = R(-3, 3), xs = [], x;
+    for (x = -5; x <= 5; x++) { var y = k * x + b; if (Number.isInteger(y) && Math.abs(y) <= 5 && x !== 0) xs.push(x); }
+    if (!xs.length) return G.fnGraph();
+    x = pick(xs); var y0 = k * x + b, ask = Math.random() < 0.7 ? "y" : "x";
+    var p = ask === "y" ? "За графіком знайди y, якщо x = " + sn(x) + ".\ny = ___" : "За графіком знайди x, при якому y = " + sn(y0) + ".\nx = ___";
+    return num(p, ask === "y" ? sn(y0) : sn(x),
+      [ask === "y" ? "Знайди на осі x число " + sn(x) + ", піднімись (опустись) по клітинках до прямої." : "Знайди на осі y число " + sn(y0) + ", пройди по горизонталі до прямої.", "Від точки на прямій — до іншої осі. Скільки клітинок?"],
+      "На графіку точка (" + sn(x) + "; " + sn(y0) + "), тож " + (ask === "y" ? "y = <b>" + sn(y0) + "</b>" : "x = <b>" + sn(x) + "</b>") + ". (Це пряма " + linD(kD(k) === k ? k : k, b).replace(/0\.5/, "0,5") + ".)",
+      { task: "Графік функції", long: true, pic: graphSVG(k, b), chk: { v: String(ask === "y" ? y0 : x) } });
+  };
+  G.fnPt = function () {
+    var k = RNZ(-5, 5), b = R(-8, 8), x = RNZ(-5, 5), ok = Math.random() < 0.5, y = k * x + b + (ok ? 0 : pick([-2, -1, 1, 2]));
+    return choice("Чи належить точка A(" + sn(x) + "; " + sn(y) + ") графіку функції", linD(k, b), ok ? "Так" : "Ні", [ok ? "Ні" : "Так"],
+      ["Точка належить графіку, якщо її координати задовольняють формулу.", "Підстав x = " + sn(x) + ": y = " + substD([[k, x], [b, null]]) + ". Порівняй з " + sn(y) + "."],
+      "y(" + sn(x) + ") = " + substD([[k, x], [b, null]]) + " = " + sn(k * x + b) + (ok ? " = " + sn(y) + " — <b>так</b>, належить." : " ≠ " + sn(y) + " — <b>ні</b>, не належить."),
+      { long: true, chk: { pt: [x, y, k, b] } });
+  };
+  G.fnKB = function () {
+    var k = RNZ(-7, 7), b = RNZ(-9, 9), t = R(1, 4), f, ask = Math.random() < 0.5 ? "k" : "b";
+    if (t === 4) { f = "y = " + sn(b) + (k < 0 ? " " + M + " " + (k === -1 ? "" : -k) : " + " + (k === 1 ? "" : k)) + "x"; } else f = linD(k, b);
+    if (t === 3 && Math.random() < 0.5) { f = "y = " + (k === 1 ? "" : k === -1 ? M : sn(k)) + "x"; b = 0; ask = Math.random() < 0.5 ? "k" : "b"; }
+    var r = ask === "k" ? k : b;
+    return num(f + "\n" + ask + " = ___", sn(r),
+      ["Лінійна функція: y = kx + b. k — число біля x (кутовий коефіцієнт), b — вільний член.", "Порядок членів не важливий: y = 4 − 3x — це y = −3x + 4. Немає вільного члена — b = 0."],
+      f + " = " + polyD([[k, "x"], [b, ""]]).replace(/^0$/, "0") + ": k = " + sn(k) + ", b = " + sn(b) + ". Відповідь: <b>" + sn(r) + "</b>.",
+      { task: "Знайди коефіцієнт лінійної функції", err: errs([[sn(ask === "k" ? b : k), ask === "k" ? "Це b (вільний член). k — число біля x." : "Це k (число біля x). b — вільний член."], [sn(-r), "Знак належить коефіцієнту."]], sn(r)), chk: { v: String(r) } });
+  };
+  G.fnAxis = function () {
+    var k = RNZ(-6, 6), x0 = RNZ(-8, 8), b = -k * x0, oy = Math.random() < 0.35;
+    if (Math.abs(k) === 1) { k = 2 * k; b = -k * x0; }
+    var f = linD(k, b);
+    if (oy) return num(f + "\nграфік перетинає вісь y у точці (0; ___)", sn(b), ["На осі y абсциса x = 0.", "Підстав x = 0: y = " + sn(b) + "."], "x = 0 → y = <b>" + sn(b) + "</b> (це завжди b).",
+      { task: "Точка перетину з віссю y", long: true, err: errs([[sn(x0), "Це перетин з віссю x. З віссю y — підстав x = 0."]], sn(b)), chk: { v: String(b) } });
+    return num(f + "\nграфік перетинає вісь x у точці (___; 0)", sn(x0), ["На осі x ордината y = 0.", "Розв'яжи " + polyD([[k, "x"], [b, ""]]) + " = 0."],
+      polyD([[k, "x"], [b, ""]]) + " = 0 → " + tail(k, -b, sn(x0)) + ".", { task: "Точка перетину з віссю x", long: true, err: errs([[sn(b), "Це перетин з віссю y (x = 0). З віссю x — y = 0."], [sn(-x0), "Розв'язуючи " + polyD([[k, "x"], [b, ""]]) + " = 0, переносимо " + sn(b) + " зі зміною знака."]], sn(x0)), chk: { eq: k + "*x+(" + b + ")", r: "0" } });
+  };
+  G.fnPar = function () {
+    if (Math.random() < 0.4) { var k = RNZ(-6, 6), b = R(-9, 9), up = k > 0;
+      return choice("Функція зростає чи спадає", linD(k, b), up ? "Зростає" : "Спадає", [up ? "Спадає" : "Зростає"],
+        ["Дивись на знак k — числа біля x.", "k > 0 — зростає (графік іде вгору зліва направо), k < 0 — спадає."],
+        "k = " + sn(k) + (up ? " > 0 — функція <b>зростає</b>." : " < 0 — функція <b>спадає</b>."), { long: true, err: (function () { var o = {}; o[up ? "Спадає" : "Зростає"] = "Важить знак k (" + sn(k) + "), а не b."; return o; })(), chk: { incr: k } }); }
+    var k1 = RNZ(-5, 5), b1 = R(-8, 8), b2; do { b2 = R(-8, 8); } while (b2 === b1);
+    var right = linD(k1, b2), w = [linD(-k1, b1), linD(k1 + pick([1, 2]), b1), linD(k1 === 0 ? 1 : (k1 % 2 === 0 ? k1 / 2 : k1 * 2), b2)];
+    var err = {}; err[w[0]] = "Паралельні прямі мають <b>однакові</b> k. Тут k = " + sn(-k1) + ", а треба " + sn(k1) + "."; err[w[1]] = "Однакове b означає спільну точку на осі y, а не паралельність. Дивись на k."; err[w[2]] = "k має бути рівно " + sn(k1) + ".";
+    return choice("Який графік паралельний графіку", linD(k1, b1), right, w,
+      ["Графіки y = k₁x + b₁ і y = k₂x + b₂ паралельні, якщо k₁ = k₂ і b₁ ≠ b₂.", "Шукай пряму з k = " + sn(k1) + "."],
+      "У " + right + " k = " + sn(k1) + ", як у " + linD(k1, b1) + ", а b різні — графіки <b>паралельні</b>.", { long: true, err: err, chk: { par: [k1, b1] } });
+  };
+
+  /* =================== Розділ 4: системи (§25–30) =================== */
+  function eq2D(a, b, c) { return polyD([[a, "x"], [b, "y"]]) + " = " + sn(c); }
+  G.sPair = function () {
+    var a = RNZ(-6, 6), b = RNZ(-6, 6), x = R(-5, 5), y = R(-5, 5), ok = Math.random() < 0.5, c = a * x + b * y + (ok ? 0 : pick([-2, -1, 1, 2]));
+    return choice("Чи є пара (" + sn(x) + "; " + sn(y) + ") розв'язком рівняння", eq2D(a, b, c), ok ? "Так" : "Ні", [ok ? "Ні" : "Так"],
+      ["Пара (x; y): перше число — x, друге — y. Підстав обидва.", substD([[a, x], [b, y]]) + " = ?"],
+      substD([[a, x], [b, y]]) + " = " + sn(a * x + b * y) + (ok ? " = " + sn(c) + " — <b>так</b>." : " ≠ " + sn(c) + " — <b>ні</b>."),
+      { long: true, err: (function () { var o = {}; if (a * y + b * x === c && !ok) o["Так"] = "Перше число пари — x, друге — y. Ти, схоже, поміняла їх місцями."; return o; })(), chk: { lin: [a, b, c, x, y] } });
+  };
+  G.sExpr = function () {
+    var a = RNZ(-5, 5), x = RNZ(-6, 6), y = RNZ(-6, 6), c = a * x + y, ask = Math.random() < 0.6 ? "y" : "x";
+    var eq = polyD([[a, "x"], [1, "y"]]) + " = " + sn(c);
+    if (ask === "y") return num(eq + "\nвирази y через x і знайди y при x = " + sn(x) + ".\ny = ___", sn(y),
+      ["Вирази y: y = " + sn(c) + (a < 0 ? " + " + polyD([[-a, "x"]]) : " " + M + " " + polyD([[a, "x"]])) + ".", "Підстав x = " + sn(x) + "."],
+      "y = " + sn(c) + (a < 0 ? " + " + polyD([[-a, "x"]]) : " " + M + " " + polyD([[a, "x"]])) + " = " + sn(c) + (a * x < 0 ? " + " + (-a * x) : " " + M + " " + a * x) + " = <b>" + sn(y) + "</b>.",
+      { task: "Лінійне рівняння з двома змінними", long: true, err: errs([[sn(c + a * x), "Переносячи " + polyD([[a, "x"]]) + " вправо, змінюй знак."]], sn(y)), chk: { lin2: [a, 1, c, "x", x, "y"] } });
+    if (Math.abs(a) === 1) a = a * 2, c = a * x + y, eq = polyD([[a, "x"], [1, "y"]]) + " = " + sn(c);
+    return num(eq + "\nзнайди x, якщо y = " + sn(y) + ".\nx = ___", sn(x),
+      ["Підстав y = " + sn(y) + ": " + polyD([[a, "x"]]) + tailT(y, "") + " = " + sn(c) + ".", polyD([[a, "x"]]) + " = " + sn(c - y) + "."],
+      polyD([[a, "x"]]) + " = " + sn(c) + (y < 0 ? " + " + (-y) : " " + M + " " + y) + " = " + sn(c - y) + " → x = <b>" + sn(x) + "</b>.",
+      { task: "Лінійне рівняння з двома змінними", long: true, err: errs([[sn(-x), "Ділимо на " + sn(a) + " разом зі знаком."]], sn(x)), chk: { lin2: [a, 1, c, "y", y, "x"] } });
+  };
+  G.sCount = function () {
+    var kind = pick(["one", "none", "inf"]), k = RNZ(-4, 4), b = R(-6, 6), m = pick([2, 3, -2]);
+    var e1, e2, sys;
+    if (kind === "one") { var k2; do { k2 = RNZ(-4, 4); } while (k2 === k); e1 = linD(k, b); e2 = Math.random() < 0.5 ? linD(k2, R(-6, 6)) : eq2D(-k2 * m, m, m * R(-6, 6)); }
+    else if (kind === "none") { var b2; do { b2 = R(-6, 6); } while (b2 === b); e1 = linD(k, b); e2 = linD(k, b2); }
+    else { e1 = linD(k, b); e2 = eq2D(-m * k, m, m * b); }
+    var right = { one: "Один розв'язок", none: "Жодного розв'язку", inf: "Безліч розв'язків" }[kind];
+    var it = choice("Скільки розв'язків має система", e1 + "\n" + e2, right, ["Один розв'язок", "Жодного розв'язку", "Безліч розв'язків"],
+      ["Кожне рівняння — пряма. Розв'язок системи — спільна точка прямих. Запиши обидва як y = kx + b.", "Різні k — прямі перетинаються (1 розв'язок). Однакові k, різні b — паралельні (0). Однакові k і b — збігаються (безліч)."],
+      kind === "one" ? "Кутові коефіцієнти різні — прямі перетинаються в одній точці: <b>один розв'язок</b>." : kind === "none" ? "k однакові (" + sn(k) + "), b різні — прямі паралельні, спільних точок немає: <b>жодного розв'язку</b>." : "Друге рівняння — це перше, помножене на " + sn(m) + " (" + eq2D(-m * k, m, m * b) + " ⇔ " + e1 + "): прямі збігаються — <b>безліч розв'язків</b>.",
+      { long: true, chk: { count: [e1, e2], kind: kind } });
+    it.o = ["Один розв'язок", "Жодного розв'язку", "Безліч розв'язків"];
+    return it;
+  };
+  function sysPick(easy) { // a1x + b1y = c1, a2x + b2y = c2 з цілим розв'язком
+    var x = RNZ(-6, 6), y = RNZ(-6, 6), a1, b1, a2, b2;
+    for (;;) { a1 = RNZ(-5, 5); b1 = RNZ(-5, 5); a2 = RNZ(-5, 5); b2 = RNZ(-5, 5); if (a1 * b2 - a2 * b1 === 0) continue; if (easy === "sub" && !(Math.abs(b1) === 1 || Math.abs(a1) === 1)) continue; if (easy === "add" && !(b1 === -b2 || a1 === -a2)) continue; break; }
+    return { a1: a1, b1: b1, c1: a1 * x + b1 * y, a2: a2, b2: b2, c2: a2 * x + b2 * y, x: x, y: y };
+  }
+  G.sSysPair = function () {
+    var S = sysPick(), cands = [[S.x, S.y], [S.y, S.x], [S.x, -S.y], [-S.x, S.y], [S.x + 1, S.y], [S.x, S.y + 1]], o = [], seen = {}, sat = function (p) { return S.a1 * p[0] + S.b1 * p[1] === S.c1 && S.a2 * p[0] + S.b2 * p[1] === S.c2; };
+    cands.forEach(function (p, i) { var d = "(" + sn(p[0]) + "; " + sn(p[1]) + ")"; if (!seen[d] && (i === 0 || !sat(p)) && o.length < 4) { seen[d] = 1; o.push(d); } });
+    var right = o[0], half = o.slice(1).filter(function (d) { return true; });
+    var err = {}; o.slice(1).forEach(function (d, i) { var p = d.replace(/[()]/g, "").split("; ").map(function (v) { return +v.replace("−", "-"); }); var s1 = S.a1 * p[0] + S.b1 * p[1] === S.c1, s2 = S.a2 * p[0] + S.b2 * p[1] === S.c2; err[d] = s1 && !s2 ? "Ця пара задовольняє лише перше рівняння. Розв'язок системи — пара, що підходить до <b>обох</b>." : !s1 && s2 ? "Ця пара задовольняє лише друге рівняння, а треба обидва." : "Підстав: x — перше число пари, y — друге."; });
+    return choice("Яка пара є розв'язком системи", eq2D(S.a1, S.b1, S.c1) + "\n" + eq2D(S.a2, S.b2, S.c2), right, half,
+      ["Розв'язок системи — пара, яка задовольняє <b>обидва</b> рівняння.", "Підставляй кожну пару в обидва рівняння."],
+      "(" + sn(S.x) + "; " + sn(S.y) + "): " + substD([[S.a1, S.x], [S.b1, S.y]]) + " = " + sn(S.c1) + " ✓, " + substD([[S.a2, S.x], [S.b2, S.y]]) + " = " + sn(S.c2) + " ✓ — <b>" + right + "</b>.",
+      { long: true, err: err, chk: { sys: [S.a1, S.b1, S.c1, S.a2, S.b2, S.c2], pairs: true } });
+  };
+  function solveText(S, method) {
+    if (method === "sub") {
+      var fromFirst = Math.abs(S.b1) === 1, v = fromFirst ? "y" : "x";
+      if (fromFirst) { var ex = sn(S.b1 * S.c1) + (S.b1 * S.a1 < 0 ? " + " + polyD([[-S.b1 * S.a1, "x"]]) : " " + M + " " + polyD([[S.b1 * S.a1, "x"]]));
+        return "З першого: y = " + ex + ". Підставляємо в друге: " + polyD([[S.a2, "x"]]) + " " + (S.b2 < 0 ? M : "+") + " " + (Math.abs(S.b2) === 1 ? "" : Math.abs(S.b2)) + "(" + ex + ") = " + sn(S.c2) + " → x = " + sn(S.x) + "; y = " + sn(S.y) + "."; }
+      var ex2 = sn(S.a1 * S.c1) + (S.a1 * S.b1 < 0 ? " + " + polyD([[-S.a1 * S.b1, "y"]]) : " " + M + " " + polyD([[S.a1 * S.b1, "y"]]));
+      return "З першого: x = " + ex2 + ". Підставляємо в друге: " + (Math.abs(S.a2) === 1 ? (S.a2 < 0 ? M : "") : sn(S.a2)) + "(" + ex2 + ")" + tailT(S.b2, "y") + " = " + sn(S.c2) + " → y = " + sn(S.y) + "; x = " + sn(S.x) + ".";
+    }
+    if (S.b1 === -S.b2) return "Додаємо рівняння: y знищується → " + polyD([[S.a1 + S.a2, "x"]]) + " = " + sn(S.c1 + S.c2) + " → x = " + sn(S.x) + "; підставляємо: y = " + sn(S.y) + ".";
+    return "Додаємо рівняння: x знищується → " + polyD([[S.b1 + S.b2, "y"]]) + " = " + sn(S.c1 + S.c2) + " → y = " + sn(S.y) + "; підставляємо: x = " + sn(S.x) + ".";
+  }
+  G.sSub = function () {
+    var S = sysPick("sub"), ask = Math.random() < 0.5 ? "x" : "y", r = ask === "x" ? S.x : S.y;
+    return num(eq2D(S.a1, S.b1, S.c1) + "\n" + eq2D(S.a2, S.b2, S.c2) + "\n" + ask + " = ___", sn(r),
+      ["Вирази з першого рівняння ту змінну, при якій коефіцієнт ±1.", "Підстав цей вираз у друге рівняння — вийде рівняння з однією змінною."],
+      solveText(S, "sub") + " Відповідь: " + ask + " = <b>" + sn(r) + "</b>.",
+      { task: "Розв'яжи систему способом підстановки", long: true, err: errs([[sn(ask === "x" ? S.y : S.x), "Це значення " + (ask === "x" ? "y" : "x") + ". А питають " + ask + "."]], sn(r)), chk: { sys: [S.a1, S.b1, S.c1, S.a2, S.b2, S.c2], ask: ask } });
+  };
+  G.sAdd = function () {
+    var S = sysPick("add"), ask = Math.random() < 0.5 ? "x" : "y", r = ask === "x" ? S.x : S.y;
+    return num(eq2D(S.a1, S.b1, S.c1) + "\n" + eq2D(S.a2, S.b2, S.c2) + "\n" + ask + " = ___", sn(r),
+      ["Коефіцієнти при " + (S.b1 === -S.b2 ? "y" : "x") + " — протилежні числа. Додай рівняння почленно.", "Ця змінна знищиться, лишиться рівняння з однією змінною. Потім підстав знайдене в будь-яке рівняння."],
+      solveText(S, "add") + " Відповідь: " + ask + " = <b>" + sn(r) + "</b>.",
+      { task: "Розв'яжи систему способом додавання", long: true, err: errs([[sn(ask === "x" ? S.y : S.x), "Це значення " + (ask === "x" ? "y" : "x") + ". А питають " + ask + "."]], sn(r)), chk: { sys: [S.a1, S.b1, S.c1, S.a2, S.b2, S.c2], ask: ask } });
+  };
+  G.sWord = function () {
+    var t = R(1, 4), x, y, txt, S, ask, xd, yd, ans;
+    if (t === 1) { x = R(5, 25); y = R(4, 30); var n1 = R(2, 5), m1 = R(1, 4), n2 = R(1, 4), m2 = R(2, 5); if (n1 * m2 === n2 * m1) m2++;
+      txt = n1 + " " + pl(n1, ["зошит", "зошити", "зошитів"]) + " і " + m1 + " " + pl(m1, ["ручка", "ручки", "ручок"]) + " коштують " + (n1 * x + m1 * y) + " грн, а " + n2 + " " + pl(n2, ["зошит", "зошити", "зошитів"]) + " і " + m2 + " " + pl(m2, ["ручка", "ручки", "ручок"]) + " — " + (n2 * x + m2 * y) + " грн. Скільки коштує ";
+      S = [n1, m1, n1 * x + m1 * y, n2, m2, n2 * x + m2 * y]; ask = Math.random() < 0.5 ? "x" : "y"; txt += ask === "x" ? "зошит?" : "ручка?"; xd = "ціна зошита"; yd = "ціна ручки"; }
+    else if (t === 2) { x = R(10, 60); y = R(2, x - 1); txt = "Сума двох чисел " + (x + y) + ", а їхня різниця " + (x - y) + ". Знайди " + (Math.random() < 0.5 ? (ask = "x", "більше") : (ask = "y", "менше")) + " число."; S = [1, 1, x + y, 1, -1, x - y]; xd = "більше число"; yd = "менше число"; }
+    else if (t === 3) { x = R(5, 30); y = R(5, 30); var legs = 2 * x + 4 * y; txt = "У дворі кури й кролики. Разом " + (x + y) + " " + pl(x + y, ["голова", "голови", "голів"]) + " і " + legs + " " + pl(legs, ["нога", "ноги", "ніг"]) + ". Скільки " + (Math.random() < 0.5 ? (ask = "x", "курей") : (ask = "y", "кроликів")) + "?"; S = [1, 1, x + y, 2, 4, legs]; xd = "кури"; yd = "кролики"; }
+    else { x = R(3, 12); y = R(3, 12); var pA = pick([80, 100, 120]), pC = pick([40, 50, 60]); txt = "Продали " + (x + y) + " " + pl(x + y, ["квиток", "квитки", "квитків"]) + " на " + (pA * x + pC * y) + " грн: дорослий — по " + pA + " грн, дитячий — по " + pC + " грн. Скільки " + (Math.random() < 0.5 ? (ask = "x", "дорослих") : (ask = "y", "дитячих")) + " квитків продали?"; S = [1, 1, x + y, pA, pC, pA * x + pC * y]; xd = "дорослі квитки"; yd = "дитячі квитки"; }
+    ans = ask === "x" ? x : y;
+    return num(txt, ans,
+      ["Познач дві невідомі: x — " + xd + ", y — " + yd + ". Склади два рівняння за умовою.", "Система: " + eq2D(S[0], S[1], S[2]) + "; " + eq2D(S[3], S[4], S[5]) + ". Розв'яжи зручним способом."],
+      "x — " + xd + ", y — " + yd + ". " + eq2D(S[0], S[1], S[2]) + ", " + eq2D(S[3], S[4], S[5]) + " → x = " + x + ", y = " + y + ". Відповідь: <b>" + ans + "</b>.",
+      { task: "Розв'яжи задачу за допомогою системи", long: true, err: errs([[ask === "x" ? y : x, "Це друга невідома. Уважно: що питають у задачі?"]], ans), chk: { sys: S, ask: ask } });
+  };
+  /* §13: подільність: 7⁹ − 7⁸ ділиться на 6 */
+  G.pDiv = function () {
+    var b = pick([2, 3, 5, 6, 7, 9, 10, 11]), n = R(6, 15), plus = Math.random() < 0.35, k = plus ? b + 1 : b - 1;
+    if (k < 2) return G.pDiv();
+    var p = b + sup(n) + (plus ? " + " : " " + M + " ") + b + sup(n - 1);
+    var bad = [2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].filter(function (d) { return d !== k && (Math.pow(b, 3) * k) % d !== 0 && b % d !== 0; });
+    var w = shuffle(bad).slice(0, 3).map(String);
+    return choice("На яке з чисел ділиться значення виразу", p, String(k), w,
+      ["Винеси за дужки спільний множник — степінь з меншим показником: " + b + sup(n - 1) + ".", b + sup(n - 1) + "(" + b + (plus ? " + " : " " + M + " ") + "1) = " + b + sup(n - 1) + " " + X + " " + k + "."],
+      p + " = " + b + sup(n - 1) + "(" + b + (plus ? " + " : " " + M + " ") + "1) = " + b + sup(n - 1) + " " + X + " " + k + " — один із множників " + k + ", тож вираз ділиться на <b>" + k + "</b>.",
+      { long: true, chk: { div: [b, n, plus ? 1 : -1] } });
   };
 })();

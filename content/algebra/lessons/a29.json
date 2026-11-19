@@ -1,0 +1,40 @@
+{
+ "id": "a29",
+ "title": "§24. Лінійна функція",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fnkb",
+  "a.fnaxis",
+  "a.fnpar"
+ ],
+ "practice": {
+  "perSkill": 3
+ },
+ "test": {
+  "plan": {
+   "a.fnkb": 3,
+   "a.fnaxis": 3,
+   "a.fnpar": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📉",
+   "h": "y = kx + b",
+   "html": "<p>Графік — пряма. k — кутовий коефіцієнт, b — точка на осі y: (0; b).</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">y = 7 − 2x: k = −2, b = 7</div><p>Пряму будують за двома точками.</p>"
+  },
+  {
+   "e": "📈",
+   "h": "Властивості",
+   "html": "<table class=\"t\"><tr><td>k > 0</td><td>зростає</td></tr><tr><td>k < 0</td><td>спадає</td></tr><tr><td>k₁ = k₂, b₁ ≠ b₂</td><td>паралельні</td></tr><tr><td>перетин з Ox</td><td>kx + b = 0</td></tr></table>"
+  }
+ ]
+}

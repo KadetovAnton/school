@@ -1,0 +1,31 @@
+{
+ "id": "a26",
+ "title": "§21. Кілька способів розкладання",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fmulti"
+ ],
+ "practice": {
+  "perSkill": 7
+ },
+ "test": {
+  "plan": {
+   "a.fmulti": 7
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🛠️",
+   "h": "План",
+   "html": "<p>1) Спільний множник за дужки. 2) Формули. 3) Групування. Розкладай <b>до кінця</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3x³ − 12x = 3x(x² − 4) = 3x(x − 2)(x + 2)</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2x² − 12x + 18 = 2(x² − 6x + 9) = 2(x − 3)²</div>"
+  }
+ ]
+}

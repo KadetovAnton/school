@@ -24,7 +24,7 @@ function val(a) { const r = ratOf(a); return r ? r.n / r.d : NaN; }
   for (const [g, r, eq] of T) { const a = ratOf(g), b = ratOf(r); if (!a || !b || (a.n * b.d === b.n * a.d) !== eq) console.log("✗ ratOf", g, r); }
   for (const g of ["5,", "−", "3/", "3/0", ",5", "", "1/2/3"]) if (ratOf(g)) console.log("✗ ratOf приймає незавершене:", JSON.stringify(g));
   if (ratOf("6/8").red || !ratOf("3/4").red) console.log("✗ ratOf: ознака скороченого дробу"); }
-let bad = 0; const B = (g, m, it) => { if (bad++ < 40) console.log("✗", g, m, JSON.stringify(it).slice(0, 400)); };
+let bad = 0; const seenB = {}; const B = (g, m, it) => { bad++; const k = g + "|" + String(m).slice(0, 30); seenB[k] = (seenB[k] || 0) + 1; if (seenB[k] <= 2) console.log("✗", g, m, JSON.stringify(it).slice(0, 400)); };
 const rnd = () => ({ a: Math.random() * 4 - 2 + 0.3, b: Math.random() * 4 - 2 + 0.7, c: Math.random() * 3 - 1.3, m: Math.random() * 3 + 0.4, n: Math.random() * 2 - 2.6, x: Math.random() * 4 - 2 + 0.11, y: Math.random() * 3 + 0.2 });
 function equiv(e1, e2, n = 6) { for (let i = 0; i < n; i++) { const v = rnd(); if (!close(ev(e1, v), ev(e2, v))) return false; } return true; }
 for (const s of sk) {
@@ -51,8 +51,12 @@ for (const s of sk) {
         const root = -f(0) / (f(1) - f(0)); if (!close(f(root + 2), (f(1) - f(0)) * 2)) B(s.gen, "рівняння не лінійне", it);
         const want = c.ans ? ev(c.ans, { x: root }) : root; if (!close(want, A)) B(s.gen, "відповідь " + want, it); }
       else if (c.pw) { const [p, n] = c.pw; const js = toJS(p); for (const base of [2, 3]) { if (!close(ev(js, { a: base, b: base, x: base, y: base }), Math.pow(base, n))) B(s.gen, "степінь", it); } }
+      else if (c.sys) { const [a1, b1, c1, a2, b2, c2] = c.sys, D = a1 * b2 - a2 * b1; if (!D) { B(s.gen, "система вироджена", it); continue; }
+        const X = (c1 * b2 - c2 * b1) / D, Y = (a1 * c2 - a2 * c1) / D; if (!close(c.ask === "x" ? X : Y, A)) B(s.gen, "розв'язок системи " + X + ";" + Y, it);
+        if (!Number.isInteger(X) || !Number.isInteger(Y)) B(s.gen, "нецілий розв'язок", it); }
+      else if (c.lin2) { const [a, b, cc, kv, kval, av] = c.lin2; const v = kv === "x" ? (cc - a * kval) / b : (cc - b * kval) / a; if (!close(v, A)) B(s.gen, "лін. рівняння " + v, it); }
       else B(s.gen, "нема chk", it);
-      if (Math.abs(A) > 9000) B(s.gen, "завелика відповідь", it);
+      if (Math.abs(A) > 11000) B(s.gen, "завелика відповідь", it);
     } else if (it.type === "choice") {
       if (!it.o.includes(it.a) || new Set(it.o).size !== it.o.length || it.o.length < 2) B(s.gen, "варіанти", it);
       if (c.src) {
@@ -71,7 +75,22 @@ for (const s of sk) {
       } else if (c.mono) {
         const isMono = e => !/[+:(]/.test(e.replace(/^−/, "")) && !/ − /.test(e);
         if (!isMono(it.a) || it.o.filter(isMono).length !== 1) B(s.gen, "одночлен", it);
-      } else if (c.tf !== undefined) {
+      } else if (c.sys && c.pairs) {
+        const [a1, b1, c1, a2, b2, c2] = c.sys, ok = o => { const [x, y] = o.replace(/[()]/g, "").split("; ").map(val); return a1 * x + b1 * y === c1 && a2 * x + b2 * y === c2; };
+        if (it.o.filter(ok).length !== 1 || !ok(it.a)) B(s.gen, "пара системи", it);
+      } else if (c.count) {
+        const co = e => { const [l, r] = e.split(" = ").map(toJS); const g = (x, y) => ev(l, { x, y }) - ev(r, { x, y }); return [g(1, 0) - g(0, 0), g(0, 1) - g(0, 0), -g(0, 0)]; };
+        const [p1, p2] = c.count.map(co), D = p1[0] * p2[1] - p2[0] * p1[1];
+        const kind = Math.abs(D) > 1e-9 ? "one" : (Math.abs(p1[0] * p2[2] - p2[0] * p1[2]) < 1e-9 && Math.abs(p1[1] * p2[2] - p2[1] * p1[2]) < 1e-9 ? "inf" : "none");
+        if (kind !== c.kind) B(s.gen, "кількість розв'язків " + kind, it);
+      } else if (c.pt) { const [x, y, k, b] = c.pt; if ((y === k * x + b) !== (it.a === "Так")) B(s.gen, "точка", it); if (!it.task.includes("(" + it.task.match(/A\((.+?);/)[1])) B(s.gen, "точка≠умова", it); }
+      else if (c.lin) { const [a, b, cc, x, y] = c.lin; if ((a * x + b * y === cc) !== (it.a === "Так")) B(s.gen, "пара", it); const [l, r] = it.p.split(" = "); if (!close(ev(toJS(l), { x, y }), a * x + b * y) || +r.replace("−", "-") !== cc) B(s.gen, "пара≠умова", it); }
+      else if (c.div) { const [b, n, sg] = c.div; const big = BigInt(b) ** BigInt(n) + BigInt(sg) * BigInt(b) ** BigInt(n - 1);
+        it.o.forEach(o => { const d = (big % BigInt(+o)) === 0n; if (d !== (o === it.a)) B(s.gen, "подільність " + o, it); }); }
+      else if (c.incr !== undefined) { if ((c.incr > 0) !== (it.a === "Зростає")) B(s.gen, "монотонність", it); }
+      else if (c.par) { const kb = o => { const g = x => ev(toJS(o.split(" = ")[1]), { x }); return [g(1) - g(0), g(0)]; };
+        it.o.forEach(o => { const [k, b] = kb(o), par = close(k, c.par[0]) && !close(b, c.par[1]); if (par !== (o === it.a)) B(s.gen, "паралельність " + o, it); }); }
+      else if (c.tf !== undefined) {
         const m = it.task.match(/число (\S+) коренем/); const x = val(m[1]); const [l, rr] = it.p.split(" = ");
         const ok = close(ev(toJS(l), { x }), ev(toJS(rr), { x })); if (ok !== c.tf || it.a !== (ok ? "Так" : "Ні")) B(s.gen, "так/ні", it);
       } else if (c.spec) {

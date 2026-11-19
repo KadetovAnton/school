@@ -12,16 +12,18 @@
  "skills": [
   "a.pfac",
   "a.pfaceq",
-  "a.pfacpoly"
+  "a.pfacpoly",
+  "a.pdiv"
  ],
  "practice": {
-  "perSkill": 3
+  "perSkill": 2
  },
  "test": {
   "plan": {
-   "a.pfac": 4,
+   "a.pfac": 3,
    "a.pfaceq": 2,
-   "a.pfacpoly": 2
+   "a.pfacpoly": 2,
+   "a.pdiv": 1
   },
   "pass": 80
  },
@@ -45,6 +47,11 @@
    "e": "🎁",
    "h": "Дужка як множник",
    "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">a(x − y) + 3(x − y) = (x − y)(a + 3)</div><p>Протилежні дужки: (b − a) = −(a − b).</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">5(a − b) − c(b − a) = 5(a − b) + c(a − b) = (a − b)(5 + c)</div>"
+  },
+  {
+   "e": "➗",
+   "h": "Подільність",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">7⁹ − 7⁸ = 7⁸(7 − 1) = 7⁸ · 6</div><p>Один із множників — 6, тож вираз ділиться на 6.</p>"
   }
  ]
 }

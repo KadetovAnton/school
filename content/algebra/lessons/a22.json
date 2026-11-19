@@ -1,0 +1,33 @@
+{
+ "id": "a22",
+ "title": "§17. Розкладання за формулами квадрата",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fsqfac",
+  "a.fsqmiss"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.fsqfac": 5,
+   "a.fsqmiss": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🔲",
+   "h": "Навпаки",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">a² ± 2ab + b² = (a ± b)²</div><p>x² − 10x + 25: крайні — x² і 5², середній 10x = 2 · x · 5 ✓ → (x − 5)².</p><div class=\"tip\">💡 Завжди перевіряй середній член. 4x² + 12x + 9 = (2x + 3)², бо 2 · 2x · 3 = 12x.</div>"
+  }
+ ]
+}

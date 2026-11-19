@@ -1,0 +1,38 @@
+{
+ "id": "a27",
+ "title": "§22. Функція. Область визначення",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fnval",
+  "a.fndom"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.fnval": 5,
+   "a.fndom": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🎰",
+   "h": "Що таке функція",
+   "html": "<p><b>Функція</b> — правило, за яким кожному x відповідає <b>одне</b> y. x — аргумент, y — значення функції.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">f(x) = 3x − 5; f(−2) = 3 · (−2) − 5 = −11</div>"
+  },
+  {
+   "e": "🚫",
+   "h": "Область визначення",
+   "html": "<p>Усі x, при яких формула має зміст. На нуль ділити не можна:</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">y = 6 / (x − 3): x ≠ 3</div>"
+  }
+ ]
+}

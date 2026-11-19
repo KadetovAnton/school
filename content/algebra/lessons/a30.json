@@ -1,0 +1,33 @@
+{
+ "id": "a30",
+ "title": "§25–26. Рівняння з двома змінними і його графік",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.spair",
+  "a.sexpr"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.spair": 3,
+   "a.sexpr": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "✳️",
+   "h": "Рівняння з двома змінними",
+   "html": "<p>ax + by = c. Розв'язок — пара чисел (x; y), що перетворює рівняння на правильну рівність. Розв'язків безліч, а графік лінійного рівняння — <b>пряма</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">3x + 2y = 4: (2; −1) — розв'язок</div><p>Щоб знайти розв'язки, вирази одну змінну через іншу: y = (4 − 3x) : 2.</p>"
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "id": "a25",
+ "title": "§20. Сума і різниця кубів",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fcubes"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.fcubes": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🧊",
+   "h": "Формули",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">a³ + b³ = (a + b)(a² − ab + b²)</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">a³ − b³ = (a − b)(a² + ab + b²)</div><p>x³ − 27 = (x − 3)(x² + 3x + 9).</p><div class=\"tip\">💡 У другій дужці — <b>неповний</b> квадрат: ab, а не 2ab, і знак біля ab протилежний.</div><p class=\"muted\">Куби варто знати: 1, 8, 27, 64, 125.</p>"
+  }
+ ]
+}

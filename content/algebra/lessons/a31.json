@@ -1,0 +1,33 @@
+{
+ "id": "a31",
+ "title": "§27. Система рівнянь. Графічний спосіб",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.scount",
+  "a.ssyspair"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.scount": 3,
+   "a.ssyspair": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "❎",
+   "h": "Система",
+   "html": "<p>Розв'язок системи — пара, що задовольняє <b>обидва</b> рівняння. Графічно — точка перетину прямих.</p><table class=\"t\"><tr><td>k різні</td><td>1 розв'язок</td></tr><tr><td>k однакові, b різні</td><td>0</td></tr><tr><td>прямі збігаються</td><td>безліч</td></tr></table>"
+  }
+ ]
+}

@@ -1,0 +1,38 @@
+{
+ "id": "a21",
+ "title": "§16. Квадрат суми і квадрат різниці",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fsq",
+  "a.fsqcalc"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.fsq": 5,
+   "a.fsqcalc": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🟥",
+   "h": "Формули",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a + b)² = a² + 2ab + b²</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a − b)² = a² − 2ab + b²</div><p>(3x − 2)² = 9x² − 12x + 4.</p><div class=\"tip\">⚠️ (a + b)² ≠ a² + b² — не загуби подвоєний добуток 2ab!</div>"
+  },
+  {
+   "e": "🧠",
+   "h": "Рахуємо в голові",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">51² = (50 + 1)² = 2500 + 100 + 1 = 2601</div><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">99² = (100 − 1)² = 10000 − 200 + 1 = 9801</div>"
+  }
+ ]
+}

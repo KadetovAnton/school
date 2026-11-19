@@ -8,7 +8,9 @@ with sync_playwright() as p:
     pg=b.new_page(viewport={"width":390,"height":844},device_scale_factor=2); pg.on("pageerror",lambda e:errors.append(str(e)))
     pg.goto(U); pg.evaluate("localStorage.clear()"); pg.reload()
     pg.click(".who-b[data-id=anya]"); pg.click(".lesson[data-s=algebra]"); pg.wait_for_selector("#diagGo")
-    for lid in ["a15","a16","a17","a18","a19","a20"]:
+    import sys
+    L=sys.argv[1].split(",") if len(sys.argv)>1 else ["a15","a16","a17","a18","a19","a20"]
+    for lid in L:
         pg.evaluate("E.lesson('%s').early=true;E.save()"%lid)
         pg.evaluate("location.hash='algebra'"); pg.reload(); pg.wait_for_selector("#diagGo")
         pg.locator(".lesson[data-file='lessons/%s.json']"%lid).click(); pg.wait_for_timeout(300)

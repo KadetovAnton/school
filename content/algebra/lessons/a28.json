@@ -1,0 +1,33 @@
+{
+ "id": "a28",
+ "title": "§23. Графік функції",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fngraph",
+  "a.fnpt"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.fngraph": 4,
+   "a.fnpt": 3
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🗺️",
+   "h": "Графік",
+   "html": "<p>Графік — усі точки (x; y), де y — значення функції при x. Знаючи графік, можна знайти y за x і x за y.</p><p>Точка належить графіку, якщо її координати задовольняють формулу.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">A(2; 1), y = 3x − 5: 3 · 2 − 5 = 1 ✓</div>"
+  }
+ ]
+}

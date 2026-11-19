@@ -1,0 +1,31 @@
+{
+ "id": "a32",
+ "title": "§28. Спосіб підстановки",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.ssub"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.ssub": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🔁",
+   "h": "Підстановка",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">y − 2x = 1; 3x + y = 11</div><p>1) y = 2x + 1. 2) 3x + (2x + 1) = 11. 3) x = 2. 4) y = 5. Відповідь: (2; 5).</p><div class=\"tip\">💡 Виражай ту змінну, при якій коефіцієнт 1 або −1.</div>"
+  }
+ ]
+}

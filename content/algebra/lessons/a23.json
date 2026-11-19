@@ -1,0 +1,33 @@
+{
+ "id": "a23",
+ "title": "§18. Множення різниці двох виразів на їх суму",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.fdsum",
+  "a.fdsumcalc"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "a.fdsum": 5,
+   "a.fdsumcalc": 2
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⚔️",
+   "h": "Формула",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">(a − b)(a + b) = a² − b²</div><p>(2x − 3)(2x + 3) = 4x² − 9. Середніх членів немає: −6x і +6x знищуються.</p><div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">52 · 48 = (50 + 2)(50 − 2) = 2500 − 4 = 2496</div>"
+  }
+ ]
+}

@@ -268,3 +268,4 @@ body.kid.insession .card{padding-top:12px}
 .fb.calm summary{cursor:pointer;color:var(--pri-ink);font-weight:700}
 body.alg .fb.bad{background:#FFF4E2}body.alg .fb.bad h3{color:var(--ink)}
 .btn.dim{opacity:.5}
+body.alg .prompt{white-space:pre-line}

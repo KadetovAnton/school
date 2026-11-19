@@ -1,0 +1,31 @@
+{
+ "id": "a33",
+ "title": "§29. Спосіб додавання",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/algebra.json"
+ ],
+ "skills": [
+  "a.sadd"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "a.sadd": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "➕",
+   "h": "Додавання",
+   "html": "<div class=\"rule-box\" style=\"text-align:center;font-size:20px;font-weight:800\">2x + y = 7; 3x − y = 8</div><p>Додаємо: 5x = 15, x = 3. Підставляємо: y = 1. Відповідь: (3; 1).</p><div class=\"tip\">💡 Коефіцієнти не протилежні? Помнож одне рівняння на число: 2x + 3y = 8 і x + y = 3 → друге × (−2).</div>"
+  }
+ ]
+}
