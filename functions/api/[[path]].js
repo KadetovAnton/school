@@ -4,7 +4,10 @@
      tok:<токен>    — якій дитині належить вхід (живе 400 днів)
      prog:<дитина>  — прогрес {p, upd}
      fail:<дитина>  — лічильник невдалих спроб PIN (блок на 15 хв після 5)
-   Секрети: TG_TOKEN (бот), TG_CHAT (чат тата). */
+     tts:<хеш>      — готова озвучка (mp3), робиться один раз
+     ttsc:<РРРР-ММ> — скільки символів відправлено в Google за місяць
+   Секрети: TG_TOKEN (бот), TG_CHAT (чат тата), GOOGLE_TTS_KEY (озвучка Google).
+   Змінні (необов'язково): TTS_VOICE (назва голосу), TTS_CAP (ліміт символів на місяць, типово 300000). */
 const KIDS = ["anya", "artem"];
 const ORIGINS = ["https://school.akdtv.pp.ua", "https://kadetovanton.github.io", "https://school-9ax.pages.dev"];
 
@@ -41,7 +44,32 @@ export async function onRequest({ request: req, env, params }) {
     try { body = JSON.parse(raw); } catch (e) {}
   }
 
-  if (path === "ping") return J(req, { ok: true, db: true, tg: !!env.TG_TOKEN, chat: !!env.TG_CHAT });
+  if (path === "ping") return J(req, { ok: true, db: true, tg: !!env.TG_TOKEN, chat: !!env.TG_CHAT, tts: !!env.GOOGLE_TTS_KEY });
+
+  // озвучка Google: лише для дитини, що увійшла; кожен текст — один раз (далі з кешу); місячний ліміт символів
+  if (path === "tts" && req.method === "POST") {
+    if (!(await who(req, env))) return J(req, { error: "потрібен вхід" }, 401);
+    const text = String(body.text || "").trim();
+    if (!text || text.length > 700) return J(req, { error: "текст порожній або задовгий" }, 400);
+    const voice = String(env.TTS_VOICE || "uk-UA-Chirp3-HD-Achernar").trim();
+    const key = "tts:" + await sha(voice + "|" + text);
+    const audioHeaders = { "Content-Type": "audio/mpeg", "Cache-Control": "private, max-age=31536000", ...cors(req) };
+    const hit = await env.DB.get(key, "arrayBuffer");
+    if (hit) return new Response(hit, { headers: audioHeaders });
+    if (!env.GOOGLE_TTS_KEY) return J(req, { error: "озвучку Google не налаштовано" }, 503);
+    const month = "ttsc:" + new Date().toISOString().slice(0, 7);
+    const used = +(await env.DB.get(month) || 0), cap = +(env.TTS_CAP || 300000);
+    if (used + text.length > cap) return J(req, { error: "місячний ліміт озвучки вичерпано" }, 429);
+    const r = await fetch("https://texttospeech.googleapis.com/v1/text:synthesize?key=" + encodeURIComponent(String(env.GOOGLE_TTS_KEY).trim()), {
+      method: "POST", headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ input: { text }, voice: { languageCode: voice.slice(0, 5), name: voice }, audioConfig: { audioEncoding: "MP3" } })
+    }).then(x => x.json()).catch(e => ({ error: { message: String(e) } }));
+    if (!r.audioContent) return J(req, { error: "Google: " + ((r.error && r.error.message) || "немає звуку") }, 502);
+    await env.DB.put(month, String(used + text.length), { expirationTtl: 60 * 60 * 24 * 70 });
+    const bin = Uint8Array.from(atob(r.audioContent), c => c.charCodeAt(0));
+    await env.DB.put(key, bin.buffer);
+    return new Response(bin, { headers: audioHeaders });
+  }
 
   // чи задано PIN для дитини
   if (path === "status") {

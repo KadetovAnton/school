@@ -18,6 +18,20 @@
   function tok(id) { try { return localStorage.getItem(TK + id) || ""; } catch (e) { return ""; } }
   function setTok(id, t) { try { if (t) localStorage.setItem(TK + id, t); else localStorage.removeItem(TK + id); } catch (e) {} }
   S.has = function (id) { return !!tok(id); };
+  /* озвучка Google (через наш сервер, з кешем): Promise → адреса mp3 або null */
+  var ttsMem = {};
+  S.tts = function (text) {
+    var id = window.E && E.cur ? E.cur() : null;
+    if (ttsMem[text]) return ttsMem[text];
+    if (!window.fetch || !window.URL || !id || !tok(id)) return Promise.resolve(null);
+    var pr = fetch(API + "tts", { method: "POST", headers: { "Content-Type": "application/json", "Authorization": "Bearer " + tok(id) }, body: JSON.stringify({ text: text }) })
+      .then(function (r) { return r.ok && /audio/.test(r.headers.get("Content-Type") || "") ? r.blob() : null; })
+      .then(function (b) { return b ? URL.createObjectURL(b) : null; })
+      .catch(function () { return null; });
+    ttsMem[text] = pr;
+    pr.then(function (u) { if (!u) delete ttsMem[text]; });
+    return pr;
+  };
   S.ready = function (id) { return !!pulled[id]; };
 
   function req(method, path, id, body) {

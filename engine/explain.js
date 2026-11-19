@@ -70,11 +70,24 @@
   function setVoice(v) { try { localStorage.setItem("school-exvoice", v ? "1" : "0"); } catch (e) {} }
   var audioEl = null;
   function stop() { try { if (audioEl) { audioEl.pause(); audioEl = null; } if (window.speechSynthesis) speechSynthesis.cancel(); } catch (e) {} }
+  var player = null, seq = 0; // один програвач: «розблоковується» натисканням, далі грає й після завантаження (Safari)
+  function playUrl(url, fail) {
+    try {
+      if (!player) player = new Audio();
+      audioEl = player; player.onerror = fail; player.src = url;
+      var p = player.play(); if (p && p.catch) p.catch(fail);
+    } catch (e) { fail(); }
+  }
   function speak(id, k, text, qi) {
-    stop();
+    stop(); var my = ++seq;
     if (!voiceOn() || !text) return;
     var D = X.list[id], A = D && D.audio, f = A ? (qi != null ? A.quiz[qi] : A.steps[k]) : null;
-    var fallback = function () { if (window.SAY && SAY.uk) SAY.uk(text); };
+    var device = function () { if (window.SAY && SAY.uk) SAY.uk(text); };
+    var fallback = function () { // немає запису → озвучка Google (якщо налаштована), інакше голос пристрою
+      if (!(window.SYNC && SYNC.tts)) return device();
+      playUrl("engine/silent.mp3", function () {});
+      SYNC.tts(text).then(function (u) { if (my !== seq) return; if (u) playUrl(u, function () { if (my === seq) device(); }); else device(); });
+    };
     if (f) {
       try {
         var a = audioEl = new Audio(A.base + f + ".mp3"), failed = false;
@@ -91,6 +104,11 @@
   X.play = function (root, id, onDone) {
     var D = X.list[id], k = 0, picked = null;
     if (!D) { if (onDone) onDone(); return; }
+    if (window.SYNC && SYNC.tts) { // заздалегідь готуємо озвучку кроків, для яких немає запису
+      var todo = [];
+      D.steps.forEach(function (st, i) { if (!(D.audio && D.audio.steps[i])) todo.push(st.say); (st.quiz || []).forEach(function (o, j) { if (!(D.audio && D.audio.quiz[j])) todo.push(o.say); }); });
+      (function next() { var t = todo.shift(); if (t) SYNC.tts(t).then(next); })();
+    }
     function apply(st, pick) {
       var on = (pick && pick.on) || st.on || [], hl = (pick && pick.hl) || st.hl || [], lab = st.lab || {};
       var ids = ["sq", "top", "left", "cut1", "cut2"].concat(ALLR, ALLT), i;
