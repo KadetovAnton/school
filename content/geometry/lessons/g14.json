@@ -10,14 +10,16 @@
   "skills/geometry.json"
  ],
  "skills": [
+  "g.trikind",
   "g.trip"
  ],
  "practice": {
-  "perSkill": 6
+  "perSkill": 4
  },
  "test": {
   "plan": {
-   "g.trip": 6
+   "g.trikind": 3,
+   "g.trip": 4
   },
   "pass": 80
  },
@@ -25,7 +27,12 @@
   {
    "e": "🔺",
    "h": "Елементи трикутника",
-   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 266.2 168\" width=\"266.2\" height=\"168\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"24\" y1=\"144\" x2=\"242.2\" y2=\"144\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"242.2\" y1=\"144\" x2=\"94.9\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"94.9\" y1=\"24\" x2=\"24\" y2=\"144\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"24\" cy=\"144\" r=\"3\" fill=\"#333\"/><circle cx=\"242.2\" cy=\"144\" r=\"3\" fill=\"#333\"/><circle cx=\"94.9\" cy=\"24\" r=\"3\" fill=\"#333\"/><text x=\"12\" y=\"149\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"254.5\" y=\"148.1\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text><text x=\"91\" y=\"11.6\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">C</text><text x=\"133.1\" y=\"159\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">c</text><text x=\"178.8\" y=\"71.4\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">a</text><text x=\"46\" y=\"76\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">b</text></svg></div><p>Вершини A, B, C; сторони AB, BC, AC; кути ∠A, ∠B, ∠C. <b>Периметр</b> — сума сторін:</p><div class=\"rule-box\" style=\"text-align:center;font-size:19px;font-weight:800\">P = AB + BC + AC</div>"
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 266.2 169.4\" width=\"266.2\" height=\"169.4\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"24\" y1=\"144\" x2=\"242.2\" y2=\"144\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"242.2\" y1=\"144\" x2=\"94.9\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"94.9\" y1=\"24\" x2=\"24\" y2=\"144\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"24\" cy=\"144\" r=\"3\" fill=\"#333\"/><circle cx=\"242.2\" cy=\"144\" r=\"3\" fill=\"#333\"/><circle cx=\"94.9\" cy=\"24\" r=\"3\" fill=\"#333\"/><text x=\"12\" y=\"149\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"254.5\" y=\"148.1\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text><text x=\"91\" y=\"11.6\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">C</text><text x=\"133.1\" y=\"159\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">c</text><text x=\"178.8\" y=\"71.4\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">a</text><text x=\"46\" y=\"76\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">b</text></svg></div><p>Вершини A, B, C; сторони AB, BC, AC; кути ∠A, ∠B, ∠C. <b>Периметр</b> — сума сторін:</p><div class=\"rule-box\" style=\"text-align:center;font-size:19px;font-weight:800\">P = AB + BC + AC</div>"
+  },
+  {
+   "e": "🗂️",
+   "h": "Види трикутників",
+   "html": "<p><b>За сторонами:</b> різносторонній (усі різні), рівнобедрений (дві рівні), рівносторонній (усі три рівні).</p><p><b>За кутами:</b> гострокутний (усі кути гострі), прямокутний (один прямий), тупокутний (один тупий).</p>"
   }
  ]
 }

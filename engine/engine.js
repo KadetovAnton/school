@@ -432,7 +432,9 @@
   E.addMistake = function (it, given) {
     var p = E.P();
     var m = { key: it.key, skill: it.skill, sub: E.curSub, given: given == null ? null : String(given), d: today(), fixed: false };
-    if (it.gen) m.it = JSON.parse(JSON.stringify(it)); // згенероване завдання зберігаємо цілим, щоб повторити
+    if (it.gen) { m.it = JSON.parse(JSON.stringify(it)); // згенероване завдання зберігаємо, щоб повторити
+      if (m.it.pic && m.it.seed != null) delete m.it.pic; } // рисунок відтвориться за зерном (E.restoreGen) — прогрес не роздувається
+    p.mistakes.forEach(function (x) { if (x.fixed && x.it) delete x.it; }); // виправленим цілі завдання вже не потрібні
     p.mistakes.push(m);
     if (p.mistakes.length > 300) p.mistakes = p.mistakes.slice(-300);
     E.save();
@@ -452,7 +454,7 @@
     for (var i = ms.length - 1; i >= 0; i--) {
       var m = ms[i];
       if (m.fixed || seen[m.key] || (m.sub || "english") !== E.curSub) continue;
-      if (!E.ITEM[m.key] && m.it) E.ITEM[m.key] = m.it;
+      if (!E.ITEM[m.key] && m.it) { var rs = E.restoreGen(m.it); if (rs) E.ITEM[m.key] = rs; }
       if (!E.ITEM[m.key]) continue;
       seen[m.key] = 1; out.push(m);
     }
@@ -560,12 +562,27 @@
   E.markSeen = function (it) { if (!it.gen) E.P().seen[it.key] = today(); };
   /* Навички-генератори (математика): завдання створюються на льоту функцією E.GEN[sk.gen] */
   E.GEN = E.GEN || {};
+  /* генерація з «зерном»: те саме зерно → те саме завдання (і той самий рисунок) */
+  function rng(seed) { return function () { seed |= 0; seed = seed + 0x6D2B79F5 | 0; var t = Math.imul(seed ^ seed >>> 15, 1 | seed); t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t; return ((t ^ t >>> 14) >>> 0) / 4294967296; }; }
+  function genSeeded(sk, a, seed) {
+    var old = Math.random; Math.random = rng(seed);
+    try { return E.GEN[sk.gen](a); } finally { Math.random = old; }
+  }
   E.makeGen = function (sk, extra) {
     var a = {}, k; for (k in sk.args || {}) a[k] = sk.args[k]; for (k in extra || {}) a[k] = extra[k];
-    var it = E.GEN[sk.gen](a);
+    var seed = Math.floor(Math.random() * 2147483647), it = genSeeded(sk, a, seed);
     it.skill = sk.id; it.key = sk.id + "|" + it.p + (it.uid ? "|" + it.uid : ""); it.gen = true;
+    if (it.pic) { it.seed = seed; it.ga = a; } // рисунок не зберігаємо в «Моїх помилках» — відтворюємо за зерном
     E.ITEM[it.key] = it;
     return it;
+  };
+  /* збережене без рисунка завдання → повне (той самий генератор, те саме зерно) */
+  E.restoreGen = function (st) {
+    var sk = E.SK[st.skill];
+    if (st.pic && (!/^<svg[\s>]/.test(st.pic) || /<script|\son\w+\s*=|href|<foreign/i.test(st.pic))) { st = JSON.parse(JSON.stringify(st)); delete st.pic; if (st.seed == null) return null; } // чужий/підроблений рисунок не показуємо
+    if (st.pic || st.seed == null || !sk || !sk.gen || !E.GEN[sk.gen]) return st;
+    try { var it = genSeeded(sk, st.ga || {}, st.seed); if (it.p !== st.p) return null;
+      it.skill = st.skill; it.key = st.key; it.gen = true; it.seed = st.seed; it.ga = st.ga; return it; } catch (e) { return null; }
   };
   /* n завдань навички: спершу ті, що ще не траплялись у цій сесії (used),
      серед них — давно не бачені; при нестачі — повтор найдавніших. */
@@ -688,7 +705,7 @@
   E.check = function (it, given) {
     var ans = answersOf(it), right = ans[0];
     if (given == null) return { st: "idk", right: right };
-    if (it.type === "num" && it.kb === "alg") {
+    if (it.type === "num" && (it.kb === "alg" || it.kb === "geo")) {
       var gv = ratOf(given), rv = ratOf(right);
       if (gv && rv && gv.n * rv.d === rv.n * gv.d) {
         if (gv.frac && !gv.red) return { st: "typo", right: right, msg: gv.d === 1 || gcdN(gv.n, gv.d) === gv.d ? "✏️ Значення правильне! Але дріб, що ділиться націло, запиши цілим числом." : "✏️ Значення правильне! Але дріб треба <b>скоротити</b> до кінця. Спробуй ще раз 🙂" };

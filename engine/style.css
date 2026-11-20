@@ -259,7 +259,7 @@ body.kid.insession .card{padding-top:12px}
 .rs-row .btn{flex:0 0 auto;margin:0}
 .keypad.alg{grid-template-columns:repeat(4,1fr);gap:8px}
 .keypad.alg .key{min-height:48px;padding:4px 0;font-size:24px}
-.keypad.alg .key.ok{font-size:22px}.keypad.alg .key.del{font-size:22px}
+.keypad.alg .key.ok{font-size:22px}.keypad.alg .key.ok.wide{grid-column:span 4}.keypad.alg .key.del{font-size:22px}
 @media (max-height:700px){.keypad.alg .key{min-height:42px}}
 .prompt.big.alg{font-size:26px;white-space:pre-line}
 .prompt.big.alg.long{font-size:19px}

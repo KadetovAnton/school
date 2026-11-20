@@ -17,11 +17,11 @@ const nameOf = (i, j) => { for (const n in T) if (T[n].some(([p, q]) => (p === i
 const sVal = (k, s) => [2, 3, 6, 7].includes(k) ? s : 180 - s; // при паралельних
 const kind = d => d < 90 ? "гострий" : d === 90 ? "прямий" : d < 180 ? "тупий" : "розгорнутий";
 const tri = (a, b, c) => a + b > c && a + c > b && b + c > a;
-const O1 = "за I ознакою (дві сторони і кут між ними)", O2 = "за II ознакою (сторона і два прилеглі кути)", O3 = "за III ознакою (три сторони)", O0 = "даних недостатньо";
+const O1 = "I ознака", O2 = "II ознака", O3 = "III ознака", O0 = "даних недостатньо";
 
 for (const s of sk) {
   if (!G[s.gen]) { B(s.gen, "нема генератора"); continue; }
-  const kinds = new Set(), texts = new Set();
+  const kinds = new Set(), texts = new Set(), plain = new Set();
   for (let i = 0; i < 3000; i++) {
     const a = Object.assign({}, s.args || {}, i % 10 === 0 ? { easy: 1 } : {});
     let it; try { it = G[s.gen](a); } catch (e) { B(s.gen, "виняток " + e.message); break; }
@@ -32,7 +32,9 @@ for (const s of sk) {
     const shown = [it.p, it.e, ...(it.h || []), ...(it.o || [])].join(" ").replace(/<[^>]+>/g, "");
     if (/\d-\d|\s-\d/.test(shown)) B(s.gen, "дефіс замість мінуса", it);
     if (it.pic) { if (!/^<svg[^>]*>[\s\S]*<\/svg>$/.test(it.pic) || /NaN|Infinity/.test(it.pic)) B(s.gen, "рисунок", it);
-      const vb = it.pic.match(/viewBox="0 0 ([\d.]+) ([\d.]+)"/); if (!vb || +vb[1] > 360 || +vb[2] > 260) B(s.gen, "завеликий рисунок", it); }
+      const vb = it.pic.match(/viewBox="(-?[\d.]+) (-?[\d.]+) ([\d.]+) ([\d.]+)"/); if (!vb || +vb[3] > 380 || +vb[4] > 270) B(s.gen, "завеликий рисунок " + (vb && vb.slice(3)), it); }
+    if (it.tt != null && i < 300) { const again = G[s.gen](Object.assign({}, s.args || {}, { tt: it.tt })); if (again.tt !== it.tt) B(s.gen, "tt не відтворює вид " + it.tt, it); }
+    plain.add(it.p);
     const c = it.chk || {};
     if (it.type === "num") {
       if (!it.p.includes("___")) B(s.gen, "нема ___", it);
@@ -62,6 +64,6 @@ for (const s of sk) {
       if (c.sides) { const i = c.sides.indexOf(c.big ? Math.max(...c.sides) : Math.min(...c.sides)); if ("∠" + "ABC"[i] !== it.a) B(s.gen, "кут проти сторони", it); if (!tri(...c.sides)) B(s.gen, "сторони не трикутник", it); }
     } else B(s.gen, "тип " + it.type, it);
   }
-  console.log((s.id + "          ").slice(0, 12), s.gen.padEnd(10), "різних умов:", String(texts.size).padStart(5), " видів:", [...kinds].filter(Boolean).length);
+  console.log((s.id + "          ").slice(0, 12), s.gen.padEnd(10), "різних умов:", String(plain.size).padStart(5), " видів:", [...kinds].filter(Boolean).length);
 }
 console.log(bad ? "\n✗ ПОМИЛОК: " + bad : "\n✓ Усе правильно");

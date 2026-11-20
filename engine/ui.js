@@ -1018,7 +1018,7 @@
     }
     $("stage").innerHTML = '<div class="bl-top"><span class="bl-n" id="bl-n">✓ 0</span><span class="bl-t" id="bl-t">60</span></div>' +
       '<div class="prog"><i id="bl-bar" style="width:100%"></i></div><div class="bl-p" id="bl-p"></div>' +
-      '<div class="keypad' + (SUB.kid ? " k5" : "") + '" id="keypad">' + (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
+      '<div class="keypad' + (SUB.kid ? " k5" : "") + '" id="keypad">' + (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { return '<button class="key' + (k === "✓" ? " ok" + (it.kb === "geo" ? " wide" : "") : k === "⌫" ? " del" : "") + '" data-k="' + k + '">' + k + '</button>'; }).join("") + '</div>';
     var ks = $("stage").querySelectorAll(".key");
     for (var i = 0; i < ks.length; i++) (function (b) { b.onclick = function () { press(b.getAttribute("data-k")); }; })(ks[i]);
     document.onkeydown = function (e) { if (!$("bl-p")) return; if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); else if (e.key === "Enter") press("✓"); };
@@ -1301,7 +1301,7 @@
     if (it.type === "input" || it.type === "dict") body += '<input id="inp" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" placeholder="Твоя відповідь"><div id="almost"></div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     if (it.type === "num") body = (it.steps ? '<div class="stps">' + it.steps.map(function (st, k) { return '<div class="stp' + (k ? "" : " cur") + '" id="stp' + k + '"><span class="sq">' + (k + 1) + ') ' + esc(st.q) + '</span> <b class="sv" id="sv' + k + '">' + (k ? "" : "?") + '</b></div>'; }).join("") + '</div>' : "") +
       '<div class="numbox" id="numbox"></div><div id="almost"></div><div class="keypad' + (SUB.kid ? " k5" : it.kb ? " alg" : "") + '" id="keypad">' +
-      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb ? [1, 2, 3, "⌫", 4, 5, 6, "−", 7, 8, 9, "/", ",", 0, "␣", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { var al = { "⌫": "Стерти", "✓": "Перевірити", "−": "Мінус", "/": "Дробова риска", ",": "Кома", "␣": "Пробіл для мішаного числа" }[k]; return '<button class="key' + (k === "✓" ? " ok" : k === "⌫" ? " del" : "") + '" data-k="' + k + '"' + (al ? ' aria-label="' + al + '"' : "") + '>' + k + '</button>'; }).join("") + '</div>';
+      (SUB.kid ? [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, "⌫", "✓"] : it.kb === "geo" ? [1, 2, 3, "⌫", 4, 5, 6, ",", 7, 8, 9, 0, "✓"] : it.kb ? [1, 2, 3, "⌫", 4, 5, 6, "−", 7, 8, 9, "/", ",", 0, "␣", "✓"] : [1, 2, 3, 4, 5, 6, 7, 8, 9, "⌫", 0, "✓"]).map(function (k) { var al = { "⌫": "Стерти", "✓": "Перевірити", "−": "Мінус", "/": "Дробова риска", ",": "Кома", "␣": "Пробіл для мішаного числа" }[k]; return '<button class="key' + (k === "✓" ? " ok" + (it.kb === "geo" ? " wide" : "") : k === "⌫" ? " del" : "") + '" data-k="' + k + '"' + (al ? ' aria-label="' + al + '"' : "") + '>' + k + '</button>'; }).join("") + '</div>';
     if (it.type === "order") body = '<div class="built empty" id="built"></div><div class="pool" id="pool">' + it.words.map(function (w, k) { return '<button class="w" data-k="' + k + '">' + esc(w) + '</button>'; }).join("") + '</div><div class="row" id="chkrow"><button class="btn full" id="check" disabled>Перевірити</button></div>';
     document.body.classList.add("insession");
     root.innerHTML = (cfg.onBack ? '<div class="topbar"><button class="back" id="qback">← Перервати</button><span class="muted small">прогрес збережено</span></div>' : "") + '<div class="card"><span class="chip">' + cfg.chip + '</span>' +
@@ -1432,7 +1432,7 @@
         if (!$("keypad") || answered) return;
         if (/^[0-9]$/.test(e.key) || e.key === "Backspace" || e.key === "Enter" || (it.kb && /^[-−,./ ]$/.test(e.key))) { try { e.preventDefault(); } catch (er) {} }
         if (/^[0-9]$/.test(e.key)) press(e.key); else if (e.key === "Backspace") press("⌫"); else if (e.key === "Enter") press("✓");
-        else if (it.kb && (e.key === "-" || e.key === "−")) press("−"); else if (it.kb && (e.key === "," || e.key === ".")) press(","); else if (it.kb && e.key === "/") press("/"); else if (it.kb && e.key === " ") press("␣");
+        else if (it.kb && it.kb !== "geo" && (e.key === "-" || e.key === "−")) press("−"); else if (it.kb && (e.key === "," || e.key === ".")) press(","); else if (it.kb && it.kb !== "geo" && e.key === "/") press("/"); else if (it.kb && it.kb !== "geo" && e.key === " ") press("␣");
       };
       show();
     }
@@ -1543,8 +1543,11 @@
     }
     function series(failed, attempt, cont) {
       var sk = E.SK[failed.skill];
-      var items = E.pick(failed.skill, 3, used, failed.key, failed); // задачі тієї ж будови, що й та, де була помилка
+      var items = failed.type === "choice" && failed.gen ? E.pick(failed.skill, 1, used, failed.key, failed).concat(E.pick(failed.skill, 2, used, failed.key)) // вибір: не лише та сама правильна відповідь, а суміш
+        : E.pick(failed.skill, 3, used, failed.key, failed); // задачі тієї ж будови, що й та, де була помилка
       items.forEach(function (x) { used[x.key] = 1; });
+      if (items.length < 2) E.pick(failed.skill, 3 - items.length, used, failed.key).forEach(function (x) { used[x.key] = 1; items.push(x); }); // мало задач цієї будови — доберемо інші тієї ж навички
+      if (!items.length) items = [failed]; // крайній випадок: повторюємо те саме завдання
       var k = 0, okc = 0, bad = 0, PRE = [2, 1, 0];
       function step() {
         if (okc >= 2 || bad >= 2 || k >= items.length) return finishSeries();
@@ -1557,7 +1560,7 @@
         });
       }
       function finishSeries() {
-        if (okc >= 2 || (items.length < 2 && okc >= items.length)) {
+        if (okc >= 2 || (items.length && items.length < 2 && okc >= items.length)) {
           fixed++; E.fixSkillMistakes(failed.skill); E.unflag(failed.skill);
           if (attempt === 2) E.cnt("brave");
           return showCard(root, '<div class="celebrate">💪</div><h2>' + (attempt === 1 ? G("Зрозуміла!", "Зрозумів!") : "Вийшло! Ось це наполегливість!") + '</h2><p class="muted">' + esc(sk.title) + '</p>', "Далі →", cont);
@@ -1608,7 +1611,7 @@
     var used = {}, out = [], n = (LES.practice && LES.practice.perSkill) || 2;
     LES.skills.forEach(function (id) {
       var got = E.pick(id, n, used), sk = E.SK[id];
-      if ((SUB.id === "algebra" || SUB.id === "geometry") && sk && sk.gen && got.length) { var ez = E.makeGen(sk, { easy: 1 }); if (!used[ez.key]) got[0] = ez; } // перше завдання навички — легше
+      if ((SUB.id === "algebra" || SUB.id === "geometry") && sk && sk.gen && got.length) { var ez = E.makeGen(sk, { easy: 1 }); if (!used[ez.key] && !got.some(function (g) { return g.key === ez.key; })) got[0] = ez; } // перше завдання навички — легше
       got.forEach(function (it) { used[it.key] = 1; out.push(it); });
     });
     return out;
@@ -1668,9 +1671,9 @@
       '<p class="muted small">⭐ ' + pass + '%+ · ⭐⭐ 90%+ · ⭐⭐⭐ 100%</p><div class="row"><button class="btn full" id="go">Почати тест →</button></div></div>';
     $("go").onclick = function () {
       runSession(root, { items: testItems(), mode: "test", onDone: function (s) {
-        var pct = Math.round(s.score / s.max * 100);
-        var stars = pct >= 100 ? 3 : pct >= 90 ? 2 : pct >= pass ? 1 : 0;
-        var L = E.lesson(LES.id), ok = stars > 0;
+        var pct = Math.round(s.score / s.max * 100), okPct = Math.round(s.res.filter(function (r) { return r.ok; }).length / s.max * 100);
+        var ok = okPct >= pass, stars = !ok ? 0 : pct >= 100 ? 3 : pct >= 90 ? 2 : 1; // зарахування — за правильними відповідями; підказки зменшують лише зірки
+        var L = E.lesson(LES.id);
         if (ok) { completeStep("test"); if (stars > L.stars) { var gain = 3 * (stars - L.stars); L.stars = stars; E.save(); E.addStars(gain, "lesson"); toast("⭐ +" + gain + " за тест!"); } }
         if (pct > L.best) L.best = pct;
         E.markDay(); E.save();

@@ -60,7 +60,7 @@
   };
   S.logout = function (id) { setTok(id, ""); pulled[id] = false; };
 
-  function clean(p) { var c = JSON.parse(JSON.stringify(p)); delete c.srv; delete c.dirty; delete c.dseq; return c; }
+  function clean(p) { var c = JSON.parse(JSON.stringify(p)); delete c.srv; delete c.dirty; delete c.dseq; delete c._shrunk; return c; }
 
   /* Забрати прогрес з сервера і ЗЛИТИ з тим, що є на пристрої (нічого не губимо).
      Якщо на пристрої було щось, чого сервер не знає, — відправляємо об'єднану версію назад. */
@@ -101,13 +101,19 @@
     req("PUT", "progress", id, { p: clean(p), base: p.srv || 0 }).then(function (d) {
       busy[id] = false;
       var cur = E.store().profiles[id];
-      if (d.ok && d.upd) { cur.srv = d.upd; if ((cur.dseq || 0) === seq) cur.dirty = false; E.saveRaw(); S.lastOk = Date.now(); }
+      if (d.ok && d.upd) { delete cur._shrunk; cur.srv = d.upd; if ((cur.dseq || 0) === seq) cur.dirty = false; E.saveRaw(); S.lastOk = Date.now(); }
       else if (d.conflict && d.p) {
         // інший пристрій зберіг свою версію — зливаємо обидві й відправляємо ще раз
         E.mergeProfile(cur, d.p); cur.srv = d.upd; cur.dirty = true; E.saveRaw();
         if (S.onRemote) S.onRemote(id);
         again[id] = true;
       } else if (d._status === 401) { S.logout(id); if (S.onLogout) S.onLogout(id); }
+      else if (d._status === 413 && !cur._shrunk) { // прогрес завеликий — прибираємо зайве з «Моїх помилок» і пробуємо ще раз
+        cur._shrunk = 1;
+        (cur.mistakes || []).forEach(function (m) { if (m.fixed) delete m.it; else if (m.it && m.it.pic && m.it.seed != null) delete m.it.pic; });
+        if (cur.mistakes && cur.mistakes.length > 200) cur.mistakes = cur.mistakes.slice(-200);
+        E.saveRaw(); again[id] = true;
+      }
       if (again[id]) { again[id] = false; send(id); }
     }, function () { busy[id] = false; again[id] = false; });
   }

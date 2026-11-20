@@ -40,7 +40,7 @@ export async function onRequest({ request: req, env, params }) {
   let body = {};
   if (req.method === "POST" || req.method === "PUT") {
     const raw = await req.text();
-    if (raw.length > 400000) return J(req, { error: "завеликий запит" }, 413);
+    if (raw.length > 1000000) return J(req, { error: "завеликий запит" }, 413);
     try { body = JSON.parse(raw); } catch (e) {}
   }
 
