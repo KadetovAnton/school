@@ -1,0 +1,31 @@
+{
+ "id": "g22",
+ "title": "§20. Нерівність трикутника",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.ineq"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "g.ineq": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🚗",
+   "h": "Нерівність трикутника",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 298 135.5\" width=\"298\" height=\"135.5\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"24\" y1=\"111.5\" x2=\"274\" y2=\"111.5\" stroke=\"#4B44E6\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"24\" y1=\"111.5\" x2=\"124\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"124\" y1=\"24\" x2=\"274\" y2=\"111.5\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"24\" cy=\"111.5\" r=\"3\" fill=\"#333\"/><circle cx=\"274\" cy=\"111.5\" r=\"3\" fill=\"#333\"/><circle cx=\"124\" cy=\"24\" r=\"3\" fill=\"#333\"/><text x=\"11.4\" y=\"114.7\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"286.7\" y=\"114.3\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text><text x=\"120.4\" y=\"11.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">C</text><text x=\"149\" y=\"126.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">AB < AC + CB</text></svg></div><p>Кожна сторона менша за суму двох інших. Щоб перевірити, чи існує трикутник, досить порівняти <b>найбільшу</b> сторону із сумою двох менших.</p><div class=\"tip\">💡 Рівнобедрений зі сторонами 3 і 8: 3, 3, 8 — не існує (3 + 3 < 8), тож бічні — по 8.</div>"
+  }
+ ]
+}

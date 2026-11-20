@@ -23,7 +23,8 @@
     {
      "id": "geometry",
      "title": "Геометрія",
-     "ic": "📐"
+     "ic": "📐",
+     "open": true
     },
     {
      "id": "ukrainian",

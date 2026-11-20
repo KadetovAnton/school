@@ -10,7 +10,8 @@
   var SUBS = {
     english: { id: "english", base: "content/english/", title: "Англійська", ic: "🇬🇧", words: true, diag: true },
     math2: { id: "math2", base: "content/math2/", title: "Математика", ic: "🔢", words: false, diag: false, kid: true },
-    algebra: { id: "algebra", base: "content/algebra/", title: "Алгебра", ic: "🔢", words: false, diag: "inline", check: true, strict: true } // strict: усе по черзі — без «відкрити раніше» і без ⏭️ пропуску за перевіркою рівня
+    algebra: { id: "algebra", base: "content/algebra/", title: "Алгебра", ic: "🔢", words: false, diag: "inline", check: true, strict: true }, // strict: усе по черзі — без «відкрити раніше» і без ⏭️ пропуску за перевіркою рівня
+    geometry: { id: "geometry", base: "content/geometry/", title: "Геометрія", ic: "📐", words: false, diag: false, check: true, strict: true } // strict: усе по черзі — без «відкрити раніше» і без ⏭️ пропуску за перевіркою рівня
   };
   var SUB = SUBS.english, CTX = {};
   function setSub(id) {
@@ -19,7 +20,7 @@
     SUB = SUBS[id]; E.curSub = id;
     var c = CTX[id] || {}; PATH = c.PATH || null; ALL = !!c.ALL;
     document.body.classList.toggle("kid", !!SUB.kid);
-    document.body.classList.toggle("alg", id === "algebra");
+    document.body.classList.toggle("alg", id === "algebra" || id === "geometry");
   }
   /* звертання з урахуванням статі дитини: G("Зрозуміла", "Зрозумів") */
   function G(f, m) { var c = SUBJ && child(); return c && c.g === "m" ? m : f; }
@@ -1607,7 +1608,7 @@
     var used = {}, out = [], n = (LES.practice && LES.practice.perSkill) || 2;
     LES.skills.forEach(function (id) {
       var got = E.pick(id, n, used), sk = E.SK[id];
-      if (SUB.id === "algebra" && sk && sk.gen && got.length) { var ez = E.makeGen(sk, { easy: 1 }); if (!used[ez.key]) got[0] = ez; } // перше завдання навички — легше
+      if ((SUB.id === "algebra" || SUB.id === "geometry") && sk && sk.gen && got.length) { var ez = E.makeGen(sk, { easy: 1 }); if (!used[ez.key]) got[0] = ez; } // перше завдання навички — легше
       got.forEach(function (it) { used[it.key] = 1; out.push(it); });
     });
     return out;

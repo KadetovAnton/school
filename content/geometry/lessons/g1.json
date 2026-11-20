@@ -1,0 +1,36 @@
+{
+ "id": "g1",
+ "title": "§1. Точка, пряма, промінь",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.pts"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "g.pts": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📍",
+   "h": "Основні фігури",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 298 129.5\" width=\"298\" height=\"129.5\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"24\" y1=\"49.7\" x2=\"152.3\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"47.8\" cy=\"44.9\" r=\"3\" fill=\"#333\"/><circle cx=\"128.6\" cy=\"28.8\" r=\"3\" fill=\"#333\"/><line x1=\"169\" y1=\"69.2\" x2=\"274\" y2=\"69.2\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"169\" cy=\"69.2\" r=\"3\" fill=\"#333\"/><circle cx=\"249.8\" cy=\"69.2\" r=\"3\" fill=\"#333\"/><text x=\"47.8\" y=\"31.9\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"128.6\" y=\"15.8\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text><text x=\"169\" y=\"82.2\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">O</text><text x=\"249.8\" y=\"82.2\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">K</text><text x=\"88.2\" y=\"105.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">пряма AB</text><text x=\"221.5\" y=\"105.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">промінь OK</text></svg></div><p><b>Пряма</b> безмежна в обидва боки. Через <b>будь-які дві точки</b> проходить пряма, і лише одна.</p><p><b>Промінь</b> має початок і йде безмежно в один бік. Називаємо його, починаючи з початку: <b>OK</b>.</p><div class=\"tip\">⌨️ Відповідь — число на клавіатурі; градуси «°» і «см» писати не треба. Десятковий дріб — через кому: 7,5.</div>"
+  },
+  {
+   "e": "🤝",
+   "h": "Скільки прямих?",
+   "html": "<p>Через n точок (жодні три не на одній прямій) — стільки прямих, скільки пар точок:</p><div class=\"rule-box\" style=\"text-align:center;font-size:19px;font-weight:800\">n · (n − 1) : 2</div><p>4 точки → 4 · 3 : 2 = 6 прямих. Точка на прямій ділить її на <b>два</b> промені.</p>"
+  }
+ ]
+}

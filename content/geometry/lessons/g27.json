@@ -1,0 +1,31 @@
+{
+ "id": "g27",
+ "title": "§26. Взаємне розміщення двох кіл",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.two"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "g.two": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🪙",
+   "h": "Два кола",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 298 125.8\" width=\"298\" height=\"125.8\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><circle cx=\"57.3\" cy=\"57.3\" r=\"33.3\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\"/><circle cx=\"99\" cy=\"57.3\" r=\"22.2\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><circle cx=\"196.2\" cy=\"57.3\" r=\"33.3\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\"/><circle cx=\"251.8\" cy=\"57.3\" r=\"22.2\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><text x=\"79.6\" y=\"101.8\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">перетин</text><text x=\"218.4\" y=\"101.8\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">дотик зовні</text></svg></div><table class=\"t\"><tr><td>d = R + r</td><td>дотик зовні</td></tr><tr><td>d = R − r</td><td>дотик внутрішній</td></tr><tr><td>R − r &lt; d &lt; R + r</td><td>перетин</td></tr><tr><td>d &gt; R + r або d &lt; R − r</td><td>спільних точок немає</td></tr></table>"
+  }
+ ]
+}

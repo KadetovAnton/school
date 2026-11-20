@@ -1,0 +1,31 @@
+{
+ "id": "g23",
+ "title": "§21. Коло і круг",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.circ"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "g.circ": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "⭕",
+   "h": "Коло",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 168 168\" width=\"168\" height=\"168\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><circle cx=\"84\" cy=\"84\" r=\"60\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\"/><line x1=\"27.6\" y1=\"104.5\" x2=\"140.4\" y2=\"63.5\" stroke=\"#4B44E6\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"84\" y1=\"84\" x2=\"73.6\" y2=\"24.9\" stroke=\"#E0662B\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"49.6\" y1=\"133.1\" x2=\"130\" y2=\"122.6\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"84\" cy=\"84\" r=\"3\" fill=\"#333\"/><text x=\"89.8\" y=\"95.6\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">O</text><text x=\"88.3\" y=\"51.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"800\" fill=\"#E0662B\">r</text><text x=\"117.8\" y=\"61.7\" dy=\".35em\" text-anchor=\"middle\" font-size=\"15\" font-weight=\"800\" fill=\"#4B44E6\">d</text><text x=\"90.8\" y=\"127.1\" dy=\".35em\" text-anchor=\"middle\" font-size=\"12\" font-weight=\"800\" fill=\"#333\">хорда</text></svg></div><p><b>Радіус</b> r — від центру до кола, <b>хорда</b> — відрізок між двома точками кола, <b>діаметр</b> — хорда через центр: d = 2r. Круг — коло разом з внутрішньою частиною.</p><div class=\"tip\">💡 Два радіуси і хорда утворюють рівнобедрений трикутник.</div>"
+  }
+ ]
+}

@@ -1,0 +1,31 @@
+{
+ "id": "g16",
+ "title": "§14. Рівнобедрений трикутник",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.iso"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "g.iso": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🏠",
+   "h": "Рівнобедрений трикутник",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 188 168\" width=\"188\" height=\"168\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"24\" y1=\"144\" x2=\"94\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"94\" y1=\"24\" x2=\"164\" y2=\"144\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"24\" y1=\"144\" x2=\"164\" y2=\"144\" stroke=\"#4B44E6\" stroke-width=\"2.6\" stroke-linecap=\"round\"/><line x1=\"53.8\" y1=\"81\" x2=\"64.2\" y2=\"87\" stroke=\"#E0662B\" stroke-width=\"2.2\"/><line x1=\"134.2\" y1=\"81\" x2=\"123.8\" y2=\"87\" stroke=\"#E0662B\" stroke-width=\"2.2\"/><circle cx=\"24\" cy=\"144\" r=\"3\" fill=\"#333\"/><circle cx=\"94\" cy=\"24\" r=\"3\" fill=\"#333\"/><circle cx=\"164\" cy=\"144\" r=\"3\" fill=\"#333\"/><path d=\"M42 144 A18 18 0 0 0 33.1 128.5\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><path d=\"M154.9 128.5 A18 18 0 0 0 146 144\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><text x=\"12.7\" y=\"150.4\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"94\" y=\"11\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text><text x=\"175.3\" y=\"150.4\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">C</text><text x=\"94\" y=\"159\" dy=\".35em\" text-anchor=\"middle\" font-size=\"14\" font-weight=\"800\" fill=\"#4B44E6\">основа</text></svg></div><p>AB = BC — <b>бічні сторони</b>, AC — <b>основа</b>. Кути при основі рівні: ∠A = ∠C. Якщо всі сторони рівні — трикутник <b>рівносторонній</b>.</p><div class=\"rule-box\" style=\"text-align:center;font-size:19px;font-weight:800\">P = 2 · бічна + основа</div>"
+  }
+ ]
+}

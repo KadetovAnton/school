@@ -7,6 +7,8 @@
 | Англійська (усі 25 уроків, слова, subjects.json) | `node tools/gen.js content/english` (gen.js підтягує gen_*.js, lib.js) |
 | Математика 2 клас | `node tools/gen_math.js content/math2` (генератори завдань — у `engine/math.js`) |
 | Алгебра 7 клас | `node tools/gen_algebra.js content/algebra` (генератори — `engine/algebra.js`) |
+| Геометрія 7 клас | `node tools/gen_geometry.js content/geometry` (генератори і рисунки — `engine/geometry.js`) |
+| Перевірка геометрії (3000 прикладів на навичку, незалежна перевірка відповіді, форма рисунка) | `node tools/check_geometry.js` |
 | Перевірка алгебри (3000 прикладів на навичку, незалежна перевірка відповіді) | `node tools/check_algebra.js` |
 | Перевірка англійської (відповіді, err, fix, дублікати) | `node tools/check_content.js` (3 «fixdiff» про порядок слів — відомі, не помилки) |
 | Перевірка математики (3000 прикладів на навичку) | `node tools/check_math.js` |

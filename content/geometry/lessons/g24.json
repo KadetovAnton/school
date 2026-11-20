@@ -1,0 +1,31 @@
+{
+ "id": "g24",
+ "title": "§22. Дотична до кола",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.tan"
+ ],
+ "practice": {
+  "perSkill": 6
+ },
+ "test": {
+  "plan": {
+   "g.tan": 6
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "🛞",
+   "h": "Дотична",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 228 168\" width=\"228\" height=\"168\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><circle cx=\"84\" cy=\"84\" r=\"60\" fill=\"none\" stroke=\"#333\" stroke-width=\"2\"/><line x1=\"84\" y1=\"84\" x2=\"114\" y2=\"32\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"84\" y1=\"84\" x2=\"114\" y2=\"136\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"204\" y1=\"84\" x2=\"114\" y2=\"32\" stroke=\"#4B44E6\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"204\" y1=\"84\" x2=\"114\" y2=\"136\" stroke=\"#4B44E6\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M108.5 41.6 L118 47.1 L123.5 37.5\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"1.8\"/><path d=\"M108.5 126.4 L118 120.9 L123.5 130.5\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"1.8\"/><line x1=\"156\" y1=\"63.2\" x2=\"162\" y2=\"52.8\" stroke=\"#E0662B\" stroke-width=\"2.2\"/><line x1=\"162\" y1=\"115.2\" x2=\"156\" y2=\"104.8\" stroke=\"#E0662B\" stroke-width=\"2.2\"/><circle cx=\"84\" cy=\"84\" r=\"3\" fill=\"#333\"/><circle cx=\"114\" cy=\"32\" r=\"3\" fill=\"#333\"/><circle cx=\"114\" cy=\"136\" r=\"3\" fill=\"#333\"/><circle cx=\"204\" cy=\"84\" r=\"3\" fill=\"#333\"/><text x=\"71\" y=\"84\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">O</text><text x=\"110.4\" y=\"19.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"110.4\" y=\"148.5\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text><text x=\"217\" y=\"84\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">P</text></svg></div><p>Дотична має з колом одну спільну точку і <b>перпендикулярна до радіуса</b> в цій точці. Відрізки дотичних з однієї точки рівні: PA = PB.</p>"
+  }
+ ]
+}

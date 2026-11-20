@@ -1,0 +1,38 @@
+{
+ "id": "g3",
+ "title": "§3. Кут. Вимірювання кутів",
+ "steps": [
+  "explain",
+  "practice",
+  "test"
+ ],
+ "skillFiles": [
+  "skills/geometry.json"
+ ],
+ "skills": [
+  "g.kind",
+  "g.ang"
+ ],
+ "practice": {
+  "perSkill": 4
+ },
+ "test": {
+  "plan": {
+   "g.kind": 3,
+   "g.ang": 4
+  },
+  "pass": 80
+ },
+ "explain": [
+  {
+   "e": "📐",
+   "h": "Види кутів",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 298 115.3\" width=\"298\" height=\"115.3\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"24\" y1=\"75.3\" x2=\"75.3\" y2=\"75.3\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"24\" y1=\"75.3\" x2=\"57\" y2=\"36\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M42 75.3 A18 18 0 0 0 35.6 61.5\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><line x1=\"120.2\" y1=\"75.3\" x2=\"171.4\" y2=\"75.3\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"120.2\" y1=\"75.3\" x2=\"120.2\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M131.2 75.3 L131.2 64.3 L120.2 64.3\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"1.8\"/><line x1=\"222.7\" y1=\"75.3\" x2=\"274\" y2=\"75.3\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"222.7\" y1=\"75.3\" x2=\"189.8\" y2=\"36\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><path d=\"M240.7 75.3 A18 18 0 0 0 211.1 61.5\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><text x=\"43.2\" y=\"91.3\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">гострий</text><text x=\"139.4\" y=\"91.3\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">прямий</text><text x=\"241.9\" y=\"91.3\" dy=\".35em\" text-anchor=\"middle\" font-size=\"13\" font-weight=\"800\" fill=\"#4B44E6\">тупий</text></svg></div><p>Гострий &lt; 90°, прямий = 90° (позначають квадратиком), тупий — між 90° і 180°, розгорнутий = 180° (сторони утворюють пряму).</p>"
+  },
+  {
+   "e": "🍕",
+   "h": "Кут з частин",
+   "html": "<div class=\"pic\"><svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 218.9 168\" width=\"218.9\" height=\"168\" style=\"max-width:100%;height:auto;background:#fff;border-radius:10px\" letter-spacing=\"0\"><line x1=\"67.7\" y1=\"144\" x2=\"194.9\" y2=\"132.9\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"67.7\" y1=\"144\" x2=\"149.8\" y2=\"46.2\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><line x1=\"67.7\" y1=\"144\" x2=\"24\" y2=\"24\" stroke=\"#333\" stroke-width=\"2\" stroke-linecap=\"round\"/><circle cx=\"67.7\" cy=\"144\" r=\"3\" fill=\"#333\"/><path d=\"M97.6 141.4 A30 30 0 0 0 87 121\" fill=\"none\" stroke=\"#4B44E6\" stroke-width=\"2\"/><path d=\"M93.4 113.4 A40 40 0 0 0 54 106.4\" fill=\"none\" stroke=\"#E0662B\" stroke-width=\"2\"/><text x=\"67.7\" y=\"157\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">O</text><text x=\"206.3\" y=\"139\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">A</text><text x=\"159\" y=\"37\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">C</text><text x=\"13.5\" y=\"16.3\" dy=\".35em\" text-anchor=\"middle\" font-size=\"16\" font-weight=\"800\" fill=\"#333\">B</text></svg></div><p>Якщо промінь OC проходить між сторонами кута AOB:</p><div class=\"rule-box\" style=\"text-align:center;font-size:19px;font-weight:800\">∠AOB = ∠AOC + ∠COB</div>"
+  }
+ ]
+}
