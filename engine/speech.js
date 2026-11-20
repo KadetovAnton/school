@@ -69,8 +69,42 @@
     u.rate = rate || 0.9; u.volume = 1; u.pitch = 1;
     return u;
   }
+  /* ---- записана озвучка (Gemini з AI Studio): content/audio/en/index.json = {нормалізований текст: файл} ---- */
+  var REC = null, recBase = base.replace(/engine\/$/, "") + "content/audio/en/", player = null;
+  function norm(t) { return String(t).replace(/<[^>]+>/g, "").replace(/[\u2018\u2019]/g, "'").toLowerCase().replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").replace(/^ | $/g, ""); }
+  try {
+    var xr = new XMLHttpRequest(); xr.open("GET", recBase + "index.json?v=" + (window.APP_VER || ""), true);
+    xr.onload = function () { try { if (xr.status === 200) REC = JSON.parse(xr.responseText); } catch (e) {} };
+    xr.send();
+  } catch (e) {}
+  // перше натискання будь-де «розблоковує» програвач, щоб запис грав і з затримкою (Safari на iPhone)
+  function arm() {
+    try { if (!player) { player = new Audio(); player.setAttribute("playsinline", ""); } if (!player.src) { player.src = base + "silent.mp3"; var q = player.play(); if (q && q.catch) q.catch(function () {}); } } catch (e) {}
+    document.removeEventListener("touchend", arm, true); document.removeEventListener("click", arm, true);
+  }
+  try { document.addEventListener("touchend", arm, true); document.addEventListener("click", arm, true); } catch (e) {}
+  S.recorded = function (text) { return !!(REC && REC[norm(text)]); };
+  function playRec(text, rate) {
+    var f = REC && REC[norm(text)];
+    if (!f) return false;
+    try {
+      if (synth && (synth.speaking || synth.pending)) synth.cancel();
+      if (!player) { player = new Audio(); player.setAttribute("playsinline", ""); }
+      player.pause();
+      player.src = recBase + f;
+      var slow = rate && rate < 0.8;
+      player.playbackRate = slow ? 0.75 : 1; // повільно — без «мультяшного» спотворення (тон зберігається)
+      try { player.preservesPitch = true; player.webkitPreservesPitch = true; } catch (e) {}
+      var p = player.play();
+      if (p && p.catch) p.catch(function () { S.say(text, rate, "synth"); });
+      return true;
+    } catch (e) { return false; }
+  }
+
   S.say = function (text, rate, lang) {
-    if (!S.can || !text) return;
+    if (!text) return;
+    if (lang !== "uk" && lang !== "synth" && playRec(text, rate)) return;
+    if (!S.can) return;
     try {
       unlock();
       if (synth.speaking || synth.pending) synth.cancel();
@@ -87,5 +121,5 @@
     } catch (e) {}
   };
   S.uk = function (text) { S.say(text, 0.95, "uk"); }; // українською — для завдань молодших
-  S.stop = function () { try { if (synth && (synth.speaking || synth.pending)) synth.cancel(); } catch (e) {} };
+  S.stop = function () { try { if (player) player.pause(); if (synth && (synth.speaking || synth.pending)) synth.cancel(); } catch (e) {} };
 })();
