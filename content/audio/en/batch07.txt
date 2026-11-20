@@ -79,6 +79,7 @@ door
 floor
 
 wall
+
 sofa
 
 wardrobe

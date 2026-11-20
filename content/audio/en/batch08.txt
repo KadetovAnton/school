@@ -79,6 +79,7 @@ shop
 market
 
 bank
+
 hospital
 
 post office
