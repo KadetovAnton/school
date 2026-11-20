@@ -79,3 +79,84 @@ door
 floor
 
 wall
+sofa
+
+wardrobe
+
+stairs
+
+classroom
+
+lesson
+
+teacher
+
+pupil
+
+timetable
+
+break
+
+homework
+
+mark
+
+exercise book
+
+textbook
+
+pencil case
+
+ruler
+
+board
+
+subject
+
+maths
+
+hobby
+
+collect
+
+draw
+
+paint
+
+ride a bike
+
+go swimming
+
+listen to music
+
+watch films
+
+play chess
+
+dance
+
+sing
+
+take photos
+
+read books
+
+enjoy
+
+hate
+
+bread
+
+butter
+
+cheese
+
+egg
+
+milk
+
+meat
+
+fish
+
+chicken

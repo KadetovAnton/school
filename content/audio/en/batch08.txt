@@ -1,81 +1,162 @@
-sofa
+potatoes
 
-wardrobe
+vegetables
 
-stairs
+fruit
 
-classroom
+apple
 
-lesson
+soup
 
-teacher
+juice
 
-pupil
+tea
 
-timetable
+dog
 
-break
+cat
 
-homework
+horse
 
-mark
+cow
 
-exercise book
+pig
 
-textbook
+sheep
 
-pencil case
+rabbit
 
-ruler
+mouse
 
-board
+bird
 
-subject
+fox
 
-maths
+wolf
 
-hobby
+bear
 
-collect
+lion
 
-draw
+monkey
 
-paint
+elephant
 
-ride a bike
+spring
 
-go swimming
+summer
 
-listen to music
+autumn
 
-watch films
+winter
 
-play chess
+weather
 
-dance
+sun
 
-sing
+rain
 
-take photos
+snow
 
-read books
+wind
 
-enjoy
+cloud
 
-hate
+cold
 
-bread
+hot
 
-butter
+warm
 
-cheese
+sunny
 
-egg
+windy
 
-milk
+street
 
-meat
+shop
 
-fish
+market
 
-chicken
+bank
+hospital
+
+post office
+
+park
+
+cinema
+
+museum
+
+library
+
+bus stop
+
+bridge
+
+square
+
+station
+
+cafe
+
+clothes
+
+T-shirt
+
+shirt
+
+jeans
+
+trousers
+
+skirt
+
+dress
+
+jacket
+
+coat
+
+sweater
+
+shoes
+
+boots
+
+trainers
+
+hat
+
+scarf
+
+travel
+
+trip
+
+plane
+
+train
+
+ticket
+
+suitcase
+
+passport
+
+airport
+
+hotel
+
+map
+
+sea
+
+beach
+
+mountains
+
+holidays
+
+abroad
