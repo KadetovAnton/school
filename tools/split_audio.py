@@ -16,21 +16,35 @@ dur = float(subprocess.check_output(["ffprobe", "-v", "error", "-show_entries", 
 log = subprocess.run(["ffmpeg", "-hide_banner", "-i", clean, "-af", "silencedetect=n=-35dB:d=0.3", "-f", "null", "-"], capture_output=True, text=True).stderr
 st = [float(x) for x in re.findall(r"silence_start: ([0-9.]+)", log)]; en = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", log)]
 gaps = [(e - s, s, e) for s, e in zip(st, en) if s > 0.5 and e < dur - 0.3]
-tot = float(sum(len(p) for p in phr)); acc = 0; cuts = []
-by_len = sorted(gaps, reverse=True)
-if len(by_len) >= n - 1 and (len(by_len) == n - 1 or by_len[n - 2][0] > 1.3 * by_len[n - 1][0]):
-    cuts = sorted(by_len[: n - 1], key=lambda g: g[1]); phr_loop = []  # паузи між фразами чітко довші за решту — беремо їх усі
-else:
-    phr_loop = phr[:-1]
-for p in phr_loop:
-    acc += len(p); exp = dur * acc / tot
-    cand = [g for g in gaps if not cuts or g[1] > cuts[-1][2]]
-    if not cand: sys.exit("замало пауз після %.1f с" % (cuts[-1][2] if cuts else 0))
-    near = [g for g in cand if abs((g[1] + g[2]) / 2 - exp) <= max(3.0, 0.04 * dur)]
-    cuts.append(max(near, key=lambda g: g[0]) if near else min(cand, key=lambda g: abs((g[1] + g[2]) / 2 - exp)))  # у вікні ±3 с — найдовша пауза
+# Вибір n−1 пауз динамічним програмуванням: довші паузи — краще; тривалість кожного шматка має відповідати
+# довжині тексту фрази (символи × темп). Так не плутаються паузи всередині фрази («Hi! I am Anya.») з паузами між фразами.
+gaps = [g for g in gaps if g[0] >= 0.25]
+m = len(gaps)
+if m < n - 1: sys.exit("замало пауз: знайдено %d, треба %d" % (m, n - 1))
+chars = [max(4, len(re.sub(r"\s+", " ", p))) for p in phr]
+top = sum(sorted((g[0] for g in gaps), reverse=True)[: n - 1])
+rate = (dur - top) / float(sum(chars))          # секунд на символ
+exp = [c * rate for c in chars]
+INF = float("inf"); A, B = 1.0, 10               # штраф за 1 с розбіжності тривалості / бонус за 1 с паузи
+def seg(a_end, b_start, k): return A * abs((b_start - a_end) - exp[k]) / max(0.6, exp[k]) ** 0.5
+# dp[i][j] — найкраща вартість, якщо i-та межа (0-based) — пауза j
+dp = [[INF] * m for _ in range(n - 1)]; bk = [[-1] * m for _ in range(n - 1)]
+for j in range(m): dp[0][j] = seg(0.0, gaps[j][1], 0) - B * gaps[j][0]
+for i in range(1, n - 1):
+    for j in range(i, m):
+        best, arg = INF, -1
+        for q in range(i - 1, j):
+            if dp[i - 1][q] == INF: continue
+            v = dp[i - 1][q] + seg(gaps[q][2], gaps[j][1], i)
+            if v < best: best, arg = v, q
+        if arg >= 0: dp[i][j] = best - B * gaps[j][0]; bk[i][j] = arg
+fin = min(range(m), key=lambda j: dp[n - 2][j] + seg(gaps[j][2], dur, n - 1) if dp[n - 2][j] < INF else INF)
+idxs = [fin]
+for i in range(n - 2, 0, -1): idxs.append(bk[i][idxs[-1]])
+cuts = [gaps[j] for j in reversed(idxs)]
 starts = [0.0] + [e - 0.05 for _, s, e in cuts]; ends = [s + 0.12 for _, s, e in cuts] + [dur]
 for i, (a, b) in enumerate(zip(starts, ends)):
     f = os.path.join(out, "%02d.mp3" % (i + 1))
-    subprocess.check_call(["ffmpeg", "-y", "-loglevel", "error", "-i", clean, "-ss", "%.2f" % a, "-to", "%.2f" % b, "-af", "loudnorm=I=-16:TP=-1.5", "-ac", "1", "-ar", "44100", "-b:a", "80k", f])
+    subprocess.check_call(["ffmpeg", "-y", "-loglevel", "error", "-ss", "%.2f" % a, "-t", "%.2f" % (b - a), "-i", clean, "-af", "loudnorm=I=-16:TP=-1.5", "-ac", "1", "-ar", "44100", "-b:a", "80k", f])
     print("%02d  %.2f с" % (i + 1, b - a))
 os.remove(clean)
