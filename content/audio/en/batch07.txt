@@ -1,0 +1,81 @@
+get up
+
+wake up
+
+have breakfast
+
+have lunch
+
+have dinner
+
+brush my teeth
+
+wash my face
+
+get dressed
+
+go to school
+
+come home
+
+do homework
+
+go to bed
+
+early
+
+late
+
+mother
+
+father
+
+parents
+
+sister
+
+brother
+
+grandmother
+
+grandfather
+
+aunt
+
+uncle
+
+cousin
+
+son
+
+daughter
+
+husband
+
+wife
+
+twins
+
+house
+
+flat
+
+room
+
+kitchen
+
+bedroom
+
+bathroom
+
+living room
+
+garden
+
+window
+
+door
+
+floor
+
+wall

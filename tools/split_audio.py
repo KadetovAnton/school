@@ -17,7 +17,12 @@ log = subprocess.run(["ffmpeg", "-hide_banner", "-i", clean, "-af", "silencedete
 st = [float(x) for x in re.findall(r"silence_start: ([0-9.]+)", log)]; en = [float(x) for x in re.findall(r"silence_end: ([0-9.]+)", log)]
 gaps = [(e - s, s, e) for s, e in zip(st, en) if s > 0.5 and e < dur - 0.3]
 tot = float(sum(len(p) for p in phr)); acc = 0; cuts = []
-for p in phr[:-1]:
+by_len = sorted(gaps, reverse=True)
+if len(by_len) >= n - 1 and (len(by_len) == n - 1 or by_len[n - 2][0] > 1.3 * by_len[n - 1][0]):
+    cuts = sorted(by_len[: n - 1], key=lambda g: g[1]); phr_loop = []  # паузи між фразами чітко довші за решту — беремо їх усі
+else:
+    phr_loop = phr[:-1]
+for p in phr_loop:
     acc += len(p); exp = dur * acc / tot
     cand = [g for g in gaps if not cuts or g[1] > cuts[-1][2]]
     if not cand: sys.exit("замало пауз після %.1f с" % (cuts[-1][2] if cuts else 0))
