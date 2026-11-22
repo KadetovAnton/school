@@ -37,6 +37,8 @@
   }
 
   S.status = function (id) { return req("GET", "status?kid=" + id); };
+  /* статистика для батьків (PIN батьків) */
+  S.parent = function (pin) { return req("POST", "parent", null, { pin: pin }).then(function (d) { if (!d.ok && !d.error) d.error = "Сервер не відповів (" + d._status + ")"; return d; }, function () { return { error: "Немає зв'язку з сервером" }; }); };
 
   S.login = function (id, pin) {
     return req("POST", "login", null, { kid: id, pin: pin }).then(function (d) {
@@ -66,6 +68,7 @@
         loc.srv = d.upd; E.saveRaw(); res = "updated";
       }
       pulled[id] = true;
+      S.flushQueue(id);
       loc = st.profiles[id];
       if (loc && (loc.dirty || (!d.p && E.hasProgress(loc)))) { loc.dirty = true; S.push(id, true); }
       return res;
@@ -121,6 +124,28 @@
     if (!tok(id)) return Promise.resolve(false);
     return req("POST", "report", id, { text: text }).then(function (d) { return !!d.ok; }, function () { return false; });
   };
+
+  /* Черга звітів, які не вдалося надіслати (немає інтернету) — підуть при наступному зв'язку. */
+  var PK = "school-pend-";
+  function pend(id) { try { return JSON.parse(localStorage.getItem(PK + id) || "[]") || []; } catch (e) { return []; } }
+  function setPend(id, a) { try { if (a.length) localStorage.setItem(PK + id, JSON.stringify(a)); else localStorage.removeItem(PK + id); } catch (e) {} }
+  S.queue = function (id, text) {
+    var a = pend(id).filter(function (x) { return x.text !== text && Date.now() - x.t < 3 * 864e5; });
+    a.push({ t: Date.now(), text: text }); setPend(id, a.slice(-10));
+  };
+  S.unqueue = function (id, text) { setPend(id, pend(id).filter(function (x) { return x.text !== text; })); };
+  var flushing = {};
+  S.flushQueue = function (id) {
+    var a = pend(id).filter(function (x) { return Date.now() - x.t < 3 * 864e5; });
+    if (!a.length || flushing[id] || !tok(id)) { if (!a.length) setPend(id, []); return; }
+    flushing[id] = true;
+    var x = a[0];
+    req("POST", "report", id, { text: x.text + "\n(надіслано із запізненням — не було інтернету)" }).then(function (d) {
+      flushing[id] = false;
+      if (d.ok || d._status === 429 || d._status === 400) { S.unqueue(id, x.text); S.flushQueue(id); }
+    }, function () { flushing[id] = false; });
+  };
+  window.addEventListener("online", function () { var id = E.cur(); if (id) S.flushQueue(id); });
 
   // сховали вкладку — відправити; повернулись — перевірити, чи не займались на іншому пристрої
   document.addEventListener("visibilitychange", function () {

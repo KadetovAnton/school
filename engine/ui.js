@@ -14,6 +14,7 @@
     geometry: { id: "geometry", base: "content/geometry/", title: "Геометрія", ic: "📐", words: false, diag: false, check: true, strict: true } // strict: усе по черзі — без «відкрити раніше» і без ⏭️ пропуску за перевіркою рівня
   };
   var SUB = SUBS.english, CTX = {};
+  E.SUBT = {}; for (var sk0 in SUBS) E.SUBT[sk0] = SUBS[sk0].title; // назви предметів для журналу занять
   function setSub(id) {
     if (!SUBS[id]) return;
     CTX[SUB.id] = { PATH: PATH, ALL: ALL };
@@ -143,6 +144,7 @@
     var r = E.reward();
     function form() {
       $app.innerHTML = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">⚙️ Для батьків</span></div>' +
+        (SY && r.pin ? '<div class="card"><button class="btn full" id="stt">📊 Статистика: коли займались, що робили, де важко</button></div>' : "") +
         '<div class="card"><h2>🎁 Нагорода тижня — ' + esc(E.P().name) + '</h2>' +
         '<label class="lbl">Що отримає за тиждень</label><input id="rt" type="text" placeholder="напр. похід у кіно, 200 грн, піца" value="' + esc(r.text) + '">' +
         '<label class="lbl">Скільки ⭐ треба за тиждень</label><input id="rg" type="text" inputmode="numeric" value="' + r.goal + '">' +
@@ -152,6 +154,7 @@
         (PATH ? '<div class="card"><h2>↺ Почати етап заново</h2><p class="muted small">Якщо етап «пройдено» нечесно (з калькулятором, підглядаючи) — уроки й навички етапу стануть непройденими на всіх пристроях. Зірки, що вже нараховані, лишаються.</p>' +
           PATH.stages.map(function (st, i) { return '<div class="rs-row"><span>' + esc(st.title) + '</span><button class="btn ghost small" data-rs="' + i + '">↺ Заново</button></div>'; }).join("") + '</div>' : "");
       $("bk").onclick = function () { back(); toTop(); };
+      if ($("stt")) $("stt").onclick = function () { renderParent(function () { renderDad(back); }, r.pin, E.cur()); toTop(); };
       var rb = $app.querySelectorAll("[data-rs]");
       for (var ri = 0; ri < rb.length; ri++) (function (b) {
         b.onclick = function () {
@@ -182,6 +185,92 @@
     $("bk").onclick = function () { back(); toTop(); };
     var go = function () { if ($("pn").value === r.pin) form(); else { toast("PIN не підходить"); $("pn").value = ""; } };
     $("ok").onclick = go; $("pn").onkeydown = function (e) { if (e.key === "Enter") go(); };
+  }
+
+  /* ================== СТАТИСТИКА ДЛЯ БАТЬКІВ ==================
+     Дані — із сервера (прогрес обох дітей), вхід — PIN батьків з «⚙️ Батьки». */
+  var DOW = ["Нд", "Пн", "Вт", "Ср", "Чт", "Пт", "Сб"];
+  function renderParent(back, pin, kid) {
+    var bar = '<div class="topbar"><button class="back" id="bk">← Назад</button><span class="muted small" style="font-weight:700">📊 Для батьків</span></div>';
+    var bindBack = function () { $("bk").onclick = function () { back(); toTop(); }; };
+    if (!pin) {
+      $app.innerHTML = bar + '<div class="card"><h2>🔒 Статистика для батьків</h2><p class="muted small">PIN батьків — той, що ви задали в профілі дитини (🎁 Нагорода тижня → ⚙️).</p>' +
+        '<label class="lbl">PIN батьків</label><input id="pn" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div class="row"><button class="btn full" id="ok">Відкрити</button></div></div>';
+      bindBack();
+      var go = function () { var v = $("pn").value.trim(); if (!/^\d{4}$/.test(v)) { toast("PIN — 4 цифри"); return; } renderParent(back, v); };
+      $("ok").onclick = go; $("pn").onkeydown = function (e) { if (e.key === "Enter") go(); };
+      setTimeout(function () { try { $("pn").focus(); } catch (e) {} }, 50);
+      return;
+    }
+    $app.innerHTML = bar + '<div class="loading">Завантажую статистику… ⏳</div>'; bindBack();
+    SY.parent(pin).then(function (d) {
+      if (!d.ok) {
+        $app.innerHTML = bar + '<div class="card" style="text-align:center"><div class="big-emoji">🔒</div><p>' + esc(d.error || "Не вдалося завантажити") + '</p><div class="row"><button class="btn full" id="again">Спробувати ще раз</button></div></div>';
+        bindBack(); $("again").onclick = function () { renderParent(back); };
+        return;
+      }
+      var ids = (SUBJ ? SUBJ.children.map(function (c) { return c.id; }) : Object.keys(d.kids)).filter(function (k) { return k in d.kids; });
+      var cur = kid && d.kids[kid] ? kid : ids[0];
+      var draw = function () {
+        $app.innerHTML = bar + (ids.length > 1 ? '<div class="card" style="padding:10px"><div class="row" style="margin:0">' + ids.map(function (k) {
+          var c = null; (SUBJ ? SUBJ.children : []).forEach(function (x) { if (x.id === k) c = x; });
+          return '<button class="btn ' + (k === cur ? "" : "ghost") + ' full" data-k="' + k + '">' + (c ? c.emoji + " " + esc(c.name) : esc(d.kids[k].name || k)) + '</button>';
+        }).join("") + '</div></div>' : "") + parentStats(d.kids[cur]);
+        bindBack();
+        var ks = $app.querySelectorAll("[data-k]");
+        for (var i = 0; i < ks.length; i++) (function (b) { b.onclick = function () { cur = b.getAttribute("data-k"); draw(); }; })(ks[i]);
+      };
+      draw();
+    });
+  }
+  function parentStats(p) {
+    if (!p) return '<div class="card"><p class="muted">Ще немає даних.</p></div>';
+    var acts = (p.act || []).filter(Boolean), t = E.today();
+    var hm = function (ms) { var x = new Date(ms); return ("0" + x.getHours()).slice(-2) + ":" + ("0" + x.getMinutes()).slice(-2); };
+    var dm = function (d) { var a = d.split("-"); return a[2] + "." + a[1]; };
+    var dow = function (d) { var a = d.split("-"); return DOW[new Date(+a[0], +a[1] - 1, +a[2]).getDay()]; };
+    var subT = function (a) { return a.st || E.subTitle(a.sub); };
+    var num = function (x) { return String(Math.round(x * 10) / 10).replace(".", ","); };
+    // по днях
+    var days = [], mx = 1;
+    for (var i = 0; i < 14; i++) {
+      var d = E.addDays(t, -i), da = acts.filter(function (a) { return a.d === d; }), tasks = 0, dl = p.daily[d] || {};
+      for (var k in dl) tasks += dl[k] || 0;
+      var sec = da.reduce(function (s, a) { return s + (a.sec || 0); }, 0), first = da.length ? Math.min.apply(null, da.map(function (a) { return a.t; })) : 0;
+      var subs = {}; da.forEach(function (a) { subs[subT(a)] = 1; }); if (!da.length) for (k in dl) subs[E.subTitle(k)] = 1;
+      days.push({ d: d, min: sec ? Math.max(1, Math.round(sec / 60)) : 0, tasks: tasks, first: first, subs: Object.keys(subs) });
+      if (sec / 60 > mx) mx = sec / 60;
+    }
+    var week = days.slice(0, 7), wMin = week.reduce(function (s, x) { return s + x.min; }, 0), wDays = week.filter(function (x) { return x.tasks; }).length;
+    var html = '<div class="card"><h2 style="margin-top:0">' + esc(p.name || "") + '</h2><div class="stats">' +
+      '<span class="stat">🔥 ' + E.streak(p) + ' ' + dayWord(E.streak(p)) + ' поспіль</span>' +
+      '<span class="stat">📅 ' + wDays + ' з 7 днів</span><span class="stat">⏱ ' + wMin + ' хв за тиждень</span>' +
+      '<span class="stat">⭐ ' + E.starsWeek(p) + ' цього тижня</span><span class="stat">🎓 уроків пройдено: ' + (p.lessons || 0) + '</span></div></div>';
+    html += '<div class="card"><h3 style="margin-top:0">📅 Останні 14 днів</h3>' + days.map(function (x) {
+      var w = x.min ? Math.max(4, Math.round(x.min / mx * 100)) : 0;
+      return '<div style="margin:8px 0"><div style="display:flex;justify-content:space-between;gap:8px;font-size:14px"><b>' + dow(x.d) + ' ' + dm(x.d) + '</b><span class="muted">' +
+        (x.tasks ? (x.min ? x.min + " хв · " : "") + x.tasks + " " + tasksW(x.tasks) + (x.first ? " · з " + hm(x.first) : "") : "не займались") + '</span></div>' +
+        (x.tasks ? '<div class="prog" style="margin:3px 0 0"><i style="width:' + (w || 4) + '%"></i></div><div class="muted small">' + esc(x.subs.join(", ")) + '</div>' : "") + '</div>';
+    }).join("") + '<p class="muted small">Хвилини — лише час між відповідями (довгі паузи не рахуються).</p></div>';
+    // останні заняття
+    var last = acts.slice(-20).reverse();
+    html += '<div class="card"><h3 style="margin-top:0">🕘 Останні заняття</h3>' + (last.length ? last.map(function (a, j) {
+      var later = acts.slice(acts.indexOf(a) + 1).some(function (b) { return b.w === a.w && b.sub === a.sub; });
+      var res = a.fin && a.mx ? "✅ " + num(a.sc) + " з " + a.mx : a.tot && !a.fin && !later && (a.pos || 0) < a.tot ? "⚠️ не закінчено: " + (a.pos || 0) + " з " + a.tot : a.n ? a.n + " відп." + (a.n ? " (✅ " + (a.ok || 0) + ")" : "") : "відкрито";
+      return '<div style="padding:8px 0;border-top:' + (j ? "1px solid var(--line)" : "0") + '"><div class="muted small">' + dow(a.d) + ' ' + dm(a.d) + ', ' + hm(a.t) + ' · ' + esc(subT(a)) +
+        (a.sec ? ' · ' + Math.max(1, Math.round(a.sec / 60)) + ' хв' : '') + '</div><div><b>' + esc(a.w || "Вправи") + '</b> — ' + res + '</div></div>';
+    }).join("") : '<p class="muted">Журнал занять почав вестись ' + dm(t) + ' — дані з\'являться після наступних занять.</p>') + '</div>';
+    // де найважче
+    var open = {}; (p.mistakes || []).forEach(function (m) { if (!m.fixed && m.skill) open[m.skill] = (open[m.skill] || 0) + 1; });
+    var hard = Object.keys(p.skills || {}).map(function (id) { var s = p.skills[id]; return { id: id, s: s, o: open[id] || 0, r: (s.bad || 0) / Math.max(1, s.n || 0) }; })
+      .filter(function (x) { return x.o || (x.s.bad || 0) >= 2 || x.s.flag; })
+      .sort(function (a, b) { return (b.s.flag ? 1 : 0) - (a.s.flag ? 1 : 0) || b.o - a.o || b.r - a.r; }).slice(0, 10);
+    html += '<div class="card"><h3 style="margin-top:0">🌱 Де найважче</h3>' + (hard.length ? hard.map(function (x) {
+      var nm = (p.skn || {})[x.id] || (E.SK[x.id] && E.SK[x.id].title) || x.id;
+      return '<div style="padding:6px 0"><b>' + esc(nm) + '</b>' + (x.s.flag ? ' 🤝' : '') + '<div class="muted small">помилок ' + (x.s.bad || 0) + ' з ' + (x.s.n || 0) +
+        (x.o ? ' · ще не виправлено: ' + x.o : ' · уже виправлено') + (x.s.last ? ' · востаннє ' + dm(x.s.last) : '') + '</div></div>';
+    }).join("") + (hard.some(function (x) { return x.s.flag; }) ? '<p class="muted small">🤝 — тема, яку варто розібрати разом із дитиною: кілька спроб не допомогли.</p>' : "") : '<p class="muted">Поки все йде добре 👍</p>') + '</div>';
+    return html;
   }
 
   /* ================== ЗНАЧКИ І ОФОРМЛЕННЯ ================== */
@@ -233,7 +322,9 @@
           var p = E.store().profiles[c.id], n = p ? E.todayCount(null, p) : 0, st = p ? E.streak(p) : 0;
           return '<button class="who-b" data-id="' + c.id + '"><span class="who-e">' + c.emoji + '</span><span class="who-n">' + esc(c.name) + '</span>' +
             '<span class="who-s">' + c.grade + ' клас' + (st ? ' · 🔥 ' + st : '') + (n ? ' · сьогодні ' + n : '') + '</span></button>';
-        }).join("") + '</div></div>';
+        }).join("") + '</div>' +
+        (SY ? '<div class="row" style="margin-top:14px"><button class="btn plain full" id="par">👨‍👩‍👧 Для батьків: статистика</button></div>' : "") + '</div>';
+      if ($("par")) $("par").onclick = function () { renderParent(renderWho); toTop(); };
       var bs = $app.querySelectorAll(".who-b");
       for (var i = 0; i < bs.length; i++) (function (b) {
         b.onclick = function () {
@@ -309,6 +400,21 @@
     if (!SY || !SY.has(E.cur())) return copy();
     toast("Надсилаю… 📨");
     SY.report(E.cur(), text).then(function (ok) { if (ok) { if (okCb) okCb(); toast("✅ Надіслано батькам у Telegram"); } else copy(); });
+  }
+
+  /* звіт батькам надсилається САМ, щойно з'явився результат; кнопка лише показує, що вже надіслано.
+     Якщо дитина без входу або немає інтернету — звіт ставиться в чергу (SYNC) і піде пізніше, а кнопка дозволяє надіслати/скопіювати вручну. */
+  function autoDad(btnId, text, okCb) {
+    var b = $(btnId); if (!b) return;
+    var manual = function (msg) { b.disabled = false; b.textContent = msg || "📨 Надіслати батькам"; b.onclick = function () { if (SY && SY.unqueue) SY.unqueue(E.cur(), text); sendDad(text, okCb); }; };
+    if (!SY || !SY.has(E.cur())) return manual();
+    b.disabled = true; b.textContent = "📨 Надсилаю звіт батькам…";
+    var kid = E.cur();
+    SY.report(kid, text).then(function (ok) {
+      if (!$(btnId)) return;
+      if (ok) { if (okCb) okCb(); b.textContent = "✅ Звіт уже в батьків"; }
+      else { SY.queue(kid, text); manual("📨 Звіт піде, щойно буде інтернет · надіслати зараз"); }
+    });
   }
 
   /* як показати завдання в списках (помилки, результати тесту, звіт): у «Знайди помилку» речення навмисно з помилкою */
@@ -534,8 +640,13 @@
       var resume = run && run.i > 0 && run.i < run.items.length;
       var save = function (r) { try { localStorage.setItem(checkKey(st, re), JSON.stringify(r)); } catch (e) {} };
       var start = function (r) {
+        E.actStart(SUB.id, (re ? "🔁 Повторна" : "🏁 Підсумкова") + " перевірка «" + st.title + "»", r.items.length); E.actPos(r.i);
         var step = function () {
-          if (r.i >= r.items.length) { try { localStorage.removeItem(checkKey(st, re)); } catch (e) {} return checkResult(si, r, re); }
+          if (r.i >= r.items.length) {
+            try { localStorage.removeItem(checkKey(st, re)); } catch (e) {}
+            E.actEnd(r.res.filter(function (x) { return x.ok; }).length, r.res.length);
+            return checkResult(si, r, re);
+          }
           var it = r.items[r.i];
           E.ITEM[it.key] = it;
           showTask($app, it, {
@@ -544,9 +655,9 @@
             chip: (re ? "🔁 Повторна · " : "🏁 Підсумкова · ") + (r.i + 1) + " з " + r.items.length, prog: r.i / r.items.length,
             nextLabel: function () { return r.i + 1 < r.items.length ? "Далі →" : "Результат"; },
             done: function (x) {
-              E.tick(SUB.id); E.record(it.skill, !!x.ok, !!x.clean);
+              E.tick(SUB.id, !!x.ok); E.record(it.skill, !!x.ok, !!x.clean);
               if (x.ok) E.fixMistake(it.key); else E.addMistake(it, x.given);
-              r.res.push({ s: it.skill, ok: !!x.ok, k: it.key }); r.i++; save(r); step();
+              r.res.push({ s: it.skill, ok: !!x.ok, k: it.key }); r.i++; E.actPos(r.i); save(r); step();
             }
           });
         };
@@ -592,9 +703,9 @@
       (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>✅ Тримається</b><br>' + good.map(function (s) { return "• " + esc(name(s)); }).join("<br>") + '</div>' : "") +
       (weak.length ? '<div class="tip" style="text-align:left"><b>🌱 Варто закріпити</b> (уже в «Моїх помилках»)<br>' + weak.map(function (s) { return "• " + esc(name(s)); }).join("<br>") + '</div>' : "") +
       (weak.length ? '<div class="row"><button class="btn full" id="fix">💪 Закріпити зараз · ~' + Math.max(3, weak.length * 3) + ' хв</button></div>' : "") +
-      '<div class="row"><button class="btn ghost full" id="send">📨 Надіслати батькам</button></div>' +
+      '<div class="row"><button class="btn ghost full" id="send" disabled>📨 Звіт батькам</button></div>' +
       '<div class="row"><button class="btn ' + (weak.length ? "plain" : "") + ' full" id="home">' + (weak.length ? "Закріплю пізніше" : "До уроків →") + '</button></div></div>';
-    $("send").onclick = function () { sendDad(text); };
+    autoDad("send", text);
     $("home").onclick = function () { renderHome(); toTop(); };
     if ($("fix")) $("fix").onclick = function () { runFix(si, weak, bad); };
     toTop();
@@ -703,9 +814,9 @@
       '<p class="muted">' + (SUB.strict ? "Уроки йдуть по черзі: знайомі теми пройдеш швидко, а на складних зупинимось довше." : "План уроків уже підлаштований під тебе.") + (first ? " +5 ⭐ за перевірку!" : "") + '</p></div>' +
       '<div class="card">' + rows +
       (skipT.length ? '<p style="margin-top:12px">⏭️ <b>Ці уроки можна пропустити</b> (або пройти для певності):<br>' + skipT.map(esc).join("<br>") + '</p>' : "") +
-      '<div class="row"><button class="btn ghost full" id="send">📨 Надіслати батькам</button></div>' +
+      '<div class="row"><button class="btn ghost full" id="send" disabled>📨 Звіт батькам</button></div>' +
       '<div class="row"><button class="btn full" id="home">До уроків →</button></div></div>';
-    $("send").onclick = function () { sendDad(text); };
+    autoDad("send", text);
     $("home").onclick = function () { renderHome(); toTop(); };
     toTop();
   }
@@ -938,6 +1049,7 @@
   }
   function blitzRun() {
     var ids = E.blitzSkills(), used = {}, res = [], T = 60000, t0 = Date.now(), it = null, val = "", lock = false, over = false, tm = null, lastSk = "";
+    E.actStart(SUB.id, "⚡ Блискавка");
     $app.querySelector(".topbar").innerHTML = '<button class="back" id="back">✕ Зупинити</button>';
     $("back").onclick = function () { over = true; clearInterval(tm); document.onkeydown = null; renderBlitz(); toTop(); };
     function nextIt() {
@@ -973,7 +1085,7 @@
       lock = true;
       var ok = String(+val) === String(it.a), cur = it;
       res.push({ it: cur, ok: ok, given: val });
-      E.tick(SUB.id);
+      E.tick(SUB.id, ok);
       if (ok) E.fixMistake(cur.key); else E.addMistake(cur, val);
       $("bl-p").className = "bl-p " + (ok ? "good" : "badv");
       if (!ok) $("bl-p").innerHTML = esc(cur.p).replace("___", '<s>' + esc(val) + '</s> <b class="bl-v">' + esc(cur.a) + '</b>');
@@ -982,7 +1094,7 @@
     function end() {
       if (over) return; over = true; clearInterval(tm); document.onkeydown = null;
       var ok = res.filter(function (r) { return r.ok; }), bad = res.filter(function (r) { return !r.ok; });
-      var r = E.blitzDone(ok.length, res.length);
+      var r = E.blitzDone(ok.length, res.length); E.actEnd(ok.length, res.length);
       setTitle("Блискавка · " + child().name);
       $app.innerHTML = '<div class="card" id="stage" style="text-align:center">' +
         '<div class="celebrate">' + (r.rec ? "🏆" : "⚡") + '</div><h2>Час!</h2>' +
@@ -1052,14 +1164,14 @@
         $("stage").innerHTML = '<div class="card" style="text-align:center"><div class="celebrate">🔁</div><h2>Повторення тижня — готово!</h2><p class="muted">' + fmt(s.score) + ' з ' + s.max + ' балів</p>' +
           (good.length ? '<div class="tip" style="text-align:left;background:var(--ok-soft)"><b>Тримається 💪</b><br>' + good.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : "") +
           (weak.length ? '<div class="tip" style="text-align:left"><b>Варто освіжити</b> (ці ' + (SUB.kid ? "завдання" : "речення") + ' вже в «Моїх помилках»)<br>' + weak.map(function (id) { return "• " + esc(name(id)); }).join("<br>") + '</div>' : '<p>Усе пам\'ятаєш — супер! 🔥</p>') +
-          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати батькам у Telegram</button><button class="btn full" id="go">Далі →</button></div></div>';
-        $("copy").onclick = function () {
+          '<div class="row"><button class="btn ghost full" id="copy" disabled>📨 Звіт батькам</button><button class="btn full" id="go">Далі →</button></div></div>';
+        (function () {
           var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
-          var text = [P.name + " — повторення тижня, " + d, "Результат: " + fmt(s.score) + " з " + s.max,
+          var text = ["🔁 " + P.name + " — " + SUB.title + ", повторення тижня, " + d, "Результат: " + fmt(s.score) + " з " + s.max,
             good.length ? "Тримається:\n" + good.map(function (id) { return "• " + name(id); }).join("\n") : "",
             weak.length ? "Варто освіжити:\n" + weak.map(function (id) { return "• " + name(id); }).join("\n") : "Усе пам'ятає!"].filter(Boolean).join("\n");
-          sendDad(text);
-        };
+          autoDad("copy", text);
+        })();
         $("go").onclick = function () { back(); toTop(); };
       } });
       toTop();
@@ -1104,8 +1216,9 @@
     var q = list.slice(), again = {}, res = { n: 0, ok: 0 };
     if (!q.length) return done(res);
     var total = q.length, k = 0;
+    E.actStart(SUB.id, "🃏 Слова");
     function next() {
-      if (!q.length) return done(res);
+      if (!q.length) { E.actEnd(res.ok, res.n); return done(res); }
       var en = q.shift(), ua = E.DICT[en] || "", box = E.wordBox(en);
       window.UI_CUR = { en: en }; // для автоматичних перевірок
       var mode = box <= 1 ? "card" : box <= 3 || !canSpeak ? "type" : (Math.random() < 0.5 ? "listen" : "type");
@@ -1113,7 +1226,7 @@
       k++;
       var chip = '<span class="chip">🃏 Слова · ' + Math.min(k, total) + ' з ' + total + '</span>' + (box ? '<span class="skillTag">коробка ' + box + ' з 5</span>' : '<span class="skillTag">нове слово ✨</span>');
       var fin = function (ok) {
-        E.tick(SUB.id);
+        E.tick(SUB.id, ok);
         if (!again[en]) { res.n++; if (ok) res.ok++; }
         E.wordAnswer(en, ok);
         if (!ok && !again[en]) { again[en] = 1; q.push(en); } // ще раз наприкінці
@@ -1490,8 +1603,10 @@
     if (SUB.words && window.SAY && SAY.preload) SAY.preload(main.map(function (it) { try { return it.type === "dict" ? it.a[0] : fullSentence(it, String(E.answersOf(it)[0])); } catch (e) { return ""; } }));
     var CHIP = { fix: "💪 Закріплюємо", practice: "✍️ Вправи", test: "🏆 Міні-тест", warm: "🔥 Розминка", mist: "📝 Мої помилки", review: "🔁 Повторення тижня" };
 
+    var LBL = { practice: "вправи", test: "міні-тест" };
+    E.actStart(SUB.id, o.title || (LBL[o.mode] && LES ? "«" + LES.title + "» — " + LBL[o.mode] : CHIP[o.mode] || o.mode), main.length);
     function rec(it, r) {
-      E.tick(SUB.id);
+      E.tick(SUB.id, !!r.ok);
       var nl = E.record(it.skill, r.ok, r.clean);
       if (nl >= 2) toast(E.LV[nl].e + " " + E.SK[it.skill].title + " — " + E.LV[nl].t + "!");
     }
@@ -1503,7 +1618,7 @@
         prog: i / main.length,
         nextLabel: function (ok) { return !ok && isP ? "Розберімо разом →" : i + 1 < main.length ? "Далі →" : "Готово"; },
         done: function (r) {
-          rec(it, r); res.push(r); i++;
+          rec(it, r); res.push(r); i++; E.actPos(i);
           if (r.ok) E.fixMistake(it.key);
           if (!r.ok) {
             E.addMistake(it, r.given);
@@ -1574,6 +1689,7 @@
     function done() {
       var score = 0;
       res.forEach(function (r) { score += r.ok ? (r.clean ? 1 : 0.5) : 0; });
+      E.actEnd(score, res.length);
       o.onDone({ res: res, score: score, max: res.length, fixed: fixed, errSkills: errSkills, flagged: flagged });
     }
     nextMain();
@@ -1663,10 +1779,10 @@
           (ok ? '<div class="stars" style="font-size:30px">' + starsStr(stars) + '</div>' : '<p class="muted">Потрібно ' + pass + '%. Зроби ще раз вправи — там помилки розбираються крок за кроком. У тебе вийде!</p>') +
           (wrong.length ? '<div class="tip" style="text-align:left;margin-top:14px"><b>Варто закріпити:</b><br>' + wrong.map(function (r) { var an = esc(E.answersOf(r.it)[0]); return "• " + (r.it.type === "num" && String(r.it.p).indexOf("___") >= 0 && !r.it.long ? esc(r.it.p).replace(/\n/g, " ").replace("___", "<b>" + an + "</b>") : pText(r.it, true, true) + " → <b>" + an + "</b>"); }).join("<br>") + '</div>' : "") +
           skillList(LES.skills) +
-          '<div class="row"><button class="btn ghost full" id="copy">📨 Надіслати батькам у Telegram</button>' +
+          '<div class="row"><button class="btn ghost full" id="copy" disabled>📨 Звіт батькам</button>' +
           (ok ? "" : '<button class="btn ghost" id="pr">✍️ До вправ</button><button class="btn" id="retry">↺ Ще раз</button>') +
           '<button class="btn ' + (ok ? "" : "plain") + ' full" id="home">До кабінету' + (ok ? " →" : "") + '</button></div></div>';
-        $("copy").onclick = function () { copyReport(pct, stars, wrong); };
+        copyReport(pct, stars, wrong);
         if ($("pr")) $("pr").onclick = function () { renderLesson("practice"); toTop(); };
         if ($("retry")) $("retry").onclick = function () { stepTest(root, idx); toTop(); };
         if (DAILY) $("home").textContent = "До заняття →";
@@ -1677,14 +1793,14 @@
 
   function copyReport(pct, stars, wrong) {
     var P = E.P(), d = new Date().toLocaleDateString("uk-UA");
-    var lines = [P.name + " — «" + LES.title + "», " + d, "Тест: " + pct + "% " + "★".repeat(stars)];
+    var lines = ["🏆 " + P.name + " — " + SUB.title + ", «" + LES.title + "», " + d, "Тест: " + pct + "% " + "★".repeat(stars)];
     lines.push(wrong.length ? "Помилки:\n" + wrong.map(function (r) { return "• " + pText(r.it) + " → " + (r.given == null ? "не знаю" : r.given) + " (правильно: " + E.answersOf(r.it)[0] + ")"; }).join("\n") : "Без помилок!");
     lines.push("Навички:\n" + LES.skills.map(function (id) { var l = lvl(id), s = P.skills[id]; return "• " + l.e + " " + (E.SK[id] ? E.SK[id].title : id) + (s && s.flag ? " — розібрати з батьками 🤝" : ""); }).join("\n"));
     var rep = P.reports.filter(function (r) { return !r.sent; });
     if (rep.length) lines.push("Позначено «тут помилка»:\n" + rep.map(function (r) { return "• " + r.key.split("|")[1] + (r.given != null ? " (відповідь: " + r.given + ")" : ""); }).join("\n"));
     lines.push("Днів поспіль: " + E.streak());
     var text = lines.join("\n");
-    sendDad(text, function () { rep.forEach(function (r) { r.sent = true; }); E.save(); });
+    autoDad("copy", text, function () { rep.forEach(function (r) { r.sent = true; }); E.save(); });
   }
   function fallbackCopy(text, ok) {
     try {

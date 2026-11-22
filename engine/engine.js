@@ -161,6 +161,11 @@
       (b.hist || []).forEach(function (x) { if (!bt[x.t]) a.hist.push(x); });
       a.hist.sort(function (x, y) { return x.t - y.t; }); a.hist = a.hist.slice(-60);
     }
+    // журнал занять: об'єднання за часом початку, з двох версій запису — новіша
+    var am = {}; (into.act || []).forEach(function (x) { if (x) am[x.t] = x; });
+    (o.act || []).forEach(function (x) { if (!x) return; var y = am[x.t]; if (!y || (x.u || 0) > (y.u || 0) || (x.fin && !y.fin)) am[x.t] = x; });
+    into.act = Object.keys(am).map(function (q) { return am[q]; }).sort(function (x, y) { return x.t - y.t; }).slice(-400);
+    into.skn = obj(into.skn); for (k in obj(o.skn)) if (!into.skn[k]) into.skn[k] = o.skn[k];
     for (k in o) if (!(k in into) && k !== "srv" && k !== "dirty" && k !== "dseq") into[k] = o[k];
     return into;
   };
@@ -172,12 +177,54 @@
   E.save();
 
   /* лічильник виконаних завдань за день по предметах */
-  E.tick = function (subject) {
+  E.tick = function (subject, ok) {
     var p = E.P(), t = today();
     var d = p.daily[t] || (p.daily[t] = {});
     d[subject] = (d[subject] || 0) + 1;
+    actHit(p, subject, ok);
     E.markDay();
   };
+
+  /* ---------- Журнал занять для батьків (p.act) ----------
+     Запис: {t: початок (мс), u: остання відповідь (мс), d: дата, sub: предмет, st: назва предмета,
+             w: що робили, n: відповідей, ok: правильних, sec: активних секунд,
+             tot: завдань у сесії, pos: скільки з них пройдено, fin: завершено, sc/mx: результат}
+     Час рахується лише між відповідями (пауза довша за 3 хв зараховується як 3 хв), тож
+     відкрита й забута вкладка не «накручує» хвилини. Зберігаємо 60 днів, до 400 записів. */
+  var ACT_GAP = 15 * 60000;
+  function actTrim(p) {
+    var lim = addDays(today(), -60);
+    p.act = (p.act || []).filter(function (a) { return a && a.d >= lim; });
+    if (p.act.length > 400) p.act = p.act.slice(-400);
+  }
+  function actNew(p, sub, w, tot) {
+    var now = Date.now(), a = { t: now, u: now, d: today(), sub: sub, st: E.subTitle(sub), w: w || "", n: 0, ok: 0, sec: 0 };
+    if (tot) { a.tot = tot; a.pos = 0; }
+    p.act = p.act || []; p.act.push(a); actTrim(p);
+    return a;
+  }
+  function actCur(p) { var a = p.act && p.act[p.act.length - 1]; return a && a.t === E._actT ? a : null; }
+  function actHit(p, sub, ok) {
+    var now = Date.now(), a = actCur(p);
+    if (!a || a.sub !== sub || a.fin || (!a.tot && now - a.u > ACT_GAP)) { a = actNew(p, sub, a && a.sub === sub && !a.tot ? a.w : ""); E._actT = a.t; }
+    a.sec = (a.sec || 0) + Math.round(Math.min(now - a.u, 180000) / 1000) + (a.n ? 0 : 20);
+    a.u = now; a.n++; if (ok) a.ok++;
+  }
+  E.subTitle = function (sub) { return (E.SUBT && E.SUBT[sub]) || sub; };
+  /* почалась сесія з відомою кількістю завдань (урок, тест, перевірка) */
+  E.actStart = function (sub, w, tot) {
+    if (!E.cur()) return;
+    var p = E.P(), a = actNew(p, sub, w, tot); E._actT = a.t; E.save();
+  };
+  /* дитина пройшла ще одне завдання сесії */
+  E.actPos = function (pos) { var a = actCur(E.P()); if (a && a.tot) { a.pos = Math.min(pos, a.tot); E.save(); } };
+  /* сесію завершено */
+  E.actEnd = function (sc, mx) {
+    var a = actCur(E.P()); if (!a) return;
+    a.fin = 1; if (a.tot) a.pos = a.tot; if (sc != null) { a.sc = Math.round(sc * 10) / 10; a.mx = mx; }
+    a.u = Math.max(a.u, Date.now()); E._actT = 0; E.save();
+  };
+
   E.todayCount = function (subject, prof) {
     var p = prof || E.P(), d = p.daily && p.daily[today()];
     if (!d) return 0;
@@ -411,6 +458,7 @@
       if (s.lvl >= 2) { s.iv = 0; s.due = addDays(t, 1); }
     }
     s.last = t;
+    if (E.SK[id] && E.SK[id].title) { var P0 = E.P(); P0.skn = P0.skn || {}; P0.skn[id] = E.SK[id].title; } // назви навичок — для статистики батькам
     E.save();
     if (s.lvl > before && s.lvl >= 2) E.addStars(s.lvl === 2 ? 2 : 3, "lvl");
     return s.lvl !== before ? s.lvl : 0;
