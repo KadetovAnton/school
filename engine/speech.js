@@ -103,6 +103,7 @@
 
   S.say = function (text, rate, lang) {
     if (!text) return;
+    if (lang !== "list") S._q = null;
     if (lang !== "uk" && lang !== "synth" && playRec(text, rate)) return;
     if (!S.can) return;
     try {
@@ -113,6 +114,17 @@
     } catch (e) {}
   };
   S.list = function (texts, rate) {
+    // усі фрази записані — граємо записи по черзі (з паузою); інакше — голос пристрою
+    if (texts.length && texts.every(S.recorded)) {
+      var q = texts.slice(), my = {};
+      S.stop(); S._q = my;
+      (function next() {
+        if (S._q !== my) return;
+        var t = q.shift(); if (!t) return;
+        if (playRec(t, rate)) player.onended = function () { player.onended = null; setTimeout(next, 450); };
+      })();
+      return;
+    }
     if (!S.can) return;
     try {
       unlock();
@@ -121,5 +133,5 @@
     } catch (e) {}
   };
   S.uk = function (text) { S.say(text, 0.95, "uk"); }; // українською — для завдань молодших
-  S.stop = function () { try { if (player) player.pause(); if (synth && (synth.speaking || synth.pending)) synth.cancel(); } catch (e) {} };
+  S.stop = function () { try { S._q = null; if (player) { player.onended = null; player.pause(); } if (synth && (synth.speaking || synth.pending)) synth.cancel(); } catch (e) {} };
 })();

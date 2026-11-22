@@ -52,6 +52,8 @@ def corr(c):                                      # наскільки трив�
 cands = [(corr(c), B, c) for B in (10, 4, 2, 1, 0.5) for c in [solve(B)]]
 best = max(cands, key=lambda t: t[0] + (0.02 if t[1] == 10 else 0))
 cuts = best[2]
+if os.environ.get("CUTS"): cuts = [g for g in gaps if any(abs((g[1]+g[2])/2 - float(t)) < 0.3 for t in os.environ["CUTS"].split(","))]
+sys.stderr.write("межі: " + ",".join("%.2f" % ((g[1]+g[2])/2) for g in cuts) + "\n")
 sys.stderr.write("вага пауз %s, відповідність %.2f\n" % (best[1], best[0]))
 starts = [0.0] + [e - 0.05 for _, s, e in cuts]; ends = [s + 0.12 for _, s, e in cuts] + [dur]
 for i, (a, b) in enumerate(zip(starts, ends)):
