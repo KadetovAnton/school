@@ -52,7 +52,12 @@ def corr(c):                                      # наскільки трив�
 cands = [(corr(c), B, c) for B in (10, 4, 2, 1, 0.5) for c in [solve(B)]]
 best = max(cands, key=lambda t: t[0] + (0.02 if t[1] == 10 else 0))
 cuts = best[2]
-if os.environ.get("CUTS"): cuts = [g for g in gaps if any(abs((g[1]+g[2])/2 - float(t)) < 0.3 for t in os.environ["CUTS"].split(","))]
+if os.environ.get("CUTS"):  # межі задано ззовні (tools/align_asr.py) — беремо найближчу паузу або ріжемо точно в цьому місці
+    def near(t):
+        g = min(gaps, key=lambda g: abs((g[1] + g[2]) / 2 - t)) if gaps else None
+        return g if g and abs((g[1] + g[2]) / 2 - t) < 0.3 else (0.2, t - 0.1, t + 0.1)
+    cuts = [near(float(t)) for t in os.environ["CUTS"].split(",")]
+    if len(cuts) != n - 1: sys.exit("CUTS: %d меж, а треба %d" % (len(cuts), n - 1))
 sys.stderr.write("межі: " + ",".join("%.2f" % ((g[1]+g[2])/2) for g in cuts) + "\n")
 sys.stderr.write("вага пауз %s, відповідність %.2f\n" % (best[1], best[0]))
 starts = [0.0] + [e - 0.05 for _, s, e in cuts]; ends = [s + 0.12 for _, s, e in cuts] + [dur]
