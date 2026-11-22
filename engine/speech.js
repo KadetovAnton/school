@@ -74,7 +74,7 @@
   function norm(t) { return String(t).replace(/<[^>]+>/g, "").replace(/[\u2018\u2019]/g, "'").toLowerCase().replace(/[^a-z0-9' ]+/g, " ").replace(/\s+/g, " ").replace(/^ | $/g, ""); }
   try {
     var xr = new XMLHttpRequest(); xr.open("GET", recBase + "index.json?v=" + (window.APP_VER || ""), true);
-    xr.onload = function () { try { if (xr.status === 200) REC = JSON.parse(xr.responseText); } catch (e) {} };
+    xr.onload = function () { try { if (xr.status === 200) REC = JSON.parse(xr.responseText); } catch (e) {} if (REC && waiting.length) { var w = waiting; waiting = []; S.preload(w); } };
     xr.send();
   } catch (e) {}
   // перше натискання будь-де «розблоковує» програвач, щоб запис грав і з затримкою (Safari на iPhone)
@@ -83,6 +83,27 @@
     document.removeEventListener("touchend", arm, true); document.removeEventListener("click", arm, true);
   }
   try { document.addEventListener("touchend", arm, true); document.addEventListener("click", arm, true); } catch (e) {}
+  /* підвантаження наперед: фрази поточного уроку/заняття завантажуються в пам'ять (до перезавантаження сторінки),
+     тож 🔊 грає миттєво навіть при «блимаючому» інтернеті. На телефоні нічого не зберігається. */
+  var mem = {}, memN = 0, pend = [], busy = 0;
+  function pump() {
+    while (busy < 2 && pend.length) {
+      (function (k) {
+        var f = REC[k]; busy++;
+        var x = new XMLHttpRequest(); x.open("GET", recBase + f, true); x.responseType = "blob";
+        x.onload = function () { busy--; if (x.status === 200 && window.URL && !mem[k]) { mem[k] = URL.createObjectURL(x.response); memN++; } pump(); };
+        x.onerror = function () { busy--; pump(); };
+        try { x.send(); } catch (e) { busy--; }
+      })(pend.shift());
+    }
+  }
+  var waiting = [];
+  S.preload = function (texts) {
+    if (!REC) { waiting = waiting.concat(texts || []); return; }
+    if (memN > 400) { for (var m in mem) { try { URL.revokeObjectURL(mem[m]); } catch (e) {} } mem = {}; memN = 0; } // не роздуваємо пам'ять
+    (texts || []).forEach(function (t) { var k = norm(t); if (REC[k] && !mem[k] && pend.indexOf(k) < 0) pend.push(k); });
+    pump();
+  };
   S.recorded = function (text) { return !!(REC && REC[norm(text)]); };
   function playRec(text, rate) {
     var f = REC && REC[norm(text)];
@@ -91,12 +112,18 @@
       if (synth && (synth.speaking || synth.pending)) synth.cancel();
       if (!player) { player = new Audio(); player.setAttribute("playsinline", ""); }
       player.pause();
-      player.src = recBase + f;
+      var k = norm(text), tries = 0;
+      player.src = mem[k] || recBase + f;
       var slow = rate && rate < 0.8;
       player.playbackRate = slow ? 0.75 : 1; // повільно — без «мультяшного» спотворення (тон зберігається)
       try { player.preservesPitch = true; player.webkitPreservesPitch = true; } catch (e) {}
+      var fail = function () { // не вийшло — ще одна спроба з мережі через 0,7 с, і лише тоді голос пристрою
+        if (tries++ === 0) { setTimeout(function () { player.src = recBase + f; var q = player.play(); if (q && q.catch) q.catch(function () { S.say(text, rate, "synth"); }); }, 700); }
+        else S.say(text, rate, "synth");
+      };
+      player.onerror = fail;
       var p = player.play();
-      if (p && p.catch) p.catch(function () { S.say(text, rate, "synth"); });
+      if (p && p.catch) p.catch(function (e) { if (e && e.name === "NotAllowedError") S.say(text, rate, "synth"); else fail(); });
       return true;
     } catch (e) { return false; }
   }

@@ -50,6 +50,7 @@
       b.onclick = function (e) { e.stopPropagation(); SAY.uk(b.getAttribute("data-uk")); };
     })(us[u]);
     var bs = root.querySelectorAll("[data-say]");
+    if (window.SAY && SAY.preload && bs.length) SAY.preload([].map.call(bs, function (b) { return b.getAttribute("data-say"); }));
     for (var i = 0; i < bs.length; i++) (function (b) {
       if (!canSpeak) { b.parentNode.removeChild(b); return; }
       b.onclick = function (e) { e.stopPropagation(); say(b.getAttribute("data-say")); };
@@ -1486,6 +1487,7 @@
     var used = {}, main = o.items, i = 0, res = [], errSkills = [], fixed = 0, flagged = [];
     main.forEach(function (it) { used[it.key] = 1; });
     var isP = o.mode === "practice" || o.mode === "fix";
+    if (SUB.words && window.SAY && SAY.preload) SAY.preload(main.map(function (it) { try { return it.type === "dict" ? it.a[0] : fullSentence(it, String(E.answersOf(it)[0])); } catch (e) { return ""; } }));
     var CHIP = { fix: "💪 Закріплюємо", practice: "✍️ Вправи", test: "🏆 Міні-тест", warm: "🔥 Розминка", mist: "📝 Мої помилки", review: "🔁 Повторення тижня" };
 
     function rec(it, r) {
